@@ -1,0 +1,31 @@
+{
+	"groups": [
+		{
+			"keys": "combat_tiao_3_png,loading_bg_1_jpg,logoBoomUI_json",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "assets/loading/combat_tiao_3.png",
+			"type": "image",
+			"name": "combat_tiao_3_png"
+		},
+		{
+			"url": "assets/loading/loading_bg_1.jpg",
+			"type": "image",
+			"name": "loading_bg_1_jpg"
+		},
+		{
+			"url": "assets/proto/game.proto",
+			"type": "bin",
+			"name": "game_proto"
+		},
+		{
+			"url": "assets/loading/logoBoomUI.json",
+			"type": "sheet",
+			"name": "logoBoomUI_json",
+			"subkeys": "loading_btn_0,loading_btn_1,loading_tiao_0,loading_tiao_1,loading_tiao_2,loading_yun_0,logo"
+		}
+	]
+}

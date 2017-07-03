@@ -1,0 +1,15 @@
+{
+	"name": "egret",
+	"version": "2.5.0",
+	"modules": [
+		{
+			"name": "jszip",
+			"description": "jszip",
+			"files": [
+			  "jszip.min.js",
+			  "jszip.d.ts"
+			],
+			"root": "src"
+		}
+	]
+}

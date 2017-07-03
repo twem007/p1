@@ -1,0 +1,4 @@
+enum ModuleEnum {
+    NONE,
+    LOADING
+}

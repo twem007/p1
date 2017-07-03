@@ -1,0 +1,4 @@
+module core {
+    class WebUtils {
+    }
+}
