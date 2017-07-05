@@ -1,12 +1,17 @@
-#框架说明
-##定位：
+# 框架说明
+
+## 定位：
 本框架定位于简化游戏流程，管理模块间关系，处理底层事务，并提供松散的工具集合，使开发者专注于游戏模块内部的逻辑开发。
-##框架流程：
+
+## 框架流程：
 egretRun->Main->框架初始化->初始化显示层->加载配置文件->初始化Controller->初始化完成，进入模块
-##模块流程：
+
+## 模块流程：
 init->收到打开监听->获取要加载的资源组->加载完成后显示
+
 收到关闭监听->关闭模块hide
-##文件结构：
+
+## 文件结构：
 + src
     + core
         + com
@@ -64,7 +69,7 @@ init->收到打开监听->获取要加载的资源组->加载完成后显示
     + jszip
     + protobuf
 
-##君子约定：
+## 君子约定：
 1.  TS文件统一首字母大写，文件名不宜过长，尽量在单个文件内写一个类，内部类及只有当前类引用的类可以写在同一文件内
 2.  资源文件统一小写
 3.  给接口名称加上大写字母I做为前缀，表示该类型为接口类型
@@ -73,7 +78,7 @@ init->收到打开监听->获取要加载的资源组->加载完成后显示
 6.	临时变量以t_开头
 7.  常量及静态公共变量所有单词大写
 
-##Egret相关：
+## Egret相关：
 1.	禁止随意向可显示对象添加Enterframe事件监听
 2.	禁止随意new Timer
 3.	尽量用序列帧代替透明度渐变及遮罩实现的动画
@@ -87,9 +92,9 @@ init->收到打开监听->获取要加载的资源组->加载完成后显示
 11.	UI和逻辑分离
 12.	谨慎的选择需要使用的容器类型
 
-##代码示例：
+## 代码示例：
 
-#Main.ts
+# Main.ts
 ```javascript
 class Main extends core.EUILayer {
     /**
@@ -190,7 +195,7 @@ class Main extends core.EUILayer {
 }
 ```
 
-#LoginController.ts
+# LoginController.ts
 ```javascript
 class LoginController extends core.Control {
 	public constructor(loadingUI: core.ILoadingUI) {
