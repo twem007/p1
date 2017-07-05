@@ -3,51 +3,47 @@ module core {
 
         private static s_instance: TimerManager;
 
-        private tickList: TickData[];
+        private m_tickList: TickData[];
 
         public constructor() {
             if (TimerManager.s_instance) {
                 throw new Error('单例类不可实例化');
             }
             egret.startTick(this.onTick, this);
-            this.tickList = [];
+            this.m_tickList = [];
         }
 
         private onTick(timeStamp: number): boolean {
-            let dataList: TickData[] = this.tickList;
-            for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
-                let data: TickData = dataList[i];
-                if (data && data.isValid) {
-                    if ((timeStamp - data.timestamp) > data.delay) {
-                        data.timestamp = timeStamp;
-                        data.count++;
-                        if (data.callback) {
-                            let t: number = egret.getTimer();
-                            data.callback.call(data.thisObj, data.clone());
-                            let t1: number = egret.getTimer();
-                            if (t1 - t > 2) {
-                                Log(`tick回调耗时:${t1 - t}`);
-                            }
-                        }
-                        if (data.count == data.maxCount) {
-                            data.isValid = false;
-                        }
-                    }
+            let dataList: TickData[] = this.m_tickList;
+            for (let i: number = dataList.length; i > 0; i--) {
+                let data: TickData = dataList[i - 1];
+                if (!data.isValid) {
+                    dataList.splice(i - 1, 1);
                 }
             }
-            let index: number = dataList.length;
-            while (index > 0) {
-                let data: TickData = dataList[index - 1];
-                if (!data.isValid) {
-                    dataList.splice(index - 1, 1);
+            for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
+                let data: TickData = dataList[i];
+                if ((timeStamp - data.timestamp) > data.delay) {
+                    data.timestamp = timeStamp;
+                    data.count++;
+                    if (data.callback) {
+                        let t: number = egret.getTimer();
+                        data.callback.call(data.thisObj, data.clone());
+                        let t1: number = egret.getTimer();
+                        if (t1 - t > 2) {
+                            Log(`tick回调耗时:${t1 - t}`);
+                        }
+                    }
+                    if (data.count == data.maxCount) {
+                        data.isValid = false;
+                    }
                 }
-                index--;
             }
             return false;
         }
 
         public addTick(delay: number, replayCount: number, callback: Function, thisObj: any, ...args): void {
-            let dataList: TickData[] = this.tickList;
+            let dataList: TickData[] = this.m_tickList;
             if (dataList) {
                 for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
                     let data: TickData = dataList[i];
@@ -67,7 +63,7 @@ module core {
                 }
             } else {
                 dataList = [];
-                this.tickList = dataList;
+                this.m_tickList = dataList;
             }
             let tick: TickData = new TickData();
             tick.delay = delay;
@@ -82,7 +78,7 @@ module core {
         }
 
         public removeTick(callback: Function, thisObj: any): void {
-            let dataList: TickData[] = this.tickList;
+            let dataList: TickData[] = this.m_tickList;
             if (dataList) {
                 let tickData: TickData;
                 for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
@@ -96,7 +92,7 @@ module core {
         }
 
         public removeTicks(thisObj: any): void {
-            let dataList: TickData[] = this.tickList;
+            let dataList: TickData[] = this.m_tickList;
             if (dataList) {
                 let tickData: TickData;
                 for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
@@ -109,7 +105,7 @@ module core {
         }
 
         public removeAllTicks(): void {
-            this.tickList.length = 0;
+            this.m_tickList.length = 0;
         }
 
         public static get instance(): TimerManager {

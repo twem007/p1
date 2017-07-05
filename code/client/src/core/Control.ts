@@ -6,13 +6,13 @@ module core {
 	 */
     export abstract class Control {
 
-        private loadingUI: core.ILoadingUI;
-        private data: any;
-        protected moduleName: number;
+        private m_loadingUI: core.ILoadingUI;
+        private m_data: EventData;
+        protected p_moduleName: number;
 
         public constructor(moduleName: number, loadingUI: core.ILoadingUI) {
-            this.moduleName = moduleName;
-            this.loadingUI = loadingUI;
+            this.p_moduleName = moduleName;
+            this.m_loadingUI = loadingUI;
             this.init();
         }
         /**
@@ -26,31 +26,30 @@ module core {
          * 预加载
          */
         private preload(): void {
-            let groups: string[] = this.getLoadGroup(this.data);
+            let groups: string[] = this.getLoadGroup(this.m_data);
             if (groups.length > 0) {
-                if (this.loadingUI) {
-                    this.loadingUI.show();
+                if (this.m_loadingUI) {
+                    this.m_loadingUI.show();
                 }
                 core.ResUtils.loadGroups(groups, this.onLoadProgress, this.onLoadFaild, this.onLoadComplete, this);
             } else {
-                this.show(this.data);
+                this.show(this.m_data);
             }
         }
         /**
          *  加载前
          */
         private onModuleShow(data: ModuleEventData): void {
-            if (this.moduleName === data.moduleEnum) {
-                this.data = data.messageData;
+            if (this.p_moduleName === data.moduleEnum) {
+                this.m_data = data.messageData;
                 this.preload();
             }
         }
         /**
          * 关闭前
          */
-        private onModuleHide(): void {
-            let curModule: string | number = arguments[0];
-            if (this.moduleName === curModule) {
+        private onModuleHide(data: ModuleEventData): void {
+            if (this.p_moduleName === data.moduleEnum) {
                 this.hide();
             }
         }
@@ -58,8 +57,8 @@ module core {
          * 加载进度
          */
         private onLoadProgress(data: core.GroupData): void {
-            if (this.loadingUI) {
-                this.loadingUI.setProgress(data);
+            if (this.m_loadingUI) {
+                this.m_loadingUI.setProgress(data);
             }
         }
         /**
@@ -72,10 +71,10 @@ module core {
          * 加载完成
          */
         private onLoadComplete(data: core.GroupData): void {
-            if (this.loadingUI) {
-                this.loadingUI.hide();
+            if (this.m_loadingUI) {
+                this.m_loadingUI.hide();
             }
-            this.show(this.data);
+            this.show(this.m_data);
         }
         /**
          * 预加载资源组

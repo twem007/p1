@@ -8,13 +8,13 @@ module core {
 
         private static s_instance: EventCenter;
 
-        private callbackMaps: Object;
+        private m_callbackMaps: Dictionary<EventCallBack[]>;
 
-        private sendBuffer: EventData[];
+        private m_sendBuffer: EventData[];
 
         public constructor() {
-            this.callbackMaps = {};
-            this.sendBuffer = [];
+            this.m_callbackMaps = new Dictionary<EventCallBack[]>();
+            this.m_sendBuffer = [];
         }
 
         public static getInstance(): EventCenter {
@@ -23,59 +23,92 @@ module core {
             }
             return EventCenter.s_instance;
         }
-
-        public addEventListener(messageID: string, callback: (data: IMessage) => void, thisObj: any, index?: number): void {
-            if (callback) {
-                let callbacks: { callback: (data: IMessage) => void; thisObj: any }[] = this.callbackMaps[messageID];
-                if (callbacks != null) {
-                    if (index) {
-                        callbacks.splice(index < 0 ? 0 : index, 0, { callback: callback, thisObj: thisObj });
-                    } else {
-                        callbacks.push({ callback: callback, thisObj: thisObj });
-                    }
+        /**
+         * 注册事件监听
+         */
+        public addEventListener(messageID: string, callback: (data: EventData) => void, thisObj: any, index?: number): void {
+            if (callback && thisObj) {
+                let data: EventCallBack = new EventCallBack(callback, thisObj);
+                data.messageID = messageID;
+                data.index = index ? index : 0;
+                let callbacks: EventCallBack[] = this.m_callbackMaps.get(messageID);
+                if (callbacks) {
+                    callbacks.push(data);
+                    callbacks.sort(this.sortIndex);
                 } else {
-                    this.callbackMaps[messageID] = [{ callback: callback, thisObj: thisObj }];
+                    this.m_callbackMaps.add(messageID, [data]);
                 }
             }
         }
 
-        public removeEventListener(messageID: string, callback: (data: IMessage) => void, thisObj: any): void {
-            var callbacks: { callback: (data: IMessage) => void; thisObj: any }[] = this.callbackMaps[messageID];
-            if (callbacks != null) {
-                for (let i: number = callbacks.length; i > 0; i--) {
-                    if (callbacks[i - 1].thisObj === thisObj) {
-                        callbacks.splice(i - 1, 1);
+        private sortIndex(a: EventCallBack, b: EventCallBack): number {
+            return a.index - b.index;
+        }
+        /**
+         * 移除事件监听
+         */
+        public removeEventListener(messageID: string, callback: (data: EventData) => void, thisObj: any): void {
+            let callbacks: EventCallBack[] = this.m_callbackMaps.get(messageID);
+            if (callbacks) {
+                for (let i: number = 0, iLen: number = callbacks.length; i < iLen; i++) {
+                    let data: EventCallBack = callbacks[i];
+                    if (data.callback === callback && data.thisObj === thisObj) {
+                        data.isValid = false;
                     }
                 }
             }
         }
-
+        /**
+         * 发送消息
+         */
         public sendEvent(message: EventData): void {
-            this.sendBuffer.push(message);
-            egret.startTick(this.onTickerLoop, this);
+            this.m_sendBuffer.push(message);
+            egret.callLater(this.sendAll, this);
         }
-
-        public onTickerLoop(timeStamp: number): boolean {
-            let buffer: EventData[] = this.sendBuffer;
-            if (buffer != null) {
-                if (buffer.length > 0) {
-                    let messageData: EventData = buffer.shift();
-                    let datas: { callback: (data: IMessage) => void; thisObj: any }[] = this.callbackMaps[messageData.messageID];
-                    if (datas != null) {
-                        for (let i: number = 0, iLen: number = datas.length; i < iLen; i++) {
-                            let data: { callback: (data: IMessage) => void; thisObj: any } = datas[i];
-                            if (data.callback) {
-                                data.callback.call(data.thisObj, messageData);
-                            }
+        /**
+         * 发送所有消息
+         */
+        private sendAll(): void {
+            while (this.m_sendBuffer.length > 0) {
+                let event: EventData = this.m_sendBuffer.shift();
+                let dataList: EventCallBack[] = this.m_callbackMaps.get(event.messageID);
+                if (dataList) {
+                    for (let i: number = dataList.length; i > 0; i--) {
+                        let data: EventCallBack = dataList[i - 1];
+                        if (!data.isValid) {
+                            dataList.splice(i - 1, 1);
                         }
-                    } else {
-                        console.log("事件ID:" + messageData.messageID + "无监听回调");
+                    }
+                    for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
+                        let data: EventCallBack = dataList[i];
+                        data.callback.call(data.thisObj, event);
                     }
                 } else {
-                    egret.stopTick(this.onTickerLoop, this);
+                    Log("事件ID:" + event.messageID + "无监听回调");
                 }
             }
-            return false;
+        }
+    }
+
+    class EventCallBack extends Callback implements IMessage {
+
+        public index: number;
+
+        public messageID: string;
+
+        public isValid: boolean;
+
+        constructor(callback: (data?: any) => void, thisObj: any) {
+            super(callback, thisObj);
+            this.isValid = true;
+        }
+
+        public clone(): EventCallBack {
+            let data: EventCallBack = new EventCallBack(<any>this.callback, this.thisObj);
+            data.index = this.index;
+            data.messageID = this.messageID;
+            data.isValid = this.isValid;
+            return data;
         }
     }
 }

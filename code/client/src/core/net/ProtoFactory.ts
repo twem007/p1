@@ -1,7 +1,7 @@
 module core {
     export class ProtoFactory {
 
-        private static protoBuff: any;
+        private static s_protoBuff: any;
 
         constructor() {
 
@@ -10,14 +10,14 @@ module core {
          * 初始化
          */
         public static init(proto: any): void {
-            ProtoFactory.protoBuff = dcodeIO.ProtoBuf.loadProto(proto);
+            ProtoFactory.s_protoBuff = dcodeIO.ProtoBuf.loadProto(proto);
         }
         /**
          * 创建协议数据
          */
         public static createMessage(messageID: string): any {
-            if (ProtoFactory.protoBuff) {
-                let dataClass = ProtoFactory.protoBuff.build(messageID);
+            if (ProtoFactory.s_protoBuff) {
+                let dataClass = ProtoFactory.s_protoBuff.build(messageID);
                 if (dataClass) {
                     let data: any = new dataClass();
                     data.protocol = messageID;
@@ -34,8 +34,8 @@ module core {
          * 创建枚举数据
          */
         public static createEnums(name: string): any {
-            if (ProtoFactory.protoBuff) {
-                return ProtoFactory.protoBuff.build(name);
+            if (ProtoFactory.s_protoBuff) {
+                return ProtoFactory.s_protoBuff.build(name);
             } else {
                 Log(`ProtoBuf协议尚未初始化`);
             }
@@ -45,8 +45,8 @@ module core {
          * 创建结构数据
          */
         public static createData(name: string): any {
-            if (ProtoFactory.protoBuff) {
-                let dataClass = ProtoFactory.protoBuff.build(name);
+            if (ProtoFactory.s_protoBuff) {
+                let dataClass = ProtoFactory.s_protoBuff.build(name);
                 if (dataClass) {
                     let data: any = new dataClass();
                     return data;
@@ -62,8 +62,8 @@ module core {
          * 解析数据
          */
         public static decodeMessage(messageID: string, buffer: core.ByteBuffer): any {
-            if (ProtoFactory.protoBuff) {
-                let dataClass = ProtoFactory.protoBuff.build(messageID);
+            if (ProtoFactory.s_protoBuff) {
+                let dataClass = ProtoFactory.s_protoBuff.build(messageID);
                 if (dataClass) {
                     return dataClass.decode(buffer);
                 } else {

@@ -6,17 +6,17 @@ module core {
 	 */
     export class NodeList {
 
-        private list: core.Node[];
+        private m_list: core.Node[];
 
         public constructor(dataList: any[]) {
-            this.list = [];
+            this.m_list = [];
             if(dataList) {
                 for(var i: number = 0,iLen: number = dataList.length;i < iLen;i++) {
                     var node: core.Node = new core.Node(dataList[i]);
-                    this.list.push(node);
+                    this.m_list.push(node);
                 }
             }
-            var list: core.Node[] = this.list;
+            var list: core.Node[] = this.m_list;
             for(var i: number = 0,iLen: number = list.length;i < iLen;i++) {
                 var node: core.Node = list[i];
                 if(i + 1 == iLen) {
@@ -33,23 +33,23 @@ module core {
         }
 
         public getLen(): number {
-            return this.list.length;
+            return this.m_list.length;
         }
 
         public getFirst(): core.Node {
-            return this.list[0];;
+            return this.m_list[0];;
         }
 
         public getEnd(): core.Node {
-            return this.list[this.list.length - 1];
+            return this.m_list[this.m_list.length - 1];
         }
 
         public getNode(index: number): core.Node {
-            return this.list[index];
+            return this.m_list[index];
         }
         
         public clear():void{
-            this.list.length = 0;
+            this.m_list.length = 0;
         }
     }
 }

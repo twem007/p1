@@ -7,12 +7,10 @@ module core {
     export class SocketAPI {
         private static s_instance: core.SocketAPI;
 
-        private socket: egret.WebSocket;
+        private m_socket: egret.WebSocket;
 
-        private sendBuffer: core.ByteBuffer;
-        private receiveBuffer: core.ByteBuffer;
-
-        private 
+        private m_sendBuffer: core.ByteBuffer;
+        private m_receiveBuffer: core.ByteBuffer;
 
         public constructor() {
             let socket: egret.WebSocket = new egret.WebSocket();
@@ -21,9 +19,9 @@ module core {
             socket.addEventListener(egret.ProgressEvent.SOCKET_DATA, this.onSocketData, this);
             socket.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onIOError, this);
             socket.addEventListener(egret.Event.CLOSE, this.onClosed, this);
-            this.socket = socket;
-            this.sendBuffer = new core.ByteBuffer();
-            this.receiveBuffer = new core.ByteBuffer();
+            this.m_socket = socket;
+            this.m_sendBuffer = new core.ByteBuffer();
+            this.m_receiveBuffer = new core.ByteBuffer();
         }
 
         public static getInstance(): core.SocketAPI {
@@ -41,7 +39,7 @@ module core {
         private onSocketData(event: egret.ProgressEvent): void {
             egret.log("从Socket服务器接收数据");
             let buffer: core.ByteBuffer = new core.ByteBuffer();
-            this.socket.readBytes(buffer, buffer.length);
+            this.m_socket.readBytes(buffer, buffer.length);
             this.readData(buffer);
         }
 
@@ -51,7 +49,7 @@ module core {
             if (buffer.bytesAvailable >= size) {
 
             }else{
-                this.receiveBuffer.writeBytes(buffer);
+                this.m_receiveBuffer.writeBytes(buffer);
             }
         }
 
@@ -67,26 +65,26 @@ module core {
 
         private flushToServer(): void {
             Log("flush数据到Socket服务器");
-            this.socket.writeBytes(this.sendBuffer);
-            this.socket.flush();
-            this.sendBuffer.clear();
+            this.m_socket.writeBytes(this.m_sendBuffer);
+            this.m_socket.flush();
+            this.m_sendBuffer.clear();
         }
 
         public sendData(data: any): void {
             var buffer: egret.ByteArray = new core.ByteBuffer(data.toArrayBuffer());
-            this.sendBuffer.writeByte(0x7c);
-            this.sendBuffer.writeShort(buffer.length);
-            this.sendBuffer.writeShort(data.protocol);
-            this.sendBuffer.writeBytes(buffer);
+            this.m_sendBuffer.writeByte(0x7c);
+            this.m_sendBuffer.writeShort(buffer.length);
+            this.m_sendBuffer.writeShort(data.protocol);
+            this.m_sendBuffer.writeBytes(buffer);
             egret.callLater(this.flushToServer, this);
         }
 
         public connect(host: string, port: number): void {
-            this.socket.connect(host, port);
+            this.m_socket.connect(host, port);
         }
 
         public close(): void {
-            this.socket.close();
+            this.m_socket.close();
         }
     }
 }

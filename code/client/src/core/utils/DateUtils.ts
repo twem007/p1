@@ -5,7 +5,7 @@ module core {
 	 *
 	 */
     export class DateUtils {
-        public static date: Date = new Date();
+        public static s_date: Date = new Date();
 
         private static s_clintTimestamp: number;
         private static s_serverTimestamp: number;
@@ -27,7 +27,7 @@ module core {
          */
         public static formatDate(format: string, date: Date): string {
             if (date == null) {
-                date = DateUtils.date;
+                date = DateUtils.s_date;
             }
             var o = {
                 "M+": date.getUTCMonth() + 1,                 //月份   

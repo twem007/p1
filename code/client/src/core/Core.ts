@@ -10,8 +10,9 @@ module core {
 		}
 
 		public static run(stage: egret.Stage): void {
-			core.FrameEventCenter.getInstance().regRenderLoop(stage);
+			core.FrameEventCenter.getInstance().init(stage);
 			core.LayerCenter.getInstance().init(stage);
+			RES.setMaxRetryTimes(3);
 		}
 	}
 }

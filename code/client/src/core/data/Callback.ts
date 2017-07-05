@@ -5,12 +5,9 @@ module core {
 
         public thisObj: any;
 
-        public args: any[];
-
-        constructor(callback: Function, thisObj: any, ...args) {
+        constructor(callback: Function, thisObj: any) {
             this.callback = callback;
             this.thisObj = thisObj;
-            this.args = args;
         }
     }
 }

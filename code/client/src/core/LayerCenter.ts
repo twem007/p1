@@ -8,7 +8,7 @@ module core {
 
         private static s_instance: LayerCenter;
 
-        private layers: egret.DisplayObjectContainer[];
+        private m_layers: Layer | EUILayer[];
 
         public stage: egret.Stage;
 
@@ -25,29 +25,36 @@ module core {
         public init(stage: egret.Stage): void {
             if (stage) {
                 this.stage = stage;
-                this.layers = [];
+                stage.addEventListener(egret.Event.RESIZE, this.onStageResize, this);
+                this.m_layers = [];
                 LayerCenter.stageWidth = stage.stageWidth;
                 LayerCenter.stageHeight = stage.stageHeight;
             }
         }
 
+        private onStageResize(event: egret.Event): void {
+            LayerCenter.stageWidth = this.stage.stageWidth;
+            LayerCenter.stageHeight = this.stage.stageHeight;
+            EventCenter.getInstance().sendEvent(new EventData(egret.Event.RESIZE));
+        }
+
         public addLayer(index: number, layer: core.Layer | core.EUILayer): void {
-            this.layers[index] = layer;
+            this.m_layers[index] = layer;
             this.stage.addChildAt(layer, index);
         }
 
         public getLayer(index: number): core.Layer | core.EUILayer {
-            return this.layers[index];
+            return this.m_layers[index];
         }
 
         public removeLayer(index: number): void {
-            var layer: core.Layer | core.EUILayer = this.layers[index];
+            var layer: core.Layer | core.EUILayer = this.m_layers[index];
             if (layer) {
                 if (layer.parent) {
                     layer.parent.removeChild(layer);
                 }
                 layer.removeChildren();
-                this.layers[index] = null;
+                this.m_layers[index] = null;
             }
         }
 

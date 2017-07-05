@@ -4,7 +4,7 @@ module core {
 	 * @author yuxuefeng
 	 *
 	 */
-	export abstract class Animation extends core.Component implements core.IRenderLoop {
+	export abstract class Animation extends core.Component {
 		private loop: core.FrameEventCenter;
 
 		public constructor() {
@@ -15,11 +15,11 @@ module core {
 		}
 
 		public play(): void {
-			this.loop.addRenderLoop(this);
+			this.loop.addFrameEventListener(this.onRenderLoop, this);
 		}
 
 		public stop(): void {
-			this.loop.removeRenderLoop(this);
+			this.loop.removeFrameEventListener(this.onRenderLoop, this);
 		}
 
 		public onRenderLoop(offset: number): void {

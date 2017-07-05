@@ -1,5 +1,5 @@
 module core {
     export interface IMessage {
-        messageID: string | number;
+        messageID: string;
     }
 }

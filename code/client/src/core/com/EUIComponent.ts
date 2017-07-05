@@ -4,6 +4,6 @@ module core {
             super();
         }
 
-        public abstract release(): void
+        public abstract release(): void;
     }
 }

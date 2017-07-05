@@ -27,7 +27,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
-class Main extends eui.UILayer {
+class Main extends core.EUILayer {
     /**
      * 加载进度界面
      * loading process interface
@@ -82,10 +82,11 @@ class Main extends eui.UILayer {
     private createScene() {
         if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
             this.loadingView = new MainLoadingUI();
-            this.loadingView.show();
             this.initController();
+            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
         }
     }
+
     /**
      * 资源组加载进度
      */
@@ -105,6 +106,7 @@ class Main extends eui.UILayer {
      */
     private onResourceLoadComplete(data: core.GroupData): void {
         if (data.curGroup == 'preload') {
+            Config.init(RES.getRes('config_zip'));
             this.loadingView.hide();
             this.isResourceLoadEnd = true;
             this.createScene();
@@ -113,6 +115,8 @@ class Main extends eui.UILayer {
     /**
      * 初始化控制器
      */
-    private initController(): void {
+    private initController(): void { 
+        new MainController(this.loadingView);
+        new LoginController(this.loadingView);
     }
 }

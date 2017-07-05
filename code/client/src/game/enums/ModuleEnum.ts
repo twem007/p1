@@ -1,4 +1,6 @@
 enum ModuleEnum {
     NONE,
-    LOADING
+    LOADING,
+    LOGIN,
+    MAINUI
 }

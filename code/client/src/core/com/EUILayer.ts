@@ -7,7 +7,7 @@ module core {
     export class EUILayer extends eui.UILayer {
         constructor() {
             super();
-            this.touchEnabled = true;
+            this.touchEnabled = false;
             this.touchChildren = true;
         }
     }

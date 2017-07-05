@@ -1,7 +1,7 @@
 module core {
     class GroupLoader {
 
-        private groupData: GroupData;
+        private m_groupData: GroupData;
 
         constructor() {
             RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
@@ -10,14 +10,14 @@ module core {
         }
 
         private onResourceLoadError(event: RES.ResourceEvent): void {
-            if (this.groupData.curGroup != event.groupName) {
+            if (this.m_groupData.curGroup != event.groupName) {
                 return;
             }
-            this.groupData.curGroupLoaded = event.itemsLoaded;
-            this.groupData.curGroupTotal = event.itemsTotal;
-            this.groupData.curResItem = event.resItem;
-            if (this.groupData.onLoadFaild) {
-                this.groupData.onLoadFaild.call(this.groupData.thisObj, this.groupData);
+            this.m_groupData.curGroupLoaded = event.itemsLoaded;
+            this.m_groupData.curGroupTotal = event.itemsTotal;
+            this.m_groupData.curResItem = event.resItem;
+            if (this.m_groupData.onLoadFaild) {
+                this.m_groupData.onLoadFaild.call(this.m_groupData.thisObj, this.m_groupData);
             }
         }
 
@@ -31,36 +31,36 @@ module core {
         }
 
         private updateGroupData(group: string, loadedItems: number = 0, totalItems: number = 0, resItem?: RES.ResourceItem): void {
-            if (this.groupData.curGroup != group) {
+            if (this.m_groupData.curGroup != group) {
                 return;
             }
-            this.groupData.curGroupLoaded = loadedItems;
-            this.groupData.curGroupTotal = totalItems;
-            this.groupData.curResItem = resItem;
-            if (this.groupData.onLoadProgress) {
-                this.groupData.onLoadProgress.call(this.groupData.thisObj, this.groupData);
+            this.m_groupData.curGroupLoaded = loadedItems;
+            this.m_groupData.curGroupTotal = totalItems;
+            this.m_groupData.curResItem = resItem;
+            if (this.m_groupData.onLoadProgress) {
+                this.m_groupData.onLoadProgress.call(this.m_groupData.thisObj, this.m_groupData);
             }
             if (loadedItems == totalItems) {
-                if (this.groupData.loadedQueue.indexOf(group) < 0) {
-                    this.groupData.loadedQueue.push(group);
-                    this.groupData.loaded = this.groupData.loadedQueue.length;
+                if (this.m_groupData.loadedQueue.indexOf(group) < 0) {
+                    this.m_groupData.loadedQueue.push(group);
+                    this.m_groupData.loaded = this.m_groupData.loadedQueue.length;
                 }
                 this.loadNext();
             }
         }
 
         private loadNext(): void {
-            let group: string = this.groupData.loadQueue.shift();
+            let group: string = this.m_groupData.loadQueue.shift();
             if (group) {
-                this.groupData.curGroup = group;
+                this.m_groupData.curGroup = group;
                 if (RES.isGroupLoaded(group)) {
                     this.updateGroupData(group);
                 } else {
                     RES.loadGroup(group);
                 }
             } else {
-                if (this.groupData.onLoadComplete) {
-                    this.groupData.onLoadComplete.call(this.groupData.thisObj, this.groupData);
+                if (this.m_groupData.onLoadComplete) {
+                    this.m_groupData.onLoadComplete.call(this.m_groupData.thisObj, this.m_groupData);
                 }
                 this.destory();
             }
@@ -70,11 +70,11 @@ module core {
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_PROGRESS, this.onResourceProgress, this);
-            this.groupData = null;
+            this.m_groupData = null;
         }
 
         public loadGroups(data: GroupData): void {
-            this.groupData = data;
+            this.m_groupData = data;
             this.loadNext();
         }
     }

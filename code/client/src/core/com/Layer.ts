@@ -7,7 +7,7 @@ module core {
 	export class Layer extends egret.DisplayObjectContainer {
 		public constructor() {
 			super();
-			this.touchEnabled = true;
+			this.touchEnabled = false;
 			this.touchChildren = true;
 		}
 	}

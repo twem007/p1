@@ -80,7 +80,7 @@ class Dictionary<T> {
 		this.m_keys.length = 0;
 		this.m_values.length = 0;
 	}
-	
+
 	/**
 	 * 随机获取一条数据
 	 */

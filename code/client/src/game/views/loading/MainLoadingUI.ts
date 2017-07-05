@@ -24,7 +24,7 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
     public m_pResItemCompleteCount: number = 0;
     /**logo */
     public m_pLogoImg: eui.Image;
-
+ 
     public constructor() {
         super();
         this.skinName = 'resource/skins/LoadingSkin.exml';
@@ -39,7 +39,7 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
 
     public setProgress(progress: core.GroupData): void {
         if (!this.m_pProgressMask) return;
-        let percent: number = progress.loaded / progress.total;
+        let percent: number = progress.curGroupLoaded / progress.total;
         this.m_pProgressMask.width = this.m_pProgressGroup.width * percent;
         this.m_pLoginLbl.text = "正在加载游戏" + Math.floor(percent * 100 << 0) + "%"
         this.m_pProgressStar.x = this.m_pProgressMask.width - this.m_pProgressStar.width;
