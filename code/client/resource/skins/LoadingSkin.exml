@@ -19,7 +19,7 @@
 		<e:Image source="logoBoomUI_json.loading_tiao_0" x="0" anchorOffsetX="0" width="912" anchorOffsetY="0"/>
 		<e:Image id="m_pProgressImg" width="920" scale9Grid="1,0,2,32" y="5" x="-10" height="36" source="logoBoomUI_json.loading_tiao_1"/>
 		<e:Image id="m_pProgressMask" width="920" scale9Grid="1,0,2,32" y="5" x="-10" height="36" source="logoBoomUI_json.loading_tiao_1"/>
-		<e:Image id="m_pProgressStar" x="1.41" y="-12.92" source="logoBoomUI_json.loading_yun_0"/>
+		<e:Image id="m_pProgressStar" x="9.41" y="-12.92" source="logoBoomUI_json.loading_yun_0"/>
 		<e:Label id="m_pStateLbl" strokeColor="0x1D605F" stroke="3" verticalAlign="bottom" textAlign="center" width="500" text="一大波表情正在靠近中..." size="25" fontFamily="Microsoft YaHei" y="-33.95" scaleX="1" scaleY="1" textColor="0xE5F7FF" horizontalCenter="0" visible="false"/>
 		<e:Label id="m_pLoginLbl" strokeColor="0x1D605F" stroke="3" verticalAlign="bottom" textAlign="center" width="500" text="0%" size="25" fontFamily="Microsoft YaHei" scaleX="1" scaleY="1" textColor="0xE5F7FF" horizontalCenter="0" verticalCenter="0"/>
 		<e:Image y="0.44" scale9Grid="23,18,7,5" anchorOffsetX="0" width="935.33" horizontalCenter="0" source="logoBoomUI_json.loading_tiao_2"/>

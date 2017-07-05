@@ -14,38 +14,33 @@ var core;
                 throw new Error('单例类不可实例化');
             }
             egret.startTick(this.onTick, this);
-            this.tickList = [];
+            this.m_tickList = [];
         }
         TimerManager.prototype.onTick = function (timeStamp) {
-            var dataList = this.tickList;
+            var dataList = this.m_tickList;
+            for (var i = dataList.length; i > 0; i--) {
+                var data = dataList[i - 1];
+                if (!data.isValid) {
+                    dataList.splice(i - 1, 1);
+                }
+            }
             for (var i = 0, iLen = dataList.length; i < iLen; i++) {
                 var data = dataList[i];
-                if (!data) {
-                    continue;
-                }
-                if ((Date.now() - data.timestamp) > data.delay) {
-                    data.timestamp = Date.now();
-                    data.replayCount--;
+                if ((timeStamp - data.timestamp) > data.delay) {
+                    data.timestamp = timeStamp;
+                    data.count++;
                     if (data.callback) {
-                        var t = Date.now();
+                        var t = egret.getTimer();
                         data.callback.call(data.thisObj, data.clone());
-                        var t1 = Date.now();
+                        var t1 = egret.getTimer();
                         if (t1 - t > 2) {
                             Log("tick\u56DE\u8C03\u8017\u65F6:" + (t1 - t));
                         }
                     }
-                    if (data.replayCount <= 0) {
+                    if (data.count == data.maxCount) {
                         data.isValid = false;
                     }
                 }
-            }
-            var index = dataList.length;
-            while (index > 0) {
-                var data = dataList[index - 1];
-                if (!data.isValid) {
-                    dataList.splice(index - 1, 1);
-                }
-                index--;
             }
             return false;
         };
@@ -54,44 +49,55 @@ var core;
             for (var _i = 4; _i < arguments.length; _i++) {
                 args[_i - 4] = arguments[_i];
             }
-            var dataList = this.tickList;
+            var dataList = this.m_tickList;
             if (dataList) {
                 for (var i = 0, iLen = dataList.length; i < iLen; i++) {
                     var data = dataList[i];
-                    if (data.callback == callback && data.thisObj == thisObj) {
-                        return;
+                    if (data.callback == callback && data.thisObj == thisObj && data.delay == delay && data.maxCount == replayCount) {
+                        if (!data.isValid) {
+                            data.isValid = true;
+                            data.delay = delay;
+                            data.count = 0;
+                            data.maxCount = replayCount <= 0 ? Number.MAX_VALUE : replayCount;
+                            data.callback = callback;
+                            data.thisObj = thisObj;
+                            data.args = args;
+                            data.timestamp = egret.getTimer();
+                            return;
+                        }
                     }
                 }
             }
             else {
                 dataList = [];
-                this.tickList = dataList;
+                this.m_tickList = dataList;
             }
             var tick = new TickData();
             tick.delay = delay;
-            tick.replayCount = replayCount <= 0 ? Number.MAX_VALUE : replayCount;
+            tick.count = 0;
+            tick.maxCount = replayCount <= 0 ? Number.MAX_VALUE : replayCount;
             tick.callback = callback;
             tick.thisObj = thisObj;
             tick.args = args;
-            tick.timestamp = Date.now();
+            tick.timestamp = egret.getTimer();
             tick.isValid = true;
             dataList.push(tick);
         };
         TimerManager.prototype.removeTick = function (callback, thisObj) {
-            var dataList = this.tickList;
+            var dataList = this.m_tickList;
             if (dataList) {
                 var tickData = void 0;
                 for (var i = 0, iLen = dataList.length; i < iLen; i++) {
                     var data = dataList[i];
                     if (data.callback == callback && data.thisObj == thisObj) {
-                        dataList.splice(i, 1);
+                        data.isValid = false;
                         return;
                     }
                 }
             }
         };
         TimerManager.prototype.removeTicks = function (thisObj) {
-            var dataList = this.tickList;
+            var dataList = this.m_tickList;
             if (dataList) {
                 var tickData = void 0;
                 for (var i = 0, iLen = dataList.length; i < iLen; i++) {
@@ -100,18 +106,10 @@ var core;
                         data.isValid = false;
                     }
                 }
-                var index = dataList.length;
-                while (index > 0) {
-                    var data = dataList[index - 1];
-                    if (!data.isValid) {
-                        dataList.splice(index - 1, 1);
-                    }
-                    index--;
-                }
             }
         };
         TimerManager.prototype.removeAllTicks = function () {
-            this.tickList.length = 0;
+            this.m_tickList.length = 0;
         };
         Object.defineProperty(TimerManager, "instance", {
             get: function () {
@@ -135,7 +133,8 @@ var core;
         TickData.prototype.clone = function () {
             var data = new TickData();
             data.delay = this.delay;
-            data.replayCount = this.replayCount;
+            data.count = this.count;
+            data.maxCount = this.maxCount;
             data.callback = this.callback;
             data.thisObj = this.thisObj;
             data.args = this.args;
@@ -147,4 +146,3 @@ var core;
     core.TickData = TickData;
     __reflect(TickData.prototype, "core.TickData");
 })(core || (core = {}));
-//# sourceMappingURL=TimerManager.js.map

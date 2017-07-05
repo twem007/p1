@@ -1,0 +1,11 @@
+{"file":"/deadFont.png","frames":{
+"0":{"x":0,"y":0,"w":68,"h":96,"offX":0,"offY":0,"sourceW":68,"sourceH":96},
+"1":{"x":210,"y":0,"w":44,"h":96,"offX":11,"offY":0,"sourceW":68,"sourceH":96},
+"2":{"x":0,"y":196,"w":68,"h":96,"offX":0,"offY":0,"sourceW":68,"sourceH":96},
+"3":{"x":70,"y":196,"w":68,"h":96,"offX":0,"offY":0,"sourceW":68,"sourceH":96},
+"4":{"x":70,"y":98,"w":68,"h":96,"offX":0,"offY":0,"sourceW":68,"sourceH":96},
+"5":{"x":140,"y":0,"w":68,"h":96,"offX":0,"offY":0,"sourceW":68,"sourceH":96},
+"6":{"x":140,"y":98,"w":68,"h":96,"offX":0,"offY":0,"sourceW":68,"sourceH":96},
+"7":{"x":140,"y":196,"w":64,"h":96,"offX":4,"offY":0,"sourceW":68,"sourceH":96},
+"8":{"x":70,"y":0,"w":68,"h":96,"offX":0,"offY":0,"sourceW":68,"sourceH":96},
+"9":{"x":0,"y":98,"w":68,"h":96,"offX":0,"offY":0,"sourceW":68,"sourceH":96}}}

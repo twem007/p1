@@ -6,4 +6,3 @@ var LayerEnum;
     LayerEnum[LayerEnum["LOADING"] = 3] = "LOADING";
     LayerEnum[LayerEnum["TOP"] = 4] = "TOP";
 })(LayerEnum || (LayerEnum = {}));
-//# sourceMappingURL=LayerEnum.js.map

@@ -36,21 +36,24 @@ class MainUI extends core.EUIComponent {
 		super.childrenCreated();
 		this.addEvent();
 	}
-	private addEvent() {
-		// core.LayerCenter.getInstance().getLayer(LayerEnum.TOP).addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickLoginBtn, this);
-		this.m_pModTimeLimitGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickLoginBtn, this);
 
+	private addEvent() {
+		this.m_pModTimeLimitGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickLoginBtn, this);
 	}
+
 	private removeEvent(): void {
 
 	}
+
 	private onClickLoginBtn(): void {
 		this.hide();
-		core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
+		GameModeManager.getInstance().enterGame(GameTypeEnum.EXERCISE);
 	}
+
 	private hide(): void {
 		core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.MAINUI));
 	}
+	
 	public release(): void {
 
 	}

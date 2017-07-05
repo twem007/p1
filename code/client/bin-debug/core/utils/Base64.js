@@ -46,24 +46,24 @@ var core;
             data.position = 0;
             while (position < len) {
                 bytes = (data.readByte() & 0xFF) << 16 | (data.readByte() & 0xFF) << 8 | (data.readByte() & 0xFF);
-                bytedata.writeByte(Base64.encodeChars[bytes >>> 18]);
-                bytedata.writeByte(Base64.encodeChars[bytes >>> 12 & 0x3F]);
-                bytedata.writeByte(Base64.encodeChars[bytes >>> 6 & 0x3F]);
-                bytedata.writeByte(Base64.encodeChars[bytes & 0x3F]);
+                bytedata.writeByte(Base64.s_encodeChars[bytes >>> 18]);
+                bytedata.writeByte(Base64.s_encodeChars[bytes >>> 12 & 0x3F]);
+                bytedata.writeByte(Base64.s_encodeChars[bytes >>> 6 & 0x3F]);
+                bytedata.writeByte(Base64.s_encodeChars[bytes & 0x3F]);
                 position += 3;
             }
             if (mod == 1) {
                 bytes = data.readByte() & 0xFF;
-                bytedata.writeByte(Base64.encodeChars[bytes >>> 2]);
-                bytedata.writeByte(Base64.encodeChars[bytes & 0x03]);
+                bytedata.writeByte(Base64.s_encodeChars[bytes >>> 2]);
+                bytedata.writeByte(Base64.s_encodeChars[bytes & 0x03]);
                 bytedata.writeByte(61);
                 bytedata.writeByte(61);
             }
             else if (mod == 2) {
                 bytes = (data.readByte() & 0xFF) << 8 | data.readByte() & 0xFF;
-                bytedata.writeByte(Base64.encodeChars[bytes >>> 10]);
-                bytedata.writeByte(Base64.encodeChars[(bytes >>> 4) & 0x3F]);
-                bytedata.writeByte(Base64.encodeChars[(bytes & 0x0F) << 2]);
+                bytedata.writeByte(Base64.s_encodeChars[bytes >>> 10]);
+                bytedata.writeByte(Base64.s_encodeChars[(bytes >>> 4) & 0x3F]);
+                bytedata.writeByte(Base64.s_encodeChars[(bytes & 0x0F) << 2]);
                 bytedata.writeByte(61);
             }
             position += mod;
@@ -78,11 +78,11 @@ var core;
             var char1, char2, char3, char4;
             var i = 0, len = base64data.length;
             while (i < len) {
-                char1 = Base64.decodeChars[base64data.readByte() & 0xFF];
+                char1 = Base64.s_decodeChars[base64data.readByte() & 0xFF];
                 if (char1 == -1) {
                     break;
                 }
-                char2 = Base64.decodeChars[base64data.readByte() & 0xFF];
+                char2 = Base64.s_decodeChars[base64data.readByte() & 0xFF];
                 if (char2 == -1) {
                     break;
                 }
@@ -91,7 +91,7 @@ var core;
                 if (char3 == 61) {
                     break;
                 }
-                char3 = Base64.decodeChars[char3];
+                char3 = Base64.s_decodeChars[char3];
                 if (char3 == -1) {
                     break;
                 }
@@ -100,7 +100,7 @@ var core;
                 if (char4 == 61) {
                     break;
                 }
-                char4 = Base64.decodeChars[char4];
+                char4 = Base64.s_decodeChars[char4];
                 if (char4 == -1) {
                     break;
                 }
@@ -127,9 +127,8 @@ var core;
         };
         return Base64;
     }());
-    Base64.encodeChars = Base64.initEncodeChar();
-    Base64.decodeChars = Base64.initDecodeChar();
+    Base64.s_encodeChars = Base64.initEncodeChar();
+    Base64.s_decodeChars = Base64.initDecodeChar();
     core.Base64 = Base64;
     __reflect(Base64.prototype, "core.Base64");
 })(core || (core = {}));
-//# sourceMappingURL=Base64.js.map

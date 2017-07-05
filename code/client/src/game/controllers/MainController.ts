@@ -17,8 +17,6 @@ class MainController extends core.Control {
 			let mainUI: MainUI = new MainUI();
 			this.m_pMainUI = mainUI;
 		}
-		// this._map.init(this._mapId);
-		// this._map.create();
 		core.LayerCenter.getInstance().getLayer(LayerEnum.POPUP).addChild(this.m_pMainUI);
 	}
 	/**

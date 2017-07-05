@@ -13,7 +13,7 @@ class TileCover {
     public static topLayerList: Object;
     //角色层瓦
     public static roleLayerList: Object;
-
+ 
     public static addTopLayer(tile: TileObject, col: number, row: number): void {
         TileCover.topLayerList[col + '_' + row] = tile;
     }
@@ -24,7 +24,7 @@ class TileCover {
 
     public static add(tile: TileObject, col: number, row: number, imgNum: number): void {
         var attr: Object = MapCellData.getBgAttr(imgNum);
-        if (attr) {
+        if (attr) { 
             if (attr['level'] == MapDecoration.FLOOR) {
                 TileCover.addRoleLayer(tile, col, row);
             }

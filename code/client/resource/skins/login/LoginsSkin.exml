@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="LoginsSkin" xmlns:e="http://ns.egret.com/eui" xmlns:AGame="AGame.*" xmlns:com_main="com_main.*" xmlns:w="http://ns.egret.com/wing" minHeight="750" minWidth="1334">
+	<e:Group id="m_pMainGroup" left="0" top="0" anchorOffsetY="0" right="0" bottom="0">
+		<e:Image id="m_pBgImg" scaleX="1" scaleY="1" x="0" y="0" source="loading_bg_1_jpg"/>
+		<e:Group id="m_pLogoGroup" y="308" anchorOffsetX="391" anchorOffsetY="241" x="667">
+			<e:Image id="m_pLogo" scaleX="1" scaleY="1" touchEnabled="false" source="logoBoomUI_json.logo"/>
+		</e:Group>
+		<e:Group id="m_pAccountGroup" anchorOffsetX="324" anchorOffsetY="69" width="648" height="138" y="374" x="667" visible="false">
+			<e:Group x="0" y="0" anchorOffsetX="0" width="645.67">
+			<e:Image y="0" anchorOffsetX="0" anchorOffsetY="0" horizontalCenter="-0.33499999999997954" source="logoBoomUI_json.loading_tiao_0" height="85.94" width="645.09" scale9Grid="127,20,19,5"/>
+			<e:EditableText id="m_pAccount" width="628.78" height="70" text="abc" y="5.65" anchorOffsetX="0" size="30" anchorOffsetY="0" scaleX="1" scaleY="1" fontFamily="Microsoft YaHei" textAlign="center" bold="true" horizontalCenter="0.6650000000000205" verticalAlign="middle" strokeColor="0x3C4F46" stroke="3" textColor="0x9AEC17"/>
+			<e:Label text="账号" y="-43.4" scaleX="1" scaleY="1" size="30" horizontalCenter="0.16500000000002046" fontFamily="Microsoft YaHei" bold="true" strokeColor="0x3C4F46" stroke="3" textColor="0x9AEC17"/>
+			</e:Group>
+			<e:Group x="0" y="102.37" anchorOffsetX="0" width="647.3" visible="false">
+			<e:Label text="密码" y="-34.04" horizontalCenter="0.35000000000002274" textColor="0xFFFFFF" size="25" bold="true" fontFamily="Microsoft YaHei" stroke="3" strokeColor="0x3C4F46"/>
+			<e:Image y="0" anchorOffsetX="0" scale9Grid="16,0,4,32" horizontalCenter="0" source="logoBoomUI_json.loading_tiao_0"/>
+			<e:EditableText id="m_pPassword" width="350" height="31.03" text="sss" y="4.52" anchorOffsetX="0" size="25" anchorOffsetY="0" scaleX="1" scaleY="1" fontFamily="Microsoft YaHei" displayAsPassword="true" textColor="0xFFFFFF" textAlign="center" bold="true" rotation="359.99" horizontalCenter="-0.6499999999999773" strokeColor="0x3C4F46" stroke="3" verticalAlign="middle"/>
+			</e:Group>
+		</e:Group>
+		<e:Image id="m_pLoginBtn" scaleX="1" scaleY="1" width="307" height="107" anchorOffsetX="153.5" anchorOffsetY="53.5" x="667" y="614" source="logoBoomUI_json.loading_btn_0"/>
+	</e:Group>
+</e:Skin>

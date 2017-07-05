@@ -14,4 +14,3 @@ var core;
     core.Progress = Progress;
     __reflect(Progress.prototype, "core.Progress");
 })(core || (core = {}));
-//# sourceMappingURL=ILoadingUI.js.map

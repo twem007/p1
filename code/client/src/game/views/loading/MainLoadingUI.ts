@@ -24,7 +24,7 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
     public m_pResItemCompleteCount: number = 0;
     /**logo */
     public m_pLogoImg: eui.Image;
- 
+
     public constructor() {
         super();
         this.skinName = 'resource/skins/LoadingSkin.exml';

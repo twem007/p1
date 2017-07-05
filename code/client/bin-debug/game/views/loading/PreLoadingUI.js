@@ -37,4 +37,3 @@ var PreLoadingUI = (function (_super) {
     return PreLoadingUI;
 }(core.Component));
 __reflect(PreLoadingUI.prototype, "PreLoadingUI", ["core.ILoadingUI"]);
-//# sourceMappingURL=PreLoadingUI.js.map

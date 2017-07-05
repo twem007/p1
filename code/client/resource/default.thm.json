@@ -2,6 +2,8 @@
   "skins": {},
   "autoGenerateExmlsList": true,
   "exmls": [
-    "resource/skins/LoadingSkin.exml"
+    "resource/skins/LoadingSkin.exml",
+    "resource/skins/login/LoginsSkin.exml",
+    "resource/skins/main/MainSkin.exml"
   ]
 }

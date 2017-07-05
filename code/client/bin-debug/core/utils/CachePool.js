@@ -10,9 +10,9 @@ var core;
          * 添加对象
          */
         CachePool.addObj = function (name, obj) {
-            var list = CachePool.pool[name];
+            var list = CachePool.s_pool[name];
             if (!list) {
-                CachePool.pool[name] = [obj];
+                CachePool.s_pool[name] = [obj];
             }
             else {
                 list.push(obj);
@@ -22,7 +22,7 @@ var core;
          * 获取对象
          */
         CachePool.getObj = function (name) {
-            var list = CachePool.pool[name];
+            var list = CachePool.s_pool[name];
             if (list) {
                 return list.pop();
             }
@@ -32,18 +32,17 @@ var core;
          * 清理指定缓存
          */
         CachePool.clear = function (name) {
-            delete CachePool.pool[name];
+            delete CachePool.s_pool[name];
         };
         /**
          * 清理所有缓存
          */
         CachePool.clearAll = function () {
-            CachePool.pool = {};
+            CachePool.s_pool = {};
         };
         return CachePool;
     }());
-    CachePool.pool = {};
+    CachePool.s_pool = {};
     core.CachePool = CachePool;
     __reflect(CachePool.prototype, "core.CachePool");
 })(core || (core = {}));
-//# sourceMappingURL=CachePool.js.map

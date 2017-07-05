@@ -115,8 +115,9 @@ class Main extends core.EUILayer {
     /**
      * 初始化控制器
      */
-    private initController(): void { 
+    private initController(): void {
         new MainController(this.loadingView);
         new LoginController(this.loadingView);
+        new GameController(this.loadingView);
     }
 }

@@ -1,0 +1,4 @@
+enum GameTypeEnum {
+    EXERCISE,
+    RANK
+}

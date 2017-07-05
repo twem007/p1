@@ -10,14 +10,14 @@ var core;
      */
     var NodeList = (function () {
         function NodeList(dataList) {
-            this.list = [];
+            this.m_list = [];
             if (dataList) {
                 for (var i = 0, iLen = dataList.length; i < iLen; i++) {
                     var node = new core.Node(dataList[i]);
-                    this.list.push(node);
+                    this.m_list.push(node);
                 }
             }
-            var list = this.list;
+            var list = this.m_list;
             for (var i = 0, iLen = list.length; i < iLen; i++) {
                 var node = list[i];
                 if (i + 1 == iLen) {
@@ -35,24 +35,23 @@ var core;
             }
         }
         NodeList.prototype.getLen = function () {
-            return this.list.length;
+            return this.m_list.length;
         };
         NodeList.prototype.getFirst = function () {
-            return this.list[0];
+            return this.m_list[0];
             ;
         };
         NodeList.prototype.getEnd = function () {
-            return this.list[this.list.length - 1];
+            return this.m_list[this.m_list.length - 1];
         };
         NodeList.prototype.getNode = function (index) {
-            return this.list[index];
+            return this.m_list[index];
         };
         NodeList.prototype.clear = function () {
-            this.list.length = 0;
+            this.m_list.length = 0;
         };
         return NodeList;
     }());
     core.NodeList = NodeList;
     __reflect(NodeList.prototype, "core.NodeList");
 })(core || (core = {}));
-//# sourceMappingURL=NodeList.js.map

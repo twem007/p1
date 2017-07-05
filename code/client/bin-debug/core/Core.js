@@ -12,12 +12,13 @@ var core;
         function Core() {
         }
         Core.run = function (stage) {
-            core.FrameEventCenter.getInstance().regRenderLoop(stage);
+            core.FrameEventCenter.getInstance().init(stage);
             core.LayerCenter.getInstance().init(stage);
+            core.WebUtils.addKeyboardListener();
+            RES.setMaxRetryTimes(3);
         };
         return Core;
     }());
     core.Core = Core;
     __reflect(Core.prototype, "core.Core");
 })(core || (core = {}));
-//# sourceMappingURL=Core.js.map

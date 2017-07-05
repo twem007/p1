@@ -23,21 +23,18 @@ var core;
             return _this;
         }
         Animation.prototype.play = function () {
-            this.loop.addRenderLoop(this);
+            this.loop.addFrameEventListener(this.onRenderLoop, this);
         };
         Animation.prototype.stop = function () {
-            this.loop.removeRenderLoop(this);
+            this.loop.removeFrameEventListener(this.onRenderLoop, this);
         };
         Animation.prototype.onRenderLoop = function (offset) {
             if (this.parent == null) {
                 this.stop();
             }
         };
-        Animation.prototype.release = function () {
-        };
         return Animation;
     }(core.Component));
     core.Animation = Animation;
-    __reflect(Animation.prototype, "core.Animation", ["core.IRenderLoop"]);
+    __reflect(Animation.prototype, "core.Animation");
 })(core || (core = {}));
-//# sourceMappingURL=Animation.js.map

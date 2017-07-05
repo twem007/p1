@@ -6,8 +6,21 @@ var core;
     var WebUtils = (function () {
         function WebUtils() {
         }
+        WebUtils.addKeyboardListener = function () {
+            document.onkeydown = function (event) {
+                if (event && WebUtils.isKeyboard) {
+                    core.EventCenter.getInstance().sendEvent(new core.KeyboardEventData(core.EventID.KEYBOARD_DOWN, event));
+                }
+            };
+            document.onkeyup = function (event) {
+                if (event && WebUtils.isKeyboard) {
+                    core.EventCenter.getInstance().sendEvent(new core.KeyboardEventData(core.EventID.KEYBOARD_UP, event));
+                }
+            };
+        };
         return WebUtils;
     }());
-    __reflect(WebUtils.prototype, "WebUtils");
+    WebUtils.isKeyboard = true;
+    core.WebUtils = WebUtils;
+    __reflect(WebUtils.prototype, "core.WebUtils");
 })(core || (core = {}));
-//# sourceMappingURL=WebUtils.js.map

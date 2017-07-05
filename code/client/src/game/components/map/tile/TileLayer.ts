@@ -54,13 +54,14 @@ class TileLayer extends egret.DisplayObjectContainer {
 		if (!this._bg1) {
 			this._bg1 = new egret.Bitmap();
 		}
-		this._bg1.bitmapData = RES.getRes(this.config['bgImg'] + '_1_jpg');
+		let key:string = this.config.bgRes + '_1_jpg';
+		this._bg1.bitmapData = RES.getRes(key);
 		this.addChild(this._bg1);
 		if (!this._bg2) {
 			this._bg2 = new egret.Bitmap();
 			this._bg2.x = this._tileWidth * this._tileCol * 0.5;
 		}
-		this._bg2.bitmapData = RES.getRes(this.config['bgImg'] + '_2_jpg');
+		this._bg2.bitmapData = RES.getRes(this.config.bgRes + '_2_jpg');
 		this.addChild(this._bg2);
 	}
 
@@ -144,7 +145,7 @@ class TileLayer extends egret.DisplayObjectContainer {
 		}
 		return;
 	}
-
+ 
 	public get mapId(): number {
 		return this._mapId;
 	}

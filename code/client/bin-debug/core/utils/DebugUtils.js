@@ -33,4 +33,3 @@ function Log(message, isLocal) {
     if (isLocal === void 0) { isLocal = false; }
     egret.log(message);
 }
-//# sourceMappingURL=DebugUtils.js.map

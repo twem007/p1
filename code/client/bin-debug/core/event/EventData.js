@@ -20,17 +20,4 @@ var core;
     }(egret.HashObject));
     core.EventData = EventData;
     __reflect(EventData.prototype, "core.EventData", ["core.IMessage"]);
-    var ModuleEventData = (function (_super) {
-        __extends(ModuleEventData, _super);
-        function ModuleEventData(messageID, moduleEnum, preModule, data) {
-            var _this = _super.call(this, messageID, data) || this;
-            _this.moduleEnum = moduleEnum;
-            _this.preModule = preModule;
-            return _this;
-        }
-        return ModuleEventData;
-    }(core.EventData));
-    core.ModuleEventData = ModuleEventData;
-    __reflect(ModuleEventData.prototype, "core.ModuleEventData");
 })(core || (core = {}));
-//# sourceMappingURL=EventData.js.map

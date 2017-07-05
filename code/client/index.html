@@ -43,29 +43,29 @@
     <!--game_files_start-->
 	<script egret="game" src="bin-debug/core/com/Component.js"></script>
 	<script egret="game" src="bin-debug/core/com/EUIComponent.js"></script>
+	<script egret="game" src="bin-debug/core/com/EUILayer.js"></script>
+	<script egret="game" src="bin-debug/core/Control.js"></script>
+	<script egret="game" src="bin-debug/core/data/Callback.js"></script>
 	<script egret="game" src="bin-debug/core/data/Dictionary.js"></script>
 	<script egret="game" src="bin-debug/core/event/EventData.js"></script>
 	<script egret="game" src="bin-debug/core/interfaces/ILoadingUI.js"></script>
-	<script egret="game" src="bin-debug/core/net/HttpAPI.js"></script>
-	<script egret="game" src="bin-debug/core/com/Layer.js"></script>
-	<script egret="game" src="bin-debug/core/Control.js"></script>
-	<script egret="game" src="bin-debug/core/Core.js"></script>
-	<script egret="game" src="bin-debug/core/data/Callback.js"></script>
-	<script egret="game" src="bin-debug/AssetAdapter.js"></script>
-	<script egret="game" src="bin-debug/core/data/GameMode.js"></script>
+	<script egret="game" src="bin-debug/game/db/DBObject.js"></script>
+	<script egret="game" src="bin-debug/core/utils/ResUtils.js"></script>
 	<script egret="game" src="bin-debug/core/data/Node.js"></script>
 	<script egret="game" src="bin-debug/core/data/NodeList.js"></script>
-	<script egret="game" src="bin-debug/core/com/EUILayer.js"></script>
+	<script egret="game" src="bin-debug/core/enum/Keyboard.js"></script>
+	<script egret="game" src="bin-debug/core/Core.js"></script>
 	<script egret="game" src="bin-debug/core/event/EventID.js"></script>
+	<script egret="game" src="bin-debug/core/event/KeyboardEventData.js"></script>
+	<script egret="game" src="bin-debug/core/event/ModuleEventData.js"></script>
 	<script egret="game" src="bin-debug/core/EventCenter.js"></script>
 	<script egret="game" src="bin-debug/core/FrameEventCenter.js"></script>
-	<script egret="game" src="bin-debug/core/interfaces/IComponent.js"></script>
-	<script egret="game" src="bin-debug/core/com/InputComponent.js"></script>
+	<script egret="game" src="bin-debug/core/InputManager.js"></script>
+	<script egret="game" src="bin-debug/core/com/Layer.js"></script>
 	<script egret="game" src="bin-debug/core/interfaces/IMessage.js"></script>
-	<script egret="game" src="bin-debug/core/interfaces/IRenderLoop.js"></script>
 	<script egret="game" src="bin-debug/core/LayerCenter.js"></script>
 	<script egret="game" src="bin-debug/core/net/ByteBuffer.js"></script>
-	<script egret="game" src="bin-debug/core/com/Animation.js"></script>
+	<script egret="game" src="bin-debug/core/net/HttpAPI.js"></script>
 	<script egret="game" src="bin-debug/core/net/MessageData.js"></script>
 	<script egret="game" src="bin-debug/core/net/ProtoFactory.js"></script>
 	<script egret="game" src="bin-debug/core/net/SocketAPI.js"></script>
@@ -73,21 +73,51 @@
 	<script egret="game" src="bin-debug/core/utils/Base64.js"></script>
 	<script egret="game" src="bin-debug/core/utils/CachePool.js"></script>
 	<script egret="game" src="bin-debug/core/utils/DateUtils.js"></script>
+	<script egret="game" src="bin-debug/core/utils/DBFactory.js"></script>
 	<script egret="game" src="bin-debug/core/utils/DebugUtils.js"></script>
 	<script egret="game" src="bin-debug/core/utils/Long.js"></script>
 	<script egret="game" src="bin-debug/core/utils/MathUtils.js"></script>
 	<script egret="game" src="bin-debug/core/utils/MCFactory.js"></script>
 	<script egret="game" src="bin-debug/core/utils/MD5.js"></script>
 	<script egret="game" src="bin-debug/core/utils/PlatUtils.js"></script>
-	<script egret="game" src="bin-debug/core/utils/ResUtils.js"></script>
+	<script egret="game" src="bin-debug/core/com/Animation.js"></script>
 	<script egret="game" src="bin-debug/core/utils/SoundUtils.js"></script>
 	<script egret="game" src="bin-debug/core/utils/TextUtils.js"></script>
 	<script egret="game" src="bin-debug/core/utils/WebUtils.js"></script>
 	<script egret="game" src="bin-debug/core/utils/XMLUtils.js"></script>
+	<script egret="game" src="bin-debug/game/components/gamemode/data/role/Role.js"></script>
+	<script egret="game" src="bin-debug/game/components/gamemode/data/role/RoleControl.js"></script>
+	<script egret="game" src="bin-debug/game/components/gamemode/data/role/RoleData.js"></script>
+	<script egret="game" src="bin-debug/game/components/gamemode/GameModeData.js"></script>
+	<script egret="game" src="bin-debug/game/components/gamemode/GameModeManager.js"></script>
+	<script egret="game" src="bin-debug/game/components/gamemode/GameTypeEnum.js"></script>
+	<script egret="game" src="bin-debug/game/components/gamemode/IGameMode.js"></script>
+	<script egret="game" src="bin-debug/game/components/gamemode/mode/ExerciseMode.js"></script>
+	<script egret="game" src="bin-debug/game/components/map/enum/LayerImage.js"></script>
+	<script egret="game" src="bin-debug/game/components/map/enum/MapObstacleType.js"></script>
+	<script egret="game" src="bin-debug/game/components/map/Map.js"></script>
+	<script egret="game" src="bin-debug/game/components/map/MapCellData.js"></script>
+	<script egret="game" src="bin-debug/game/components/map/MapSetting.js"></script>
+	<script egret="game" src="bin-debug/game/components/map/tile/TileCover.js"></script>
+	<script egret="game" src="bin-debug/game/components/map/tile/TileLayer.js"></script>
+	<script egret="game" src="bin-debug/game/components/map/tile/TileObject.js"></script>
+	<script egret="game" src="bin-debug/game/controllers/GameController.js"></script>
+	<script egret="game" src="bin-debug/game/controllers/LoginController.js"></script>
+	<script egret="game" src="bin-debug/game/controllers/MainController.js"></script>
+	<script egret="game" src="bin-debug/game/db/DBCharacter.js"></script>
+	<script egret="game" src="bin-debug/game/db/DBCharacterConst.js"></script>
+	<script egret="game" src="bin-debug/game/db/DBCharacterMgr.js"></script>
+	<script egret="game" src="bin-debug/AssetAdapter.js"></script>
 	<script egret="game" src="bin-debug/game/enums/LayerEnum.js"></script>
 	<script egret="game" src="bin-debug/game/enums/ModuleEnum.js"></script>
+	<script egret="game" src="bin-debug/game/uimanager/UIAnim.js"></script>
+	<script egret="game" src="bin-debug/game/uimanager/UIManager.js"></script>
+	<script egret="game" src="bin-debug/game/utils/config/Config.js"></script>
+	<script egret="game" src="bin-debug/game/utils/config/ConfigBase.js"></script>
 	<script egret="game" src="bin-debug/game/views/loading/MainLoadingUI.js"></script>
 	<script egret="game" src="bin-debug/game/views/loading/PreLoadingUI.js"></script>
+	<script egret="game" src="bin-debug/game/views/login/LoginUI.js"></script>
+	<script egret="game" src="bin-debug/game/views/main/MainUI.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
 	<script egret="game" src="bin-debug/ThemeAdapter.js"></script>
 	<!--game_files_end-->
@@ -98,7 +128,7 @@
          data-entry-class="Main"
          data-orientation="landscape"
          data-scale-mode="fixedWide"
-         data-frame-rate="30"
+         data-frame-rate="60"
          data-content-width="1334"
          data-content-height="750"
          data-show-paint-rect="false"

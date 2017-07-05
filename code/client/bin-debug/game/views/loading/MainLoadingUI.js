@@ -30,7 +30,7 @@ var MainLoadingUI = (function (_super) {
     MainLoadingUI.prototype.setProgress = function (progress) {
         if (!this.m_pProgressMask)
             return;
-        var percent = progress.loaded / progress.total;
+        var percent = progress.curGroupLoaded / progress.total;
         this.m_pProgressMask.width = this.m_pProgressGroup.width * percent;
         this.m_pLoginLbl.text = "正在加载游戏" + Math.floor(percent * 100 << 0) + "%";
         this.m_pProgressStar.x = this.m_pProgressMask.width - this.m_pProgressStar.width;
@@ -49,4 +49,3 @@ var MainLoadingUI = (function (_super) {
     return MainLoadingUI;
 }(core.EUIComponent));
 __reflect(MainLoadingUI.prototype, "MainLoadingUI", ["core.ILoadingUI"]);
-//# sourceMappingURL=MainLoadingUI.js.map

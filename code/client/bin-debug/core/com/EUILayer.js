@@ -17,7 +17,7 @@ var core;
         __extends(EUILayer, _super);
         function EUILayer() {
             var _this = _super.call(this) || this;
-            _this.touchEnabled = true;
+            _this.touchEnabled = false;
             _this.touchChildren = true;
             return _this;
         }
@@ -26,4 +26,3 @@ var core;
     core.EUILayer = EUILayer;
     __reflect(EUILayer.prototype, "core.EUILayer");
 })(core || (core = {}));
-//# sourceMappingURL=EUILayer.js.map

@@ -14,7 +14,8 @@ var core;
     EventID.SOCKET_DATA = 'core.Event.SOCKET_DATA';
     EventID.SOCKET_IOERROR = 'core.Event.SOCKET_IOERROR';
     EventID.SOCKET_CLOSE = 'core.Event.SOCKET_CLOSE';
+    EventID.KEYBOARD_DOWN = 'core.Event.KEYBOARD_DOWN';
+    EventID.KEYBOARD_UP = 'core.Event.KEYBOARD_UP';
     core.EventID = EventID;
     __reflect(EventID.prototype, "core.EventID");
 })(core || (core = {}));
-//# sourceMappingURL=EventID.js.map

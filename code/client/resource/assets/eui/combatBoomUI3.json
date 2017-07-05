@@ -1,0 +1,6 @@
+{"file":"combatBoomUI3.png","frames":{
+"combatBoom_deuceBg_01":{"x":400,"y":423,"w":397,"h":194,"offX":0,"offY":0,"sourceW":398,"sourceH":194},
+"combatBoom_lostBg":{"x":1,"y":239,"w":397,"h":194,"offX":0,"offY":0,"sourceW":398,"sourceH":194},
+"combatBoom_lostBing":{"x":1,"y":1,"w":510,"h":236,"offX":0,"offY":0,"sourceW":510,"sourceH":236},
+"combatBoom_winStart":{"x":513,"y":1,"w":416,"h":224,"offX":0,"offY":0,"sourceW":416,"sourceH":224},
+"combatBoom_winFBg_02":{"x":513,"y":227,"w":397,"h":194,"offX":0,"offY":0,"sourceW":398,"sourceH":194}}}

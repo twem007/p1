@@ -84,8 +84,8 @@ var Main = (function (_super) {
     Main.prototype.createScene = function () {
         if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
             this.loadingView = new MainLoadingUI();
-            this.loadingView.show();
             this.initController();
+            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
         }
     };
     /**
@@ -107,6 +107,7 @@ var Main = (function (_super) {
      */
     Main.prototype.onResourceLoadComplete = function (data) {
         if (data.curGroup == 'preload') {
+            Config.init(RES.getRes('config_zip'));
             this.loadingView.hide();
             this.isResourceLoadEnd = true;
             this.createScene();
@@ -116,8 +117,10 @@ var Main = (function (_super) {
      * 初始化控制器
      */
     Main.prototype.initController = function () {
+        new MainController(this.loadingView);
+        new LoginController(this.loadingView);
+        new GameController(this.loadingView);
     };
     return Main;
-}(eui.UILayer));
+}(core.EUILayer));
 __reflect(Main.prototype, "Main");
-//# sourceMappingURL=Main.js.map

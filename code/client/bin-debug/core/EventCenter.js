@@ -1,6 +1,11 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
 var core;
 (function (core) {
     /**
@@ -10,8 +15,8 @@ var core;
      */
     var EventCenter = (function () {
         function EventCenter() {
-            this.callbackMaps = {};
-            this.sendBuffer = [];
+            this.m_callbackMaps = new Dictionary();
+            this.m_sendBuffer = [];
         }
         EventCenter.getInstance = function () {
             if (EventCenter.s_instance == null) {
@@ -19,63 +24,91 @@ var core;
             }
             return EventCenter.s_instance;
         };
+        /**
+         * 注册事件监听
+         */
         EventCenter.prototype.addEventListener = function (messageID, callback, thisObj, index) {
-            if (callback) {
-                var callbacks = this.callbackMaps[messageID];
-                if (callbacks != null) {
-                    if (index) {
-                        callbacks.splice(index < 0 ? 0 : index, 0, { callback: callback, thisObj: thisObj });
-                    }
-                    else {
-                        callbacks.push({ callback: callback, thisObj: thisObj });
-                    }
+            if (callback && thisObj) {
+                var data = new EventCallBack(callback, thisObj);
+                data.messageID = messageID;
+                data.index = index ? index : 0;
+                var callbacks = this.m_callbackMaps.get(messageID);
+                if (callbacks) {
+                    callbacks.push(data);
+                    callbacks.sort(this.sortIndex);
                 }
                 else {
-                    this.callbackMaps[messageID] = [{ callback: callback, thisObj: thisObj }];
+                    this.m_callbackMaps.add(messageID, [data]);
                 }
             }
         };
+        EventCenter.prototype.sortIndex = function (a, b) {
+            return a.index - b.index;
+        };
+        /**
+         * 移除事件监听
+         */
         EventCenter.prototype.removeEventListener = function (messageID, callback, thisObj) {
-            var callbacks = this.callbackMaps[messageID];
-            if (callbacks != null) {
-                for (var i = callbacks.length; i > 0; i--) {
-                    if (callbacks[i - 1].thisObj === thisObj) {
-                        callbacks.splice(i - 1, 1);
+            var callbacks = this.m_callbackMaps.get(messageID);
+            if (callbacks) {
+                for (var i = 0, iLen = callbacks.length; i < iLen; i++) {
+                    var data = callbacks[i];
+                    if (data.callback === callback && data.thisObj === thisObj) {
+                        data.isValid = false;
                     }
                 }
             }
         };
+        /**
+         * 发送消息
+         */
         EventCenter.prototype.sendEvent = function (message) {
-            this.sendBuffer.push(message);
-            egret.startTick(this.onTickerLoop, this);
+            this.m_sendBuffer.push(message);
+            egret.callLater(this.sendAll, this);
         };
-        EventCenter.prototype.onTickerLoop = function (timeStamp) {
-            var buffer = this.sendBuffer;
-            if (buffer != null) {
-                if (buffer.length > 0) {
-                    var messageData = buffer.shift();
-                    var datas = this.callbackMaps[messageData.messageID];
-                    if (datas != null) {
-                        for (var i = 0, iLen = datas.length; i < iLen; i++) {
-                            var data = datas[i];
-                            if (data.callback) {
-                                data.callback.call(data.thisObj, messageData);
-                            }
+        /**
+         * 发送所有消息
+         */
+        EventCenter.prototype.sendAll = function () {
+            while (this.m_sendBuffer.length > 0) {
+                var event_1 = this.m_sendBuffer.shift();
+                var dataList = this.m_callbackMaps.get(event_1.messageID);
+                if (dataList) {
+                    for (var i = dataList.length; i > 0; i--) {
+                        var data = dataList[i - 1];
+                        if (!data.isValid) {
+                            dataList.splice(i - 1, 1);
                         }
                     }
-                    else {
-                        console.log("事件ID:" + messageData.messageID + "无监听回调");
+                    for (var i = 0, iLen = dataList.length; i < iLen; i++) {
+                        var data = dataList[i];
+                        data.callback.call(data.thisObj, event_1);
                     }
                 }
                 else {
-                    egret.stopTick(this.onTickerLoop, this);
+                    Log("事件ID:" + event_1.messageID + "无监听回调");
                 }
             }
-            return false;
         };
         return EventCenter;
     }());
     core.EventCenter = EventCenter;
     __reflect(EventCenter.prototype, "core.EventCenter");
+    var EventCallBack = (function (_super) {
+        __extends(EventCallBack, _super);
+        function EventCallBack(callback, thisObj) {
+            var _this = _super.call(this, callback, thisObj) || this;
+            _this.isValid = true;
+            return _this;
+        }
+        EventCallBack.prototype.clone = function () {
+            var data = new EventCallBack(this.callback, this.thisObj);
+            data.index = this.index;
+            data.messageID = this.messageID;
+            data.isValid = this.isValid;
+            return data;
+        };
+        return EventCallBack;
+    }(core.Callback));
+    __reflect(EventCallBack.prototype, "EventCallBack", ["core.IMessage"]);
 })(core || (core = {}));
-//# sourceMappingURL=EventCenter.js.map

@@ -25,7 +25,7 @@ var core;
          */
         DateUtils.formatDate = function (format, date) {
             if (date == null) {
-                date = DateUtils.date;
+                date = DateUtils.s_date;
             }
             var o = {
                 "M+": date.getUTCMonth() + 1,
@@ -62,8 +62,7 @@ var core;
         };
         return DateUtils;
     }());
-    DateUtils.date = new Date();
+    DateUtils.s_date = new Date();
     core.DateUtils = DateUtils;
     __reflect(DateUtils.prototype, "core.DateUtils");
 })(core || (core = {}));
-//# sourceMappingURL=DateUtils.js.map

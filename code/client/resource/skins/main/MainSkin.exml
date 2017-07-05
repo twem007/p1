@@ -1,0 +1,43 @@
+<e:Skin class="MainView" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:com_main="com_main.*" xmlns:w="http://ns.egret.com/wing" xmlns:AGame="AGame.*">
+	<w:Config id="159d8c47d8d"/>
+	<e:Image id="m_pBgImg" width="100%" height="100%" x="0" y="0" source="loading_bg_1_jpg"/>
+	<e:Group id="m_pMainGroup" x="0" y="0" width="1334" height="750">
+		<e:Group id="m_pPlayerBtn" anchorOffsetX="0" anchorOffsetY="0" x="6" y="8" visible="false">
+			<e:Image id="m_pPlayerbgImg" x="0" y="0" anchorOffsetX="0" anchorOffsetY="0" scale9Grid="16,11,7,15" scaleX="1" scaleY="1" alpha="1" source=""/>
+			<e:Image id="m_pPlayerIconImg" x="12" y="10" anchorOffsetX="0" anchorOffsetY="0" scaleX="1" scaleY="1" width="100" height="100" source=""/>
+			<e:Group x="123.80000000000001" y="17.4">
+				<e:Image x="0" y="0" anchorOffsetX="0" width="204" scale9Grid="18,0,3,36" anchorOffsetY="0" height="35" source=""/>
+				<e:Label id="m_pPlayerNameLab" text="不爱吃肉的团团" y="7.560000000000002" anchorOffsetX="0" size="20" scaleX="1" scaleY="1" fontFamily="Microsoft YaHei" textColor="0x9aec17" textAlign="center" horizontalCenter="0"/>
+			</e:Group>
+			<e:Label id="m_pPlayerNameLab0" text="黄金" x="135.8" y="66" anchorOffsetX="0" size="20" scaleX="1" scaleY="1" fontFamily="Microsoft YaHei" textColor="0x1d605f" bold="true"/>
+		</e:Group>
+		<e:Group id="m_pModEndlessGroup" y="377" anchorOffsetX="162" anchorOffsetY="208" touchChildren="true" touchEnabled="true" x="271" width="324" height="416">
+			<e:Image source="mainBoomUI_json.main_mod03_img" x="-47" y="-31"/>
+		</e:Group>
+		<e:Group id="m_pModTeamGroup" y="377" anchorOffsetX="162" anchorOffsetY="208" x="1099" width="324" height="416">
+			<e:Image id="m_pModTeamBtn" y="-32" scaleX="1" scaleY="1" x="-48" source="mainBoomUI_json.main_mod01_img"/>
+		</e:Group>
+		<e:Group id="m_pModTimeLimitGroup" y="377" anchorOffsetX="162" anchorOffsetY="208" width="324" height="416" x="689">
+			<e:Image y="-70" touchEnabled="false" x="-80" source="mainBoomUI_json.main_mod02_img"/>
+		</e:Group>
+		<e:Group id="m_pRightGroup" x="1072" y="68" anchorOffsetX="248" width="496" height="98" anchorOffsetY="49">
+			<e:Group id="m_pMenuGroup" x="6.470000000000027" y="13.04000000000002">
+				<e:Image id="m_pMenuBg" x="16.72" y="-6.08" scaleX="1" scaleY="1" scale9Grid="40,0,5,82" anchorOffsetX="0" width="404" source=""/>
+				<e:Group x="111" y="0">
+					<e:Image id="m_pNoticeBtn" x="0" y="0.639999999999997" anchorOffsetX="0" anchorOffsetY="0" source=""/>
+				</e:Group>
+				<e:Image id="m_pTeachBtn" x="259" y="3" source=""/>
+				<e:Image id="m_pSetBtn" x="185" y="2" source=""/>
+				<e:Group x="331.3399999999999" y="3.3799999999999955">
+					<e:Image id="m_pMailBtn" x="0" source=""/>
+					<e:Image id="m_pMailRedDot" x="35.1" y="-5.684341886080802e-14" touchEnabled="false" source=""/>
+				</e:Group>
+				<e:Group id="m_pQuestionBtn" x="36.48" y="1">
+					<e:Image x="0" source=""/>
+					<e:Image id="m_pQuestionRedDot" x="35.1" y="0" touchEnabled="false" source=""/>
+				</e:Group>
+			</e:Group>
+			<e:Image id="m_pMenuBtn" x="402.05" y="1.76" source=""/>
+		</e:Group>
+	</e:Group>
+</e:Skin>

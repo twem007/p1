@@ -16,9 +16,9 @@ var core;
             socket.addEventListener(egret.ProgressEvent.SOCKET_DATA, this.onSocketData, this);
             socket.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onIOError, this);
             socket.addEventListener(egret.Event.CLOSE, this.onClosed, this);
-            this.socket = socket;
-            this.sendBuffer = new core.ByteBuffer();
-            this.receiveBuffer = new core.ByteBuffer();
+            this.m_socket = socket;
+            this.m_sendBuffer = new core.ByteBuffer();
+            this.m_receiveBuffer = new core.ByteBuffer();
         }
         SocketAPI.getInstance = function () {
             if (SocketAPI.s_instance == null) {
@@ -33,7 +33,7 @@ var core;
         SocketAPI.prototype.onSocketData = function (event) {
             egret.log("从Socket服务器接收数据");
             var buffer = new core.ByteBuffer();
-            this.socket.readBytes(buffer, buffer.length);
+            this.m_socket.readBytes(buffer, buffer.length);
             this.readData(buffer);
         };
         SocketAPI.prototype.readData = function (buffer) {
@@ -42,7 +42,7 @@ var core;
             if (buffer.bytesAvailable >= size) {
             }
             else {
-                this.receiveBuffer.writeBytes(buffer);
+                this.m_receiveBuffer.writeBytes(buffer);
             }
         };
         SocketAPI.prototype.onIOError = function (event) {
@@ -55,27 +55,26 @@ var core;
         };
         SocketAPI.prototype.flushToServer = function () {
             Log("flush数据到Socket服务器");
-            this.socket.writeBytes(this.sendBuffer);
-            this.socket.flush();
-            this.sendBuffer.clear();
+            this.m_socket.writeBytes(this.m_sendBuffer);
+            this.m_socket.flush();
+            this.m_sendBuffer.clear();
         };
         SocketAPI.prototype.sendData = function (data) {
             var buffer = new core.ByteBuffer(data.toArrayBuffer());
-            this.sendBuffer.writeByte(0x7c);
-            this.sendBuffer.writeShort(buffer.length);
-            this.sendBuffer.writeShort(data.protocol);
-            this.sendBuffer.writeBytes(buffer);
+            this.m_sendBuffer.writeByte(0x7c);
+            this.m_sendBuffer.writeShort(buffer.length);
+            this.m_sendBuffer.writeShort(data.protocol);
+            this.m_sendBuffer.writeBytes(buffer);
             egret.callLater(this.flushToServer, this);
         };
         SocketAPI.prototype.connect = function (host, port) {
-            this.socket.connect(host, port);
+            this.m_socket.connect(host, port);
         };
         SocketAPI.prototype.close = function () {
-            this.socket.close();
+            this.m_socket.close();
         };
         return SocketAPI;
     }());
     core.SocketAPI = SocketAPI;
     __reflect(SocketAPI.prototype, "core.SocketAPI");
 })(core || (core = {}));
-//# sourceMappingURL=SocketAPI.js.map

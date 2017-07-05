@@ -13,5 +13,9 @@ module core {
         public static SOCKET_IOERROR: string = 'core.Event.SOCKET_IOERROR';
 
         public static SOCKET_CLOSE: string = 'core.Event.SOCKET_CLOSE';
+
+        public static KEYBOARD_DOWN: string = 'core.Event.KEYBOARD_DOWN';
+
+        public static KEYBOARD_UP: string = 'core.Event.KEYBOARD_UP';
     }
 }

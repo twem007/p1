@@ -17,7 +17,7 @@ var core;
         __extends(Layer, _super);
         function Layer() {
             var _this = _super.call(this) || this;
-            _this.touchEnabled = true;
+            _this.touchEnabled = false;
             _this.touchChildren = true;
             return _this;
         }
@@ -26,4 +26,3 @@ var core;
     core.Layer = Layer;
     __reflect(Layer.prototype, "core.Layer");
 })(core || (core = {}));
-//# sourceMappingURL=Layer.js.map

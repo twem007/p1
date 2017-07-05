@@ -27,7 +27,7 @@ module core {
          */
         private preload(): void {
             let groups: string[] = this.getLoadGroup(this.m_data);
-            if (groups.length > 0) {
+            if (groups && groups.length > 0) {
                 if (this.m_loadingUI) {
                     this.m_loadingUI.show();
                 }

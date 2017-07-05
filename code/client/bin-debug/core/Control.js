@@ -10,8 +10,8 @@ var core;
      */
     var Control = (function () {
         function Control(moduleName, loadingUI) {
-            this.moduleName = moduleName;
-            this.loadingUI = loadingUI;
+            this.p_moduleName = moduleName;
+            this.m_loadingUI = loadingUI;
             this.init();
         }
         /**
@@ -25,32 +25,31 @@ var core;
          * 预加载
          */
         Control.prototype.preload = function () {
-            var groups = this.getLoadGroup(this.data);
-            if (groups.length > 0) {
-                if (this.loadingUI) {
-                    this.loadingUI.show();
+            var groups = this.getLoadGroup(this.m_data);
+            if (groups && groups.length > 0) {
+                if (this.m_loadingUI) {
+                    this.m_loadingUI.show();
                 }
                 core.ResUtils.loadGroups(groups, this.onLoadProgress, this.onLoadFaild, this.onLoadComplete, this);
             }
             else {
-                this.show(this.data);
+                this.show(this.m_data);
             }
         };
         /**
          *  加载前
          */
         Control.prototype.onModuleShow = function (data) {
-            if (this.moduleName === data.moduleEnum) {
-                this.data = data.messageData;
+            if (this.p_moduleName === data.moduleEnum) {
+                this.m_data = data.messageData;
                 this.preload();
             }
         };
         /**
          * 关闭前
          */
-        Control.prototype.onModuleHide = function () {
-            var curModule = arguments[0];
-            if (this.moduleName === curModule) {
+        Control.prototype.onModuleHide = function (data) {
+            if (this.p_moduleName === data.moduleEnum) {
                 this.hide();
             }
         };
@@ -58,8 +57,8 @@ var core;
          * 加载进度
          */
         Control.prototype.onLoadProgress = function (data) {
-            if (this.loadingUI) {
-                this.loadingUI.setProgress(data);
+            if (this.m_loadingUI) {
+                this.m_loadingUI.setProgress(data);
             }
         };
         /**
@@ -72,10 +71,10 @@ var core;
          * 加载完成
          */
         Control.prototype.onLoadComplete = function (data) {
-            if (this.loadingUI) {
-                this.loadingUI.hide();
+            if (this.m_loadingUI) {
+                this.m_loadingUI.hide();
             }
-            this.show(this.data);
+            this.show(this.m_data);
         };
         /**
          * 释放资源
@@ -89,4 +88,3 @@ var core;
     core.Control = Control;
     __reflect(Control.prototype, "core.Control");
 })(core || (core = {}));
-//# sourceMappingURL=Control.js.map

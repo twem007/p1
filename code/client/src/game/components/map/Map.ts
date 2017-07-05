@@ -4,8 +4,8 @@
  * 
  */
 class Map extends egret.DisplayObjectContainer {
-	/** 背景瓦片层 */
-	private _bgLayerTile: TileLayer;
+	/** 背景瓦片层 */ 
+	private _bgLayerTile: TileLayer; 
 
 	/** 顶层瓦片层 */
 	private _topLayer: egret.DisplayObjectContainer;

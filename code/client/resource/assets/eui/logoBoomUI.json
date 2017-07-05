@@ -1,0 +1,8 @@
+{"file":"logoBoomUI.png","frames":{
+"loading_tiao_0":{"x":1,"y":485,"w":386,"h":42,"offX":0,"offY":0,"sourceW":386,"sourceH":42},
+"logo":{"x":1,"y":1,"w":781,"h":482,"offX":0,"offY":0,"sourceW":782,"sourceH":482},
+"loading_btn_0":{"x":784,"y":1,"w":208,"h":87,"offX":0,"offY":0,"sourceW":208,"sourceH":88},
+"loading_btn_1":{"x":784,"y":90,"w":208,"h":87,"offX":0,"offY":0,"sourceW":208,"sourceH":88},
+"loading_yun_0":{"x":784,"y":179,"w":36,"h":70,"offX":0,"offY":0,"sourceW":36,"sourceH":70},
+"loading_tiao_1":{"x":994,"y":1,"w":4,"h":32,"offX":0,"offY":0,"sourceW":4,"sourceH":32},
+"loading_tiao_2":{"x":822,"y":179,"w":52,"h":44,"offX":0,"offY":0,"sourceW":52,"sourceH":44}}}

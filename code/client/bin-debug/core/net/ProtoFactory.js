@@ -10,14 +10,14 @@ var core;
          * 初始化
          */
         ProtoFactory.init = function (proto) {
-            ProtoFactory.protoBuff = dcodeIO.ProtoBuf.loadProto(proto);
+            ProtoFactory.s_protoBuff = dcodeIO.ProtoBuf.loadProto(proto);
         };
         /**
          * 创建协议数据
          */
         ProtoFactory.createMessage = function (messageID) {
-            if (ProtoFactory.protoBuff) {
-                var dataClass = ProtoFactory.protoBuff.build(messageID);
+            if (ProtoFactory.s_protoBuff) {
+                var dataClass = ProtoFactory.s_protoBuff.build(messageID);
                 if (dataClass) {
                     var data = new dataClass();
                     data.protocol = messageID;
@@ -36,8 +36,8 @@ var core;
          * 创建枚举数据
          */
         ProtoFactory.createEnums = function (name) {
-            if (ProtoFactory.protoBuff) {
-                return ProtoFactory.protoBuff.build(name);
+            if (ProtoFactory.s_protoBuff) {
+                return ProtoFactory.s_protoBuff.build(name);
             }
             else {
                 Log("ProtoBuf\u534F\u8BAE\u5C1A\u672A\u521D\u59CB\u5316");
@@ -48,8 +48,8 @@ var core;
          * 创建结构数据
          */
         ProtoFactory.createData = function (name) {
-            if (ProtoFactory.protoBuff) {
-                var dataClass = ProtoFactory.protoBuff.build(name);
+            if (ProtoFactory.s_protoBuff) {
+                var dataClass = ProtoFactory.s_protoBuff.build(name);
                 if (dataClass) {
                     var data = new dataClass();
                     return data;
@@ -67,8 +67,8 @@ var core;
          * 解析数据
          */
         ProtoFactory.decodeMessage = function (messageID, buffer) {
-            if (ProtoFactory.protoBuff) {
-                var dataClass = ProtoFactory.protoBuff.build(messageID);
+            if (ProtoFactory.s_protoBuff) {
+                var dataClass = ProtoFactory.s_protoBuff.build(messageID);
                 if (dataClass) {
                     return dataClass.decode(buffer);
                 }
@@ -86,4 +86,3 @@ var core;
     core.ProtoFactory = ProtoFactory;
     __reflect(ProtoFactory.prototype, "core.ProtoFactory");
 })(core || (core = {}));
-//# sourceMappingURL=ProtoFactory.js.map
