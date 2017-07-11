@@ -49,7 +49,7 @@ class MainUI extends core.EUIComponent {
 	}
 	public onAdaptive() {
 		UIManager.updataPoint(this.m_pBgImg, 667, 375);
-		UIManager.rightTopAdaptive(this.m_pRightTow, 889, 45);
+		UIManager.rightTopAdaptive(this.m_pRightTow, 866, 45);
 		UIManager.rightBelowAdaptive(this.m_pRightLowGroup, 1067, 704);
 		UIManager.leftBelowAdaptive(this.m_pRankGroup, 59, 543);
 		UIManager.updataPoint(this.m_pModleBtnGroup, 1017, 378);
@@ -57,6 +57,7 @@ class MainUI extends core.EUIComponent {
 	}
 	public release() {
 	}
+
 	private onClickRankBtn() {
 		core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.MAINUI));
 		GameModeManager.getInstance().enterGame(GameTypeEnum.EXERCISE);

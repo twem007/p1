@@ -14,11 +14,9 @@ class GoodsManager {
     public creatBox(data?: BattleBoxData): BattleBoxGoods {
         let box: BattleBoxGoods = core.CachePool.getObj(egret.getQualifiedClassName(BattleBoxGoods));
         if (!box) {
-            box = new BattleBoxGoods();
+            box = new BattleBoxGoods(data);
         }
-        if (data) {
-            box.setData(data);
-        }
+
         this.boxs.add(`${box.data.col}_${box.data.row}`, box);
         this.goods.add(`${box.data.col}_${box.data.row}`, box);
         return box;

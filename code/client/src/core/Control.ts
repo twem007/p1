@@ -71,6 +71,7 @@ module core {
          * 加载完成
          */
         private onLoadComplete(data: core.GroupData): void {
+            this.preShow(this.m_data);
             if (this.m_loadingUI) {
                 this.m_loadingUI.hide();
             }
@@ -80,6 +81,10 @@ module core {
          * 预加载资源组
          */
         protected abstract getLoadGroup(data?: any): string[];
+        /**
+         * 预显示
+         */
+        protected preShow(data?: any): void { };
         /**
          * 显示
          */

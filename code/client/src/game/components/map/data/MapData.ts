@@ -26,6 +26,7 @@ class MapData extends BaseData {
 
     public update(id: number): void {
         this.reset();
+        this.id = id;
         let configs: Dictionary<MapCfgConfig> = Config.getConfig(MapCfgConfig);
         this.config = configs.get(id);
         let config: any = RES.getRes(`${this.config.mapData}_json`);

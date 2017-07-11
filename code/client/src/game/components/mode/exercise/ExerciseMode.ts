@@ -5,13 +5,17 @@ class ExerciseMode implements IGameMode {
     private goods: GoodsData[];
 
     constructor() {
-
+        
     }
 
     public enter(): void {
         // core.InputManager.getInstance().enable(true);
-        let data:ExerciseModeData = ExerciseProxy.instance().getData();
-        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.GAME, ModuleEnum.NONE, data.mapID));
+        // ExerciseProxy.instance().getinfo();
+        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.GAME, ModuleEnum.NONE, 101));
+    }
+
+    private onGetInfo(data:any):void{
+        // ExerciseProxy.instance().setData();
     }
 
     public exit(): void {

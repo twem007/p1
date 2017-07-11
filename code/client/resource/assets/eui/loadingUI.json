@@ -1,0 +1,6 @@
+{"file":"loadingUI.png","frames":{
+"loading_bar_4":{"x":196,"y":0,"w":30,"h":30,"offX":0,"offY":0,"sourceW":30,"sourceH":30},
+"loading_icon_1":{"x":0,"y":0,"w":130,"h":126,"offX":0,"offY":0,"sourceW":130,"sourceH":126},
+"loading_bar_1":{"x":164,"y":0,"w":30,"h":30,"offX":0,"offY":0,"sourceW":30,"sourceH":30},
+"loading_bar_2":{"x":228,"y":0,"w":20,"h":20,"offX":0,"offY":0,"sourceW":20,"sourceH":20},
+"loading_bar_3":{"x":132,"y":0,"w":30,"h":42,"offX":0,"offY":0,"sourceW":30,"sourceH":42}}}

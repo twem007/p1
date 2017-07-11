@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "loading_bg_1_jpg,combat_tiao_3_png,logoBoomUI_json,config_zip",
+			"keys": "loading_bg_1_jpg,combat_tiao_3_png,logoBoomUI_json,config_zip,loadingUI_json",
 			"name": "preload"
 		},
 		{
@@ -39,7 +39,7 @@
 			"url": "assets/eui/mainBoomUI.json",
 			"type": "sheet",
 			"name": "mainBoomUI_json",
-			"subkeys": "main_btnBg,main_decorate1,main_decorate2,main_entranceBg,main_entranceBtn1,main_entranceBtn2,main_entranceBtn3,main_entranceBtn4,main_entranceBtn5,main_entranceBtn6,main_entranceBtn7,main_face,main_linkBg,main_linkImg1,main_linkImg2,main_linkImg3,main_lvBg,main_modleBtn1,main_modleBtn1hui,main_playerBg,main_playerMsgBg,main_playerPro,main_playerProBg,main_rankBg,main_rankFont,mian_font1,mian_font2,mian_font3,mian_font4,mian_lockFont"
+			"subkeys": "main_RankFaceBg,main_btnBg,main_decorate1,main_decorate2,main_entranceBg,main_entranceBtn1,main_entranceBtn2,main_entranceBtn3,main_entranceBtn4,main_entranceBtn5,main_entranceBtn6,main_entranceBtn7,main_face,main_linkBg,main_linkImg1,main_linkImg2,main_linkImg3,main_lvBg,main_modleBtn1,main_modleBtn1hui,main_playerBg,main_playerMsgBg,main_playerPro,main_playerProBg,main_rankBg,main_rankFont,mian_font1,mian_font2,mian_font3,mian_font4,mian_lockFont"
 		},
 		{
 			"url": "assets/eui/combatBoomUI.json",
@@ -657,6 +657,12 @@
 			"url": "assets/font/currencyFont.png",
 			"type": "image",
 			"name": "currencyFont_png"
+		},
+		{
+			"name": "loadingUI_json",
+			"type": "sheet",
+			"url": "assets/eui/loadingUI.json",
+			"subkeys": "loading_bar_4,loading_icon_1,loading_bar_1,loading_bar_2,loading_bar_3"
 		}
 	]
 }
