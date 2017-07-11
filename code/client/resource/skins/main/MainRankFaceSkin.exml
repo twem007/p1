@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MainRankFaceSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="mainBoomUI_json.main_RankFaceBg" x="0" y="0"/>
+	<e:Image id="m_pFacnImg" source="mainBoomUI_json.main_face" x="4" y="4"/>
+	<e:Image id="m_pRankImg" source="mainBoomUI_json.mian_font1" x="29" y="61"/>
+</e:Skin>

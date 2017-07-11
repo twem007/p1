@@ -78,3 +78,4 @@ var Keyboard;
     Keyboard[Keyboard["F11"] = 122] = "F11";
     Keyboard[Keyboard["F12"] = 123] = "F12";
 })(Keyboard || (Keyboard = {}));
+//# sourceMappingURL=Keyboard.js.map

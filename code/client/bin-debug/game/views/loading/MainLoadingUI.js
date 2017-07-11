@@ -18,7 +18,7 @@ var MainLoadingUI = (function (_super) {
         _this.m_pResItemCount = 0;
         //资源项完成数
         _this.m_pResItemCompleteCount = 0;
-        _this.skinName = 'resource/skins/LoadingSkin.exml';
+        _this.skinName = 'resource/skins/loading/LoadingSkin.exml';
         return _this;
     }
     MainLoadingUI.prototype.childrenCreated = function () {
@@ -30,7 +30,7 @@ var MainLoadingUI = (function (_super) {
     MainLoadingUI.prototype.setProgress = function (progress) {
         if (!this.m_pProgressMask)
             return;
-        var percent = progress.curGroupLoaded / progress.total;
+        var percent = progress.curGroupLoaded / progress.curGroupTotal;
         this.m_pProgressMask.width = this.m_pProgressGroup.width * percent;
         this.m_pLoginLbl.text = "正在加载游戏" + Math.floor(percent * 100 << 0) + "%";
         this.m_pProgressStar.x = this.m_pProgressMask.width - this.m_pProgressStar.width;
@@ -39,13 +39,16 @@ var MainLoadingUI = (function (_super) {
     MainLoadingUI.prototype.show = function () {
         core.LayerCenter.getInstance().getLayer(LayerEnum.LOADING).addChild(this);
     };
+    MainLoadingUI.prototype.release = function () {
+    };
     MainLoadingUI.prototype.hide = function () {
         if (this.parent) {
             this.parent.removeChild(this);
         }
     };
-    MainLoadingUI.prototype.release = function () {
+    MainLoadingUI.prototype.updateAdaptive = function () {
     };
     return MainLoadingUI;
 }(core.EUIComponent));
 __reflect(MainLoadingUI.prototype, "MainLoadingUI", ["core.ILoadingUI"]);
+//# sourceMappingURL=MainLoadingUI.js.map

@@ -1,0 +1,6 @@
+{"file":"commonBoom.png","frames":{
+"common_redDot1":{"x":223,"y":34,"w":20,"h":20,"offX":0,"offY":0,"sourceW":20,"sourceH":20},
+"common_redDot2":{"x":223,"y":1,"w":31,"h":31,"offX":0,"offY":0,"sourceW":32,"sourceH":32},
+"common_goldsBg":{"x":1,"y":1,"w":132,"h":32,"offX":0,"offY":0,"sourceW":132,"sourceH":32},
+"common_goldsBtn":{"x":181,"y":1,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
+"common_grading":{"x":135,"y":1,"w":44,"h":48,"offX":0,"offY":0,"sourceW":44,"sourceH":48}}}

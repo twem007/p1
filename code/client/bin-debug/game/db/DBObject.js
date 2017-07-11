@@ -70,3 +70,4 @@ var DBObject = (function (_super) {
     return DBObject;
 }(egret.DisplayObjectContainer));
 __reflect(DBObject.prototype, "DBObject");
+//# sourceMappingURL=DBObject.js.map

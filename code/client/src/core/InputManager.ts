@@ -1,5 +1,5 @@
 module core {
-    
+
     export class InputManager {
 
         private static s_instance: InputManager;
@@ -10,7 +10,7 @@ module core {
             this.m_keyMap = new Dictionary<KeyData>();
         }
 
-        public addKeyListener(key: number, callback: () => void, thisObj: number): void {
+        public addKeyListener(key: number, callback: () => void, thisObj: any): void {
             let data: KeyData = this.m_keyMap.get(key);
             if (!data) {
                 data = new KeyData(key);
@@ -19,7 +19,7 @@ module core {
             this.m_keyMap.add(key, data);
         }
 
-        public removeKeyListener(key: number, callback: () => void, thisObj: number): void {
+        public removeKeyListener(key: number, callback: () => void, thisObj: any): void {
             let data: KeyData = this.m_keyMap.get(key);
             if (data) {
                 let list: KeyCallBack[] = data.callbacks;
@@ -34,6 +34,14 @@ module core {
 
         public enableKey(key: number, enable: boolean): void {
             this.m_keyMap.get(key).keyEnable = enable;
+        }
+
+        public enable(enable: boolean): void {
+            let map: Dictionary<KeyData> = this.m_keyMap;
+            let values: KeyData[] = map.values;
+            for (let i: number = 0, iLen: number = values.length; i < iLen; i++) {
+                values[i].keyEnable = enable;
+            }
         }
 
         public sendKey(key: number): void {

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="HeroBtnSkin" width="100" height="100" currentState="default" xmlns:e="http://ns.egret.com/eui" states="default,redDot,markRedDot" >
+	<e:Image id="m_pImg" horizontalCenter="0" verticalCenter="0" source="mainBoomUI_json.main_entranceBtn7"/>
+	<e:Image id="m_pRedDot" source="commonUI_json.common_reddot_01" horizontalCenter="26" verticalCenter="-26" x="10" y="10" visible.markRedDot="false" visible.default="false"/>
+	<e:Image id="m_pMarkRedDot" source="commonBoom_json.common_redDot2" x="62" y="6" visible.redDot="false" visible.default="false"/>
+</e:Skin>

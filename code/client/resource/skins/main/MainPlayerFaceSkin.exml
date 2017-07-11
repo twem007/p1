@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="MainPlayerFaceSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="mainBoomUI_json.main_playerBg" x="0" y="0"/>
+	<e:Image source="mainBoomUI_json.main_playerMsgBg" x="12" y="14"/>
+	<e:Image id="m_pGradingImg" source="commonBoom_json.common_grading" x="103" y="14"/>
+	<e:Label id="m_pNameLab" text="这是玩家的名字" x="152" y="27" size="20" textColor="0x322f2f" fontFamily="Microsoft YaHei" bold="true" width="140" height="20"/>
+	<e:Label text="等级" x="105" y="67" fontFamily="Microsoft YaHei" size="20" textColor="0x322f2f"/>
+	<e:Group x="150" y="60">
+		<e:Image source="mainBoomUI_json.main_lvBg" x="0" y="0"/>
+		<e:Label id="m_pLvNum" text="16" size="20" fontFamily="Microsoft YaHei" textColor="0x00fffb" bold="true" horizontalCenter="0" verticalCenter="0.5"/>
+	</e:Group>
+	<e:Image source="mainBoomUI_json.main_playerProBg" x="188.4" y="67.99" width="103.6" scale9Grid="1,2,2,16" anchorOffsetX="0"/>
+	<e:Group id="m_pProGroup" x="194.63" y="71.62">
+		<e:Image id="m_pProImg" source="mainBoomUI_json.main_playerPro" x="0" y="0" scale9Grid="1,1,2,10" anchorOffsetX="0" width="90.93"/>
+	</e:Group>
+	<e:Image id="m_pPlayerFaceImg" width="82" height="80.67" x="17" y="16.33" anchorOffsetX="0" anchorOffsetY="0" source="mainBoomUI_json.main_face"/>
+</e:Skin>

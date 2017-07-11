@@ -35,6 +35,13 @@ var core;
         InputManager.prototype.enableKey = function (key, enable) {
             this.m_keyMap.get(key).keyEnable = enable;
         };
+        InputManager.prototype.enable = function (enable) {
+            var map = this.m_keyMap;
+            var values = map.values;
+            for (var i = 0, iLen = values.length; i < iLen; i++) {
+                values[i].keyEnable = enable;
+            }
+        };
         InputManager.prototype.sendKey = function (key) {
             var data = this.m_keyMap.get(key);
             if (data) {
@@ -81,3 +88,4 @@ var core;
     }(core.Callback));
     __reflect(KeyCallBack.prototype, "KeyCallBack");
 })(core || (core = {}));
+//# sourceMappingURL=InputManager.js.map

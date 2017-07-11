@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="RoundEndPlayerMsgSKin1" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group x="0" y="0">
+		<e:Image id="m_pBg" x="0" y="0" source="roundEndUI_json.roundEndUI_Bg_03"/>
+		<e:Image id="m_pMVP" x="450.47" y="30" source="roundEndUI_json.roundEndUI_rightMVP"/>
+		<e:Image id="m_pPlayerIcon" source="combatBoomUI_json.combatBoom_faceIcon_blue" x="438" y="81"/>
+		<e:Group x="84" y="44" rotation="10" width="356">
+			<e:Label id="m_pPlayerName" text="兵长胡大大虫问问" fontFamily="Microsoft YaHei" size="20" bold="true" stroke="4" strokeColor="0x0e8a16" y="5" scaleX="1" scaleY="1" right="-4"/>
+			<e:Label id="m_pHelpNum" text="10" size="30" fontFamily="Microsoft YaHei" bold="true" y="0" horizontalCenter="-155"/>
+			<e:Label id="m_pCaptureNum" text="20" size="30" fontFamily="Microsoft YaHei" bold="true" y="0" horizontalCenter="-80"/>
+			<e:Label id="m_pKillNum" text="10" size="30" fontFamily="Microsoft YaHei" bold="true" y="0" horizontalCenter="-2"/>
+		</e:Group>
+		<e:Image id="m_pAddFriend" source="roundEndUI_json.roundEndUI_friend" x="17" y="28"/>
+	</e:Group>
+</e:Skin>

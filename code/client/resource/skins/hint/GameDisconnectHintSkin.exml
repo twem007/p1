@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GameDisconnectHintSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="common_bg_0_png" alpha="0" left="0" top="0" right="0" bottom="0"/>
+	<e:Group id="m_pMainGroup" right="0" left="0" top="0" bottom="0">
+		<e:Group id="m_pNoLinkGroup" anchorOffsetX="335" anchorOffsetY="183" width="670" height="366" x="667" y="375" visible="false">
+			<e:Image x="-2" y="-2" width="672" height="368" anchorOffsetX="0" anchorOffsetY="0" source="commonUI_json.common_bg_03" scale9Grid="40,39,6,5"/>
+			<e:Group y="76.38" anchorOffsetY="0" height="209" horizontalCenter="0">
+			<e:Label text="网络异常，登录失败，请检测网络设置" anchorOffsetX="0" textAlign="center" verticalAlign="middle" fontFamily="Microsoft YaHei" y="75.45" size="25" horizontalCenter="0" textColor="0x584334"/>
+			<e:Group id="m_pInCombatGroup" x="5.24" y="145.71" anchorOffsetX="0">
+				<e:Image id="m_pReconnectionBtn" y="47" anchorOffsetX="0" width="194" anchorOffsetY="0" x="328.32" source="commonUI_json.common_btn_02" scale9Grid="31,0,4,68"/>
+				<e:Image id="m_pBackBtn" y="47" anchorOffsetX="0" width="194" anchorOffsetY="0" x="4.04" source="commonUI_json.common_btn_01" scale9Grid="31,0,3,68"/>
+				<e:Image source="commonUI_json.comon_btnfont_07" x="55.76" y="63.64" touchEnabled="false"/>
+				<e:Image source="commonUI_json.comon_btnfont_08" x="356.44" y="62" touchEnabled="false"/>
+			</e:Group>
+			</e:Group>
+			<e:Image source="commonUI_json.common_title_01" y="-41.56" scaleX="1" scaleY="1" horizontalCenter="0"/>
+		</e:Group>
+		<e:Group id="m_pLoadingGroup" anchorOffsetX="340" anchorOffsetY="128" x="667" y="375" width="680" height="256">
+			<e:Image y="0" scaleX="1" scaleY="1" anchorOffsetX="0" width="680" anchorOffsetY="0" height="256" horizontalCenter="0" source="commonUI_json.common_bg_04" scale9Grid="24,22,6,7"/>
+			<e:Label text="正在重新连接......" y="47.32" anchorOffsetX="0" width="287.67" anchorOffsetY="0" height="62" textAlign="center" verticalAlign="middle" fontFamily="Microsoft YaHei" horizontalCenter="0" size="25" textColor="0x584334" bold="true"/>
+			<e:Group id="m_pProssectGroup" x="75.99999999999994" y="139.00000000000003">
+				<e:Image width="528" source="commonUI_json.common_tiao_01" scale9Grid="16,0,4,32" x="0" y="5"/>
+				<e:Image id="m_pProssectImg" width="212.83" scaleX="1" scaleY="1" scale9Grid="29,0,7,46" source="commonUI_json.common_tiao_02" height="44" x="0" anchorOffsetX="0" rotation="359.88" y="0"/>
+				<e:Group id="m_pCursorGroup" width="3" height="44" x="0" y="0" scaleX="1" scaleY="1">
+					<e:Image source="commonUI_json.common_guangbiao_01" y="-12.04000000000002" scaleX="1" scaleY="1" right="-13"/>
+				</e:Group>
+			</e:Group>
+		</e:Group>
+	</e:Group>
+</e:Skin>

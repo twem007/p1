@@ -1,3 +1,6 @@
+/**
+ * 主界面控制器
+ */
 class MainController extends core.Control {
 	public constructor(loadingUI: core.ILoadingUI) {
 		super(ModuleEnum.MAINUI, loadingUI);
@@ -17,15 +20,13 @@ class MainController extends core.Control {
 			let mainUI: MainUI = new MainUI();
 			this.m_pMainUI = mainUI;
 		}
-		core.LayerCenter.getInstance().getLayer(LayerEnum.POPUP).addChild(this.m_pMainUI);
+		core.LayerCenter.getInstance().getLayer(LayerEnum.UI).addChild(this.m_pMainUI);
 	}
 	/**
 	 * 隐藏
 	 */
 	protected hide(): void {
-		if (this.m_pMainUI.parent) {
-			this.m_pMainUI.parent.removeChild(this.m_pMainUI);
-		}
+		this.m_pMainUI.hide();
 	}
 	protected release(): void {
 		super.release();

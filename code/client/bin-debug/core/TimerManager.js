@@ -146,3 +146,4 @@ var core;
     core.TickData = TickData;
     __reflect(TickData.prototype, "core.TickData");
 })(core || (core = {}));
+//# sourceMappingURL=TimerManager.js.map

@@ -13,3 +13,4 @@ var core;
     core.Callback = Callback;
     __reflect(Callback.prototype, "core.Callback");
 })(core || (core = {}));
+//# sourceMappingURL=Callback.js.map

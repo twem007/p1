@@ -30,7 +30,6 @@ var core;
         };
         GroupLoader.prototype.onResourceLoadComplete = function (event) {
             this.updateGroupData(event.groupName, event.itemsTotal, event.itemsTotal, event.resItem);
-            this.loadNext();
         };
         GroupLoader.prototype.updateGroupData = function (group, loadedItems, totalItems, resItem) {
             if (loadedItems === void 0) { loadedItems = 0; }
@@ -125,3 +124,4 @@ var core;
     core.GroupData = GroupData;
     __reflect(GroupData.prototype, "core.GroupData");
 })(core || (core = {}));
+//# sourceMappingURL=ResUtils.js.map

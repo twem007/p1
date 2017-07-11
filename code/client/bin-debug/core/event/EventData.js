@@ -21,3 +21,4 @@ var core;
     core.EventData = EventData;
     __reflect(EventData.prototype, "core.EventData", ["core.IMessage"]);
 })(core || (core = {}));
+//# sourceMappingURL=EventData.js.map

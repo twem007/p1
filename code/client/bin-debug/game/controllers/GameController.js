@@ -37,23 +37,16 @@ var GameController = (function (_super) {
         if (keyArr.length > 0) {
             RES.createGroup('map', keyArr);
         }
-        return ['map'];
+        return ['map', 'soundMap', 'animMap'];
     };
     GameController.prototype.show = function (data) {
-        var map = this.map;
-        if (!map) {
-            map = new Map();
-        }
+        var map = MapManager.instance().map;
         map.init(data);
         map.create();
-        core.LayerCenter.getInstance().getLayer(LayerEnum.BG).addChild(map);
-        var mode = GameModeManager.getInstance().getCurMode();
-        if (mode) {
-            mode.map = map;
-        }
+        core.LayerCenter.getInstance().getLayer(LayerEnum.MAP_BG).addChild(map);
     };
     GameController.prototype.hide = function () {
-        var map = this.map;
+        var map = MapManager.instance().map;
         if (map.parent) {
             map.parent.removeChild(map);
         }
@@ -61,3 +54,4 @@ var GameController = (function (_super) {
     return GameController;
 }(core.Control));
 __reflect(GameController.prototype, "GameController");
+//# sourceMappingURL=GameController.js.map

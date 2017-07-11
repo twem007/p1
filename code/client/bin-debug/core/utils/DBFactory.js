@@ -41,3 +41,4 @@ var core;
     core.DBFactory = DBFactory;
     __reflect(DBFactory.prototype, "core.DBFactory");
 })(core || (core = {}));
+//# sourceMappingURL=DBFactory.js.map

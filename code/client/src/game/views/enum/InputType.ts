@@ -1,0 +1,14 @@
+enum InputType{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+	LEFT_UP,
+	RIGHT_UP,
+	LEFT_DOWN,
+	RIGHT_DOWN,
+	SKILL_1,
+	SKILL_2,
+	SKILL_3,
+	SKILL_4,
+}

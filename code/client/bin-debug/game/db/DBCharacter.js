@@ -61,3 +61,4 @@ var DBCharacter = (function (_super) {
     return DBCharacter;
 }(DBObject));
 __reflect(DBCharacter.prototype, "DBCharacter");
+//# sourceMappingURL=DBCharacter.js.map

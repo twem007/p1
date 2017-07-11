@@ -98,3 +98,4 @@ var core;
     }(core.Callback));
     __reflect(FrameCallBack.prototype, "FrameCallBack");
 })(core || (core = {}));
+//# sourceMappingURL=FrameEventCenter.js.map

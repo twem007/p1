@@ -5,3 +5,4 @@ var MapObstacleType;
     MapObstacleType[MapObstacleType["BOMB"] = 3] = "BOMB";
     MapObstacleType[MapObstacleType["BOX"] = 4] = "BOX"; //箱子
 })(MapObstacleType || (MapObstacleType = {}));
+//# sourceMappingURL=MapObstacleType.js.map

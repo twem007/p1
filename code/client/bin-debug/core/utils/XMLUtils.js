@@ -16,3 +16,4 @@ var core;
     core.XMLUtils = XMLUtils;
     __reflect(XMLUtils.prototype, "core.XMLUtils");
 })(core || (core = {}));
+//# sourceMappingURL=XMLUtils.js.map

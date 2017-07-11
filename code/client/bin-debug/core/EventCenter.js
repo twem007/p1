@@ -112,3 +112,4 @@ var core;
     }(core.Callback));
     __reflect(EventCallBack.prototype, "EventCallBack", ["core.IMessage"]);
 })(core || (core = {}));
+//# sourceMappingURL=EventCenter.js.map

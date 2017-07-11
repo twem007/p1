@@ -24,3 +24,4 @@ MapSetting.DECORATION_LAYER = 4;
 //背景层
 MapSetting.BG_LAYER = 5;
 __reflect(MapSetting.prototype, "MapSetting");
+//# sourceMappingURL=MapSetting.js.map

@@ -45,10 +45,17 @@ var Main = (function (_super) {
     Main.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
         core.Core.run(this.stage);
-        core.LayerCenter.getInstance().addLayer(LayerEnum.BG, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_BG, new TileLayer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_EFFECT, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_GOODS, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_ROLE, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_TOP, new core.Layer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.UI, new core.EUILayer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.POPUP, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MENU, new core.Layer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.LOADING, new core.EUILayer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.HINT, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.HINTSEC, new core.Layer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.TOP, new core.Layer());
         //Config loading process interface
         //设置加载进度界面
@@ -117,10 +124,19 @@ var Main = (function (_super) {
      * 初始化控制器
      */
     Main.prototype.initController = function () {
-        new MainController(this.loadingView);
-        new LoginController(this.loadingView);
+        new BreakLineController(this.loadingView);
+        new CombatController(this.loadingView);
+        new CommonController(this.loadingView);
         new GameController(this.loadingView);
+        new GameOverController(this.loadingView);
+        new GameSetController(this.loadingView);
+        new LinkController(this.loadingView);
+        new LoginController(this.loadingView);
+        new MainController(this.loadingView);
+        new NoticeAnimController(this.loadingView);
+        new NoticeController(this.loadingView);
     };
     return Main;
 }(core.EUILayer));
 __reflect(Main.prototype, "Main");
+//# sourceMappingURL=Main.js.map

@@ -41,3 +41,4 @@ var core;
     core.ByteBuffer = ByteBuffer;
     __reflect(ByteBuffer.prototype, "core.ByteBuffer");
 })(core || (core = {}));
+//# sourceMappingURL=ByteBuffer.js.map

@@ -11,3 +11,4 @@ var com_main;
     com_main.UIAnim = UIAnim;
     __reflect(UIAnim.prototype, "com_main.UIAnim");
 })(com_main || (com_main = {}));
+//# sourceMappingURL=UIAnim.js.map

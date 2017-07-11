@@ -6,6 +6,9 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
+/**
+ * 主界面控制器
+ */
 var MainController = (function (_super) {
     __extends(MainController, _super);
     function MainController(loadingUI) {
@@ -25,15 +28,13 @@ var MainController = (function (_super) {
             var mainUI = new MainUI();
             this.m_pMainUI = mainUI;
         }
-        core.LayerCenter.getInstance().getLayer(LayerEnum.POPUP).addChild(this.m_pMainUI);
+        core.LayerCenter.getInstance().getLayer(LayerEnum.UI).addChild(this.m_pMainUI);
     };
     /**
      * 隐藏
      */
     MainController.prototype.hide = function () {
-        if (this.m_pMainUI.parent) {
-            this.m_pMainUI.parent.removeChild(this.m_pMainUI);
-        }
+        this.m_pMainUI.hide();
     };
     MainController.prototype.release = function () {
         _super.prototype.release.call(this);
@@ -41,3 +42,4 @@ var MainController = (function (_super) {
     return MainController;
 }(core.Control));
 __reflect(MainController.prototype, "MainController");
+//# sourceMappingURL=MainController.js.map

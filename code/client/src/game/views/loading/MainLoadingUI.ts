@@ -15,7 +15,6 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
     public m_pProgressStar: eui.Image;
     /**加载文本显示 */
     public m_pStateLbl: eui.Label;
-
     //资源组完成数
     public m_pResGroupsCompleteCount: number = 0;
     //资源项数
@@ -27,9 +26,8 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
 
     public constructor() {
         super();
-        this.skinName = 'resource/skins/LoadingSkin.exml';
+        this.skinName = 'resource/skins/loading/LoadingSkin.exml';
     }
-
     protected childrenCreated(): void {
         super.childrenCreated();
         this.m_pProgressImg.mask = this.m_pProgressMask;
@@ -39,7 +37,7 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
 
     public setProgress(progress: core.GroupData): void {
         if (!this.m_pProgressMask) return;
-        let percent: number = progress.curGroupLoaded / progress.total;
+        let percent: number = progress.curGroupLoaded / progress.curGroupTotal;
         this.m_pProgressMask.width = this.m_pProgressGroup.width * percent;
         this.m_pLoginLbl.text = "正在加载游戏" + Math.floor(percent * 100 << 0) + "%"
         this.m_pProgressStar.x = this.m_pProgressMask.width - this.m_pProgressStar.width;
@@ -49,14 +47,15 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
     public show(): void {
         core.LayerCenter.getInstance().getLayer(LayerEnum.LOADING).addChild(this);
     }
+    public release() {
+	}
 
     public hide(): void {
         if (this.parent) {
             this.parent.removeChild(this);
         }
     }
-
-    public release(): void {
+    public updateAdaptive(): void {
 
     }
 }

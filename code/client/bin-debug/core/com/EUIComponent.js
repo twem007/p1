@@ -11,10 +11,46 @@ var core;
     var EUIComponent = (function (_super) {
         __extends(EUIComponent, _super);
         function EUIComponent() {
-            return _super.call(this) || this;
+            var _this = _super.call(this) || this;
+            _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onShow, _this);
+            return _this;
         }
+        /**
+         * 显示
+         */
+        EUIComponent.prototype.onShow = function () {
+            this.addListener();
+            this.onAdaptive();
+        };
+        /**
+         * 添加监听
+         */
+        EUIComponent.prototype.addListener = function () {
+            core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
+        };
+        /**
+         * 删除监听
+         */
+        EUIComponent.prototype.removeListener = function () {
+            core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
+        };
+        /**
+         * 自适应显示
+         */
+        EUIComponent.prototype.onAdaptive = function () {
+        };
+        /**
+         * 隐藏显示
+         */
+        EUIComponent.prototype.hide = function () {
+            this.removeListener();
+            if (this.parent) {
+                this.parent.removeChild(this);
+            }
+        };
         return EUIComponent;
     }(eui.Component));
     core.EUIComponent = EUIComponent;
     __reflect(EUIComponent.prototype, "core.EUIComponent");
 })(core || (core = {}));
+//# sourceMappingURL=EUIComponent.js.map

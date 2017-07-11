@@ -32,3 +32,4 @@ var DBCharacterMgr = (function () {
     return DBCharacterMgr;
 }());
 __reflect(DBCharacterMgr.prototype, "DBCharacterMgr");
+//# sourceMappingURL=DBCharacterMgr.js.map

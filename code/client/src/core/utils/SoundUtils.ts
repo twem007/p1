@@ -1,4 +1,4 @@
-module com_main {
+module core {
     /**
      * 声音控制
      */

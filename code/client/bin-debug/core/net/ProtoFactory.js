@@ -86,3 +86,4 @@ var core;
     core.ProtoFactory = ProtoFactory;
     __reflect(ProtoFactory.prototype, "core.ProtoFactory");
 })(core || (core = {}));
+//# sourceMappingURL=ProtoFactory.js.map

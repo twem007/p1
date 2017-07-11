@@ -30,11 +30,13 @@ class RoleConfig{
 	public powerMax:number;
 	public move:number;
 	public moveMax:number;
-	public name:string;
-	public fileName:string;
+	public battleName:string;
+	public battleFileName:string;
+	public defBattleName:string;
+	public defBattleFileName:string;
 
 	public attrs(){
-		return ['id','bubble','bubbleMax','power','powerMax','move','moveMax','name','fileName'];
+		return ['id','bubble','bubbleMax','power','powerMax','move','moveMax','battleName','battleFileName','defBattleName','defBattleFileName'];
 	}
 }
 

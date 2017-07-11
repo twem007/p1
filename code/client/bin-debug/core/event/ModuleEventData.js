@@ -21,3 +21,4 @@ var core;
     core.ModuleEventData = ModuleEventData;
     __reflect(ModuleEventData.prototype, "core.ModuleEventData");
 })(core || (core = {}));
+//# sourceMappingURL=ModuleEventData.js.map

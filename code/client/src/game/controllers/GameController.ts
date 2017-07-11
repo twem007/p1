@@ -1,7 +1,5 @@
 class GameController extends core.Control {
 
-    private map: Map;
-
     constructor(loadingUI: core.ILoadingUI) {
         super(ModuleEnum.GAME, loadingUI);
     }
@@ -32,25 +30,18 @@ class GameController extends core.Control {
         if (keyArr.length > 0) {
             RES.createGroup('map', keyArr);
         }
-        return ['map'];
+        return ['map','soundMap','animMap'];
     }
 
     public show(data?: any): void {
-        let map: Map = this.map;
-        if (!map) {
-            map = new Map();
-        }
+        let map: Map = MapManager.instance().map;
         map.init(data);
         map.create();
-        core.LayerCenter.getInstance().getLayer(LayerEnum.BG).addChild(map);
-        let mode: IGameMode = GameModeManager.getInstance().getCurMode();
-        if (mode) {
-            mode.map = map;
-        }
+        core.LayerCenter.getInstance().getLayer(LayerEnum.MAP_BG).addChild(map);
     }
 
     public hide(): void {
-        let map: Map = this.map;
+        let map: Map = MapManager.instance().map;
         if (map.parent) {
             map.parent.removeChild(map);
         }

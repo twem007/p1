@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="GameOverHintSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Group id="m_pBgGroup" width="1334" height="750" anchorOffsetX="667" anchorOffsetY="375" x="667" y="376">
+		<e:Image id="m_pBgImg" scale9Grid="15,11,6,6" alpha="1" y="0" x="0" source="loading_bg_1_jpg"/>
+	</e:Group>
+	<e:Group id="m_pRoundEndGroup" anchorOffsetX="650" anchorOffsetY="343" width="1300" height="686" x="667" y="383">
+		<e:Group id="m_pEndHintGroup" x="417.03" y="-20">
+			<e:Image id="m_pWinImg" source="roundEndUI_json.roundEndUI_win" x="-46" y="-114"/>
+			<e:Image id="m_pDeuceImg" source="roundEndUI_json.roundEndUI_deuce" x="-57.99" y="-131.16"/>
+			<e:Image id="m_pLostImg" source="roundEndUI_json.roundEndUI_lost" x="-62.19" y="-153.82999999999998"/>
+		</e:Group>
+		<e:Group y="46.14" horizontalCenter="0">
+			<e:Group x="0" y="0">
+				<e:Image id="m_pLeftScoreBg" source="roundEndUI_json.roundEndUI_scoreBg" y="0" x="0"/>
+				<e:BitmapLabel id="m_pLeftTeamScore" y="14.860000000000007" text="5" anchorOffsetX="0" anchorOffsetY="0" font="roundEndBlueFont_fnt" horizontalCenter="32"/>
+			</e:Group>
+			<e:Group x="485.16" y="0">
+				<e:Image id="m_pRightScoreBg" y="0" x="0" source="roundEndUI_json.roundEndUI_scoreBg_1"/>
+				<e:BitmapLabel id="m_pRightTeamScore" y="14.860000000000007" text="5" anchorOffsetX="0" anchorOffsetY="0" font="roundEndRedFont_fnt" horizontalCenter="32"/>
+			</e:Group>
+		</e:Group>
+		<e:Group y="86.32000000000001" horizontalCenter="0" width="1168" height="420">
+		<e:Image source="roundEndUI_json.roundEndUI_Bg_01" anchorOffsetX="289" anchorOffsetY="210" skewY="180" x="289" y="210"/>
+			<e:Image id="m_pLeftDecorate" source="roundEndUI_json.roundEndUI_Bg_05" scaleX="1" scaleY="1" anchorOffsetX="102" anchorOffsetY="90" horizontalCenter="-511" verticalCenter="-134"/>
+		<e:Group x="47.08" y="33.68" anchorOffsetX="0" width="493.33" rotation="10">
+			<e:Label text="玩家信息" x="319.37" y="-2" fontFamily="Microsoft YaHei" bold="true" size="24"/>
+			<e:Label text="击杀" x="238.22" y="-2" fontFamily="Microsoft YaHei" bold="true" size="24"/>
+			<e:Label text="俘虏" x="151.61" y="-2.17" fontFamily="Microsoft YaHei" bold="true" size="24"/>
+			<e:Label text="解救" x="66" y="-2" fontFamily="Microsoft YaHei" bold="true" size="24"/>
+		</e:Group>
+		<ns1:RoundEndPlayerMsgItem id="m_pLeftPlayer1" xmlns:ns1="*" x="27" y="62.68" skinName="RoundEndPlayerMsgSKin1"/>
+		<ns1:RoundEndPlayerMsgItem id="m_pLeftPlayer2" xmlns:ns1="*" x="27" y="200.68" skinName="RoundEndPlayerMsgSKin1"/>
+			<e:Image source="roundEndUI_json.roundEndUI_Bg_01" anchorOffsetX="289" anchorOffsetY="210" x="878.49" y="210"/>
+			<e:Image id="m_pRightDecorate" source="roundEndUI_json.roundEndUI_Bg_04" horizontalCenter="515" verticalCenter="-136" anchorOffsetX="102" anchorOffsetY="90"/>
+			<e:Group x="679.21" y="115.99" anchorOffsetX="0" width="493.33" rotation="-10">
+				<e:Label text="玩家信息" x="30.85" y="-2" fontFamily="Microsoft YaHei" bold="true" size="24"/>
+				<e:Label text="击杀" x="166.47" y="-2.26" fontFamily="Microsoft YaHei" bold="true" size="24"/>
+				<e:Label text="俘虏" x="246.64" y="-2.26" fontFamily="Microsoft YaHei" bold="true" size="24"/>
+				<e:Label text="解救" x="331.33" y="-2" fontFamily="Microsoft YaHei" bold="true" size="24"/>
+			</e:Group>
+		<ns1:RoundEndPlayerMsgItem id="m_pRightPlayer1" xmlns:ns1="*" x="544" y="64.68" skinName="RoundEndPlayerMsgSKin"/>
+		<ns1:RoundEndPlayerMsgItem id="m_pRightPlayer2" xmlns:ns1="*" x="544" y="200.68" skinName="RoundEndPlayerMsgSKin"/>
+		</e:Group>
+		<e:Group x="3.52" y="388.32">
+			<e:Image source="roundEndUI_json.girl" x="156" y="36.84" scaleX="1" scaleY="1"/>
+			<e:Image source="roundEndUI_json.man" x="-3.52" y="26" scaleX="1" scaleY="1"/>
+			<e:Image x="881.92" y="37" scaleX="1" scaleY="1" source="roundEndUI_json.girl2"/>
+			<e:Image x="1059.2000000000003" y="27.36000000000007" scaleX="1" scaleY="1" source="roundEndUI_json.man2"/>
+		</e:Group>
+		<e:Group x="480.3999999999999" y="553.22" width="348" height="132">
+			<e:Image id="m_pMainBtnImg" horizontalCenter="-4" verticalCenter="-22" source="roundEndUI_json.roundEndUI_btn_02"/>
+		</e:Group>
+	</e:Group>
+</e:Skin>

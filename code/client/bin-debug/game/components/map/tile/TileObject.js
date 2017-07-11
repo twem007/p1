@@ -20,3 +20,4 @@ var TileObject = (function (_super) {
     return TileObject;
 }(egret.Bitmap));
 __reflect(TileObject.prototype, "TileObject");
+//# sourceMappingURL=TileObject.js.map

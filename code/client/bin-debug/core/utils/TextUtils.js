@@ -69,8 +69,47 @@ var core;
                 target.parent.removeChild(target);
             }, this, [textfield]);
         };
+        /**唯一的文字提示带底图 */
+        TextUtils.hintLabel = function (text) {
+            var group = this.group;
+            var image = this.image;
+            var label = this.label;
+            core.LayerCenter.getInstance().stage.addChildAt(group, 100);
+            group.addChild(image);
+            group.addChild(label);
+            if (group.touchEnabled == true || group.touchChildren == true) {
+                group.touchEnabled = false;
+                group.touchChildren = false;
+            }
+            label.text = text;
+            image.width = label.width + 200;
+            group.width = core.LayerCenter.stageWidth;
+            group.anchorOffsetX = group.width * 0.5;
+            group.x = core.LayerCenter.stageWidth * 0.5;
+            group.y = core.LayerCenter.stageHeight * 0.5;
+            label.fontFamily = "Microsoft YaHei";
+            label.anchorOffsetX = label.width * 0.5;
+            label.anchorOffsetY = label.height * 0.5;
+            label.x = core.LayerCenter.stageWidth * 0.5;
+            image.source = "combat_tiao_3_png";
+            image.anchorOffsetX = image.width * 0.5;
+            image.anchorOffsetY = image.height * 0.5;
+            image.x = core.LayerCenter.stageWidth * 0.5;
+            label.verticalCenter = 0;
+            label.horizontalCenter = 0;
+            image.verticalCenter = 0;
+            image.horizontalCenter = 0;
+            group.visible = true;
+            egret.Tween.removeTweens(group);
+            egret.Tween.get(group).to({ y: 250 }, 200).to({ y: 225 }, 1000)
+                .call(function () { group.visible = false; });
+        };
         return TextUtils;
     }());
+    TextUtils.group = new eui.Group;
+    TextUtils.image = new eui.Image;
+    TextUtils.label = new eui.Label;
     core.TextUtils = TextUtils;
     __reflect(TextUtils.prototype, "core.TextUtils");
 })(core || (core = {}));
+//# sourceMappingURL=TextUtils.js.map

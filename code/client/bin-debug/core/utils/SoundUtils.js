@@ -1,8 +1,8 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
-var com_main;
-(function (com_main) {
+var core;
+(function (core) {
     /**
      * 声音控制
      */
@@ -218,6 +218,7 @@ var com_main;
         };
         return SoundUtils;
     }());
-    com_main.SoundUtils = SoundUtils;
-    __reflect(SoundUtils.prototype, "com_main.SoundUtils");
-})(com_main || (com_main = {}));
+    core.SoundUtils = SoundUtils;
+    __reflect(SoundUtils.prototype, "core.SoundUtils");
+})(core || (core = {}));
+//# sourceMappingURL=SoundUtils.js.map

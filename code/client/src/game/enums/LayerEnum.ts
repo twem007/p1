@@ -1,7 +1,15 @@
+/**层次枚举 */
 enum LayerEnum {
-    BG,
+    MAP_BG,
+    MAP_EFFECT,
+    MAP_GOODS,
+    MAP_ROLE,
+    MAP_TOP,
     UI,
     POPUP,
+    MENU,
     LOADING,
-    TOP
+    HINT,
+    HINTSEC,
+    TOP,
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="LinkDelaySkin" currentState="common" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="good,common,low" >
+	<e:Image source="mainBoomUI_json.main_linkBg" x="0" y="0"/>
+	<e:Image source="mainBoomUI_json.main_linkImg1" y="11.25" source.common="mainBoomUI_json.main_linkImg2" source.low="mainBoomUI_json.main_linkImg3" x="19"/>
+	<e:Label id="m_pLinkLab" text="99" y="41.75" textColor="0x33ffff" fontFamily="Microsoft YaHei" size="17" bold="true" horizontalCenter="0" textColor.common="0xffcc5e" textColor.low="0xef707f"/>
+</e:Skin>

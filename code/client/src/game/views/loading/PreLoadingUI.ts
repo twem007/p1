@@ -31,6 +31,5 @@ class PreLoadingUI extends core.Component implements core.ILoadingUI {
     }
 
     public release(): void {
-
     }
 }

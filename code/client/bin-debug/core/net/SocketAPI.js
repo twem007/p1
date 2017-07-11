@@ -78,3 +78,4 @@ var core;
     core.SocketAPI = SocketAPI;
     __reflect(SocketAPI.prototype, "core.SocketAPI");
 })(core || (core = {}));
+//# sourceMappingURL=SocketAPI.js.map

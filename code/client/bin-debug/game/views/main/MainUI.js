@@ -11,31 +11,38 @@ var MainUI = (function (_super) {
     function MainUI() {
         var _this = _super.call(this) || this;
         _this.skinName = "resource/skins/main/MainSkin.exml";
-        core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, _this.onResize, _this);
         return _this;
     }
-    MainUI.prototype.onResize = function (data) {
-        // core.LayerCenter.stageWidth;
-        // core.LayerCenter.stageHeight;
+    MainUI.prototype.onShow = function () {
+        _super.prototype.onShow.call(this);
+        core.SoundUtils.getInstance().playSound('25', 0);
     };
-    MainUI.prototype.createChildren = function () {
-        _super.prototype.childrenCreated.call(this);
-        this.addEvent();
+    MainUI.prototype.addListener = function () {
+        _super.prototype.addListener.call(this);
+        this.m_pRankModleBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
     };
-    MainUI.prototype.addEvent = function () {
-        this.m_pModTimeLimitGroup.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickLoginBtn, this);
+    MainUI.prototype.removeListener = function () {
+        _super.prototype.removeListener.call(this);
+        this.m_pRankModleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
     };
-    MainUI.prototype.removeEvent = function () {
-    };
-    MainUI.prototype.onClickLoginBtn = function () {
-        this.hide();
-        GameModeManager.getInstance().enterGame(GameTypeEnum.EXERCISE);
-    };
-    MainUI.prototype.hide = function () {
-        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.MAINUI));
+    MainUI.prototype.onAdaptive = function () {
+        UIManager.updataPoint(this.m_pBgImg, 667, 375);
+        UIManager.rightTopAdaptive(this.m_pRightTow, 889, 45);
+        UIManager.rightBelowAdaptive(this.m_pRightLowGroup, 1067, 704);
+        UIManager.leftBelowAdaptive(this.m_pRankGroup, 59, 543);
+        UIManager.updataPoint(this.m_pModleBtnGroup, 1017, 378);
     };
     MainUI.prototype.release = function () {
+    };
+    MainUI.prototype.onClickRankBtn = function () {
+        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.MAINUI));
+        GameModeManager.getInstance().enterGame(GameTypeEnum.EXERCISE);
+    };
+    MainUI.prototype.onButtonClick = function (event) {
+        switch (event.currentTarget) {
+        }
     };
     return MainUI;
 }(core.EUIComponent));
 __reflect(MainUI.prototype, "MainUI");
+//# sourceMappingURL=MainUI.js.map

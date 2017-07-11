@@ -27,7 +27,6 @@ module core {
 
         private onResourceLoadComplete(event: RES.ResourceEvent): void {
             this.updateGroupData(event.groupName, event.itemsTotal, event.itemsTotal, event.resItem);
-            this.loadNext();
         }
 
         private updateGroupData(group: string, loadedItems: number = 0, totalItems: number = 0, resItem?: RES.ResourceItem): void {

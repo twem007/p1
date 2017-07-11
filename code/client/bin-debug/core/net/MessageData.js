@@ -24,3 +24,4 @@ var core;
     core.MessageData = MessageData;
     __reflect(MessageData.prototype, "core.MessageData");
 })(core || (core = {}));
+//# sourceMappingURL=MessageData.js.map

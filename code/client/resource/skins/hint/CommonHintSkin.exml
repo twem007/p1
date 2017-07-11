@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="CommonHintSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui"
+        xmlns:w="http://ns.egret.com/wing">
+	<e:Image source="common_bg_0_png" alpha="0.6" left="0" top="0" right="0" bottom="0" />
+	<e:Group id="m_pMainGroup" left="0" top="0" right="0" bottom="0">
+		<e:Group id="m_pMainComGroup" anchorOffsetX="336" anchorOffsetY="184" width="672" height="368" x="667" y="375">
+			<e:Image anchorOffsetX="0" width="672" anchorOffsetY="0" height="368" y="0" touchEnabled="false"
+			         source="commonUI_json.common_bg_03" scale9Grid="39,38,5,5" x="0" />
+			<e:Scroller width="501" height="192" y="72" anchorOffsetY="0" anchorOffsetX="0" bounces="false"
+			            horizontalCenter="0.5">
+				<e:Group anchorOffsetY="0" height="167">
+					<e:Label id="m_pLab" text="祝愿游戏大赚，大卖特卖，祝愿游戏大赚，大卖特卖，祝愿游戏大赚，大卖特卖，祝愿游戏大赚，大卖特卖，祝愿游戏大赚，大卖特卖，祝愿游戏大赚，大卖特卖，"
+					         anchorOffsetX="0" anchorOffsetY="0" fontFamily="Microsoft YaHei" size="25" scaleX="1" scaleY="1"
+					         maxWidth="500" horizontalCenter="0.5" verticalCenter="0" textAlign="center" textColor="0x584334" />
+				</e:Group>
+			</e:Scroller>
+			<e:Group id="m_pKnowBtn" y="267.39" anchorOffsetX="0" width="274.79" anchorOffsetY="0" height="86.67"
+			         horizontalCenter="0.5">
+				<e:Image horizontalCenter="-0.39500000000001023" verticalCenter="-6.335000000000001" width="194"
+				         scale9Grid="29,0,5,68" source="commonUI_json.common_btn_02" />
+				<e:Image source="commonUI_json.comon_btnfont_06" x="92" y="17" touchEnabled="false" />
+			</e:Group>
+			<e:Group id="m_pTwoBtn" x="42" y="260.74" visible="false">
+				<e:Group id="m_pCloseBtn" y="0" anchorOffsetX="0" width="274.79" anchorOffsetY="0" height="86.67" x="0">
+					<e:Image horizontalCenter="0" verticalCenter="0" width="194" scale9Grid="29,0,5,68"
+					         source="commonUI_json.common_btn_01" />
+					<e:Image x="92" y="23" touchEnabled="false" source="commonUI_json.comon_btnfont_05" />
+				</e:Group>
+				<e:Group id="m_pSureBtn" y="0" anchorOffsetX="0" width="274.79" anchorOffsetY="0" height="86.67" x="308">
+					<e:Image horizontalCenter="0" verticalCenter="0" width="194" scale9Grid="29,0,5,68"
+					         source="commonUI_json.common_btn_02" />
+					<e:Image source="commonUI_json.comon_btnfont_06" x="92" y="23" touchEnabled="false" />
+				</e:Group>
+			</e:Group>
+			<e:Image source="commonUI_json.common_title_01" y="-40" horizontalCenter="0" x="235" scaleX="1" scaleY="1" />
+		</e:Group>
+	</e:Group>
+</e:Skin>

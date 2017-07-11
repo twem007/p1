@@ -23,7 +23,7 @@ var RoleConfig = (function () {
     function RoleConfig() {
     }
     RoleConfig.prototype.attrs = function () {
-        return ['id', 'bubble', 'bubbleMax', 'power', 'powerMax', 'move', 'moveMax', 'name', 'fileName'];
+        return ['id', 'bubble', 'bubbleMax', 'power', 'powerMax', 'move', 'moveMax', 'battleName', 'battleFileName', 'defBattleName', 'defBattleFileName'];
     };
     return RoleConfig;
 }());
@@ -100,3 +100,4 @@ var RobotNameConfig = (function () {
     return RobotNameConfig;
 }());
 __reflect(RobotNameConfig.prototype, "RobotNameConfig");
+//# sourceMappingURL=ConfigBase.js.map

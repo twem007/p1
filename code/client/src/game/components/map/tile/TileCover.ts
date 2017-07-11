@@ -1,19 +1,13 @@
 /**
- * Created by WZW on 2017/6/7.
  * 可覆盖瓦片
  */
-enum MapDecoration {
-    FLOOR = 1,
-    TOP = 2
-}
-
 class TileCover {
 
     //顶层瓦
     public static topLayerList: Object;
     //角色层瓦
     public static roleLayerList: Object;
- 
+
     public static addTopLayer(tile: TileObject, col: number, row: number): void {
         TileCover.topLayerList[col + '_' + row] = tile;
     }
@@ -22,25 +16,23 @@ class TileCover {
         TileCover.roleLayerList[col + '_' + row] = tile;
     }
 
-    public static add(tile: TileObject, col: number, row: number, imgNum: number): void {
-        var attr: Object = MapCellData.getBgAttr(imgNum);
-        if (attr) { 
-            if (attr['level'] == MapDecoration.FLOOR) {
-                TileCover.addRoleLayer(tile, col, row);
-            }
-            else if (attr['level'] == MapDecoration.TOP) {
-                TileCover.addTopLayer(tile, col, row);
-            }
+    public static add(tile: TileObject, col: number, row: number, level: number): void {
+        if (level == MapDecorationEnum.FLOOR) {
+            TileCover.addRoleLayer(tile, col, row);
+        }
+        else if (level == MapDecorationEnum.TOP) {
+            TileCover.addTopLayer(tile, col, row);
         }
     }
 
-    public static addAllToLayer(map: Map): void {
-        for (var key in TileCover.topLayerList) {
-            map.topLayer.addChild(TileCover.topLayerList[key]);
+    public static addAllToLayer(): void {
+        let layer: core.Layer = core.LayerCenter.getInstance().getLayer(LayerEnum.MAP_TOP);
+        for (let key in TileCover.topLayerList) {
+            layer.addChild(TileCover.topLayerList[key]);
         }
-
-        for (var key in TileCover.roleLayerList) {
-            map.roleLayer.addChild(TileCover.roleLayerList[key]);
+        layer = core.LayerCenter.getInstance().getLayer(LayerEnum.MAP_ROLE);
+        for (let key in TileCover.roleLayerList) {
+            layer.addChild(TileCover.roleLayerList[key]);
         }
     }
 }

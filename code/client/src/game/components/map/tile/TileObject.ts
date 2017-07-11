@@ -12,6 +12,5 @@ class TileObject extends egret.Bitmap {
 		super(texture);
 		this.touchEnabled = false;
 	}
-
 }
 
