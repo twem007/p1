@@ -16,7 +16,7 @@ var BattleAnimGoods = (function (_super) {
     BattleAnimGoods.prototype.release = function () {
         _super.prototype.release.call(this);
         if (this.animation) {
-            core.MCFactory.instance.revertMovieClip(this.data.config.name + "_json", this.data.config.fileName, this.animation);
+            core.MCFactory.instance.revertMovieClip(this.getData().config.name + "_json", this.getData().config.fileName, this.animation);
         }
         this.p_data = null;
         this.animation = null;
@@ -25,8 +25,8 @@ var BattleAnimGoods = (function (_super) {
      * 更新动画
      */
     BattleAnimGoods.prototype.updateAnim = function (data) {
-        var fileName = this.data.config.name;
-        var animName = this.data.config.fileName;
+        var fileName = this.getData().config.name;
+        var animName = this.getData().config.fileName;
         var animation = core.MCFactory.instance.getMovieClip(fileName + '_json', fileName + '_png', animName, true);
         this.addChild(animation);
         this.animation = animation;
@@ -48,21 +48,17 @@ var BattleAnimGoods = (function (_super) {
             this.animation.stop();
         }
     };
-    Object.defineProperty(BattleAnimGoods.prototype, "data", {
-        get: function () {
-            return this.p_data;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    BattleAnimGoods.prototype.getData = function () {
+        return this.p_data;
+    };
     /**
      * 更新道具数据
      */
     BattleAnimGoods.prototype.setData = function (data) {
-        if (this.data.id != data.id) {
-            if (this.data.sid != data.sid) {
+        if (this.getData().id != data.id) {
+            if (this.getData().sid != data.sid) {
                 if (this.animation) {
-                    core.MCFactory.instance.revertMovieClip(this.data.config.name + "_json", this.data.config.fileName, this.animation);
+                    core.MCFactory.instance.revertMovieClip(this.getData().config.name + "_json", this.getData().config.fileName, this.animation);
                 }
             }
             _super.prototype.setData.call(this, data);

@@ -9,7 +9,7 @@ class BattleAnimGoods extends Goods {
     public release(): void {
         super.release();
         if (this.animation) {
-            core.MCFactory.instance.revertMovieClip(`${this.data.config.name}_json`, this.data.config.fileName, this.animation);
+            core.MCFactory.instance.revertMovieClip(`${this.getData().config.name}_json`, this.getData().config.fileName, this.animation);
         }
         this.p_data = null;
         this.animation = null;
@@ -18,8 +18,8 @@ class BattleAnimGoods extends Goods {
      * 更新动画
      */
     private updateAnim(data: BattleGoodsData) {
-        let fileName: string = this.data.config.name;
-        let animName: string = this.data.config.fileName;
+        let fileName: string = this.getData().config.name;
+        let animName: string = this.getData().config.fileName;
         let animation: egret.MovieClip = core.MCFactory.instance.getMovieClip(fileName + '_json', fileName + '_png', animName, true);
         this.addChild(animation);
         this.animation = animation;
@@ -43,17 +43,17 @@ class BattleAnimGoods extends Goods {
         }
     }
 
-    public get data(): BattleGoodsData {
+    public getData():BattleGoodsData{
         return <BattleGoodsData>this.p_data;
     }
     /**
      * 更新道具数据
      */
     public setData(data: BattleGoodsData): void {
-        if (this.data.id != data.id) {
-            if (this.data.sid != data.sid) {
+        if (this.getData().id != data.id) {
+            if (this.getData().sid != data.sid) {
                 if (this.animation) {
-                    core.MCFactory.instance.revertMovieClip(`${this.data.config.name}_json`, this.data.config.fileName, this.animation);
+                    core.MCFactory.instance.revertMovieClip(`${this.getData().config.name}_json`, this.getData().config.fileName, this.animation);
                 }
             }
             super.setData(data);

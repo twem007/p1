@@ -30,7 +30,7 @@ class NoticeView extends core.EUIComponent {
 	public release() {
 	}
 	private onClickClose() {
-		core.SoundUtils.getInstance().playSound('9');
+		SoundUtils.getInstance().playSound('9');
 		core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.NOTICE));
 	}
 	public setText() {

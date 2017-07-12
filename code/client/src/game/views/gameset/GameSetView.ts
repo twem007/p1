@@ -225,7 +225,7 @@ class GameSetView extends core.EUIComponent {
 	}
 	/**点击音乐按钮 */
 	private onClickMusicBtn() {
-		core.SoundUtils.getInstance().playSound('9');
+		SoundUtils.getInstance().playSound('9');
 		if (this.m_pMusicImg.visible == true) {
 			this.m_pMusicImg.visible = false;
 			SoundViewData.m_pIsMusic = 0;
@@ -236,15 +236,15 @@ class GameSetView extends core.EUIComponent {
 			LocalData.setIsMusic("" + 1 + "");
 		}
 		if (SoundViewData.m_pIsMusic == 1) {
-			core.SoundUtils.getInstance().setBGMValume((SoundViewData.m_pMusicBlockValue) * 0.1);
+			SoundUtils.getInstance().setBGMValume((SoundViewData.m_pMusicBlockValue) * 0.1);
 		}
 		else {
-			core.SoundUtils.getInstance().setBGMValume(0);
+			SoundUtils.getInstance().setBGMValume(0);
 		}
 	}
 	/**点击音效按钮 */
 	private onClickSoundBtn() {
-		core.SoundUtils.getInstance().playSound('9');
+		SoundUtils.getInstance().playSound('9');
 		if (this.m_pSoundImg.visible == true) {
 			this.m_pSoundImg.visible = false;
 			SoundViewData.m_pIsSound = 0;
@@ -255,10 +255,10 @@ class GameSetView extends core.EUIComponent {
 			LocalData.setIsSound("" + 1 + "");
 		}
 		if (SoundViewData.m_pIsSound == 1) {
-			core.SoundUtils.getInstance().setEffectValume((SoundViewData.m_pSoundBlockValue) * 0.1);
+			SoundUtils.getInstance().setEffectValume((SoundViewData.m_pSoundBlockValue) * 0.1);
 		}
 		else {
-			core.SoundUtils.getInstance().setEffectValume(0);
+			SoundUtils.getInstance().setEffectValume(0);
 		}
 	}
 	/**画质按钮 */
@@ -296,9 +296,9 @@ class GameSetView extends core.EUIComponent {
 		SoundViewData.m_pMusicBlockValue = this.m_pMusicHSlider.value;
 		LocalData.setMusicSize("" + this.m_pMusicHSlider.value + "");
 		if (SoundViewData.m_pIsMusic == 1) {
-			core.SoundUtils.getInstance().setBGMValume((SoundViewData.m_pMusicBlockValue) * 0.1);
+			SoundUtils.getInstance().setBGMValume((SoundViewData.m_pMusicBlockValue) * 0.1);
 		} else {
-			core.SoundUtils.getInstance().setBGMValume(0);
+			SoundUtils.getInstance().setBGMValume(0);
 		}
 
 	}
@@ -307,15 +307,15 @@ class GameSetView extends core.EUIComponent {
 		SoundViewData.m_pSoundBlockValue = this.m_pSoundHSlider.value;
 		LocalData.setSoundSize("" + this.m_pSoundHSlider.value + "");
 		if (SoundViewData.m_pIsSound == 1) {
-			core.SoundUtils.getInstance().setEffectValume((SoundViewData.m_pSoundBlockValue) * 0.1);
+			SoundUtils.getInstance().setEffectValume((SoundViewData.m_pSoundBlockValue) * 0.1);
 		} else {
-			core.SoundUtils.getInstance().setEffectValume(0);
+			SoundUtils.getInstance().setEffectValume(0);
 		}
 	}
 	/**点击游戏设置按 */
 	private onClickGameSetBtn() {
 		Log("点击游戏设置按钮");
-		core.SoundUtils.getInstance().playSound('11');
+		SoundUtils.getInstance().playSound('11');
 		this.m_pGameSetImg.source = "setUI_json.set_font_03";
 		this.m_pGameSetBtn.source = "setUI_json.set_btn_03";
 		this.m_pHandleSetImg.source = "setUI_json.set_font_02";
@@ -328,7 +328,7 @@ class GameSetView extends core.EUIComponent {
 	/**点击游戏操作设置按钮 */
 	private onClickHandleBtn() {
 		Log("点击操作设置按钮");
-		core.SoundUtils.getInstance().playSound('11');
+		SoundUtils.getInstance().playSound('11');
 		this.m_pGameSetImg.source = "setUI_json.set_font_01";
 		this.m_pGameSetBtn.source = "setUI_json.set_btn_04";
 		this.m_pHandleSetImg.source = "setUI_json.set_font_04";
@@ -346,7 +346,7 @@ class GameSetView extends core.EUIComponent {
 	/**点击镜像按钮 */
 	private onClickMirroringBtn() {
 		Log("点击镜像按钮");
-		core.SoundUtils.getInstance().playSound('9');
+		SoundUtils.getInstance().playSound('9');
 		this.m_pThroughBtn.x = this.m_pSkillBg.width - this.m_pThroughBtn.x;
 		this.m_pSpeedBtn.x = this.m_pSkillBg.width - this.m_pSpeedBtn.x;
 		let throughBtnData = this.changeBtnPoint(SkillBtnData.m_pThroughBtnSetPoint, this.m_pThroughBtn);
@@ -361,7 +361,7 @@ class GameSetView extends core.EUIComponent {
 
 	/**点击重置按钮 */
 	private onClickResBtn() {
-		core.SoundUtils.getInstance().playSound('9');
+		SoundUtils.getInstance().playSound('9');
 		let throughBtnData = this.initBtnPoint(SkillBtnData.m_pThroughBtnInitPoint, this.m_pThroughBtn);
 		SkillBtnData.m_pThroughBtnSetPoint.x = SkillBtnData.m_pThroughBtnInitPoint.x;
 		SkillBtnData.m_pThroughBtnSetPoint.y = SkillBtnData.m_pThroughBtnInitPoint.y;
@@ -484,7 +484,7 @@ class GameSetView extends core.EUIComponent {
 	/**按退出按钮 */
 	private onClickGameOutBtn() {
 		core.EventCenter.getInstance().addEventListener(EventType.SET_SPEED_POINT,this.onConnectClose,this);
-		core.SoundUtils.getInstance().playSound('9');
+		SoundUtils.getInstance().playSound('9');
 		// MapManager.getInstance().destroy();
 		// AGame.R.notifyView(RootNav.ROOT_CLOSE);
 		// AGame.R.notifyView(SceneNav.SCENE_MAIN_OPEN);

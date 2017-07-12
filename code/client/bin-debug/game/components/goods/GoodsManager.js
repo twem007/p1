@@ -9,21 +9,20 @@ var GoodsManager = (function () {
     GoodsManager.prototype.creatBox = function (data) {
         var box = core.CachePool.getObj(egret.getQualifiedClassName(BattleBoxGoods));
         if (!box) {
-            box = new BattleBoxGoods();
+            box = new BattleBoxGoods(data);
         }
-        if (data) {
-            box.setData(data);
-        }
-        this.boxs.add(box.data.col + "_" + box.data.row, box);
-        this.goods.add(box.data.col + "_" + box.data.row, box);
+        var boxData = box.getData();
+        this.boxs.add(boxData.col + "_" + boxData.row, box);
+        this.goods.add(boxData.col + "_" + boxData.row, box);
         return box;
     };
     GoodsManager.prototype.removeBox = function (box) {
         if (box) {
             if (box.parent) {
                 box.parent.removeChild(box);
-                this.boxs.remove(box.data.col + "_" + box.data.row);
-                this.goods.remove(box.data.col + "_" + box.data.row);
+                var boxData = box.getData();
+                this.boxs.remove(boxData.col + "_" + boxData.row);
+                this.goods.remove(boxData.col + "_" + boxData.row);
                 box.release();
             }
         }

@@ -47,6 +47,8 @@ var MainLoadingUI = (function (_super) {
         }
     };
     MainLoadingUI.prototype.updateAdaptive = function () {
+        UIManager.updataPoint(this.m_pMainGroup, 667, 375);
+        UIManager.updataPoint(this.m_pProgressGroup, 667, 653);
     };
     return MainLoadingUI;
 }(core.EUIComponent));

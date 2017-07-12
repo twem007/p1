@@ -15,7 +15,7 @@ var MainUI = (function (_super) {
     }
     MainUI.prototype.onShow = function () {
         _super.prototype.onShow.call(this);
-        core.SoundUtils.getInstance().playSound('25', 0);
+        SoundUtils.getInstance().playSound('25', 0);
     };
     MainUI.prototype.addListener = function () {
         _super.prototype.addListener.call(this);
@@ -27,7 +27,7 @@ var MainUI = (function (_super) {
     };
     MainUI.prototype.onAdaptive = function () {
         UIManager.updataPoint(this.m_pBgImg, 667, 375);
-        UIManager.rightTopAdaptive(this.m_pRightTow, 889, 45);
+        UIManager.rightTopAdaptive(this.m_pRightTow, 866, 45);
         UIManager.rightBelowAdaptive(this.m_pRightLowGroup, 1067, 704);
         UIManager.leftBelowAdaptive(this.m_pRankGroup, 59, 543);
         UIManager.updataPoint(this.m_pModleBtnGroup, 1017, 378);

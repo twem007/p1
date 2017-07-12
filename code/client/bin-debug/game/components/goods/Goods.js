@@ -21,16 +21,12 @@ var Goods = (function (_super) {
         this.p_data = null;
         core.CachePool.addObj(egret.getQualifiedClassName(this), this);
     };
-    Object.defineProperty(Goods.prototype, "data", {
-        /**
-         * 得到道具数据
-         */
-        get: function () {
-            return this.p_data;
-        },
-        enumerable: true,
-        configurable: true
-    });
+    /**
+     * 得到道具数据
+     */
+    Goods.prototype.getData = function () {
+        return this.p_data;
+    };
     /**
     * 更新道具数据
     */

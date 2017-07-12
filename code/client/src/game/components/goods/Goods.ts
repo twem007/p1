@@ -17,7 +17,7 @@ class Goods extends core.Component {
     /**
      * 得到道具数据
      */
-    public get data(): GoodsData {
+    public getData():GoodsData{
         return this.p_data;
     }
     /**

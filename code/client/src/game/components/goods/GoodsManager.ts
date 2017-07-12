@@ -16,9 +16,9 @@ class GoodsManager {
         if (!box) {
             box = new BattleBoxGoods(data);
         }
-
-        this.boxs.add(`${box.data.col}_${box.data.row}`, box);
-        this.goods.add(`${box.data.col}_${box.data.row}`, box);
+        let boxData = box.getData();
+        this.boxs.add(`${boxData.col}_${boxData.row}`, box);
+        this.goods.add(`${boxData.col}_${boxData.row}`, box);
         return box;
     }
 
@@ -26,8 +26,9 @@ class GoodsManager {
         if (box) {
             if (box.parent) {
                 box.parent.removeChild(box);
-                this.boxs.remove(`${box.data.col}_${box.data.row}`);
-                this.goods.remove(`${box.data.col}_${box.data.row}`);
+                let boxData = box.getData();
+                this.boxs.remove(`${boxData.col}_${boxData.row}`);
+                this.goods.remove(`${boxData.col}_${boxData.row}`);
                 box.release();
             }
         }

@@ -41,26 +41,26 @@
 
     <!--这个标签会被替换为项目中所有的 javascript 文件。删除 game_files 标签后，项目文件加载列表将不会变化，请谨慎操作！-->
     <!--game_files_start-->
-	<script egret="game" src="bin-debug/game/components/BaseData.js"></script>
 	<script egret="game" src="bin-debug/core/com/Component.js"></script>
-	<script egret="game" src="bin-debug/game/components/goods/data/GoodsData.js"></script>
+	<script egret="game" src="bin-debug/game/components/BaseData.js"></script>
 	<script egret="game" src="bin-debug/game/components/goods/Goods.js"></script>
-	<script egret="game" src="bin-debug/core/com/Layer.js"></script>
+	<script egret="game" src="bin-debug/game/components/goods/data/GoodsData.js"></script>
 	<script egret="game" src="bin-debug/core/Control.js"></script>
 	<script egret="game" src="bin-debug/core/data/Callback.js"></script>
 	<script egret="game" src="bin-debug/core/data/Dictionary.js"></script>
 	<script egret="game" src="bin-debug/core/event/EventData.js"></script>
-	<script egret="game" src="bin-debug/core/interfaces/ILoadingUI.js"></script>
 	<script egret="game" src="bin-debug/game/db/DBObject.js"></script>
+	<script egret="game" src="bin-debug/core/interfaces/ILoadingUI.js"></script>
 	<script egret="game" src="bin-debug/game/components/goods/data/BattleGoodsData.js"></script>
-	<script egret="game" src="bin-debug/core/com/EUIComponent.js"></script>
 	<script egret="game" src="bin-debug/core/com/EUILayer.js"></script>
+	<script egret="game" src="bin-debug/core/com/Layer.js"></script>
 	<script egret="game" src="bin-debug/game/components/goods/ImageGoods.js"></script>
 	<script egret="game" src="bin-debug/game/components/mode/GameModeData.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/BaseProp.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/data/ItemData.js"></script>
 	<script egret="game" src="bin-debug/game/components/role/RoleData.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/enum/PropType.js"></script>
+	<script egret="game" src="bin-debug/core/com/EUIComponent.js"></script>
+	<script egret="game" src="bin-debug/game/components/role/enum/BuffEffectDataType.js"></script>
+	<script egret="game" src="bin-debug/core/FrameEventCenter.js"></script>
+	<script egret="game" src="bin-debug/core/InputManager.js"></script>
 	<script egret="game" src="bin-debug/core/interfaces/IFactory.js"></script>
 	<script egret="game" src="bin-debug/core/Core.js"></script>
 	<script egret="game" src="bin-debug/core/interfaces/IMessage.js"></script>
@@ -82,7 +82,6 @@
 	<script egret="game" src="bin-debug/core/utils/MD5.js"></script>
 	<script egret="game" src="bin-debug/core/utils/PlatUtils.js"></script>
 	<script egret="game" src="bin-debug/core/utils/ResUtils.js"></script>
-	<script egret="game" src="bin-debug/core/utils/SoundUtils.js"></script>
 	<script egret="game" src="bin-debug/core/utils/TextUtils.js"></script>
 	<script egret="game" src="bin-debug/core/utils/WebUtils.js"></script>
 	<script egret="game" src="bin-debug/core/utils/XMLUtils.js"></script>
@@ -111,31 +110,20 @@
 	<script egret="game" src="bin-debug/game/components/map/tile/TileObject.js"></script>
 	<script egret="game" src="bin-debug/game/components/mode/exercise/ExerciseMode.js"></script>
 	<script egret="game" src="bin-debug/game/components/mode/exercise/ExerciseModeData.js"></script>
+	<script egret="game" src="bin-debug/game/components/mode/exercise/proxy/ExerciseProxy.js"></script>
 	<script egret="game" src="bin-debug/core/event/KeyboardEventData.js"></script>
 	<script egret="game" src="bin-debug/game/components/mode/GameModeManager.js"></script>
 	<script egret="game" src="bin-debug/game/components/mode/GameTypeEnum.js"></script>
 	<script egret="game" src="bin-debug/game/components/mode/IGameMode.js"></script>
-	<script egret="game" src="bin-debug/game/components/mode/proxy/ExerciseProxy.js"></script>
-	<script egret="game" src="bin-debug/core/event/ModuleEventData.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/BombProp.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/BoxProp.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/data/BoxData.js"></script>
-	<script egret="game" src="bin-debug/core/EventCenter.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/enum/PropStatus.js"></script>
-	<script egret="game" src="bin-debug/core/com/Animation.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/GlueProp.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/NeedleProp.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/ShieldProp.js"></script>
-	<script egret="game" src="bin-debug/game/components/prop/SpeedProp.js"></script>
 	<script egret="game" src="bin-debug/game/components/role/BattleData.js"></script>
-	<script egret="game" src="bin-debug/game/components/role/enum/BuffEffectDataType.js"></script>
-	<script egret="game" src="bin-debug/game/components/role/enum/BuffType.js"></script>
+	<script egret="game" src="bin-debug/core/com/Animation.js"></script>
+	<script egret="game" src="bin-debug/ThemeAdapter.js"></script>
 	<script egret="game" src="bin-debug/game/components/role/Monster.js"></script>
 	<script egret="game" src="bin-debug/game/components/role/MonsterData.js"></script>
 	<script egret="game" src="bin-debug/game/components/role/PlayerData.js"></script>
 	<script egret="game" src="bin-debug/game/components/role/Role.js"></script>
 	<script egret="game" src="bin-debug/game/components/role/RoleControl.js"></script>
-	<script egret="game" src="bin-debug/core/FrameEventCenter.js"></script>
+	<script egret="game" src="bin-debug/core/event/ModuleEventData.js"></script>
 	<script egret="game" src="bin-debug/game/components/role/RoleManager.js"></script>
 	<script egret="game" src="bin-debug/game/controllers/BreakLineController.js"></script>
 	<script egret="game" src="bin-debug/game/controllers/CombatController.js"></script>
@@ -151,7 +139,7 @@
 	<script egret="game" src="bin-debug/game/db/DBCharacter.js"></script>
 	<script egret="game" src="bin-debug/game/db/DBCharacterConst.js"></script>
 	<script egret="game" src="bin-debug/game/db/DBCharacterMgr.js"></script>
-	<script egret="game" src="bin-debug/core/InputManager.js"></script>
+	<script egret="game" src="bin-debug/core/EventCenter.js"></script>
 	<script egret="game" src="bin-debug/game/enums/LayerEnum.js"></script>
 	<script egret="game" src="bin-debug/game/enums/ModuleEnum.js"></script>
 	<script egret="game" src="bin-debug/game/keyBoard/KeyBoardManager.js"></script>
@@ -161,6 +149,7 @@
 	<script egret="game" src="bin-debug/game/utils/config/Config.js"></script>
 	<script egret="game" src="bin-debug/game/utils/config/ConfigBase.js"></script>
 	<script egret="game" src="bin-debug/game/utils/LocalData.js"></script>
+	<script egret="game" src="bin-debug/game/utils/SoundUtils.js"></script>
 	<script egret="game" src="bin-debug/game/utils/TimerUtils.js"></script>
 	<script egret="game" src="bin-debug/game/utils/Utils.js"></script>
 	<script egret="game" src="bin-debug/game/views/combat/broadcast/BroadcastManager.js"></script>
@@ -203,7 +192,7 @@
 	<script egret="game" src="bin-debug/game/views/notice/NoticeAnimView.js"></script>
 	<script egret="game" src="bin-debug/game/views/notice/NoticeView.js"></script>
 	<script egret="game" src="bin-debug/Main.js"></script>
-	<script egret="game" src="bin-debug/ThemeAdapter.js"></script>
+	<script egret="game" src="bin-debug/game/components/role/enum/BuffType.js"></script>
 	<!--game_files_end-->
 </head>
 <body>

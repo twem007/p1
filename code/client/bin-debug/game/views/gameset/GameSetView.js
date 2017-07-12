@@ -158,7 +158,7 @@ var GameSetView = (function (_super) {
     };
     /**点击音乐按钮 */
     GameSetView.prototype.onClickMusicBtn = function () {
-        core.SoundUtils.getInstance().playSound('9');
+        SoundUtils.getInstance().playSound('9');
         if (this.m_pMusicImg.visible == true) {
             this.m_pMusicImg.visible = false;
             SoundViewData.m_pIsMusic = 0;
@@ -170,15 +170,15 @@ var GameSetView = (function (_super) {
             LocalData.setIsMusic("" + 1 + "");
         }
         if (SoundViewData.m_pIsMusic == 1) {
-            core.SoundUtils.getInstance().setBGMValume((SoundViewData.m_pMusicBlockValue) * 0.1);
+            SoundUtils.getInstance().setBGMValume((SoundViewData.m_pMusicBlockValue) * 0.1);
         }
         else {
-            core.SoundUtils.getInstance().setBGMValume(0);
+            SoundUtils.getInstance().setBGMValume(0);
         }
     };
     /**点击音效按钮 */
     GameSetView.prototype.onClickSoundBtn = function () {
-        core.SoundUtils.getInstance().playSound('9');
+        SoundUtils.getInstance().playSound('9');
         if (this.m_pSoundImg.visible == true) {
             this.m_pSoundImg.visible = false;
             SoundViewData.m_pIsSound = 0;
@@ -190,10 +190,10 @@ var GameSetView = (function (_super) {
             LocalData.setIsSound("" + 1 + "");
         }
         if (SoundViewData.m_pIsSound == 1) {
-            core.SoundUtils.getInstance().setEffectValume((SoundViewData.m_pSoundBlockValue) * 0.1);
+            SoundUtils.getInstance().setEffectValume((SoundViewData.m_pSoundBlockValue) * 0.1);
         }
         else {
-            core.SoundUtils.getInstance().setEffectValume(0);
+            SoundUtils.getInstance().setEffectValume(0);
         }
     };
     /**画质按钮 */
@@ -231,10 +231,10 @@ var GameSetView = (function (_super) {
         SoundViewData.m_pMusicBlockValue = this.m_pMusicHSlider.value;
         LocalData.setMusicSize("" + this.m_pMusicHSlider.value + "");
         if (SoundViewData.m_pIsMusic == 1) {
-            core.SoundUtils.getInstance().setBGMValume((SoundViewData.m_pMusicBlockValue) * 0.1);
+            SoundUtils.getInstance().setBGMValume((SoundViewData.m_pMusicBlockValue) * 0.1);
         }
         else {
-            core.SoundUtils.getInstance().setBGMValume(0);
+            SoundUtils.getInstance().setBGMValume(0);
         }
     };
     /**改变滑块时改变音效音量大小 */
@@ -242,16 +242,16 @@ var GameSetView = (function (_super) {
         SoundViewData.m_pSoundBlockValue = this.m_pSoundHSlider.value;
         LocalData.setSoundSize("" + this.m_pSoundHSlider.value + "");
         if (SoundViewData.m_pIsSound == 1) {
-            core.SoundUtils.getInstance().setEffectValume((SoundViewData.m_pSoundBlockValue) * 0.1);
+            SoundUtils.getInstance().setEffectValume((SoundViewData.m_pSoundBlockValue) * 0.1);
         }
         else {
-            core.SoundUtils.getInstance().setEffectValume(0);
+            SoundUtils.getInstance().setEffectValume(0);
         }
     };
     /**点击游戏设置按 */
     GameSetView.prototype.onClickGameSetBtn = function () {
         Log("点击游戏设置按钮");
-        core.SoundUtils.getInstance().playSound('11');
+        SoundUtils.getInstance().playSound('11');
         this.m_pGameSetImg.source = "setUI_json.set_font_03";
         this.m_pGameSetBtn.source = "setUI_json.set_btn_03";
         this.m_pHandleSetImg.source = "setUI_json.set_font_02";
@@ -264,7 +264,7 @@ var GameSetView = (function (_super) {
     /**点击游戏操作设置按钮 */
     GameSetView.prototype.onClickHandleBtn = function () {
         Log("点击操作设置按钮");
-        core.SoundUtils.getInstance().playSound('11');
+        SoundUtils.getInstance().playSound('11');
         this.m_pGameSetImg.source = "setUI_json.set_font_01";
         this.m_pGameSetBtn.source = "setUI_json.set_btn_04";
         this.m_pHandleSetImg.source = "setUI_json.set_font_04";
@@ -281,7 +281,7 @@ var GameSetView = (function (_super) {
     /**点击镜像按钮 */
     GameSetView.prototype.onClickMirroringBtn = function () {
         Log("点击镜像按钮");
-        core.SoundUtils.getInstance().playSound('9');
+        SoundUtils.getInstance().playSound('9');
         this.m_pThroughBtn.x = this.m_pSkillBg.width - this.m_pThroughBtn.x;
         this.m_pSpeedBtn.x = this.m_pSkillBg.width - this.m_pSpeedBtn.x;
         var throughBtnData = this.changeBtnPoint(SkillBtnData.m_pThroughBtnSetPoint, this.m_pThroughBtn);
@@ -293,7 +293,7 @@ var GameSetView = (function (_super) {
     };
     /**点击重置按钮 */
     GameSetView.prototype.onClickResBtn = function () {
-        core.SoundUtils.getInstance().playSound('9');
+        SoundUtils.getInstance().playSound('9');
         var throughBtnData = this.initBtnPoint(SkillBtnData.m_pThroughBtnInitPoint, this.m_pThroughBtn);
         SkillBtnData.m_pThroughBtnSetPoint.x = SkillBtnData.m_pThroughBtnInitPoint.x;
         SkillBtnData.m_pThroughBtnSetPoint.y = SkillBtnData.m_pThroughBtnInitPoint.y;
@@ -409,7 +409,7 @@ var GameSetView = (function (_super) {
     /**按退出按钮 */
     GameSetView.prototype.onClickGameOutBtn = function () {
         core.EventCenter.getInstance().addEventListener(EventType.SET_SPEED_POINT, this.onConnectClose, this);
-        core.SoundUtils.getInstance().playSound('9');
+        SoundUtils.getInstance().playSound('9');
         // MapManager.getInstance().destroy();
         // AGame.R.notifyView(RootNav.ROOT_CLOSE);
         // AGame.R.notifyView(SceneNav.SCENE_MAIN_OPEN);

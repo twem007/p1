@@ -71,11 +71,17 @@ var core;
          * 加载完成
          */
         Control.prototype.onLoadComplete = function (data) {
+            this.preShow(this.m_data);
             if (this.m_loadingUI) {
                 this.m_loadingUI.hide();
             }
             this.show(this.m_data);
         };
+        /**
+         * 预显示
+         */
+        Control.prototype.preShow = function (data) { };
+        ;
         /**
          * 释放资源
          */

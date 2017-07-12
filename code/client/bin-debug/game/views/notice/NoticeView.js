@@ -31,7 +31,7 @@ var NoticeView = (function (_super) {
     NoticeView.prototype.release = function () {
     };
     NoticeView.prototype.onClickClose = function () {
-        core.SoundUtils.getInstance().playSound('9');
+        SoundUtils.getInstance().playSound('9');
         core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.NOTICE));
     };
     NoticeView.prototype.setText = function () {

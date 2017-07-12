@@ -44,7 +44,7 @@ var CommonHintView = (function (_super) {
         core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.COMMON));
     };
     CommonHintView.prototype.onMainBtn = function () {
-        core.SoundUtils.getInstance().playSound('9');
+        SoundUtils.getInstance().playSound('9');
         var commonData = this.m_pCommonData;
         if (commonData.m_pFun != null) {
             commonData.m_pFun();

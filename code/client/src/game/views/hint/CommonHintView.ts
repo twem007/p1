@@ -49,7 +49,7 @@ class CommonHintView extends core.EUIComponent {
 		core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.COMMON));
 	}
 	private onMainBtn() {
-		core.SoundUtils.getInstance().playSound('9');
+		SoundUtils.getInstance().playSound('9');
 		let commonData = this.m_pCommonData;
 		if (commonData.m_pFun != null) {
 			commonData.m_pFun();

@@ -4,8 +4,7 @@ class BattleBoxGoods extends ImageGoods {
         // this.setBitmap(data.config.fileName);
     }
     private _bitmap: egret.Bitmap;
-
-    public get data(): BattleBoxData {
+    public getData():BattleBoxData{
         return <BattleBoxData>this.p_data;
     }
 

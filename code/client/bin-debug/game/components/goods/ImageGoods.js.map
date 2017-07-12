@@ -1,1 +1,1 @@
-{"version":3,"file":"ImageGoods.js","sourceRoot":"","sources":["../../../../src/game/components/goods/ImageGoods.ts"],"names":[],"mappings":";;;;;;;;AAAA;IAAyB,8BAAK;IAC1B,oBAAY,IAAgB;eACxB,kBAAM,IAAI,CAAC;IACf,CAAC;IACL,iBAAC;AAAD,CAAC,AAJD,CAAyB,KAAK,GAI7B;AAJK,UAAA,UAAU,yBAIf,CAAA"}
+{"version":3,"file":"ImageGoods.js","sourceRoot":"","sources":["../../../../src/game/components/goods/ImageGoods.ts"],"names":[],"mappings":";;;;;;;;AAAA;IAAyB,8BAAK;IAC1B,oBAAY,IAAgB;eACxB,kBAAM,IAAI,CAAC;IACf,CAAC;IAGL,iBAAC;AAAD,CAAC,AAND,CAAyB,KAAK,GAM7B;AANK,UAAA,UAAU,yBAMf,CAAA"}

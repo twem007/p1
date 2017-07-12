@@ -33,14 +33,14 @@ class GameController extends core.Control {
         return ['map','soundMap','animMap'];
     }
 
-    public preShow(data: number):void{
+    protected preShow(data: number):void{
         ExerciseProxy.instance().createMapData(data);
         ExerciseProxy.instance().createBoxData();
         ExerciseProxy.instance().creatPlayerData();
         ExerciseProxy.instance().creatRobotData(1);
     }
 
-    public show(data?: any): void {
+    protected show(data?: any): void {
         let modeData:ExerciseModeData = ExerciseProxy.instance().getData();
         // modeData.goods
         // modeData.player
@@ -88,7 +88,7 @@ class GameController extends core.Control {
         
     }
 
-    public hide(): void {
+    protected hide(): void {
         let map: Map = MapManager.instance().map;
         if (map.parent) {
             map.parent.removeChild(map);

@@ -16,6 +16,7 @@ var MapData = (function (_super) {
     }
     MapData.prototype.update = function (id) {
         this.reset();
+        this.id = id;
         var configs = Config.getConfig(MapCfgConfig);
         this.config = configs.get(id);
         var config = RES.getRes(this.config.mapData + "_json");

@@ -146,15 +146,15 @@ class LoginUI extends core.EUIComponent {
 		SoundViewData.m_pIsSound = parseInt(isSound);
 
 		if (SoundViewData.m_pIsMusic == 1) {
-			core.SoundUtils.getInstance().setBGMValume(parseInt(musicSize) * 0.1);
+			SoundUtils.getInstance().setBGMValume(parseInt(musicSize) * 0.1);
 		} else {
-			core.SoundUtils.getInstance().setBGMValume(0);
+			SoundUtils.getInstance().setBGMValume(0);
 		}
 
 		if (SoundViewData.m_pIsSound == 1) {
-			core.SoundUtils.getInstance().setEffectValume(parseInt(soundSize) * 0.1);
+			SoundUtils.getInstance().setEffectValume(parseInt(soundSize) * 0.1);
 		} else {
-			core.SoundUtils.getInstance().setEffectValume(0);
+			SoundUtils.getInstance().setEffectValume(0);
 		}
 	}
 	/**画质缓存初始化 */
