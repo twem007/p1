@@ -15,51 +15,25 @@
  10. [Lisence](#Lisence)
 
 ## 框架定位：
-> 「做游戏很简单！」
+> 「让做游戏变简单！」
 
 本框架定位于简化游戏流程，提高团队开发效率，目前提供了管理模块间关系，处理底层事务，及松散的工具集合，使开发者专注于游戏本身的逻辑。
 
 ## 框架初始化流程：
-```flow
-st=>start: egretRun
-op1=>operation: Main初始化
-op2=>operation: 框架初始化
-op3=>operation: 初始化显示层
-op4=>operation: 加载配置文件
-op5=>operation: 初始化Controller
-op6=>operation: 初始化完成
-e=>end: 结束
+<p align="center">
+    <img src="./docs/imgs/frame.png">
+</p>
 
-st->op1->op2->op3->op4->op5->op6->e->
-```
 
 ## 模块进入流程：
-```flow
-st=>start: core.EventCenter发送进入模块消息
-op1=>operation: 框架收到进入模块消息
-op2=>operation: 获取要加载的资源组
-cond1=>condition: 是否需要预加载
-op3=>operation: 预加载资源
-op4=>operation: preshow
-e=>end: show
-
-st->op1->op2->cond1
-cond1(no)->op4
-cond1(yes)->op3
-op4->e
-op3->op4
-```
+<p align="center">
+    <img src="./docs/imgs/module_enter.png">
+</p>
 
 ## 模块退出流程：
-```flow
-st=>start: core.EventCenter发送关闭模块消息
-op1=>operation: 框架收到退出模块消息
-e=>end: hide
-
-st->op1->e
-```
-
-收到关闭监听->关闭模块hide
+<p align="center">
+    <img src="./docs/imgs/module_exit.png">
+</p>
 
 ## 文件结构：
 + src
@@ -139,7 +113,7 @@ st->op1->e
 8.	减少频繁的实例化，请使用对象池
 9.	在适当的时候销毁实例化对象及Resource加载的资源
 10.	根据变量的使用频率决定它是否为临时变量
-11.	注意UI与逻辑分离，逻辑与数据分离
+11.	注意UI与逻辑分离，逻辑与数据分离，
 12.	谨慎的选择需要使用的容器类型，显示类尽量从Component和EUIComponent继承
 
 ## 待办事宜：
