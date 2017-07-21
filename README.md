@@ -118,7 +118,7 @@
 
 ## 待办事宜：
 - [ ] 取消模块与Loading间的依赖关系
-- [ ] 完成HTTPAPI和SocketAPI
+- [ ] 完成HTTPAPI和SocketAPI、SoundUtils
 - [ ] 修复框架中的BUG
 - [ ] 常用UI组件的开发
 
