@@ -1,19 +1,69 @@
 # 框架说明
 
-## 定位：
-本框架定位于简化游戏流程，管理模块间关系，处理底层事务，并提供松散的工具集合，使开发者专注于游戏模块内部的逻辑开发。
 
-## 框架流程：
-egretRun->Main->框架初始化->初始化显示层->加载配置文件->初始化Controller->初始化完成，进入模块
+## 目录
 
-## 模块流程：
-init->收到打开监听->获取要加载的资源组->加载完成后显示
+ 1. [框架定位](#框架定位)
+ 2. [框架初始化流程](#框架初始化流程)
+ 3. [模块进入流程](#模块进入流程)
+ 4. [模块退出流程](#模块退出流程)
+ 5. [文件结构](#文件结构)
+ 6. [君子约定](#君子约定)
+ 7. [Egret相关](#Egret相关)
+ 8. [待办事宜](#待办事宜)
+ 9. [代码示例](#代码示例)
+ 10. [Lisence](#Lisence)
+
+## 框架定位：
+> 「做游戏很简单！」
+
+本框架定位于简化游戏流程，提高团队开发效率，目前提供了管理模块间关系，处理底层事务，及松散的工具集合，使开发者专注于游戏本身的逻辑。
+
+## 框架初始化流程：
+```flow
+st=>start: egretRun
+op1=>operation: Main初始化
+op2=>operation: 框架初始化
+op3=>operation: 初始化显示层
+op4=>operation: 加载配置文件
+op5=>operation: 初始化Controller
+op6=>operation: 初始化完成
+e=>end: 结束
+
+st->op1->op2->op3->op4->op5->op6->e->
+```
+
+## 模块进入流程：
+```flow
+st=>start: core.EventCenter发送进入模块消息
+op1=>operation: 框架收到进入模块消息
+op2=>operation: 获取要加载的资源组
+cond1=>condition: 是否需要预加载
+op3=>operation: 预加载资源
+op4=>operation: preshow
+e=>end: show
+
+st->op1->op2->cond1
+cond1(no)->op4
+cond1(yes)->op3
+op4->e
+op3->op4
+```
+
+## 模块退出流程：
+```flow
+st=>start: core.EventCenter发送关闭模块消息
+op1=>operation: 框架收到退出模块消息
+e=>end: hide
+
+st->op1->e
+```
 
 收到关闭监听->关闭模块hide
 
 ## 文件结构：
 + src
-    + core
+    + core                              框架源代码目录
         + com
             + Animation.ts 				动画类
             + Component.ts				显示对象基类
@@ -36,8 +86,8 @@ init->收到打开监听->获取要加载的资源组->加载完成后显示
         + net
             + ByteBuffer.ts				二进制处理类
             + HttpAPI.ts				HTTP协议接口类
-            + MessageData.ts			
-            + ProtoFactory.ts
+            + MessageData.ts			消息体封装
+            + ProtoFactory.ts           ProtoBuff的二次封装
             + SocketAPI.ts				Websocket协议接口类
         + utils
             + Base64.ts					Base64实现
@@ -61,16 +111,16 @@ init->收到打开监听->获取要加载的资源组->加载完成后显示
         + FrameEventCenter.ts			帧循环管理类
         + LayerCenter.ts				层管理类
         + TimerManager.ts				Timer管理类
-    + game
-+ resource
+    + game                              游戏源代码目录
++ resource                              游戏资源目录
     + assets
     + skins
-+ thirdparty
++ thirdparty                            第三方库目录
     + jszip
     + protobuf
 
 ## 君子约定：
-1.  TS文件统一首字母大写，文件名不宜过长，尽量在单个文件内写一个类，内部类及只有当前类引用的类可以写在同一文件内
+1.  类文件及类名统一首字母大写，文件名不宜过长，尽量在单个文件内写一个类，只有当前类引用的类和枚举可以写在同一文件内
 2.  资源文件统一小写
 3.  给接口名称加上大写字母I做为前缀，表示该类型为接口类型
 4.	成员变量以m_开头
@@ -79,18 +129,24 @@ init->收到打开监听->获取要加载的资源组->加载完成后显示
 7.  常量及静态公共变量所有单词大写
 
 ## Egret相关：
-1.	禁止随意向可显示对象添加Enterframe事件监听
-2.	禁止随意new Timer
+1.	通过FrameEventCenter替代帧循环监听
+2.	通过TimerManager替代new Timer
 3.	尽量用序列帧代替透明度渐变及遮罩实现的动画
 4.	少用get、set语法糖，如需使用子类在调用父类的get、set需采用egret自身封装的方法
 5.	图片资源尽量合并为大图
 6.	文本文件采用zip压缩
 7.	常用UI面板关闭时尽量缓存
 8.	减少频繁的实例化，请使用对象池
-9.	在适当的时候销毁实例化对象，Resource加载的资源，AssetBundle资源
+9.	在适当的时候销毁实例化对象及Resource加载的资源
 10.	根据变量的使用频率决定它是否为临时变量
-11.	UI和逻辑分离
-12.	谨慎的选择需要使用的容器类型
+11.	注意UI与逻辑分离，逻辑与数据分离
+12.	谨慎的选择需要使用的容器类型，显示类尽量从Component和EUIComponent继承
+
+## 待办事宜：
+- [ ] 取消模块与Loading间的依赖关系
+- [ ] 完成HTTPAPI和SocketAPI
+- [ ] 修复框架中的BUG
+- [ ] 常用UI组件的开发
 
 ## 代码示例：
 
@@ -135,7 +191,7 @@ class Main extends core.EUILayer {
         //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
         let theme = new eui.Theme("resource/default.thm.json", this.stage);
         theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
-
+        //加载preload资源组
         core.ResUtils.loadGroups(['preload'], this.onResourceProgress, this.onResourceLoadError, this.onResourceLoadComplete, this);
     }
 
@@ -231,3 +287,7 @@ class LoginController extends core.Control {
 	}
 }
 ```
+## Lisence
+[MIT][1]
+
+[1]: http://opensource.org/licenses/mit-license.html
