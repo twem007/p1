@@ -1,7 +1,7 @@
 module core {
 	/**
-	 *	框架GIT地址：https://github.com/twem007/p1
-	 * @author yuxuefeng
+	 *
+	 * @author 
 	 *
 	 */
 	export class Core {
@@ -11,6 +11,7 @@ module core {
 
 		public static run(stage: egret.Stage): void {
 			Log(`框架GIT地址：https://github.com/twem007/p1`);
+			egret.ImageLoader.crossOrigin = 'anonymous';
 			core.FrameEventCenter.getInstance().init(stage);
 			core.LayerCenter.getInstance().init(stage);
 			if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {

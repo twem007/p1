@@ -33,7 +33,7 @@ class HttpAPI {
      * @param onIOError     请求失败回调
      * @param thisObj       this目标
      */
-    public static HttpPOST(path: string, data: any, onComplete: Function, onIOError: Function, thisObj: any): void {
+    public static HttpPOST(path: string, data: any, onComplete: (event: egret.Event) => void, onIOError: (event: egret.IOErrorEvent) => void, thisObj: any): void {
         let request: egret.HttpRequest = new egret.HttpRequest();
         request.responseType = egret.HttpResponseType.TEXT;
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');

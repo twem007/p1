@@ -33,6 +33,7 @@ module core {
                 }
                 core.ResUtils.loadGroups(groups, this.onLoadProgress, this.onLoadFaild, this.onLoadComplete, this);
             } else {
+                this.preShow(this.m_data);
                 this.show(this.m_data);
             }
         }
