@@ -23,10 +23,10 @@ module core {
                     data.protocol = messageID;
                     return data;
                 } else {
-                    Log(`ProtoBuf协议：${messageID} 在Proto文件中不存在`);
+                    egret.log(`ProtoBuf协议：${messageID} 在Proto文件中不存在`);
                 }
             } else {
-                Log(`ProtoBuf协议尚未初始化`);
+                egret.log(`ProtoBuf协议尚未初始化`);
             }
             return null;
         }
@@ -37,7 +37,7 @@ module core {
             if (ProtoFactory.s_protoBuff) {
                 return ProtoFactory.s_protoBuff.build(name);
             } else {
-                Log(`ProtoBuf协议尚未初始化`);
+                egret.log(`ProtoBuf协议尚未初始化`);
             }
             return null;
         }
@@ -51,10 +51,10 @@ module core {
                     let data: any = new dataClass();
                     return data;
                 } else {
-                    Log(`ProtoBuf数据结构：${name} 在Proto文件中不存在`);
+                    egret.log(`ProtoBuf数据结构：${name} 在Proto文件中不存在`);
                 }
             } else {
-                Log(`ProtoBuf协议尚未初始化`);
+                egret.log(`ProtoBuf协议尚未初始化`);
             }
             return null;
         }
@@ -67,10 +67,10 @@ module core {
                 if (dataClass) {
                     return dataClass.decode(buffer);
                 } else {
-                    Log(`ProtoBuf协议：${messageID} 在Proto文件中不存在`);
+                    egret.log(`ProtoBuf协议：${messageID} 在Proto文件中不存在`);
                 }
             } else {
-                Log(`ProtoBuf协议尚未初始化`);
+                egret.log(`ProtoBuf协议尚未初始化`);
             }
             return null;
         }

@@ -34,7 +34,7 @@ var core;
                         data.callback.call(data.thisObj, data.clone());
                         var t1 = egret.getTimer();
                         if (t1 - t > 2) {
-                            Log("tick\u56DE\u8C03\u8017\u65F6:" + (t1 - t));
+                            egret.log("tick\u56DE\u8C03\u8017\u65F6:" + (t1 - t));
                         }
                     }
                     if (data.count == data.maxCount) {

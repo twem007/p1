@@ -56,7 +56,7 @@ class MapData extends BaseData {
                 }
             }
         } else {
-            Log(`地图配置${this.config.mapData}_json不存在`);
+            egret.log(`地图配置${this.config.mapData}_json不存在`);
         }
     }
 

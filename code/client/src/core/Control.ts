@@ -72,7 +72,7 @@ module core {
          * 加载失败
          */
         private onLoadFaild(data: core.GroupData): void {
-            Log(`资源组${data.curGroup}加载失败, 失败URL：${data.curResItem.url}`);
+            egret.log(`资源组${data.curGroup}加载失败, 失败URL：${data.curResItem.url}`);
         }
         /**
          * 加载完成

@@ -47,7 +47,7 @@ var MapData = (function (_super) {
             }
         }
         else {
-            Log("\u5730\u56FE\u914D\u7F6E" + this.config.mapData + "_json\u4E0D\u5B58\u5728");
+            egret.log("\u5730\u56FE\u914D\u7F6E" + this.config.mapData + "_json\u4E0D\u5B58\u5728");
         }
     };
     MapData.prototype.getBirthCell = function (teamID) {

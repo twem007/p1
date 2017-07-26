@@ -86,7 +86,7 @@ var core;
                     }
                 }
                 else {
-                    Log("事件ID:" + event_1.messageID + "无监听回调");
+                    egret.log("事件ID:" + event_1.messageID + "无监听回调");
                 }
             }
         };

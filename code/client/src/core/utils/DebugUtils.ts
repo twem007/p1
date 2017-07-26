@@ -22,7 +22,3 @@ module core {
 		}
 	}
 }
-
-function Log(message: any, isLocal: boolean = false): void {
-	egret.log(message);
-}

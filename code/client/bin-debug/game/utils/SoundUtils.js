@@ -38,7 +38,7 @@ var SoundUtils = (function () {
             this.stopSound(config.coverKey.toString());
         }
         else {
-            Log("ID\u4E3A" + id + "\u7684\u97F3\u6548\u5728SoundConfig\u4E2D\u4E0D\u5B58\u5728");
+            egret.log("ID\u4E3A" + id + "\u7684\u97F3\u6548\u5728SoundConfig\u4E2D\u4E0D\u5B58\u5728");
             return;
         }
         var sound = this.m_sounds[id];
@@ -58,7 +58,7 @@ var SoundUtils = (function () {
                 channel = sound.play(0, loop);
             }
             catch (e) {
-                Log("ID\u4E3A" + id + "\u7684\u97F3\u4E50\u64AD\u653E\u5931\u8D25");
+                egret.log("ID\u4E3A" + id + "\u7684\u97F3\u4E50\u64AD\u653E\u5931\u8D25");
                 delete this.m_playChannel[config.coverKey.toString()];
                 return;
             }
@@ -78,7 +78,7 @@ var SoundUtils = (function () {
             this.m_channels[sound.hashCode.toString()] = channel;
         }
         else {
-            Log("\u540D\u79F0\u4E3A" + config.soundName + "\u7684\u97F3\u6548\u8D44\u6E90\u4E0D\u5B58\u5728");
+            egret.log("\u540D\u79F0\u4E3A" + config.soundName + "\u7684\u97F3\u6548\u8D44\u6E90\u4E0D\u5B58\u5728");
             return;
         }
     };
@@ -126,7 +126,7 @@ var SoundUtils = (function () {
                 channel.stop();
             }
             catch (e) {
-                Log("\u505C\u6B62\u64AD\u653E\u97F3\u4E50\u5931\u8D25");
+                egret.log("\u505C\u6B62\u64AD\u653E\u97F3\u4E50\u5931\u8D25");
             }
             if (channel.hasEventListener(egret.Event.SOUND_COMPLETE)) {
                 channel.removeEventListener(egret.Event.SOUND_COMPLETE, this.onPlayComplete, this);
@@ -152,7 +152,7 @@ var SoundUtils = (function () {
                         channel.volume = volume;
                     }
                     catch (e) {
-                        Log("\u80CC\u666F\u97F3\u4E50\u97F3\u91CF\u8BBE\u7F6E\u5931\u8D25");
+                        egret.log("\u80CC\u666F\u97F3\u4E50\u97F3\u91CF\u8BBE\u7F6E\u5931\u8D25");
                     }
                 }
             }
@@ -180,7 +180,7 @@ var SoundUtils = (function () {
                         channel.volume = volume;
                     }
                     catch (e) {
-                        Log("\u97F3\u6548\u97F3\u91CF\u8BBE\u7F6E\u5931\u8D25");
+                        egret.log("\u97F3\u6548\u97F3\u91CF\u8BBE\u7F6E\u5931\u8D25");
                     }
                 }
             }

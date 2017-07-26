@@ -30,7 +30,7 @@ var core;
                 this.m_stage.addEventListener(egret.Event.ENTER_FRAME, this.onEnterFrame, this);
             }
             else {
-                Log('Stage为null不能开启帧循环监听');
+                egret.log('Stage为null不能开启帧循环监听');
             }
         };
         FrameEventCenter.prototype.onEnterFrame = function (event) {

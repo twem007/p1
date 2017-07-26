@@ -31,6 +31,8 @@ class Main extends core.EUILayer {
 
     protected createChildren(): void {
         super.createChildren();
+        //debug等级
+        egret.Logger.logLevel = egret.Logger.OFF;
         core.Core.run(this.stage);
         core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_BG, new TileLayer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_EFFECT, new core.Layer());
@@ -101,7 +103,7 @@ class Main extends core.EUILayer {
      */
     private onResourceLoadError(data: core.GroupData): void {
         //TODO
-        Log("Group:" + data.curGroup + " has failed to load");
+        egret.log("Group:" + data.curGroup + " has failed to load");
     }
     /**
      * preload资源组加载完成

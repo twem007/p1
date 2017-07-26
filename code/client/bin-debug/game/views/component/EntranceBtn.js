@@ -16,7 +16,6 @@ var EntranceBtn = (function (_super) {
     }
     EntranceBtn.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
-        Log('创建新对象');
     };
     return EntranceBtn;
 }(eui.Component));

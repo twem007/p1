@@ -68,7 +68,7 @@ var core;
          * 加载失败
          */
         Control.prototype.onLoadFaild = function (data) {
-            Log("\u8D44\u6E90\u7EC4" + data.curGroup + "\u52A0\u8F7D\u5931\u8D25, \u5931\u8D25URL\uFF1A" + data.curResItem.url);
+            egret.log("\u8D44\u6E90\u7EC4" + data.curGroup + "\u52A0\u8F7D\u5931\u8D25, \u5931\u8D25URL\uFF1A" + data.curResItem.url);
         };
         /**
          * 加载完成

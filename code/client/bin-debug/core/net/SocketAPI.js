@@ -46,15 +46,15 @@ var core;
             }
         };
         SocketAPI.prototype.onIOError = function (event) {
-            Log("与Socket服务器链接失败");
+            egret.log("与Socket服务器链接失败");
             core.EventCenter.getInstance().sendEvent(new core.EventData(core.EventID.SOCKET_IOERROR));
         };
         SocketAPI.prototype.onClosed = function (event) {
-            Log("与Socket服务器断开链接");
+            egret.log("与Socket服务器断开链接");
             core.EventCenter.getInstance().sendEvent(new core.EventData(core.EventID.SOCKET_CLOSE));
         };
         SocketAPI.prototype.flushToServer = function () {
-            Log("flush数据到Socket服务器");
+            egret.log("flush数据到Socket服务器");
             this.m_socket.writeBytes(this.m_sendBuffer);
             this.m_socket.flush();
             this.m_sendBuffer.clear();

@@ -44,6 +44,8 @@ var Main = (function (_super) {
     }
     Main.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
+        //debug等级
+        egret.Logger.logLevel = egret.Logger.OFF;
         core.Core.run(this.stage);
         core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_BG, new TileLayer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_EFFECT, new core.Layer());
@@ -106,7 +108,7 @@ var Main = (function (_super) {
      */
     Main.prototype.onResourceLoadError = function (data) {
         //TODO
-        Log("Group:" + data.curGroup + " has failed to load");
+        egret.log("Group:" + data.curGroup + " has failed to load");
     };
     /**
      * preload资源组加载完成

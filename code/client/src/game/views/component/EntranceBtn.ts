@@ -13,6 +13,5 @@ class EntranceBtn extends eui.Component {
 	public m_pMarkRedDot: eui.Image;
 	protected createChildren() {
 		super.createChildren();
-		Log('创建新对象');
 	}
 }

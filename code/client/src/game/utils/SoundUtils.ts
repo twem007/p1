@@ -63,7 +63,7 @@ class SoundUtils {
         if (config) {
             this.stopSound(config.coverKey.toString());
         } else {
-            Log(`ID为${id}的音效在SoundConfig中不存在`);
+            egret.log(`ID为${id}的音效在SoundConfig中不存在`);
             return;
         }
         let sound: egret.Sound = this.m_sounds[id];
@@ -82,7 +82,7 @@ class SoundUtils {
             try {
                 channel = sound.play(0, loop);
             } catch (e) {
-                Log(`ID为${id}的音乐播放失败`);
+                egret.log(`ID为${id}的音乐播放失败`);
                 delete this.m_playChannel[config.coverKey.toString()];
                 return;
             }
@@ -100,7 +100,7 @@ class SoundUtils {
             channel.addEventListener(egret.Event.SOUND_COMPLETE, this.onPlayComplete, this);
             this.m_channels[sound.hashCode.toString()] = channel;
         } else {
-            Log(`名称为${config.soundName}的音效资源不存在`);
+            egret.log(`名称为${config.soundName}的音效资源不存在`);
             return;
         }
     }
@@ -147,7 +147,7 @@ class SoundUtils {
             try {
                 channel.stop();
             } catch (e) {
-                Log(`停止播放音乐失败`);
+                egret.log(`停止播放音乐失败`);
             }
             if (channel.hasEventListener(egret.Event.SOUND_COMPLETE)) {
                 channel.removeEventListener(egret.Event.SOUND_COMPLETE, this.onPlayComplete, this);
@@ -172,7 +172,7 @@ class SoundUtils {
                     try {
                         channel.volume = volume;
                     } catch (e) {
-                        Log(`背景音乐音量设置失败`)
+                        egret.log(`背景音乐音量设置失败`)
                     }
                 }
             }
@@ -199,7 +199,7 @@ class SoundUtils {
                     try {
                         channel.volume = volume;
                     } catch (e) {
-                        Log(`音效音量设置失败`);
+                        egret.log(`音效音量设置失败`);
                     }
                 }
             }

@@ -10,7 +10,6 @@ var core;
 (function (core) {
     /**
      * EUIComponent为EUI容器组件，该容器自动关注添加到舞台和从舞台移除事件
-     * addListener自动关注了舞台变化事件，removeListener
      *
      */
     var EUIComponent = (function (_super) {

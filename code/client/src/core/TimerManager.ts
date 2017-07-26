@@ -31,7 +31,7 @@ module core {
                         data.callback.call(data.thisObj, data.clone());
                         let t1: number = egret.getTimer();
                         if (t1 - t > 2) {
-                            Log(`tick回调耗时:${t1 - t}`);
+                            egret.log(`tick回调耗时:${t1 - t}`);
                         }
                     }
                     if (data.count == data.maxCount) {

@@ -84,7 +84,7 @@ module core {
                         data.callback.call(data.thisObj, event);
                     }
                 } else {
-                    Log("事件ID:" + event.messageID + "无监听回调");
+                    egret.log("事件ID:" + event.messageID + "无监听回调");
                 }
             }
         }

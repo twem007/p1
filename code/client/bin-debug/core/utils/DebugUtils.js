@@ -29,8 +29,4 @@ var core;
     core.DebugUtils = DebugUtils;
     __reflect(DebugUtils.prototype, "core.DebugUtils");
 })(core || (core = {}));
-function Log(message, isLocal) {
-    if (isLocal === void 0) { isLocal = false; }
-    egret.log(message);
-}
 //# sourceMappingURL=DebugUtils.js.map

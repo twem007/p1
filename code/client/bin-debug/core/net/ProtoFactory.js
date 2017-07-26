@@ -24,11 +24,11 @@ var core;
                     return data;
                 }
                 else {
-                    Log("ProtoBuf\u534F\u8BAE\uFF1A" + messageID + " \u5728Proto\u6587\u4EF6\u4E2D\u4E0D\u5B58\u5728");
+                    egret.log("ProtoBuf\u534F\u8BAE\uFF1A" + messageID + " \u5728Proto\u6587\u4EF6\u4E2D\u4E0D\u5B58\u5728");
                 }
             }
             else {
-                Log("ProtoBuf\u534F\u8BAE\u5C1A\u672A\u521D\u59CB\u5316");
+                egret.log("ProtoBuf\u534F\u8BAE\u5C1A\u672A\u521D\u59CB\u5316");
             }
             return null;
         };
@@ -40,7 +40,7 @@ var core;
                 return ProtoFactory.s_protoBuff.build(name);
             }
             else {
-                Log("ProtoBuf\u534F\u8BAE\u5C1A\u672A\u521D\u59CB\u5316");
+                egret.log("ProtoBuf\u534F\u8BAE\u5C1A\u672A\u521D\u59CB\u5316");
             }
             return null;
         };
@@ -55,11 +55,11 @@ var core;
                     return data;
                 }
                 else {
-                    Log("ProtoBuf\u6570\u636E\u7ED3\u6784\uFF1A" + name + " \u5728Proto\u6587\u4EF6\u4E2D\u4E0D\u5B58\u5728");
+                    egret.log("ProtoBuf\u6570\u636E\u7ED3\u6784\uFF1A" + name + " \u5728Proto\u6587\u4EF6\u4E2D\u4E0D\u5B58\u5728");
                 }
             }
             else {
-                Log("ProtoBuf\u534F\u8BAE\u5C1A\u672A\u521D\u59CB\u5316");
+                egret.log("ProtoBuf\u534F\u8BAE\u5C1A\u672A\u521D\u59CB\u5316");
             }
             return null;
         };
@@ -73,11 +73,11 @@ var core;
                     return dataClass.decode(buffer);
                 }
                 else {
-                    Log("ProtoBuf\u534F\u8BAE\uFF1A" + messageID + " \u5728Proto\u6587\u4EF6\u4E2D\u4E0D\u5B58\u5728");
+                    egret.log("ProtoBuf\u534F\u8BAE\uFF1A" + messageID + " \u5728Proto\u6587\u4EF6\u4E2D\u4E0D\u5B58\u5728");
                 }
             }
             else {
-                Log("ProtoBuf\u534F\u8BAE\u5C1A\u672A\u521D\u59CB\u5316");
+                egret.log("ProtoBuf\u534F\u8BAE\u5C1A\u672A\u521D\u59CB\u5316");
             }
             return null;
         };
