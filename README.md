@@ -123,11 +123,14 @@
 12.	谨慎的选择需要使用的容器类型，显示类尽量从Component和EUIComponent继承
 
 ## 待办事宜：
-- [X] 取消模块与Loading间的依赖关系
-- [ ] 完成HTTPAPI和SocketAPI、SoundUtils
-- [ ] 修复框架中的BUG
+- [X] 为进行中
+- [ ] 为未开始
+***********************************
+- [X] 完成HTTPAPI和SocketAPI、SoundUtils
+- [ ] 添加EventCenter分块管理
 - [ ] 常用UI组件的开发
 - [ ] 基本配置表模版及相关工具的开发
+- [ ] 修复框架中的BUG
 
 ## 代码示例：
 
