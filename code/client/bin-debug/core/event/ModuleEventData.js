@@ -10,10 +10,9 @@ var core;
 (function (core) {
     var ModuleEventData = (function (_super) {
         __extends(ModuleEventData, _super);
-        function ModuleEventData(messageID, moduleEnum, preModule, data) {
+        function ModuleEventData(messageID, moduleEnum, data) {
             var _this = _super.call(this, messageID, data) || this;
             _this.moduleEnum = moduleEnum;
-            _this.preModule = preModule;
             return _this;
         }
         return ModuleEventData;

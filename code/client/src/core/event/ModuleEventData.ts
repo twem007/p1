@@ -3,12 +3,9 @@ module core {
 
         public moduleEnum: number;
 
-        public preModule: number;
-
-        constructor(messageID: string, moduleEnum: number, preModule?: number, data?: any) {
+        constructor(messageID: string, moduleEnum: number, data?: any) {
             super(messageID, data);
             this.moduleEnum = moduleEnum;
-            this.preModule = preModule;
         }
     }
 }

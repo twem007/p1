@@ -11,8 +11,8 @@ var __extends = (this && this.__extends) || function (d, b) {
  */
 var LoginController = (function (_super) {
     __extends(LoginController, _super);
-    function LoginController(loadingUI) {
-        return _super.call(this, ModuleEnum.LOGIN, loadingUI) || this;
+    function LoginController() {
+        return _super.call(this, ModuleEnum.LOGIN) || this;
     }
     /**
      * 预加载资源组

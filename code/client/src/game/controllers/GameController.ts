@@ -1,7 +1,7 @@
 class GameController extends core.Control {
 
-    constructor(loadingUI: core.ILoadingUI) {
-        super(ModuleEnum.GAME, loadingUI);
+    constructor() {
+        super(ModuleEnum.GAME);
     }
 
     public getLoadGroup(data?: any): string[] {
@@ -30,7 +30,7 @@ class GameController extends core.Control {
         if (keyArr.length > 0) {
             RES.createGroup('map', keyArr);
         }
-        return ['map', 'soundMap', 'animMap'];
+        return ['map', 'soundMap'];
     }
 
     protected preShow(data: number): void {

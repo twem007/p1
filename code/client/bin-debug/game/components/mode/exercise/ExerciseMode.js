@@ -5,7 +5,7 @@ var ExerciseMode = (function () {
     function ExerciseMode() {
     }
     ExerciseMode.prototype.enter = function () {
-        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.GAME, ModuleEnum.NONE, 101));
+        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.GAME, 101));
     };
     ExerciseMode.prototype.onGetInfo = function (data) {
     };

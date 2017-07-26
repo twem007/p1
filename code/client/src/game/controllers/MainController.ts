@@ -2,8 +2,8 @@
  * 主界面控制器
  */
 class MainController extends core.Control {
-	public constructor(loadingUI: core.ILoadingUI) {
-		super(ModuleEnum.MAINUI, loadingUI);
+	public constructor() {
+		super(ModuleEnum.MAINUI);
 	}
 	private m_pMainUI: MainUI;
 	/**

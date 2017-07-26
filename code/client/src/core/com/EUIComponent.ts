@@ -1,5 +1,11 @@
 module core {
-    export class EUIComponent extends eui.Component {
+    /**
+     * EUIComponent为EUI容器组件，该容器自动关注添加到舞台和从舞台移除事件
+     * addListener自动关注了舞台变化事件，removeListener
+     * 
+     */
+    export class EUIComponent extends eui.Component implements IComponent {
+        
         constructor() {
             super();
             this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onShow, this);
@@ -11,7 +17,6 @@ module core {
          */
         protected onShow(event?: egret.Event): void {
             this.addListener();
-            this.onAdaptive();
         }
 
         protected onHide(event?: egret.Event): void {
@@ -21,21 +26,12 @@ module core {
          * 添加监听
          */
         protected addListener(): void {
-            core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
         }
 
         /**
          * 删除监听
          */
         protected removeListener(): void {
-            core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
-        }
-
-        /**
-         * 自适应显示
-         */
-        public onAdaptive(): void {
-
         }
 
         /**

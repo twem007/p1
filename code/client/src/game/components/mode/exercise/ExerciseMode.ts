@@ -7,7 +7,7 @@ class ExerciseMode implements IGameMode {
     }
 
     public enter(): void {
-        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.GAME, ModuleEnum.NONE, 101));
+        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.GAME, 101));
     }
 
     private onGetInfo(data:any):void{

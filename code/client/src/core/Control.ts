@@ -1,18 +1,22 @@
 module core {
 	/**
-	 *    此为模块入口 除release()外都为底层自动调用
+	 *  此为模块入口 除release()外都为底层自动调用
+     *    
 	 * @author yuxuefeng
 	 * 
 	 */
     export abstract class Control {
-
-        private m_loadingUI: core.ILoadingUI;
-        private m_data: EventData;
+        /**
+         * 进入模块传入数据
+         */
+        protected p_data: any;
+        /**
+         * 当前模块
+         */
         protected p_moduleName: number;
 
-        public constructor(moduleName: number, loadingUI: core.ILoadingUI) {
+        public constructor(moduleName: number) {
             this.p_moduleName = moduleName;
-            this.m_loadingUI = loadingUI;
             this.init();
         }
         /**
@@ -26,15 +30,16 @@ module core {
          * 预加载
          */
         private preload(): void {
-            let groups: string[] = this.getLoadGroup(this.m_data);
+            let groups: string[] = this.getLoadGroup(this.p_data);
             if (groups && groups.length > 0) {
-                if (this.m_loadingUI) {
-                    this.m_loadingUI.show();
+                let loading: core.ILoadingUI = LoadingManager.getCurLoading();
+                if (loading) {
+                    loading.show();
                 }
                 core.ResUtils.loadGroups(groups, this.onLoadProgress, this.onLoadFaild, this.onLoadComplete, this);
             } else {
-                this.preShow(this.m_data);
-                this.show(this.m_data);
+                this.preShow(this.p_data);
+                this.show(this.p_data);
             }
         }
         /**
@@ -42,7 +47,7 @@ module core {
          */
         private onModuleShow(data: ModuleEventData): void {
             if (this.p_moduleName === data.moduleEnum) {
-                this.m_data = data.messageData;
+                this.p_data = data.messageData;
                 this.preload();
             }
         }
@@ -58,8 +63,9 @@ module core {
          * 加载进度
          */
         private onLoadProgress(data: core.GroupData): void {
-            if (this.m_loadingUI) {
-                this.m_loadingUI.setProgress(data);
+            let loading: core.ILoadingUI = LoadingManager.getCurLoading();
+            if (loading) {
+                loading.setProgress(data);
             }
         }
         /**
@@ -72,11 +78,12 @@ module core {
          * 加载完成
          */
         private onLoadComplete(data: core.GroupData): void {
-            this.preShow(this.m_data);
-            if (this.m_loadingUI) {
-                this.m_loadingUI.hide();
+            this.preShow(this.p_data);
+            let loading: core.ILoadingUI = LoadingManager.getCurLoading();
+            if (loading) {
+                loading.hide();
             }
-            this.show(this.m_data);
+            this.show(this.p_data);
         }
         /**
          * 预加载资源组

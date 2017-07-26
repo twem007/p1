@@ -2,8 +2,8 @@
  * 登录界面控制器
  */
 class LoginController extends core.Control {
-	public constructor(loadingUI: core.ILoadingUI) {
-		super(ModuleEnum.LOGIN, loadingUI);
+	public constructor() {
+		super(ModuleEnum.LOGIN);
 	}
 	private m_pLoginUI: LoginUI;
 	/**

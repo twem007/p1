@@ -8,6 +8,11 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var core;
 (function (core) {
+    /**
+     * EUIComponent为EUI容器组件，该容器自动关注添加到舞台和从舞台移除事件
+     * addListener自动关注了舞台变化事件，removeListener
+     *
+     */
     var EUIComponent = (function (_super) {
         __extends(EUIComponent, _super);
         function EUIComponent() {
@@ -21,7 +26,6 @@ var core;
          */
         EUIComponent.prototype.onShow = function (event) {
             this.addListener();
-            this.onAdaptive();
         };
         EUIComponent.prototype.onHide = function (event) {
             this.removeListener();
@@ -30,18 +34,11 @@ var core;
          * 添加监听
          */
         EUIComponent.prototype.addListener = function () {
-            core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
         };
         /**
          * 删除监听
          */
         EUIComponent.prototype.removeListener = function () {
-            core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
-        };
-        /**
-         * 自适应显示
-         */
-        EUIComponent.prototype.onAdaptive = function () {
         };
         /**
          * 释放资源
@@ -57,6 +54,6 @@ var core;
         return EUIComponent;
     }(eui.Component));
     core.EUIComponent = EUIComponent;
-    __reflect(EUIComponent.prototype, "core.EUIComponent");
+    __reflect(EUIComponent.prototype, "core.EUIComponent", ["core.IComponent"]);
 })(core || (core = {}));
 //# sourceMappingURL=EUIComponent.js.map

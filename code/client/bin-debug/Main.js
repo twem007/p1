@@ -59,8 +59,7 @@ var Main = (function (_super) {
         core.LayerCenter.getInstance().addLayer(LayerEnum.TOP, new core.Layer());
         //Config loading process interface
         //设置加载进度界面
-        this.loadingView = new PreLoadingUI();
-        this.loadingView.show();
+        core.LoadingManager.getLoading(PreLoadingUI).show();
         // initialize the Resource loading library
         //初始化Resource资源加载库
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
@@ -90,7 +89,7 @@ var Main = (function (_super) {
     };
     Main.prototype.createScene = function () {
         if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
-            this.loadingView = new MainLoadingUI();
+            core.LoadingManager.setCurLoading(MainLoadingUI);
             this.initController();
             core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
         }
@@ -99,7 +98,7 @@ var Main = (function (_super) {
      * 资源组加载进度
      */
     Main.prototype.onResourceProgress = function (data) {
-        this.loadingView.setProgress(data);
+        core.LoadingManager.getLoading(PreLoadingUI).setProgress(data);
     };
     /**
      * 资源组加载出错
@@ -114,8 +113,8 @@ var Main = (function (_super) {
      */
     Main.prototype.onResourceLoadComplete = function (data) {
         if (data.curGroup == 'preload') {
+            core.LoadingManager.getLoading(PreLoadingUI).hide();
             Config.init(RES.getRes('config_zip'));
-            this.loadingView.hide();
             this.isResourceLoadEnd = true;
             this.createScene();
         }
@@ -124,9 +123,9 @@ var Main = (function (_super) {
      * 初始化控制器
      */
     Main.prototype.initController = function () {
-        new GameController(this.loadingView);
-        new LoginController(this.loadingView);
-        new MainController(this.loadingView);
+        new GameController();
+        new LoginController();
+        new MainController();
     };
     return Main;
 }(core.EUILayer));

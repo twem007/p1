@@ -8,8 +8,8 @@ var __extends = (this && this.__extends) || function (d, b) {
 };
 var GameController = (function (_super) {
     __extends(GameController, _super);
-    function GameController(loadingUI) {
-        return _super.call(this, ModuleEnum.GAME, loadingUI) || this;
+    function GameController() {
+        return _super.call(this, ModuleEnum.GAME) || this;
     }
     GameController.prototype.getLoadGroup = function (data) {
         var configs = Config.getConfig(MapCfgConfig);
@@ -37,7 +37,7 @@ var GameController = (function (_super) {
         if (keyArr.length > 0) {
             RES.createGroup('map', keyArr);
         }
-        return ['map', 'soundMap', 'animMap'];
+        return ['map', 'soundMap'];
     };
     GameController.prototype.preShow = function (data) {
         ExerciseProxy.instance().createMapData(data);
