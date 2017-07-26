@@ -13,14 +13,18 @@ var core;
         function EUIComponent() {
             var _this = _super.call(this) || this;
             _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onShow, _this);
+            _this.addEventListener(egret.Event.REMOVED_FROM_STAGE, _this.onHide, _this);
             return _this;
         }
         /**
          * 显示
          */
-        EUIComponent.prototype.onShow = function () {
+        EUIComponent.prototype.onShow = function (event) {
             this.addListener();
             this.onAdaptive();
+        };
+        EUIComponent.prototype.onHide = function (event) {
+            this.removeListener();
         };
         /**
          * 添加监听
@@ -40,10 +44,12 @@ var core;
         EUIComponent.prototype.onAdaptive = function () {
         };
         /**
-         * 隐藏显示
+         * 释放资源
          */
-        EUIComponent.prototype.hide = function () {
-            this.removeListener();
+        EUIComponent.prototype.release = function () {
+            this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onShow, this);
+            this.removeEventListener(egret.Event.REMOVED_FROM_STAGE, this.onHide, this);
+            this.onHide();
             if (this.parent) {
                 this.parent.removeChild(this);
             }

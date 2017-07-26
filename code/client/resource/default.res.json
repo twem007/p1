@@ -5,12 +5,8 @@
 			"name": "preload"
 		},
 		{
-			"keys": "mainBoomUI_json,loading_bg_2_jpg",
+			"keys": "mainBoomUI_json,loading_bg_2_jpg,main_bg_jpg",
 			"name": "mainUI"
-		},
-		{
-			"keys": "combatBoomUI_json,combatBoomUI2_json,combatBoomUI3_json,roundEndUI_json",
-			"name": "combatUI"
 		},
 		{
 			"keys": "main_1_mp3,popup_mp3,select_button_mp3,set_success_mp3",
@@ -23,41 +19,14 @@
 		{
 			"keys": "loading_png,loading_json",
 			"name": "animUI"
-		},
-		{
-			"keys": "speedProp_png,speedProp_json,shieldProp_png,shieldProp_json,powerProp_png,powerProp_json,pop_png,pop_json,playerBoomAnim_png,playerBoomAnim_json,needleProp_png,needleProp_json,invincible_png,invincible_json,fire_tail_effect_png,fire_tail_effect_json,box_blink_png,box_blink_json,bombProp_png,bombProp_json,bomb_png,bomb_json,bomb_power_png,bomb_power_json,bomb_other_png,bomb_other_json",
-			"name": "animMap"
 		}
 	],
 	"resources": [
-		{
-			"url": "assets/proto/game.proto",
-			"type": "bin",
-			"name": "game_proto"
-		},
 		{
 			"url": "assets/eui/mainBoomUI.json",
 			"type": "sheet",
 			"name": "mainBoomUI_json",
 			"subkeys": "main_RankFaceBg,main_btnBg,main_decorate1,main_decorate2,main_entranceBg,main_entranceBtn1,main_entranceBtn2,main_entranceBtn3,main_entranceBtn4,main_entranceBtn5,main_entranceBtn6,main_entranceBtn7,main_face,main_linkBg,main_linkImg1,main_linkImg2,main_linkImg3,main_lvBg,main_modleBtn1,main_modleBtn1hui,main_playerBg,main_playerMsgBg,main_playerPro,main_playerProBg,main_rankBg,main_rankFont,mian_font1,mian_font2,mian_font3,mian_font4,mian_lockFont"
-		},
-		{
-			"url": "assets/eui/combatBoomUI.json",
-			"type": "sheet",
-			"name": "combatBoomUI_json",
-			"subkeys": "combatBoom_BgRound,combatBoom_Bg_01,combatBoom_Bg_02,combatBoom_Bg_05,combatBoom_Bg_06,combatBoom_deuceFont,combatBoom_deuceImg,combatBoom_endFont_01,combatBoom_endFont_02,combatBoom_endFont_03,combatBoom_endFont_04,combatBoom_endFont_05,combatBoom_faceIcon_blue,combatBoom_faceIcon_dead,combatBoom_faceIcon_deadX,combatBoom_faceIcon_red,combatBoom_fceBg_01,combatBoom_fceBg_02,combatBoom_lostFont,combatBoom_lostImg,combatBoom_maohao,combatBoom_mengHei,combatBoom_queIcon,combatBoom_seeBg,combatBoom_seeFont,combatBoom_seeImg,combatBoom_seePoint,combatBoom_skillMask_0,combatBoom_skillStop,combatBoom_teamFont_start,combatBoom_teamFont_wait,combatBoom_winBg_01,combatBoom_winBg_blue,combatBoom_winBg_red,combatBoom_winCup,combatBoom_winFont,combat_roundFont_01,combat_roundFont_02,combat_roundFont_03,combat_roundFont_04,combat_roundFont_05"
-		},
-		{
-			"url": "assets/eui/combatBoomUI2.json",
-			"type": "sheet",
-			"name": "combatBoomUI2_json",
-			"subkeys": "combatBoom_TeamBlueArr,combatBoom_TeamRedArr,combatBoom_bgBoomNum_01,combatBoom_btnBoom,combatBoom_btnQue,combatBoom_equipment0_Btn,combatBoom_equipment1_Btn,combatBoom_killBg_01,combatBoom_killBg_02,combatBoom_killFont_01,combatBoom_rock,combatBoom_rockBg,combatBoom_winImg"
-		},
-		{
-			"url": "assets/eui/combatBoomUI3.json",
-			"type": "sheet",
-			"name": "combatBoomUI3_json",
-			"subkeys": "combatBoom_deuceBg_01,combatBoom_lostBg,combatBoom_lostBing,combatBoom_winFBg_02,combatBoom_winStart"
 		},
 		{
 			"url": "assets/eui/common_bg_0.png",
@@ -118,102 +87,10 @@
 			"subkeys": "map_101_000,map_101_001,map_101_002,map_101_003,map_101_004,map_101_005,map_101_006,map_101_007,map_101_008,map_101_009,map_101_010,map_101_011,map_101_012,map_101_013,map_101_014,map_101_015,map_101_016,map_101_017,map_101_018,map_101_019,map_101_020,map_101_021,map_101_022,map_101_023,map_101_024,map_101_025,map_101_026,map_101_027,map_101_028,map_101_029,map_101_030,map_101_031,map_101_032,map_101_033,map_101_034,map_101_035,map_101_036,map_101_037,map_101_038,map_101_039,map_101_040,map_101_041,map_101_042,map_101_043,map_101_044,map_101_045,map_101_046,map_101_047,map_101_048,map_101_049,map_101_050,map_101_051,map_101_052,map_101_053,map_101_054,map_101_055,map_101_056,map_101_057,map_101_058,map_101_059,map_101_060,map_101_061,map_101_062"
 		},
 		{
-			"url": "assets/eui/setUI.json",
-			"type": "sheet",
-			"name": "setUI_json",
-			"subkeys": "set_bg_02,set_biaoti_01,set_btn_01,set_btn_02,set_btn_03,set_btn_04,set_btn_07,set_font_01,set_font_02,set_font_03,set_font_04,set_gou_01,set_gou_02,set_guangbiao_01,set_huabiao_01,set_huatiao_01,set_huatiao_02"
-		},
-		{
 			"url": "assets/eui/commonUI.json",
 			"type": "sheet",
 			"name": "commonUI_json",
 			"subkeys": "commog_bg_05,common_bg_02,common_bg_03,common_bg_04,common_btn_01,common_btn_02,common_btn_03,common_closebtn,common_faceFont_01,common_guangbiao_01,common_img_04,common_lvBg_01,common_lvBg_02,common_lvBg_03,common_reddot_01,common_strong,common_tiao_01,common_tiao_02,common_tiao_03,common_tiaomask,common_title_01,common_weak,comnon_btn_04,comon_btnfont_05,comon_btnfont_06,comon_btnfont_07,comon_btnfont_08,comon_btnfont_09,get_face_bg,get_face_bg_02,get_face_bg_03,gift_bg,gift_font,gift_titile,goodsGet_img,login_7_day_bg,mail_Arr_01,mail_Arr_02,mail_bgImg_05,mail_bg_01,mail_bg_02,mail_btnfont_01,mail_btnfont_02,mail_btnfont_03,mail_btnfont_04,mail_btnfont_05,mail_font_01,mail_kuang_01,mail_mailclose_01,mail_mailclose_02,mail_mailopen_02,mail_numImg_01,mail_start_01,mail_xian_01,mail_xian_02,mail_xinfeng,mail_xinxian,notice_font_02,present_font_03"
-		},
-		{
-			"url": "assets/font/combatLastTime.fnt",
-			"type": "font",
-			"name": "combatLastTime_fnt"
-		},
-		{
-			"url": "assets/font/combatLastTime.png",
-			"type": "image",
-			"name": "combatLastTime_png"
-		},
-		{
-			"url": "assets/font/combatTeamScore.fnt",
-			"type": "font",
-			"name": "combatTeamScore_fnt"
-		},
-		{
-			"url": "assets/font/combatTeamScore.png",
-			"type": "image",
-			"name": "combatTeamScore_png"
-		},
-		{
-			"url": "assets/font/combatTimeRun.fnt",
-			"type": "font",
-			"name": "combatTimeRun_fnt"
-		},
-		{
-			"url": "assets/font/combatTimeRun.png",
-			"type": "image",
-			"name": "combatTimeRun_png"
-		},
-		{
-			"url": "assets/font/roundEndBlueFont.fnt",
-			"type": "font",
-			"name": "roundEndBlueFont_fnt"
-		},
-		{
-			"url": "assets/font/roundEndBlueFont.png",
-			"type": "image",
-			"name": "roundEndBlueFont_png"
-		},
-		{
-			"url": "assets/font/roundEndRedFont.fnt",
-			"type": "font",
-			"name": "roundEndRedFont_fnt"
-		},
-		{
-			"url": "assets/font/roundEndRedFont.png",
-			"type": "image",
-			"name": "roundEndRedFont_png"
-		},
-		{
-			"url": "assets/font/whietTimeNum.fnt",
-			"type": "font",
-			"name": "whietTimeNum_fnt"
-		},
-		{
-			"url": "assets/font/whietTimeNum.png",
-			"type": "image",
-			"name": "whietTimeNum_png"
-		},
-		{
-			"url": "assets/font/white.fnt",
-			"type": "font",
-			"name": "white_fnt"
-		},
-		{
-			"url": "assets/font/white.png",
-			"type": "image",
-			"name": "white_png"
-		},
-		{
-			"url": "assets/font/whiteKillNum.fnt",
-			"type": "font",
-			"name": "whiteKillNum_fnt"
-		},
-		{
-			"url": "assets/font/whiteKillNum.png",
-			"type": "image",
-			"name": "whiteKillNum_png"
-		},
-		{
-			"url": "assets/eui/roundEndUI.json",
-			"type": "sheet",
-			"name": "roundEndUI_json",
-			"subkeys": "girl,girl2,man,man2,roundEndUI_Bg_01,roundEndUI_Bg_02,roundEndUI_Bg_03,roundEndUI_Bg_04,roundEndUI_Bg_05,roundEndUI_btn_01,roundEndUI_btn_02,roundEndUI_deuce,roundEndUI_friend,roundEndUI_leftMVP,roundEndUI_lost,roundEndUI_rightMVP,roundEndUI_scoreBg,roundEndUI_scoreBg_1,roundEndUI_wait,roundEndUI_win"
 		},
 		{
 			"url": "assets/eui/combat_tiao_3.png",
@@ -492,146 +369,6 @@
 			"name": "loading_json"
 		},
 		{
-			"url": "assets/animMap/bomb.png",
-			"type": "image",
-			"name": "bomb_png"
-		},
-		{
-			"url": "assets/animMap/bombProp.png",
-			"type": "image",
-			"name": "bombProp_png"
-		},
-		{
-			"url": "assets/animMap/bomb_other.png",
-			"type": "image",
-			"name": "bomb_other_png"
-		},
-		{
-			"url": "assets/animMap/bomb_power.png",
-			"type": "image",
-			"name": "bomb_power_png"
-		},
-		{
-			"url": "assets/animMap/box_blink.png",
-			"type": "image",
-			"name": "box_blink_png"
-		},
-		{
-			"url": "assets/animMap/fire_tail_effect.png",
-			"type": "image",
-			"name": "fire_tail_effect_png"
-		},
-		{
-			"url": "assets/animMap/invincible.png",
-			"type": "image",
-			"name": "invincible_png"
-		},
-		{
-			"url": "assets/animMap/needleProp.png",
-			"type": "image",
-			"name": "needleProp_png"
-		},
-		{
-			"url": "assets/animMap/playerBoomAnim.png",
-			"type": "image",
-			"name": "playerBoomAnim_png"
-		},
-		{
-			"url": "assets/animMap/pop.png",
-			"type": "image",
-			"name": "pop_png"
-		},
-		{
-			"url": "assets/animMap/powerProp.png",
-			"type": "image",
-			"name": "powerProp_png"
-		},
-		{
-			"url": "assets/animMap/shieldProp.png",
-			"type": "image",
-			"name": "shieldProp_png"
-		},
-		{
-			"url": "assets/animMap/speedProp.png",
-			"type": "image",
-			"name": "speedProp_png"
-		},
-		{
-			"url": "assets/animMap/bombProp.json",
-			"type": "json",
-			"name": "bombProp_json"
-		},
-		{
-			"url": "assets/animMap/fire_tail_effect.json",
-			"type": "json",
-			"name": "fire_tail_effect_json"
-		},
-		{
-			"url": "assets/animMap/bomb.json",
-			"type": "json",
-			"name": "bomb_json"
-		},
-		{
-			"url": "assets/animMap/bomb_other.json",
-			"type": "json",
-			"name": "bomb_other_json"
-		},
-		{
-			"url": "assets/animMap/box_blink.json",
-			"type": "json",
-			"name": "box_blink_json"
-		},
-		{
-			"url": "assets/animMap/invincible.json",
-			"type": "json",
-			"name": "invincible_json"
-		},
-		{
-			"url": "assets/animMap/bomb_power.json",
-			"type": "json",
-			"name": "bomb_power_json"
-		},
-		{
-			"url": "assets/animMap/needleProp.json",
-			"type": "json",
-			"name": "needleProp_json"
-		},
-		{
-			"url": "assets/animMap/pop.json",
-			"type": "json",
-			"name": "pop_json"
-		},
-		{
-			"url": "assets/animMap/powerProp.json",
-			"type": "json",
-			"name": "powerProp_json"
-		},
-		{
-			"url": "assets/animMap/shieldProp.json",
-			"type": "json",
-			"name": "shieldProp_json"
-		},
-		{
-			"url": "assets/animMap/playerBoomAnim.json",
-			"type": "json",
-			"name": "playerBoomAnim_json"
-		},
-		{
-			"url": "assets/animMap/speedProp.json",
-			"type": "json",
-			"name": "speedProp_json"
-		},
-		{
-			"url": "assets/font/combatBoomNum.fnt",
-			"type": "font",
-			"name": "combatBoomNum_fnt"
-		},
-		{
-			"url": "assets/font/combatBoomNum.png",
-			"type": "image",
-			"name": "combatBoomNum_png"
-		},
-		{
 			"url": "assets/eui/main_bg.jpg",
 			"type": "image",
 			"name": "main_bg_jpg"
@@ -649,20 +386,10 @@
 			"subkeys": "prop_1,prop_2,prop_3"
 		},
 		{
-			"url": "assets/font/currencyFont.fnt",
-			"type": "font",
-			"name": "currencyFont_fnt"
-		},
-		{
-			"url": "assets/font/currencyFont.png",
-			"type": "image",
-			"name": "currencyFont_png"
-		},
-		{
-			"name": "loadingUI_json",
-			"type": "sheet",
 			"url": "assets/eui/loadingUI.json",
-			"subkeys": "loading_bar_4,loading_icon_1,loading_bar_1,loading_bar_2,loading_bar_3"
+			"type": "sheet",
+			"name": "loadingUI_json",
+			"subkeys": "loading_bar_1,loading_bar_2,loading_bar_3,loading_bar_4,loading_icon_1"
 		}
 	]
 }

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="CombatTeamArr" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" xmlns:ns1="*" states="myTeam,enemyTeam" >
-	<e:Group id="m_pTeamArrGroup" x="52" y="54" anchorOffsetX="52" anchorOffsetY="54" touchChildren="false" touchEnabled="false">
-		<e:Label id="m_pDistanceLab" text="Label" verticalCenter="-37" horizontalCenter="0" fontFamily="Microsoft YaHei" strokeColor="0xFFFFFF" stroke="2" size="20" bold="true" visible="false"/>
-		<e:Image id="m_pArrImg" anchorOffsetX="52" anchorOffsetY="54" rotation="90" source="combatBoomUI2_json.combatBoom_TeamRedArr" x="54" y="52" source.myTeam="combatBoomUI2_json.combatBoom_TeamBlueArr"/>
-	</e:Group>
-</e:Skin>

@@ -26,8 +26,12 @@ class LoginController extends core.Control {
 	 * 隐藏
 	 */
 	protected hide(): void {
-		this.m_pLoginUI.hide();
+		if (this.m_pLoginUI && this.m_pLoginUI.parent) {
+			this.m_pLoginUI.parent.removeChild(this.m_pLoginUI);
+		}
+		this.m_pLoginUI = null;
 	}
+	
 	protected release(): void {
 		super.release();
 	}

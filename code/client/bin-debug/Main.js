@@ -124,17 +124,9 @@ var Main = (function (_super) {
      * 初始化控制器
      */
     Main.prototype.initController = function () {
-        new BreakLineController(this.loadingView);
-        new CombatController(this.loadingView);
-        new CommonController(this.loadingView);
         new GameController(this.loadingView);
-        new GameOverController(this.loadingView);
-        new GameSetController(this.loadingView);
-        new LinkController(this.loadingView);
         new LoginController(this.loadingView);
         new MainController(this.loadingView);
-        new NoticeAnimController(this.loadingView);
-        new NoticeController(this.loadingView);
     };
     return Main;
 }(core.EUILayer));

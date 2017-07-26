@@ -57,31 +57,4 @@ class Role extends core.Component {
     protected doLayout(): void {
 
     }
-
-    //吃道具触发事件
-    protected callBeginEatPower(): void { }
-    //结束吃道具触发事件
-    protected callEndEatPower(): void { }
-
-    /**
-     * 执行动作,要将函数move放在update里面才能移动
-     * @action  RoleAction枚举里面的动作
-     */
-    public runAction(action: RoleDirection) {
-        //trace(`当前动作：${action} 前一个动作:${this._move.actionBeforeStop}`);
-        // this._move.runAction(action);
-    }
-
-    private changeRunDirection(action: RoleDirection) {
-        this.p_avatar.gotoAndPlay(`run_${action}`, -1);
-    }
-
-    private changeStandDirection(action: RoleDirection) {
-        this.p_avatar.gotoAndPlay(`idle_${action}`, -1);
-    }
-
-    public move(dt: number) {
-        // this._move.update(dt);
-    }
-
 }

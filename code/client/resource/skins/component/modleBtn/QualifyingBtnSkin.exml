@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="QualifyingBtnSkinBtnSkin" currentState="default" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing" states="default,normal" >
-	<e:Image source="mainBoomUI_json.main_modleBtn1" x="0" y="0"/>
-	<e:Image source="mainBoomUI_json.main_modleBtn1hui" x="0" y="0" visible.normal="false"/>
-	<e:Image source="mainBoomUI_json.mian_lockFont" x="157" y="89" visible.normal="false"/>
-	<e:Label id="m_pLockLvLab" text="77" x="116" y="88" fontFamily="Microsoft YaHei" textColor="0xff4571" bold="true" stroke="2" strokeColor="0xffffff" visible.normal="false"/>
-</e:Skin>

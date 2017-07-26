@@ -4,10 +4,7 @@ class RoleData extends BaseData {
 
     public config: RoleConfig;
 
-    public battleData: BattleData;
-
     constructor() {
         super();
-        this.battleData = new BattleData();
     }
 }

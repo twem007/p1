@@ -9,9 +9,7 @@ var __extends = (this && this.__extends) || function (d, b) {
 var RoleData = (function (_super) {
     __extends(RoleData, _super);
     function RoleData() {
-        var _this = _super.call(this) || this;
-        _this.battleData = new BattleData();
-        return _this;
+        return _super.call(this) || this;
     }
     return RoleData;
 }(BaseData));

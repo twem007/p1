@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="LinkHintSkin" width="1334" height="750" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image source="common_bg_0_png" alpha="0" left="0" top="0" right="0" bottom="0"/>
-	<e:Group id="m_pMainGroup" x="0" y="0" width="1334" height="750">
-		<e:Group id="m_pLoadingGroup" width="200" height="200" anchorOffsetX="100" anchorOffsetY="100" x="685" y="375"/>
-	</e:Group>
-</e:Skin>

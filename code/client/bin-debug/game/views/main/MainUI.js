@@ -19,28 +19,22 @@ var MainUI = (function (_super) {
     };
     MainUI.prototype.addListener = function () {
         _super.prototype.addListener.call(this);
-        this.m_pRankModleBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
+        this.m_pHeroBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
     };
     MainUI.prototype.removeListener = function () {
         _super.prototype.removeListener.call(this);
-        this.m_pRankModleBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
+        this.m_pHeroBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
     };
     MainUI.prototype.onAdaptive = function () {
         UIManager.updataPoint(this.m_pBgImg, 667, 375);
-        UIManager.rightTopAdaptive(this.m_pRightTow, 866, 45);
         UIManager.rightBelowAdaptive(this.m_pRightLowGroup, 1067, 704);
-        UIManager.leftBelowAdaptive(this.m_pRankGroup, 59, 543);
-        UIManager.updataPoint(this.m_pModleBtnGroup, 1017, 378);
     };
     MainUI.prototype.release = function () {
+        _super.prototype.release.call(this);
     };
     MainUI.prototype.onClickRankBtn = function () {
         core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.MAINUI));
         GameModeManager.getInstance().enterGame(GameTypeEnum.EXERCISE);
-    };
-    MainUI.prototype.onButtonClick = function (event) {
-        switch (event.currentTarget) {
-        }
     };
     return MainUI;
 }(core.EUIComponent));

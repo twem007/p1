@@ -63,27 +63,6 @@ var Role = (function (_super) {
     };
     Role.prototype.doLayout = function () {
     };
-    //吃道具触发事件
-    Role.prototype.callBeginEatPower = function () { };
-    //结束吃道具触发事件
-    Role.prototype.callEndEatPower = function () { };
-    /**
-     * 执行动作,要将函数move放在update里面才能移动
-     * @action  RoleAction枚举里面的动作
-     */
-    Role.prototype.runAction = function (action) {
-        //trace(`当前动作：${action} 前一个动作:${this._move.actionBeforeStop}`);
-        // this._move.runAction(action);
-    };
-    Role.prototype.changeRunDirection = function (action) {
-        this.p_avatar.gotoAndPlay("run_" + action, -1);
-    };
-    Role.prototype.changeStandDirection = function (action) {
-        this.p_avatar.gotoAndPlay("idle_" + action, -1);
-    };
-    Role.prototype.move = function (dt) {
-        // this._move.update(dt);
-    };
     return Role;
 }(core.Component));
 __reflect(Role.prototype, "Role");

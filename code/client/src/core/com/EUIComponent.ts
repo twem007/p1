@@ -1,5 +1,5 @@
 module core {
-    export abstract class EUIComponent extends eui.Component {
+    export class EUIComponent extends eui.Component {
         constructor() {
             super();
             this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onShow, this);

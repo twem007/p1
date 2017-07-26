@@ -37,13 +37,9 @@ class LinkHintView extends core.EUIComponent {
 	public onAdaptive() {
 		UIManager.updataPoint(this.m_pLoadingGroup, 685, 375);
 	}
-	public release() {
-	}
+	
 	private hintLab() {
-		// if (MapManager.getInstance().isInit) {
-		// 	return;
-		// }
-	    core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE,ModuleEnum.LINK));	
-		core.TextUtils.hintLabel("网络较差，请到网络更好的地方体验游戏");
+		core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.LINK));
+		core.TextUtils.showTextTip("网络较差，请到网络更好的地方体验游戏");
 	}
 }

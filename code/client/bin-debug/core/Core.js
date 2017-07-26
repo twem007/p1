@@ -12,6 +12,7 @@ var core;
         function Core() {
         }
         Core.run = function (stage) {
+            egret.ImageLoader.crossOrigin = 'anonymous';
             core.FrameEventCenter.getInstance().init(stage);
             core.LayerCenter.getInstance().init(stage);
             if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {

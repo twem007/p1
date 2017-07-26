@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="SkillBtnSkin" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-	<e:Image id="m_pSkillImg" scaleX="1" scaleY="1" height="150" width="150" horizontalCenter="0" verticalCenter="0" x="-75" y="-75" source="combatBoomUI2_json.combatBoom_btnQue"/>
-	<e:BitmapLabel id="m_pNumLab" text="0" touchEnabled="false" scaleX="1.3" scaleY="1.3" right="0" top="0" font="combatTimeRun_fnt" x="25" y="-75"/>
-</e:Skin>

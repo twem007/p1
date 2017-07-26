@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="ModleBtnSkin" xmlns:e="http://ns.egret.com/eui">
-	<e:Image source="mainBoomUI_json.main_btnBg" x="0" y="0"/>
-	<e:Image source="mainBoomUI_json.mian_lockFont" x="57" y="45"/>
-	<e:Label id="m_pLockLvLab" text="77" x="16" y="44" fontFamily="Microsoft YaHei" textColor="0xFF4571" bold="true" stroke="2" strokeColor="0xFFFFFF"/>
-</e:Skin>

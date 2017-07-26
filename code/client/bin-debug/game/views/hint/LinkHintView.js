@@ -41,14 +41,9 @@ var LinkHintView = (function (_super) {
     LinkHintView.prototype.onAdaptive = function () {
         UIManager.updataPoint(this.m_pLoadingGroup, 685, 375);
     };
-    LinkHintView.prototype.release = function () {
-    };
     LinkHintView.prototype.hintLab = function () {
-        // if (MapManager.getInstance().isInit) {
-        // 	return;
-        // }
         core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.LINK));
-        core.TextUtils.hintLabel("网络较差，请到网络更好的地方体验游戏");
+        core.TextUtils.showTextTip("网络较差，请到网络更好的地方体验游戏");
     };
     return LinkHintView;
 }(core.EUIComponent));

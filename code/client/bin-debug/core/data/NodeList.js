@@ -9,7 +9,8 @@ var core;
      *
      */
     var NodeList = (function () {
-        function NodeList(dataList) {
+        function NodeList(dataList, isLoop) {
+            if (isLoop === void 0) { isLoop = false; }
             this.m_list = [];
             if (dataList) {
                 for (var i = 0, iLen = dataList.length; i < iLen; i++) {
@@ -21,13 +22,13 @@ var core;
             for (var i = 0, iLen = list.length; i < iLen; i++) {
                 var node = list[i];
                 if (i + 1 == iLen) {
-                    node.nextNode = list[0];
+                    node.nextNode = isLoop ? list[0] : null;
                 }
                 else {
                     node.nextNode = list[i + 1];
                 }
                 if (i == 0) {
-                    node.preNode = list[iLen - 1];
+                    node.preNode = isLoop ? list[iLen - 1] : null;
                 }
                 else {
                     node.preNode = list[i - 1];

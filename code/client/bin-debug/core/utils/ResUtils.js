@@ -56,7 +56,7 @@ var core;
             if (group) {
                 this.m_groupData.curGroup = group;
                 if (RES.isGroupLoaded(group)) {
-                    this.updateGroupData(group);
+                    this.updateGroupData(group, this.m_groupData.total, this.m_groupData.total, this.m_groupData.curResItem);
                 }
                 else {
                     RES.loadGroup(group);

@@ -119,17 +119,6 @@ var UIManager = (function () {
         obj.y = stageHeight - (this.CONTENT_HEIGHT - pointY);
         obj.x = stageWidth - (this.CONTENT_WIDTH - pointX);
     };
-    /**右上角适配
-     * obj:要改变的对象
-     * pointX:初始x值
-     * pointY:初始y值
-     */
-    UIManager.rightTopAdaptive = function (obj, pointX, pointY) {
-        var stageWidth = core.LayerCenter.stageWidth;
-        var stageHeight = core.LayerCenter.stageHeight;
-        obj.x = stageWidth - (this.CONTENT_WIDTH - pointX);
-        obj.y = pointY;
-    };
     /**
      * 根据输入坐标获取舞台改变后的宽高比坐标
      * pointX：x坐标

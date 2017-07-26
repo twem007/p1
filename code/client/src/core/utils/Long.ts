@@ -1,3 +1,6 @@
+/**
+ * 来源：ProtoBuf
+ */
 class Long {
 	public low: number;
 	public high: number;

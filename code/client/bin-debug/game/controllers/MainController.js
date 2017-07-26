@@ -34,7 +34,9 @@ var MainController = (function (_super) {
      * 隐藏
      */
     MainController.prototype.hide = function () {
-        this.m_pMainUI.hide();
+        if (this.m_pMainUI && this.m_pMainUI.parent) {
+            this.m_pMainUI.parent.removeChild(this.m_pMainUI);
+        }
     };
     MainController.prototype.release = function () {
         _super.prototype.release.call(this);

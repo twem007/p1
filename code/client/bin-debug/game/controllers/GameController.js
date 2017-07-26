@@ -41,50 +41,14 @@ var GameController = (function (_super) {
     };
     GameController.prototype.preShow = function (data) {
         ExerciseProxy.instance().createMapData(data);
-        ExerciseProxy.instance().createBoxData();
-        ExerciseProxy.instance().creatPlayerData();
-        ExerciseProxy.instance().creatRobotData(1);
     };
     GameController.prototype.show = function (data) {
         var modeData = ExerciseProxy.instance().getData();
-        // modeData.goods
-        // modeData.player
-        // modeData.roles
-        // modeData.map
         //初始化地图
         var map = MapManager.instance().map;
         map.init(modeData.map);
         map.create();
         core.LayerCenter.getInstance().getLayer(LayerEnum.MAP_BG).addChild(map);
-        //初始化道具
-        var goods = modeData.goods;
-        if (goods != null) {
-            var goodsLayer = core.LayerCenter.getInstance().getLayer(LayerEnum.MAP_GOODS);
-            var len = goods.length;
-            for (var i = 0; i < len; i++) {
-                var goodsData = goods[i];
-                var battleGoods = GoodsManager.instance().creatBox(goodsData);
-                goodsLayer.addChild(battleGoods);
-            }
-        }
-        //初始化主角
-        var roleLayer = core.LayerCenter.getInstance().getLayer(LayerEnum.MAP_ROLE);
-        var playerData = modeData.player;
-        if (playerData != null) {
-            var player = RoleManager.instance().create(playerData);
-            roleLayer.addChild(player);
-            RoleManager.instance().player = player;
-        }
-        //初始化其他玩家
-        var others = modeData.roles;
-        if (others != null) {
-            var len = others.length;
-            for (var i = 0; i < len; i++) {
-                var otherData = others[i];
-                var otherPlayer = RoleManager.instance().create(otherData);
-                roleLayer.addChild(otherPlayer);
-            }
-        }
     };
     GameController.prototype.hide = function () {
         var map = MapManager.instance().map;

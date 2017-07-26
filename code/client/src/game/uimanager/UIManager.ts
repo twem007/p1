@@ -123,17 +123,6 @@ class UIManager {
 		obj.x = stageWidth-(this.CONTENT_WIDTH- pointX);
 		
 	}
-    /**右上角适配
-	 * obj:要改变的对象
-	 * pointX:初始x值
-	 * pointY:初始y值
-	 */
-	public static rightTopAdaptive(obj: any, pointX: number, pointY: number) {
-		let stageWidth = core.LayerCenter.stageWidth;
-		let stageHeight = core.LayerCenter.stageHeight;
-		obj.x = stageWidth - (this.CONTENT_WIDTH - pointX);
-		obj.y = pointY;
-	}
 
 
     /**

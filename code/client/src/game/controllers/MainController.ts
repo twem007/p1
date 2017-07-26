@@ -26,7 +26,9 @@ class MainController extends core.Control {
 	 * 隐藏
 	 */
 	protected hide(): void {
-		this.m_pMainUI.hide();
+		if (this.m_pMainUI && this.m_pMainUI.parent) {
+			this.m_pMainUI.parent.removeChild(this.m_pMainUI);
+		}
 	}
 	protected release(): void {
 		super.release();

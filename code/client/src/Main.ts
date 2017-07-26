@@ -123,16 +123,8 @@ class Main extends core.EUILayer {
      * 初始化控制器
      */
     private initController(): void {
-        new BreakLineController(this.loadingView);
-        new CombatController(this.loadingView);
-        new CommonController(this.loadingView);
         new GameController(this.loadingView);
-        new GameOverController(this.loadingView);
-        new GameSetController(this.loadingView);
-        new LinkController(this.loadingView);
         new LoginController(this.loadingView);
         new MainController(this.loadingView);
-        new NoticeAnimController(this.loadingView);
-        new NoticeController(this.loadingView);
     }
 }

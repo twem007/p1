@@ -34,7 +34,10 @@ var LoginController = (function (_super) {
      * 隐藏
      */
     LoginController.prototype.hide = function () {
-        this.m_pLoginUI.hide();
+        if (this.m_pLoginUI && this.m_pLoginUI.parent) {
+            this.m_pLoginUI.parent.removeChild(this.m_pLoginUI);
+        }
+        this.m_pLoginUI = null;
     };
     LoginController.prototype.release = function () {
         _super.prototype.release.call(this);
