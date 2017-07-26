@@ -43,18 +43,22 @@
             + Component.ts				显示对象基类
             + EUIComponent.ts			EUI显示对象基类
             + EUILayer.ts				EUI显示层基类
-            + InputComponent.ts			输入控制基类
             + Layer.ts					显示层基类
         + data
             + Callback.ts				回调函数对象
             + Dictionary.ts				字典对象
             + Node.ts					链表节点对象
             + NodeList.ts				链表对象
+        + enum 
+            + Keyboard.ts               键盘按键枚举
         + event
             + EventData.ts				事件数据基类
             + EventID.ts				事件ID类
+            + KeyboardEventData.ts		键盘事件数据
+            + ModuleEventData.ts		模块事件数据
         + interface
-            + IComponent.ts				
+            + IComponent.ts		
+            + IFactory.ts 		
             + ILoadingUI.ts
             + IMessage.ts
         + net
@@ -83,7 +87,9 @@
         + Core.ts						框架入口
         + EventCenter.ts				事件管理类
         + FrameEventCenter.ts			帧循环管理类
+        + InputManager.ts			    输入控制类
         + LayerCenter.ts				层管理类
+        + LoadingManager.ts             Loading管理类
         + TimerManager.ts				Timer管理类
     + game                              游戏源代码目录
 + resource                              游戏资源目录
@@ -117,44 +123,47 @@
 12.	谨慎的选择需要使用的容器类型，显示类尽量从Component和EUIComponent继承
 
 ## 待办事宜：
-- [ ] 取消模块与Loading间的依赖关系
+- [X] 取消模块与Loading间的依赖关系
 - [ ] 完成HTTPAPI和SocketAPI、SoundUtils
 - [ ] 修复框架中的BUG
 - [ ] 常用UI组件的开发
+- [ ] 基本配置表模版及相关工具的开发
 
 ## 代码示例：
 
 # Main.ts
 ```javascript
 class Main extends core.EUILayer {
-    /**
-    * 加载进度界面
-    * loading process interface
-    */
-    private loadingView: core.ILoadingUI;
+
     protected createChildren(): void {
         super.createChildren();
-        //框架初始化
+        //初始化框架
         core.Core.run(this.stage);
-        //层初始化
-        core.LayerCenter.getInstance().addLayer(LayerEnum.BG, new core.Layer());
+        //初始化层
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_BG, new TileLayer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_EFFECT, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_GOODS, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_ROLE, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_TOP, new core.Layer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.UI, new core.EUILayer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.POPUP, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.MENU, new core.Layer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.LOADING, new core.EUILayer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.HINT, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.HINTSEC, new core.Layer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.TOP, new core.Layer());
         //Config loading process interface
-        //设置加载进度界面
-        this.loadingView = new PreLoadingUI();
-        this.loadingView.show();
+        //显示预加载进度条
+        core.LoadingManager.getLoading(PreLoadingUI).show();
         // initialize the Resource loading library
         //初始化Resource资源加载库
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         RES.loadConfig("resource/default.res.json", "resource/");
     }
     /**
-    * 配置文件加载完成,开始预加载皮肤主题资源和preload资源组。
-    * Loading of configuration file is complete, start to pre-load the theme configuration file and the preload resource group
-    */
+     * 配置文件加载完成,开始预加载皮肤主题资源和preload资源组。
+     * Loading of configuration file is complete, start to pre-load the theme configuration file and the preload resource group
+     */
     private onConfigComplete(event: RES.ResourceEvent): void {
         RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
 
@@ -171,9 +180,9 @@ class Main extends core.EUILayer {
 
     private isThemeLoadEnd: boolean = false;
     /**
-    * 主题文件加载完成,开始预加载
-    * Loading of theme configuration file is complete, start to pre-load the 
-    */
+     * 主题文件加载完成,开始预加载
+     * Loading of theme configuration file is complete, start to pre-load the 
+     */
     private onThemeLoadComplete(): void {
         this.isThemeLoadEnd = true;
         this.createScene();
@@ -182,45 +191,49 @@ class Main extends core.EUILayer {
 
     private createScene() {
         if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
-            this.loadingView = new MainLoadingUI();
-            //初始化模块
+            //设置当前loading，设置后模块的加载都会显示当前loading，如需自定义loading，请调用LoadingManager的getLoading方法
+            core.LoadingManager.setCurLoading(MainLoadingUI);
+            //初始化模块控制器
             this.initController();
-            //打开模块
+            //通知Login模块打开
             core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
         }
     }
 
     /**
-    * 资源组加载进度
-    */
+     * 资源组加载进度
+     */
     private onResourceProgress(data: core.GroupData): void {
-        this.loadingView.setProgress(data);
+        core.LoadingManager.getLoading(PreLoadingUI).setProgress(data);
     }
     /**
-    * 资源组加载出错
-    * Resource group loading failed
-    */
+     * 资源组加载出错
+     * Resource group loading failed
+     */
     private onResourceLoadError(data: core.GroupData): void {
         //TODO
         Log("Group:" + data.curGroup + " has failed to load");
     }
     /**
-    * preload资源组加载完成
-    */
+     * preload资源组加载完成
+     */
     private onResourceLoadComplete(data: core.GroupData): void {
         if (data.curGroup == 'preload') {
+            //隐藏预加载进度条
+            core.LoadingManager.getLoading(PreLoadingUI).hide();
+            //初始化配置表
             Config.init(RES.getRes('config_zip'));
-            this.loadingView.hide();
             this.isResourceLoadEnd = true;
             this.createScene();
         }
     }
     /**
-    * 初始化控制器
-    */
-    private initController(): void { 
-        new MainController(this.loadingView);
-        new LoginController(this.loadingView);
+     * 初始化控制器
+     */
+    private initController(): void {
+        new GameController();
+        new LoginController();
+        new MainController();
     }
 }
 ```
@@ -228,15 +241,15 @@ class Main extends core.EUILayer {
 # LoginController.ts
 ```javascript
 class LoginController extends core.Control {
-	public constructor(loadingUI: core.ILoadingUI) {
-		super(ModuleEnum.LOGIN, loadingUI);
+	public constructor() {
+		super(ModuleEnum.LOGIN);
 	}
 	private m_pLoginUI: LoginUI;
 	/**
 	 * 预加载资源组
 	 */
 	protected getLoadGroup(data?: core.ModuleEventData): string[] {
-		return [];
+		return ['soundUI', 'animUI'];
 	}
 	/**
 	 * 显示
@@ -246,16 +259,18 @@ class LoginController extends core.Control {
 			let loginUI: LoginUI = new LoginUI();
 			this.m_pLoginUI = loginUI;
 		}
-		core.LayerCenter.getInstance().getLayer(LayerEnum.POPUP).addChild(this.m_pLoginUI);
+		core.LayerCenter.getInstance().getLayer(LayerEnum.UI).addChild(this.m_pLoginUI);
 	}
 	/**
 	 * 隐藏
 	 */
 	protected hide(): void {
-		if (this.m_pLoginUI.parent) {
+		if (this.m_pLoginUI && this.m_pLoginUI.parent) {
 			this.m_pLoginUI.parent.removeChild(this.m_pLoginUI);
 		}
+		this.m_pLoginUI = null;
 	}
+	
 	protected release(): void {
 		super.release();
 	}
