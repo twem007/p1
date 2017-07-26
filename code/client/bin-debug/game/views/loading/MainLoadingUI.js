@@ -37,11 +37,14 @@ var MainLoadingUI = (function (_super) {
         this.m_pProgressStar.visible = this.m_pProgressStar.x >= 0;
     };
     MainLoadingUI.prototype.show = function () {
+        core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.updateAdaptive, this);
         core.LayerCenter.getInstance().getLayer(LayerEnum.LOADING).addChild(this);
+        this.updateAdaptive();
     };
     MainLoadingUI.prototype.release = function () {
     };
     MainLoadingUI.prototype.hide = function () {
+        core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.updateAdaptive, this);
         if (this.parent) {
             this.parent.removeChild(this);
         }

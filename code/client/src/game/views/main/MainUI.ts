@@ -31,14 +31,17 @@ class MainUI extends core.EUIComponent {
 	protected onShow(): void {
 		super.onShow();
 		SoundUtils.getInstance().playSound('25', 0);
+		this.onAdaptive();
 	}
 	protected addListener() {
 		super.addListener();
+		core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
 		this.m_pHeroBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
 	}
 
 	protected removeListener(): void {
 		super.removeListener();
+		core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
 		this.m_pHeroBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
 	}
 

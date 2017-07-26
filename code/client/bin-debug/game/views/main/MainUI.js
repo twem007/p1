@@ -16,13 +16,16 @@ var MainUI = (function (_super) {
     MainUI.prototype.onShow = function () {
         _super.prototype.onShow.call(this);
         SoundUtils.getInstance().playSound('25', 0);
+        this.onAdaptive();
     };
     MainUI.prototype.addListener = function () {
         _super.prototype.addListener.call(this);
+        core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
         this.m_pHeroBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
     };
     MainUI.prototype.removeListener = function () {
         _super.prototype.removeListener.call(this);
+        core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
         this.m_pHeroBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
     };
     MainUI.prototype.onAdaptive = function () {

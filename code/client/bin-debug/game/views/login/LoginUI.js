@@ -16,14 +16,17 @@ var LoginUI = (function (_super) {
     LoginUI.prototype.onShow = function () {
         _super.prototype.onShow.call(this);
         this.m_pAccount.text = name;
+        this.onAdaptive();
     };
     LoginUI.prototype.addListener = function () {
         _super.prototype.addListener.call(this);
+        core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
         this.m_pLoginBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
         this.m_pPassword.addEventListener(egret.Event.CHANGE, this.onChangePassword, this);
     };
     LoginUI.prototype.removeListener = function () {
         _super.prototype.removeListener.call(this);
+        core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
         this.m_pLoginBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
         this.m_pPassword.removeEventListener(egret.Event.CHANGE, this.onChangePassword, this);
     };

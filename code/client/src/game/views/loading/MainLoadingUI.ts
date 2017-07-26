@@ -45,18 +45,21 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
     }
 
     public show(): void {
+        core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.updateAdaptive, this);
         core.LayerCenter.getInstance().getLayer(LayerEnum.LOADING).addChild(this);
+        this.updateAdaptive();
     }
     public release() {
-	}
+    }
 
     public hide(): void {
+        core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.updateAdaptive, this);
         if (this.parent) {
             this.parent.removeChild(this);
         }
     }
     public updateAdaptive(): void {
-         UIManager.updataPoint(this.m_pMainGroup,667,375);
-         UIManager.updataPoint(this.m_pProgressGroup,667,653);
+        UIManager.updataPoint(this.m_pMainGroup, 667, 375);
+        UIManager.updataPoint(this.m_pProgressGroup, 667, 653);
     }
 }

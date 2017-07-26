@@ -48,7 +48,7 @@ module core {
             let size: number = buffer.readUnsignedShort();
             if (buffer.bytesAvailable >= size) {
 
-            }else{
+            } else {
                 this.m_receiveBuffer.writeBytes(buffer);
             }
         }
@@ -81,6 +81,10 @@ module core {
 
         public connect(host: string, port: number): void {
             this.m_socket.connect(host, port);
+        }
+
+        public connectURL(hostURL: string): void {
+            this.m_socket.connectByUrl(hostURL);
         }
 
         public close(): void {

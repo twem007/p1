@@ -70,6 +70,9 @@ var core;
         SocketAPI.prototype.connect = function (host, port) {
             this.m_socket.connect(host, port);
         };
+        SocketAPI.prototype.connectURL = function (hostURL) {
+            this.m_socket.connectByUrl(hostURL);
+        };
         SocketAPI.prototype.close = function () {
             this.m_socket.close();
         };
