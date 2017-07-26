@@ -137,6 +137,8 @@ class Main extends core.EUILayer {
 
     protected createChildren(): void {
         super.createChildren();
+        //debug等级
+        egret.Logger.logLevel = egret.Logger.OFF;
         //初始化框架
         core.Core.run(this.stage);
         //初始化层
