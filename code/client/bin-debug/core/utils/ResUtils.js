@@ -44,10 +44,8 @@ var core;
                 this.m_groupData.onLoadProgress.call(this.m_groupData.thisObj, this.m_groupData);
             }
             if (loadedItems == totalItems) {
-                if (this.m_groupData.loadedQueue.indexOf(group) < 0) {
-                    this.m_groupData.loadedQueue.push(group);
-                    this.m_groupData.loaded = this.m_groupData.loadedQueue.length;
-                }
+                this.m_groupData.loadedQueue.push(group);
+                this.m_groupData.loaded = this.m_groupData.loadedQueue.length;
                 this.loadNext();
             }
         };
@@ -55,7 +53,7 @@ var core;
             var group = this.m_groupData.loadQueue.shift();
             if (group) {
                 this.m_groupData.curGroup = group;
-                if (RES.isGroupLoaded(group)) {
+                if (RES.isGroupLoaded(group) || this.m_groupData.loadedQueue.indexOf(group) >= 0) {
                     this.updateGroupData(group, this.m_groupData.total, this.m_groupData.total, this.m_groupData.curResItem);
                 }
                 else {

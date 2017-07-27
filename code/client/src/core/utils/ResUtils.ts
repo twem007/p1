@@ -50,7 +50,7 @@ module core {
             let group: string = this.m_groupData.loadQueue.shift();
             if (group) {
                 this.m_groupData.curGroup = group;
-                if (RES.isGroupLoaded(group)) {
+                if (RES.isGroupLoaded(group) || this.m_groupData.loadedQueue.indexOf(group) >= 0) {
                     this.updateGroupData(group, this.m_groupData.total, this.m_groupData.total, this.m_groupData.curResItem);
                 } else {
                     RES.loadGroup(group);
