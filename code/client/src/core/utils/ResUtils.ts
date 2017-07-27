@@ -40,10 +40,8 @@ module core {
                 this.m_groupData.onLoadProgress.call(this.m_groupData.thisObj, this.m_groupData);
             }
             if (loadedItems == totalItems) {
-                if (this.m_groupData.loadedQueue.indexOf(group) < 0) {
-                    this.m_groupData.loadedQueue.push(group);
-                    this.m_groupData.loaded = this.m_groupData.loadedQueue.length;
-                }
+                this.m_groupData.loadedQueue.push(group);
+                this.m_groupData.loaded = this.m_groupData.loadedQueue.length;
                 this.loadNext();
             }
         }
