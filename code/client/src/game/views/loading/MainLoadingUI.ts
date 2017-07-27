@@ -30,6 +30,7 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
     }
     protected childrenCreated(): void {
         super.childrenCreated();
+        this.m_pLogoImg.visible = false;
         this.m_pProgressImg.mask = this.m_pProgressMask;
         this.m_pProgressMask.width = 0;
         this.m_pStateLbl.text = "首次进游戏需加载更多资源，疯狂载入中...";

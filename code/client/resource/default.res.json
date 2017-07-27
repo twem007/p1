@@ -380,12 +380,6 @@
 			"subkeys": "common_goldsBg,common_goldsBtn,common_grading,common_redDot1,common_redDot2"
 		},
 		{
-			"url": "assets/eui/prop.json",
-			"type": "sheet",
-			"name": "prop_json",
-			"subkeys": "prop_1,prop_2,prop_3"
-		},
-		{
 			"url": "assets/eui/loadingUI.json",
 			"type": "sheet",
 			"name": "loadingUI_json",

@@ -15,6 +15,7 @@ var LoginUI = (function (_super) {
     }
     LoginUI.prototype.onShow = function () {
         _super.prototype.onShow.call(this);
+        this.m_pLogo.visible = false;
         this.m_pAccount.text = name;
         this.onAdaptive();
     };
