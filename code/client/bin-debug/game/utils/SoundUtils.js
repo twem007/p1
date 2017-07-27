@@ -33,7 +33,8 @@ var SoundUtils = (function () {
      */
     SoundUtils.prototype.playSound = function (id, loop, onPlayComplete) {
         if (loop === void 0) { loop = 1; }
-        var config = Config.getConfig(SoundConfig).get(parseInt(id));
+        // let config: SoundConfig = Config.getConfig(SoundConfig).get(parseInt(id));
+        var config;
         if (config) {
             this.stopSound(config.coverKey.toString());
         }

@@ -59,7 +59,8 @@ class SoundUtils {
      * @version Egret 2.4
      */
     public playSound(id: string, loop: number = 1, onPlayComplete?: () => void): void {
-        let config: SoundConfig = Config.getConfig(SoundConfig).get(parseInt(id));
+        // let config: SoundConfig = Config.getConfig(SoundConfig).get(parseInt(id));
+        let config: any;
         if (config) {
             this.stopSound(config.coverKey.toString());
         } else {

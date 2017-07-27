@@ -1,4 +1,0 @@
-enum GameTypeEnum {
-    EXERCISE,
-    RANK
-}

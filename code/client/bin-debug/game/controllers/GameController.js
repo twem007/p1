@@ -12,18 +12,12 @@ var GameController = (function (_super) {
         return _super.call(this, ModuleEnum.GAME) || this;
     }
     GameController.prototype.getLoadGroup = function (data) {
-        var configs = Config.getConfig(MapCfgConfig);
         var mapIDArr = [101, 102, 103];
         var keyArr = [];
         for (var i = 0, iLen = mapIDArr.length; i < iLen; i++) {
-            var config = configs.get(mapIDArr[i]);
-            var configKey = config.mapData + "_json";
-            var imgKey = config.mapRes + "_json";
-            var bgImgKey1 = config.bgRes + "_1_jpg";
-            var bgImgKey2 = config.bgRes + "_2_jpg";
-            if (keyArr.indexOf(configKey) === -1) {
-                keyArr.push(configKey);
-            }
+            var imgKey = "";
+            var bgImgKey1 = "";
+            var bgImgKey2 = "";
             if (keyArr.indexOf(imgKey) === -1) {
                 keyArr.push(imgKey);
             }
@@ -40,21 +34,10 @@ var GameController = (function (_super) {
         return ['map', 'soundMap'];
     };
     GameController.prototype.preShow = function (data) {
-        ExerciseProxy.instance().createMapData(data);
     };
     GameController.prototype.show = function (data) {
-        var modeData = ExerciseProxy.instance().getData();
-        //初始化地图
-        var map = MapManager.instance().map;
-        map.init(modeData.map);
-        map.create();
-        core.LayerCenter.getInstance().getLayer(LayerEnum.MAP_BG).addChild(map);
     };
     GameController.prototype.hide = function () {
-        var map = MapManager.instance().map;
-        if (map.parent) {
-            map.parent.removeChild(map);
-        }
     };
     return GameController;
 }(core.Control));

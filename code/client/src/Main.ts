@@ -34,11 +34,6 @@ class Main extends core.EUILayer {
         //debug等级
         egret.Logger.logLevel = egret.Logger.OFF;
         core.Core.run(this.stage);
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_BG, new TileLayer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_EFFECT, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_GOODS, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_ROLE, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_TOP, new core.Layer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.UI, new core.EUILayer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.POPUP, new core.Layer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.MENU, new core.Layer());

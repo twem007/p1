@@ -5,18 +5,12 @@ class GameController extends core.Control {
     }
 
     public getLoadGroup(data?: any): string[] {
-        let configs: Dictionary<MapCfgConfig> = Config.getConfig(MapCfgConfig);
         let mapIDArr: Array<any> = [101, 102, 103];
         let keyArr: Array<string> = [];
         for (let i = 0, iLen: number = mapIDArr.length; i < iLen; i++) {
-            let config: MapCfgConfig = configs.get(mapIDArr[i]);
-            let configKey: string = `${config.mapData}_json`;
-            let imgKey: string = `${config.mapRes}_json`;
-            let bgImgKey1: string = `${config.bgRes}_1_jpg`;
-            let bgImgKey2: string = `${config.bgRes}_2_jpg`;
-            if (keyArr.indexOf(configKey) === -1) {
-                keyArr.push(configKey);
-            }
+            let imgKey: string = ``;
+            let bgImgKey1: string = ``;
+            let bgImgKey2: string = ``;
             if (keyArr.indexOf(imgKey) === -1) {
                 keyArr.push(imgKey);
             }
@@ -34,22 +28,11 @@ class GameController extends core.Control {
     }
 
     protected preShow(data: number): void {
-        ExerciseProxy.instance().createMapData(data);
     }
 
     protected show(data?: any): void {
-        let modeData: ExerciseModeData = ExerciseProxy.instance().getData();
-        //初始化地图
-        let map: Map = MapManager.instance().map;
-        map.init(modeData.map);
-        map.create();
-        core.LayerCenter.getInstance().getLayer(LayerEnum.MAP_BG).addChild(map);
     }
 
     protected hide(): void {
-        let map: Map = MapManager.instance().map;
-        if (map.parent) {
-            map.parent.removeChild(map);
-        }
     }
 }

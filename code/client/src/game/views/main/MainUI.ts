@@ -55,7 +55,6 @@ class MainUI extends core.EUIComponent {
 	}
 
 	private onClickRankBtn() {
-		core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.MAINUI));
-		GameModeManager.getInstance().enterGame(GameTypeEnum.EXERCISE);
+		// core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.MAINUI));
 	}
 }
