@@ -13,15 +13,14 @@ var core;
      * @author
      *
      */
-    var MessageData = (function (_super) {
-        __extends(MessageData, _super);
-        function MessageData(messageID, messageData) {
-            if (messageData === void 0) { messageData = {}; }
+    var SocketEventData = (function (_super) {
+        __extends(SocketEventData, _super);
+        function SocketEventData(messageID, messageData) {
             return _super.call(this, messageID, messageData) || this;
         }
-        return MessageData;
+        return SocketEventData;
     }(core.EventData));
-    core.MessageData = MessageData;
-    __reflect(MessageData.prototype, "core.MessageData");
+    core.SocketEventData = SocketEventData;
+    __reflect(SocketEventData.prototype, "core.SocketEventData");
 })(core || (core = {}));
-//# sourceMappingURL=MessageData.js.map
+//# sourceMappingURL=SocketEventData.js.map

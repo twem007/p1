@@ -5,26 +5,37 @@ module core {
 	 *
 	 */
     export class SocketAPI {
-        private static s_instance: core.SocketAPI;
 
-        private m_socket: egret.WebSocket;
+        private static s_instance: SocketAPI;
 
-        private m_sendBuffer: core.ByteBuffer;
-        private m_receiveBuffer: core.ByteBuffer;
+        private m_webSocket: egret.WebSocket;
+        /**
+         * 目标服务器地址 IP或者url
+         */
+        private m_host: string;
+        /**
+         * 目标服务器端口
+         */
+        private m_port: number;
+        /**
+         * WebSocket连接状态
+         */
+        private m_state: WebSocketStateEnum = WebSocketStateEnum.CLOSED;
+        /**
+         * WebSocket发送和接收数据类型
+         */
+        private m_type: WebSocketTypeEnum = WebSocketTypeEnum.TYPE_STRING;
 
         public constructor() {
-            let socket: egret.WebSocket = new egret.WebSocket();
-            socket.type = egret.WebSocket.TYPE_BINARY;
-            socket.addEventListener(egret.Event.CONNECT, this.onConnected, this);
-            socket.addEventListener(egret.ProgressEvent.SOCKET_DATA, this.onSocketData, this);
-            socket.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onIOError, this);
-            socket.addEventListener(egret.Event.CLOSE, this.onClosed, this);
-            this.m_socket = socket;
-            this.m_sendBuffer = new core.ByteBuffer();
-            this.m_receiveBuffer = new core.ByteBuffer();
+            let webSocket: egret.WebSocket = new egret.WebSocket();
+            webSocket.addEventListener(egret.Event.CONNECT, this.onConnected, this);
+            webSocket.addEventListener(egret.ProgressEvent.SOCKET_DATA, this.onSocketData, this);
+            webSocket.addEventListener(egret.IOErrorEvent.IO_ERROR, this.onIOError, this);
+            webSocket.addEventListener(egret.Event.CLOSE, this.onClosed, this);
+            this.m_webSocket = webSocket;
         }
 
-        public static getInstance(): core.SocketAPI {
+        public static get instance(): SocketAPI {
             if (SocketAPI.s_instance == null) {
                 SocketAPI.s_instance = new SocketAPI();
             }
@@ -32,63 +43,88 @@ module core {
         }
 
         private onConnected(event: egret.Event): void {
-            egret.log("与Socket服务器链接成功");
-            core.EventCenter.getInstance().sendEvent(new EventData(EventID.SOCKET_CONNECT));
+            egret.log("与WebSocket服务器链接成功");
+            this.m_state = WebSocketStateEnum.CONNECTED;
+            core.EventCenter.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_CONNECT));
         }
 
         private onSocketData(event: egret.ProgressEvent): void {
-            egret.log("从Socket服务器接收数据");
             let buffer: core.ByteBuffer = new core.ByteBuffer();
-            this.m_socket.readBytes(buffer, buffer.length);
-            this.readData(buffer);
-        }
-
-        private readData(buffer: core.ByteBuffer): void {
-            buffer.position = 0;
-            let size: number = buffer.readUnsignedShort();
-            if (buffer.bytesAvailable >= size) {
-
-            } else {
-                this.m_receiveBuffer.writeBytes(buffer);
-            }
+            this.m_webSocket.readBytes(buffer, buffer.length);
+            core.EventCenter.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_DATA, buffer));
         }
 
         private onIOError(event: egret.IOErrorEvent): void {
-            egret.log("与Socket服务器链接失败");
-            core.EventCenter.getInstance().sendEvent(new EventData(EventID.SOCKET_IOERROR));
+            egret.log("与WebSocket服务器链接失败");
+            this.m_state = WebSocketStateEnum.CLOSED;
+            core.EventCenter.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_IOERROR));
         }
 
         private onClosed(event: egret.Event): void {
-            egret.log("与Socket服务器断开链接");
-            core.EventCenter.getInstance().sendEvent(new EventData(EventID.SOCKET_CLOSE));
+            egret.log("与WebSocket服务器断开链接");
+            this.m_state = WebSocketStateEnum.CLOSED;
+            core.EventCenter.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_CLOSE));
         }
 
-        private flushToServer(): void {
-            egret.log("flush数据到Socket服务器");
-            this.m_socket.writeBytes(this.m_sendBuffer);
-            this.m_socket.flush();
-            this.m_sendBuffer.clear();
+        public sendData(data: egret.ByteArray): void {
+            this.m_webSocket.writeBytes(data);
+            this.m_webSocket.flush();
         }
 
-        public sendData(data: any): void {
-            var buffer: egret.ByteArray = new core.ByteBuffer(data.toArrayBuffer());
-            this.m_sendBuffer.writeByte(0x7c);
-            this.m_sendBuffer.writeShort(buffer.length);
-            this.m_sendBuffer.writeShort(data.protocol);
-            this.m_sendBuffer.writeBytes(buffer);
-            egret.callLater(this.flushToServer, this);
+        public setAddress(host: string, port: number): void {
+            this.m_host = host;
+            this.m_port = port;
         }
 
-        public connect(host: string, port: number): void {
-            this.m_socket.connect(host, port);
+        public setAddressURL(hostURL: string): void {
+            this.m_host = hostURL;
         }
 
-        public connectURL(hostURL: string): void {
-            this.m_socket.connectByUrl(hostURL);
+        public setType(type: WebSocketTypeEnum): void {
+            switch (type) {
+                case WebSocketTypeEnum.TYPE_STRING:
+                    this.m_webSocket.type = egret.WebSocket.TYPE_STRING;
+                    break;
+                case WebSocketTypeEnum.TYPE_BINARY:
+                    this.m_webSocket.type = egret.WebSocket.TYPE_BINARY;
+                    break;
+            }
+        }
+
+        public connect(): void {
+            this.m_state = WebSocketStateEnum.CONNECTING;
+            if (this.m_host.indexOf(":") > 0) {
+                this.m_webSocket.connectByUrl(this.m_host);
+            } else {
+                this.m_webSocket.connect(this.m_host, this.m_port);
+            }
         }
 
         public close(): void {
-            this.m_socket.close();
+            this.m_state = WebSocketStateEnum.CLOSING;
+            this.m_webSocket.close();
         }
+    }
+
+    /**
+     * CONNECTING   正在尝试连接服务器
+     * CONNECTED    已成功连接服务器 
+     * CLOSING      正在断开服务器连接
+     * CLOSED       已断开与服务器连接
+     */
+    export enum WebSocketStateEnum {
+        CONNECTING,
+        CONNECTED,
+        CLOSING,
+        CLOSED
+    }
+
+    /**
+     * TYPE_STRING 以字符串格式发送和接收数据
+     * TYPE_BINARY 以二进制格式发送和接收数据
+     */
+    export enum WebSocketTypeEnum {
+        TYPE_STRING,
+        TYPE_BINARY
     }
 }

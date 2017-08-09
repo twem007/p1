@@ -45,7 +45,7 @@ var Main = (function (_super) {
     Main.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
         //debug等级
-        egret.Logger.logLevel = egret.Logger.OFF;
+        egret.Logger.logLevel = egret.Logger.ALL;
         core.Core.run(this.stage);
         core.LayerCenter.getInstance().addLayer(LayerEnum.UI, new core.EUILayer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.POPUP, new core.Layer());
@@ -89,6 +89,8 @@ var Main = (function (_super) {
             core.LoadingManager.setCurLoading(MainLoadingUI);
             this.initController();
             core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
+            //单元测试
+            runUnitTest();
         }
     };
     /**

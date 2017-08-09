@@ -32,7 +32,7 @@ class Main extends core.EUILayer {
     protected createChildren(): void {
         super.createChildren();
         //debug等级
-        egret.Logger.logLevel = egret.Logger.OFF;
+        egret.Logger.logLevel = egret.Logger.ALL;
         core.Core.run(this.stage);
         core.LayerCenter.getInstance().addLayer(LayerEnum.UI, new core.EUILayer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.POPUP, new core.Layer());
@@ -83,6 +83,8 @@ class Main extends core.EUILayer {
             core.LoadingManager.setCurLoading(MainLoadingUI);
             this.initController();
             core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
+            //单元测试
+            runUnitTest();
         }
     }
 
