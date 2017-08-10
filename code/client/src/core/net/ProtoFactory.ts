@@ -61,7 +61,7 @@ module core {
         /**
          * 解析数据
          */
-        public static decodeMessage(messageID: string, buffer: core.ByteBuffer): any {
+        public static decodeMessage(messageID: string, buffer: ArrayBuffer): any {
             if (ProtoFactory.s_protoBuff) {
                 let dataClass = ProtoFactory.s_protoBuff.build(messageID);
                 if (dataClass) {

@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "loading_bg_1_jpg,combat_tiao_3_png,logoBoomUI_json,config_zip,loadingUI_json",
+			"keys": "loading_bg_1_jpg,combat_tiao_3_png,logoBoomUI_json,loadingUI_json,protobuf_proto",
 			"name": "preload"
 		},
 		{
@@ -37,11 +37,6 @@
 			"url": "assets/eui/common_bg_1.png",
 			"type": "image",
 			"name": "common_bg_1_png"
-		},
-		{
-			"url": "assets/config/config.zip",
-			"type": "bin",
-			"name": "config_zip"
 		},
 		{
 			"url": "assets/eui/commonUI.json",
@@ -341,6 +336,11 @@
 			"type": "sheet",
 			"name": "loadingUI_json",
 			"subkeys": "loading_bar_1,loading_bar_2,loading_bar_3,loading_bar_4,loading_icon_1"
+		},
+		{
+			"url": "assets/config/protobuf.proto",
+			"type": "text",
+			"name": "protobuf_proto"
 		}
 	]
 }

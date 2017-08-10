@@ -114,6 +114,7 @@ var Main = (function (_super) {
         if (data.curGroup == 'preload') {
             core.LoadingManager.getLoading(PreLoadingUI).hide();
             Config.init(RES.getRes('config_zip'));
+            core.ProtoFactory.init(RES.getRes('protobuf_proto'));
             this.isResourceLoadEnd = true;
             this.createScene();
         }
