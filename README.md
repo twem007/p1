@@ -67,6 +67,7 @@
             + MessageData.ts			消息体封装
             + ProtoFactory.ts           ProtoBuff的二次封装
             + SocketAPI.ts				Websocket协议接口类
+			+ SocketEventData.ts 		Websocket事件数据
         + utils
             + Base64.ts					Base64实现
             + CachePool.ts				对象池
@@ -91,7 +92,13 @@
         + LayerCenter.ts				层管理类
         + LoadingManager.ts             Loading管理类
         + TimerManager.ts				Timer管理类
+	+ unittest                          单元测试及使用示例目录
+		+ UnitTest.ts 					单元测试入口
+		+ WSTest.ts 					Websocket和Protobuf测试及使用示例
     + game                              游戏源代码目录
+	+ AssetAdapter.ts
+	+ ThemeAdapter.ts
+	+ Main.ts
 + resource                              游戏资源目录
     + assets
     + skins
@@ -126,7 +133,7 @@
 - [X] 为进行中
 - [ ] 为未开始
 ***********************************
-- [X] 完成HTTPAPI和SocketAPI、SoundUtils
+- [X] --完成HTTPAPI和SocketAPI--、SoundUtils
 - [ ] 添加EventCenter分块管理
 - [ ] 常用UI组件的开发
 - [ ] 基本配置表模版及相关工具的开发
@@ -202,6 +209,8 @@ class Main extends core.EUILayer {
             this.initController();
             //通知Login模块打开
             core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
+			//单元测试
+            runUnitTest();
         }
     }
 
