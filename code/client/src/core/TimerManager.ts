@@ -57,8 +57,8 @@ module core {
                             data.thisObj = thisObj;
                             data.args = args;
                             data.timestamp = egret.getTimer();
-                            return;
                         }
+                        return;
                     }
                 }
             } else {
