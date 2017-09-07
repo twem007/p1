@@ -58,9 +58,8 @@ class SoundUtils {
      * @param onPlayComplete: () => void 播放完毕回调函数
      * @version Egret 2.4
      */
-    public playSound(id: string, loop: number = 1, onPlayComplete?: () => void): void {
-        // let config: SoundConfig = Config.getConfig(SoundConfig).get(parseInt(id));
-        let config: any;
+    public playSound(id: number, loop: number = 1, onPlayComplete?: () => void): void {
+        let config: SoundConfig = Config.getConfig(SoundConfig).get(id);
         if (config) {
             this.stopSound(config.coverKey.toString());
         } else {

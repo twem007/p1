@@ -12,8 +12,8 @@ class Config {
         if (bin) {
             let zip: JSZip = new JSZip(bin);
             let files: any = zip.files;
-            for (var key in files) {
-                let file: any = files[key];
+            for (let fileName in files) {
+                let file: any = files[fileName];
                 if (file) {
                     let data: any = JSON.parse(file.asText());
                     let name: string = data.name;
@@ -29,10 +29,7 @@ class Config {
                     Config.s_configs[name] = dic;
                     for (let i: number = 0; i < size; i++) {
                         let value: any = values[i];
-                        for (let key in value) {
-                            config[key] = value[key];
-                        }
-                        dic.add(config[key], config);
+                        dic.add(value[data.key], value);
                     }
                 }
             }

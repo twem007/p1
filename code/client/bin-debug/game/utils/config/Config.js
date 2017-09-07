@@ -12,8 +12,8 @@ var Config = (function () {
         if (bin) {
             var zip = new JSZip(bin);
             var files = zip.files;
-            for (var key in files) {
-                var file = files[key];
+            for (var fileName in files) {
+                var file = files[fileName];
                 if (file) {
                     var data = JSON.parse(file.asText());
                     var name_1 = data.name;
@@ -29,10 +29,7 @@ var Config = (function () {
                     Config.s_configs[name_1] = dic;
                     for (var i = 0; i < size; i++) {
                         var value = values[i];
-                        for (var key_1 in value) {
-                            config[key_1] = value[key_1];
-                            dic.add(config[key_1], config);
-                        }
+                        dic.add(value[data.key], value);
                     }
                 }
             }

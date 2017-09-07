@@ -9,16 +9,12 @@
 			"name": "mainUI"
 		},
 		{
-			"keys": "main_1_mp3,popup_mp3,select_button_mp3,set_success_mp3",
-			"name": "soundUI"
-		},
-		{
-			"keys": "kill_mp3,end_menu_mp3,eat_smallgem_mp3,eat_smallgem_9_mp3,eat_smallgem_8_mp3,eat_smallgem_7_mp3,eat_smallgem_6_mp3,eat_smallgem_5_mp3,eat_smallgem_4_mp3,eat_smallgem_3_mp3,eat_smallgem_2_mp3,eat_smallgem_10_mp3,eat_smallgem_1_mp3,eat_power_mp3,eat_biggem_mp3,eat_biggem_9_mp3,eat_biggem_8_mp3,eat_biggem_7_mp3,eat_biggem_6_mp3,eat_biggem_5_mp3,eat_biggem_4_mp3,eat_biggem_3_mp3,eat_biggem_2_mp3,eat_biggem_10_mp3,eat_biggem_1_mp3,die_mp3,baozha_mp3,background3_mp3,background2_mp3,background1_mp3,9kill_mp3,8kill_mp3,7kill_mp3,6kill_mp3,5kill_mp3,4kill_mp3,3kill_mp3,2kill_mp3,1kill_mp3,11kill_mp3,10kill_mp3,maipao_mp3,wild_mp3,tick_mp3,skill01_mp3",
-			"name": "soundMap"
-		},
-		{
 			"keys": "loading_png,loading_json",
 			"name": "animUI"
+		},
+		{
+			"keys": "button_mp3,main_bgm_mp3",
+			"name": "soundUI"
 		}
 	],
 	"resources": [
@@ -66,251 +62,6 @@
 			"subkeys": "loading_btn_0,loading_btn_1,loading_tiao_0,loading_tiao_1,loading_tiao_2,loading_yun_0,logo"
 		},
 		{
-			"url": "assets/sound/10kill.mp3",
-			"type": "sound",
-			"name": "10kill_mp3"
-		},
-		{
-			"url": "assets/sound/11kill.mp3",
-			"type": "sound",
-			"name": "11kill_mp3"
-		},
-		{
-			"url": "assets/sound/1kill.mp3",
-			"type": "sound",
-			"name": "1kill_mp3"
-		},
-		{
-			"url": "assets/sound/2kill.mp3",
-			"type": "sound",
-			"name": "2kill_mp3"
-		},
-		{
-			"url": "assets/sound/3kill.mp3",
-			"type": "sound",
-			"name": "3kill_mp3"
-		},
-		{
-			"url": "assets/sound/4kill.mp3",
-			"type": "sound",
-			"name": "4kill_mp3"
-		},
-		{
-			"url": "assets/sound/5kill.mp3",
-			"type": "sound",
-			"name": "5kill_mp3"
-		},
-		{
-			"url": "assets/sound/6kill.mp3",
-			"type": "sound",
-			"name": "6kill_mp3"
-		},
-		{
-			"url": "assets/sound/7kill.mp3",
-			"type": "sound",
-			"name": "7kill_mp3"
-		},
-		{
-			"url": "assets/sound/8kill.mp3",
-			"type": "sound",
-			"name": "8kill_mp3"
-		},
-		{
-			"url": "assets/sound/9kill.mp3",
-			"type": "sound",
-			"name": "9kill_mp3"
-		},
-		{
-			"url": "assets/sound/background1.mp3",
-			"type": "sound",
-			"name": "background1_mp3"
-		},
-		{
-			"url": "assets/sound/background2.mp3",
-			"type": "sound",
-			"name": "background2_mp3"
-		},
-		{
-			"url": "assets/sound/background3.mp3",
-			"type": "sound",
-			"name": "background3_mp3"
-		},
-		{
-			"url": "assets/sound/baozha.mp3",
-			"type": "sound",
-			"name": "baozha_mp3"
-		},
-		{
-			"url": "assets/sound/die.mp3",
-			"type": "sound",
-			"name": "die_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem.mp3",
-			"type": "sound",
-			"name": "eat_biggem_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem_1.mp3",
-			"type": "sound",
-			"name": "eat_biggem_1_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem_10.mp3",
-			"type": "sound",
-			"name": "eat_biggem_10_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem_2.mp3",
-			"type": "sound",
-			"name": "eat_biggem_2_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem_3.mp3",
-			"type": "sound",
-			"name": "eat_biggem_3_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem_4.mp3",
-			"type": "sound",
-			"name": "eat_biggem_4_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem_5.mp3",
-			"type": "sound",
-			"name": "eat_biggem_5_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem_6.mp3",
-			"type": "sound",
-			"name": "eat_biggem_6_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem_7.mp3",
-			"type": "sound",
-			"name": "eat_biggem_7_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem_8.mp3",
-			"type": "sound",
-			"name": "eat_biggem_8_mp3"
-		},
-		{
-			"url": "assets/sound/eat_biggem_9.mp3",
-			"type": "sound",
-			"name": "eat_biggem_9_mp3"
-		},
-		{
-			"url": "assets/sound/eat_power.mp3",
-			"type": "sound",
-			"name": "eat_power_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem_1.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_1_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem_10.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_10_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem_2.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_2_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem_3.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_3_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem_4.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_4_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem_5.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_5_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem_6.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_6_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem_7.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_7_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem_8.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_8_mp3"
-		},
-		{
-			"url": "assets/sound/eat_smallgem_9.mp3",
-			"type": "sound",
-			"name": "eat_smallgem_9_mp3"
-		},
-		{
-			"url": "assets/sound/end_menu.mp3",
-			"type": "sound",
-			"name": "end_menu_mp3"
-		},
-		{
-			"url": "assets/sound/kill.mp3",
-			"type": "sound",
-			"name": "kill_mp3"
-		},
-		{
-			"url": "assets/sound/main_1.mp3",
-			"type": "sound",
-			"name": "main_1_mp3"
-		},
-		{
-			"url": "assets/sound/maipao.mp3",
-			"type": "sound",
-			"name": "maipao_mp3"
-		},
-		{
-			"url": "assets/sound/popup.mp3",
-			"type": "sound",
-			"name": "popup_mp3"
-		},
-		{
-			"url": "assets/sound/select_button.mp3",
-			"type": "sound",
-			"name": "select_button_mp3"
-		},
-		{
-			"url": "assets/sound/set_success.mp3",
-			"type": "sound",
-			"name": "set_success_mp3"
-		},
-		{
-			"url": "assets/sound/skill01.mp3",
-			"type": "sound",
-			"name": "skill01_mp3"
-		},
-		{
-			"url": "assets/sound/tick.mp3",
-			"type": "sound",
-			"name": "tick_mp3"
-		},
-		{
-			"url": "assets/sound/wild.mp3",
-			"type": "sound",
-			"name": "wild_mp3"
-		},
-		{
 			"url": "assets/animUI/loading.png",
 			"type": "image",
 			"name": "loading_png"
@@ -346,6 +97,16 @@
 			"url": "assets/config/config.zip",
 			"type": "bin",
 			"name": "config_zip"
+		},
+		{
+			"url": "assets/sound/main_bgm.mp3",
+			"type": "sound",
+			"name": "main_bgm_mp3"
+		},
+		{
+			"url": "assets/sound/button.mp3",
+			"type": "sound",
+			"name": "button_mp3"
 		}
 	]
 }

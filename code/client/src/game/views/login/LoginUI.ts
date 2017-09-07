@@ -49,6 +49,7 @@ class LoginUI extends core.EUIComponent {
 	}
 
 	private onButtonClick(event: egret.TouchEvent): void {
+		SoundUtils.getInstance().playSound(2);
 		if (this.m_pLogoGroup.visible) {
 			this.m_pLogoGroup.visible = false;
 			this.m_pAccountGroup.visible = true
