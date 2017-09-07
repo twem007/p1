@@ -18,9 +18,9 @@ var core;
                 }
             };
         };
+        WebUtils.isKeyboard = true;
         return WebUtils;
     }());
-    WebUtils.isKeyboard = true;
     core.WebUtils = WebUtils;
     __reflect(WebUtils.prototype, "core.WebUtils");
 })(core || (core = {}));

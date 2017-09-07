@@ -40,10 +40,11 @@ var core;
          */
         TextUtils.formatString = function (str, args) {
             if (str) {
-                var reg = /\{[0-9]+\}/;
+                var reg = /\{[0-9]+?\}/;
                 while (str.match(reg)) {
                     var arr = str.match(reg);
-                    str = str.replace(reg, args[arr.index]);
+                    var arg = arr[0].match(/[0-9]+?/);
+                    str = str.replace(reg, args[parseInt(arg[0])]);
                 }
                 return str;
             }
@@ -76,9 +77,9 @@ var core;
                 target.parent.removeChild(target);
             }, this, [textfield]);
         };
+        TextUtils.s_textFlowParser = new egret.HtmlTextParser();
         return TextUtils;
     }());
-    TextUtils.s_textFlowParser = new egret.HtmlTextParser();
     core.TextUtils = TextUtils;
     __reflect(TextUtils.prototype, "core.TextUtils");
 })(core || (core = {}));

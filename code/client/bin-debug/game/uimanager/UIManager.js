@@ -219,9 +219,9 @@ var UIManager = (function () {
         group.scaleY = 0;
         egret.Tween.get(group).to({ alpha: 1, scaleX: 1.2, scaleY: 1.2 }, 300).to({ scaleX: 1, scaleY: 1 }, 100);
     };
+    UIManager.CONTENT_WIDTH = 1334;
+    UIManager.CONTENT_HEIGHT = 750;
     return UIManager;
 }());
-UIManager.CONTENT_WIDTH = 1334;
-UIManager.CONTENT_HEIGHT = 750;
 __reflect(UIManager.prototype, "UIManager");
 //# sourceMappingURL=UIManager.js.map

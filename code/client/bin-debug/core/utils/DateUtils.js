@@ -66,12 +66,12 @@ var core;
                     fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
             return fmt;
         };
+        DateUtils.s_serverTimestamp = 0; //服务器同步时间戳
+        DateUtils.s_clientTimestamp = 0; //客户端同步时间戳
+        DateUtils.s_delay = 10; // 网络延迟
+        DateUtils.s_sendTimestamp = 0;
         return DateUtils;
     }());
-    DateUtils.s_serverTimestamp = 0; //服务器同步时间戳
-    DateUtils.s_clientTimestamp = 0; //客户端同步时间戳
-    DateUtils.s_delay = 10; // 网络延迟
-    DateUtils.s_sendTimestamp = 0;
     core.DateUtils = DateUtils;
     __reflect(DateUtils.prototype, "core.DateUtils");
 })(core || (core = {}));

@@ -41,10 +41,11 @@ module core {
          */
         public static formatString(str: string, args: string[]): string {
             if (str) {
-                var reg: RegExp = /\{[0-9]+\}/;
+                let reg: RegExp = /\{[0-9]+?\}/;
                 while (str.match(reg)) {
-                    var arr: RegExpMatchArray = str.match(reg);
-                    str = str.replace(reg, args[arr.index]);
+                    let arr: RegExpMatchArray = str.match(reg);
+                    let arg: RegExpMatchArray = arr[0].match(/[0-9]+?/);
+                    str = str.replace(reg, args[parseInt(arg[0])]);
                 }
                 return str;
             }
