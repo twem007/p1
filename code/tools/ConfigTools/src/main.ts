@@ -71,10 +71,10 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                         for (let j: number = 0, jLen: number = rowData.length; j < jLen; j++) {
                             let channel: number = channels[j];
                             if ((channel & 1) == 1) {
-                                data_client[`${keys[j]}`] = `${rowData[j]}`;
+                                data_client[keys[j]] = formatValueType(types[j], rowData[j]);
                             }
                             if ((channel & 2) == 2) {
-                                data_server[`${keys[j]}`] = `${rowData[j]}`;
+                                data_server[keys[j]] = rowData[j];
                             }
                         }
                         clientData.data.push(data_client);
@@ -128,5 +128,17 @@ function formatKeyType(type: string): string {
             return "string";
         case "boolean":
             return "boolean";
+    }
+}
+
+function formatValueType(type: string, value: any): any {
+    switch (type) {
+        case "int32":
+        case "float":
+            return Number(value);
+        case "string":
+            return value + "";
+        case "boolean":
+            return Boolean(value);
     }
 }

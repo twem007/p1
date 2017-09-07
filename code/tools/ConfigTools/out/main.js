@@ -72,10 +72,10 @@ fs.readdir(xlsxPath, function (err, files) {
                         for (var j = 0, jLen = rowData.length; j < jLen; j++) {
                             var channel = channels[j];
                             if ((channel & 1) == 1) {
-                                data_client["" + keys[j]] = "" + rowData[j];
+                                data_client[keys[j]] = formatValueType(types[j], rowData[j]);
                             }
                             if ((channel & 2) == 2) {
-                                data_server["" + keys[j]] = "" + rowData[j];
+                                data_server[keys[j]] = rowData[j];
                             }
                         }
                         clientData.data.push(data_client);
@@ -126,6 +126,17 @@ function formatKeyType(type) {
             return "string";
         case "boolean":
             return "boolean";
+    }
+}
+function formatValueType(type, value) {
+    switch (type) {
+        case "int32":
+        case "float":
+            return Number(value);
+        case "string":
+            return value + "";
+        case "boolean":
+            return Boolean(value);
     }
 }
 //# sourceMappingURL=main.js.map
