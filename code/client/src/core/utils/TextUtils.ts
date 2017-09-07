@@ -35,8 +35,8 @@ module core {
         }
 
         /**
-         *  字符参数替换
-         * @param str       "参数替换{0}和{1}"
+         *  字符参数替换  数组索引与括号内索引一一对应
+         * @param str       "参数替换{0}和{1}..."
          * @param args      [x,y]    
          */
         public static formatString(str: string, args: string[]): string {
