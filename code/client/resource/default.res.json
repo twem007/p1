@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "loading_bg_1_jpg,combat_tiao_3_png,logoBoomUI_json,loadingUI_json,protobuf_proto",
+			"keys": "loading_bg_1_jpg,combat_tiao_3_png,logoBoomUI_json,loadingUI_json,protobuf_proto,config_zip",
 			"name": "preload"
 		},
 		{
@@ -341,6 +341,11 @@
 			"url": "assets/config/protobuf.proto",
 			"type": "text",
 			"name": "protobuf_proto"
+		},
+		{
+			"url": "assets/config/config.zip",
+			"type": "bin",
+			"name": "config_zip"
 		}
 	]
 }

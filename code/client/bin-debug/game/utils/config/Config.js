@@ -25,15 +25,14 @@ var Config = (function () {
                     var values = data.data;
                     var size = data.dataSize;
                     var config = new classRef();
-                    var attrs = config.attrs();
                     var dic = new Dictionary();
                     Config.s_configs[name_1] = dic;
                     for (var i = 0; i < size; i++) {
                         var value = values[i];
-                        for (var j = 0, jLen = attrs.length; j < jLen; j++) {
-                            config[attrs[j]] = value[j];
+                        for (var key_1 in value) {
+                            config[key_1] = value[key_1];
+                            dic.add(config[key_1], config);
                         }
-                        dic.add(value[0], config);
                     }
                 }
             }

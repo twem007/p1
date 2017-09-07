@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
 var xlsx = require("node-xlsx");
-console.log("\u5F53\u524D\u76EE\u5F55\uFF1A" + process.cwd());
 var xlsxPath = process.argv.splice(2, 1)[0] || process.cwd();
 var outPath = xlsxPath + "\\outFile";
+console.log("\u8BFB\u53D6\u76EE\u5F55\uFF1A" + xlsxPath);
 fs.readdir(xlsxPath, function (err, files) {
     if (err) {
         console.log("\u8BFB\u53D6\u76EE\u5F55\u5931\u8D25:" + err.message);
@@ -59,6 +59,8 @@ fs.readdir(xlsxPath, function (err, files) {
                 var size = sheetData.length - 6;
                 clientData.dataSize = size;
                 serverData.dataSize = size;
+                clientData.key = keys[0];
+                serverData.key = keys[0];
                 clientData.data = [];
                 serverData.data = [];
                 //解析表数据

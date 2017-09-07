@@ -3,7 +3,7 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 };
 var UtilsTest = (function () {
     function UtilsTest() {
-        var templete = "class {0} {\n{1}}\n{2}";
+        var templete = "class {0} {\n{1}\n}\n{2}";
         egret.log(core.TextUtils.formatString(templete, ['UtilsTest', "egret.log('')", 'testend']));
     }
     return UtilsTest;

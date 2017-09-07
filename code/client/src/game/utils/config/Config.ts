@@ -25,15 +25,14 @@ class Config {
                     let values: any[] = data.data;
                     let size: number = data.dataSize;
                     let config = new classRef();
-                    let attrs: string[] = config.attrs();
                     let dic: Dictionary<any> = new Dictionary<any>();
                     Config.s_configs[name] = dic;
                     for (let i: number = 0; i < size; i++) {
-                        let value: any[] = values[i];
-                        for (let j: number = 0, jLen: number = attrs.length; j < jLen; j++) {
-                            config[attrs[j]] = value[j];
+                        let value: any = values[i];
+                        for (let key in value) {
+                            config[key] = value[key];
                         }
-                        dic.add(value[0], config);
+                        dic.add(config[key], config);
                     }
                 }
             }

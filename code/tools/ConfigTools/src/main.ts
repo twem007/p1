@@ -58,6 +58,8 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                 let size: number = sheetData.length - 6;
                 clientData.dataSize = size;
                 serverData.dataSize = size;
+                clientData.key = keys[0];
+                serverData.key = keys[0];
                 clientData.data = [];
                 serverData.data = [];
                 //解析表数据
