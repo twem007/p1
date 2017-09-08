@@ -14,11 +14,11 @@ class SoundConfig {
 	 **/
 	public id:number;
 	/**
-	 * 物品名称
+	 * 音乐说明
 	 **/
 	public tips:string;
 	/**
-	 * 物品说明
+	 * 音乐文件Key
 	 **/
 	public soundName:string;
 	/**
