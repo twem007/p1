@@ -24,7 +24,6 @@ var Config = (function () {
                     }
                     var values = data.data;
                     var size = data.dataSize;
-                    var config = new classRef();
                     var dic = new Dictionary();
                     Config.s_configs[name_1] = dic;
                     for (var i = 0; i < size; i++) {

@@ -117,8 +117,6 @@ var Main = (function (_super) {
             core.ProtoFactory.init(RES.getRes('protobuf_proto'));
             this.isResourceLoadEnd = true;
             this.createScene();
-            var a = true;
-            egret.log(Number(a));
         }
     };
     /**

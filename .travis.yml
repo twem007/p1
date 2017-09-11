@@ -1,7 +1,21 @@
 language: node_js
+
 node_js:
-  - "node"
+  - node
+
+sudo: false
+
+cache:
+  directories:
+    - "node_modules"
+
+before_install:
+  - npm install -g npm
+
+install:
+  - npm install
+
 before_script:
-  - npm install --global gulp
-services:
-  - gulp
+  - npm install -g gulp-cli
+
+script: gulp
