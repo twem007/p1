@@ -1,0 +1,27 @@
+{
+  "name": "p1",
+  "version": "0.0.1",
+  "description": "A game framework based on egrets engine",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twem007/p1.git"
+  },
+  "keywords": [
+    "egret",
+    "typescript",
+    "gameframework"
+  ],
+  "author": "yuxuefeng",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twem007/p1/issues"
+  },
+  "homepage": "https://github.com/twem007/p1#readme"
+}
