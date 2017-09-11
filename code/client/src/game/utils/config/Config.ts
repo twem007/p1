@@ -24,7 +24,6 @@ class Config {
                     }
                     let values: any[] = data.data;
                     let size: number = data.dataSize;
-                    let config = new classRef();
                     let dic: Dictionary<any> = new Dictionary<any>();
                     Config.s_configs[name] = dic;
                     for (let i: number = 0; i < size; i++) {
