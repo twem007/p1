@@ -21,6 +21,9 @@ var core;
             if (!factory) {
                 var jsonData = RES.getRes(json);
                 var pngData = RES.getRes(png);
+                if (!jsonData || !pngData) {
+                    return null;
+                }
                 factory = new egret.MovieClipDataFactory(jsonData, pngData);
                 factory.enableCache = true;
                 this.m_mcFactorys[json] = factory;

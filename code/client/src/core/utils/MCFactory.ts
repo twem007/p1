@@ -23,6 +23,9 @@ module core {
             if (!factory) {
                 let jsonData: any = RES.getRes(json);
                 let pngData: egret.Texture = RES.getRes(png);
+                if (!jsonData || !pngData) {
+                    return null;
+                }
                 factory = new egret.MovieClipDataFactory(jsonData, pngData);
                 factory.enableCache = true;
                 this.m_mcFactorys[json] = factory;

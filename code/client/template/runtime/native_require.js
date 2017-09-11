@@ -85,6 +85,7 @@ var game_file_list = [
 	"bin-debug/game/views/main/MainUI.js",
 	"bin-debug/Main.js",
 	"bin-debug/ThemeAdapter.js",
+	"bin-debug/unittest/ResUtilsTest.js",
 	"bin-debug/unittest/UnitTest.js",
 	"bin-debug/unittest/UtilsTest.js",
 	"bin-debug/unittest/WSTest.js",
