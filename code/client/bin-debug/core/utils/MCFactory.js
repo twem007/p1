@@ -1,6 +1,9 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var core;
 (function (core) {
-    var MCFactory = /** @class */ (function () {
+    var MCFactory = (function () {
         function MCFactory() {
             this.m_factorys = {};
             this.m_mcFactorys = {};
@@ -82,5 +85,6 @@ var core;
         return MCFactory;
     }());
     core.MCFactory = MCFactory;
+    __reflect(MCFactory.prototype, "core.MCFactory");
 })(core || (core = {}));
 //# sourceMappingURL=MCFactory.js.map

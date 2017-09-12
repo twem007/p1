@@ -1,3 +1,6 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var core;
 (function (core) {
     /**
@@ -5,7 +8,7 @@ var core;
      * @author yuxuefeng
      *
      */
-    var DateUtils = /** @class */ (function () {
+    var DateUtils = (function () {
         function DateUtils() {
         }
         /**
@@ -70,5 +73,6 @@ var core;
         return DateUtils;
     }());
     core.DateUtils = DateUtils;
+    __reflect(DateUtils.prototype, "core.DateUtils");
 })(core || (core = {}));
 //# sourceMappingURL=DateUtils.js.map

@@ -1,6 +1,9 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var core;
 (function (core) {
-    var DBFactory = /** @class */ (function () {
+    var DBFactory = (function () {
         function DBFactory() {
             this.m_factorys = {};
             this.m_dbFactory = new dragonBones.EgretFactory();
@@ -36,5 +39,6 @@ var core;
         return DBFactory;
     }());
     core.DBFactory = DBFactory;
+    __reflect(DBFactory.prototype, "core.DBFactory");
 })(core || (core = {}));
 //# sourceMappingURL=DBFactory.js.map

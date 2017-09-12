@@ -1,3 +1,6 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -10,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var core;
 (function (core) {
-    var InputManager = /** @class */ (function () {
+    var InputManager = (function () {
         function InputManager() {
             this.m_keyMap = new Dictionary();
         }
@@ -69,7 +72,8 @@ var core;
         return InputManager;
     }());
     core.InputManager = InputManager;
-    var KeyData = /** @class */ (function () {
+    __reflect(InputManager.prototype, "core.InputManager");
+    var KeyData = (function () {
         function KeyData(key) {
             this.key = key;
             this.keyEnable = true;
@@ -77,7 +81,8 @@ var core;
         }
         return KeyData;
     }());
-    var KeyCallBack = /** @class */ (function (_super) {
+    __reflect(KeyData.prototype, "KeyData");
+    var KeyCallBack = (function (_super) {
         __extends(KeyCallBack, _super);
         function KeyCallBack(callback, thisObj) {
             var _this = _super.call(this, callback, thisObj) || this;
@@ -86,5 +91,6 @@ var core;
         }
         return KeyCallBack;
     }(core.Callback));
+    __reflect(KeyCallBack.prototype, "KeyCallBack");
 })(core || (core = {}));
 //# sourceMappingURL=InputManager.js.map

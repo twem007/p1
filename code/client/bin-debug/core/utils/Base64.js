@@ -1,3 +1,6 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var core;
 (function (core) {
     /**
@@ -5,7 +8,7 @@ var core;
      * @author
      *
      */
-    var Base64 = /** @class */ (function () {
+    var Base64 = (function () {
         function Base64() {
         }
         Base64.initEncodeChar = function () {
@@ -127,5 +130,6 @@ var core;
         return Base64;
     }());
     core.Base64 = Base64;
+    __reflect(Base64.prototype, "core.Base64");
 })(core || (core = {}));
 //# sourceMappingURL=Base64.js.map

@@ -1,7 +1,10 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 /**
  * 声音控制
  */
-var SoundUtils = /** @class */ (function () {
+var SoundUtils = (function () {
     function SoundUtils() {
         this.m_BGMVolume = 1;
         this.m_effectVolume = 1;
@@ -197,4 +200,5 @@ var SoundUtils = /** @class */ (function () {
     };
     return SoundUtils;
 }());
+__reflect(SoundUtils.prototype, "SoundUtils");
 //# sourceMappingURL=SoundUtils.js.map

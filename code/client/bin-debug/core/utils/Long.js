@@ -1,7 +1,10 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 /**
  * 来源：ProtoBuf
  */
-var Long = /** @class */ (function () {
+var Long = (function () {
     function Long(low, high, unsigned) {
         this.__isLong__ = {
             value: true,
@@ -750,4 +753,5 @@ var Long = /** @class */ (function () {
     Long.pow_dbl = Math.pow; // Used 4 times (4*8 to 15+4)
     return Long;
 }());
+__reflect(Long.prototype, "Long");
 //# sourceMappingURL=Long.js.map

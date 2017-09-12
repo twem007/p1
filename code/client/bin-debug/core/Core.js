@@ -1,3 +1,6 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var core;
 (function (core) {
     /**
@@ -5,7 +8,7 @@ var core;
      * @author
      *
      */
-    var Core = /** @class */ (function () {
+    var Core = (function () {
         function Core() {
         }
         Core.run = function (stage) {
@@ -20,5 +23,6 @@ var core;
         return Core;
     }());
     core.Core = Core;
+    __reflect(Core.prototype, "core.Core");
 })(core || (core = {}));
 //# sourceMappingURL=Core.js.map

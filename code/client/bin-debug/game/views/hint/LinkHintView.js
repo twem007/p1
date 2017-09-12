@@ -1,3 +1,6 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -11,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 /**
  * 转圈圈界面
  */
-var LinkHintView = /** @class */ (function (_super) {
+var LinkHintView = (function (_super) {
     __extends(LinkHintView, _super);
     function LinkHintView() {
         var _this = _super.call(this) || this;
@@ -49,4 +52,5 @@ var LinkHintView = /** @class */ (function (_super) {
     };
     return LinkHintView;
 }(core.EUIComponent));
+__reflect(LinkHintView.prototype, "LinkHintView");
 //# sourceMappingURL=LinkHintView.js.map

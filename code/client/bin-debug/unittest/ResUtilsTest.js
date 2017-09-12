@@ -1,4 +1,7 @@
-var ResUtilsTest = /** @class */ (function () {
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
+var ResUtilsTest = (function () {
     function ResUtilsTest() {
         RES.createGroup('TestGroup', ['commonBoom_json']);
         core.ResUtils.loadGroups(['TestGroup'], null, null, this.onLoadComplete, this);
@@ -9,4 +12,5 @@ var ResUtilsTest = /** @class */ (function () {
     };
     return ResUtilsTest;
 }());
+__reflect(ResUtilsTest.prototype, "ResUtilsTest");
 //# sourceMappingURL=ResUtilsTest.js.map

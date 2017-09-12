@@ -1,3 +1,6 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -8,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var LoginUI = /** @class */ (function (_super) {
+var LoginUI = (function (_super) {
     __extends(LoginUI, _super);
     function LoginUI() {
         var _this = _super.call(this) || this;
@@ -67,4 +70,5 @@ var LoginUI = /** @class */ (function (_super) {
     };
     return LoginUI;
 }(core.EUIComponent));
+__reflect(LoginUI.prototype, "LoginUI");
 //# sourceMappingURL=LoginUI.js.map

@@ -1,1 +1,1 @@
-{"version":3,"file":"ConfigDef.js","sourceRoot":"","sources":["../../../../src/game/utils/config/ConfigDef.ts"],"names":[],"mappings":"AAAA;IAAA;IASA,CAAC;IAAD,sBAAC;AAAD,CAAC,AATD,IASC;AACD;IAAA;IAqBA,CAAC;IAAD,kBAAC;AAAD,CAAC,AArBD,IAqBC"}
+{"version":3,"file":"ConfigDef.js","sourceRoot":"","sources":["../../../../src/game/utils/config/ConfigDef.ts"],"names":[],"mappings":";;;AAAA;IAAA;IASA,CAAC;IAAD,sBAAC;AAAD,CAAC,AATD,IASC;AATK,UAAA,eAAe,8BASpB,CAAA;AACD;IAAA;IAqBA,CAAC;IAAD,kBAAC;AAAD,CAAC,AArBD,IAqBC;AArBK,UAAA,WAAW,0BAqBhB,CAAA"}

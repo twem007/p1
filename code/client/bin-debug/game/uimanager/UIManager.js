@@ -1,4 +1,7 @@
-var UIManager = /** @class */ (function () {
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
+var UIManager = (function () {
     function UIManager() {
     }
     /**
@@ -220,4 +223,5 @@ var UIManager = /** @class */ (function () {
     UIManager.CONTENT_HEIGHT = 750;
     return UIManager;
 }());
+__reflect(UIManager.prototype, "UIManager");
 //# sourceMappingURL=UIManager.js.map

@@ -1,3 +1,6 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -11,11 +14,12 @@ var __extends = (this && this.__extends) || (function () {
 /**
  * 选择模式按钮组件
  */
-var ModleBtn = /** @class */ (function (_super) {
+var ModleBtn = (function (_super) {
     __extends(ModleBtn, _super);
     function ModleBtn() {
         return _super.call(this) || this;
     }
     return ModleBtn;
 }(eui.Component));
+__reflect(ModleBtn.prototype, "ModleBtn");
 //# sourceMappingURL=ModleBtn.js.map

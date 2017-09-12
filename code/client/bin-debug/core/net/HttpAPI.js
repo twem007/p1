@@ -1,9 +1,12 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 /**
  *
  * @author
  *
  */
-var HttpAPI = /** @class */ (function () {
+var HttpAPI = (function () {
     function HttpAPI() {
     }
     /**
@@ -52,4 +55,5 @@ var HttpAPI = /** @class */ (function () {
     };
     return HttpAPI;
 }());
+__reflect(HttpAPI.prototype, "HttpAPI");
 //# sourceMappingURL=HttpAPI.js.map

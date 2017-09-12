@@ -1,3 +1,6 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -15,7 +18,7 @@ var core;
      * @author yuxuefeng
      *
      */
-    var FrameEventCenter = /** @class */ (function () {
+    var FrameEventCenter = (function () {
         function FrameEventCenter() {
             this.m_callbacks = [];
         }
@@ -82,7 +85,8 @@ var core;
         return FrameEventCenter;
     }());
     core.FrameEventCenter = FrameEventCenter;
-    var FrameCallBack = /** @class */ (function (_super) {
+    __reflect(FrameEventCenter.prototype, "core.FrameEventCenter");
+    var FrameCallBack = (function (_super) {
         __extends(FrameCallBack, _super);
         function FrameCallBack(callback, thisObj) {
             var _this = _super.call(this, callback, thisObj) || this;
@@ -97,5 +101,6 @@ var core;
         };
         return FrameCallBack;
     }(core.Callback));
+    __reflect(FrameCallBack.prototype, "FrameCallBack");
 })(core || (core = {}));
 //# sourceMappingURL=FrameEventCenter.js.map

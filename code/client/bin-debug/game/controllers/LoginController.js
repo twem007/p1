@@ -1,3 +1,6 @@
+var __reflect = (this && this.__reflect) || function (p, c, t) {
+    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
+};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -11,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
 /**
  * 登录界面控制器
  */
-var LoginController = /** @class */ (function (_super) {
+var LoginController = (function (_super) {
     __extends(LoginController, _super);
     function LoginController() {
         return _super.call(this, ModuleEnum.LOGIN) || this;
@@ -46,4 +49,5 @@ var LoginController = /** @class */ (function (_super) {
     };
     return LoginController;
 }(core.Control));
+__reflect(LoginController.prototype, "LoginController");
 //# sourceMappingURL=LoginController.js.map
