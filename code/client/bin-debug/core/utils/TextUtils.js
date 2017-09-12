@@ -1,6 +1,3 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var core;
 (function (core) {
     /**
@@ -8,7 +5,7 @@ var core;
      * @author
      *
      */
-    var TextUtils = (function () {
+    var TextUtils = /** @class */ (function () {
         function TextUtils() {
         }
         /**
@@ -81,6 +78,5 @@ var core;
         return TextUtils;
     }());
     core.TextUtils = TextUtils;
-    __reflect(TextUtils.prototype, "core.TextUtils");
 })(core || (core = {}));
 //# sourceMappingURL=TextUtils.js.map

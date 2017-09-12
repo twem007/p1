@@ -1,6 +1,3 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -13,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var core;
 (function (core) {
-    var TimerManager = (function () {
+    var TimerManager = /** @class */ (function () {
         function TimerManager() {
             if (TimerManager.s_instance) {
                 throw new Error('单例类不可实例化');
@@ -129,8 +126,7 @@ var core;
         return TimerManager;
     }());
     core.TimerManager = TimerManager;
-    __reflect(TimerManager.prototype, "core.TimerManager");
-    var TickData = (function (_super) {
+    var TickData = /** @class */ (function (_super) {
         __extends(TickData, _super);
         function TickData() {
             return _super.call(this) || this;
@@ -149,6 +145,5 @@ var core;
         return TickData;
     }(egret.HashObject));
     core.TickData = TickData;
-    __reflect(TickData.prototype, "core.TickData");
 })(core || (core = {}));
 //# sourceMappingURL=TimerManager.js.map

@@ -26,10 +26,7 @@
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 //////////////////////////////////////////////////////////////////////////////////////
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
-var AssetAdapter = (function () {
+var AssetAdapter = /** @class */ (function () {
     function AssetAdapter() {
     }
     /**
@@ -58,5 +55,4 @@ var AssetAdapter = (function () {
     };
     return AssetAdapter;
 }());
-__reflect(AssetAdapter.prototype, "AssetAdapter", ["eui.IAssetAdapter"]);
 //# sourceMappingURL=AssetAdapter.js.map

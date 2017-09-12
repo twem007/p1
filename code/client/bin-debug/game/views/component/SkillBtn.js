@@ -1,6 +1,3 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -14,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
 /**
  * 道具技能按钮
  */
-var SkillBtn = (function (_super) {
+var SkillBtn = /** @class */ (function (_super) {
     __extends(SkillBtn, _super);
     function SkillBtn() {
         return _super.call(this) || this;
@@ -25,5 +22,4 @@ var SkillBtn = (function (_super) {
     };
     return SkillBtn;
 }(eui.Component));
-__reflect(SkillBtn.prototype, "SkillBtn");
 //# sourceMappingURL=SkillBtn.js.map

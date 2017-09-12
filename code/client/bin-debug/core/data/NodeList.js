@@ -1,6 +1,3 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var core;
 (function (core) {
     /**
@@ -8,7 +5,7 @@ var core;
      * @author
      *
      */
-    var NodeList = (function () {
+    var NodeList = /** @class */ (function () {
         function NodeList(dataList, isLoop) {
             if (isLoop === void 0) { isLoop = false; }
             this.m_list = [];
@@ -54,6 +51,5 @@ var core;
         return NodeList;
     }());
     core.NodeList = NodeList;
-    __reflect(NodeList.prototype, "core.NodeList");
 })(core || (core = {}));
 //# sourceMappingURL=NodeList.js.map

@@ -1,9 +1,6 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var core;
 (function (core) {
-    var PlatUtils = (function () {
+    var PlatUtils = /** @class */ (function () {
         function PlatUtils() {
         }
         Object.defineProperty(PlatUtils, "isPC", {
@@ -51,6 +48,5 @@ var core;
         return PlatUtils;
     }());
     core.PlatUtils = PlatUtils;
-    __reflect(PlatUtils.prototype, "core.PlatUtils");
 })(core || (core = {}));
 //# sourceMappingURL=PlatUtils.js.map

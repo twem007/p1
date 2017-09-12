@@ -1,6 +1,3 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var core;
 (function (core) {
     /**
@@ -8,7 +5,7 @@ var core;
      * @author yuxuefeng
      *
      */
-    var SocketAPI = (function () {
+    var SocketAPI = /** @class */ (function () {
         function SocketAPI() {
             /**
              * WebSocket连接状态
@@ -92,7 +89,6 @@ var core;
         return SocketAPI;
     }());
     core.SocketAPI = SocketAPI;
-    __reflect(SocketAPI.prototype, "core.SocketAPI");
     /**
      * CONNECTING   正在尝试连接服务器
      * CONNECTED    已成功连接服务器

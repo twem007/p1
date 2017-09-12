@@ -1,7 +1,4 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
-var WSTest = (function () {
+var WSTest = /** @class */ (function () {
     function WSTest() {
         core.EventCenter.getInstance().addEventListener(core.EventID.SOCKET_CONNECT, this.onSocketConnect, this);
         core.EventCenter.getInstance().addEventListener(core.EventID.SOCKET_CLOSE, this.onSocketClose, this);
@@ -43,5 +40,4 @@ var WSTest = (function () {
     };
     return WSTest;
 }());
-__reflect(WSTest.prototype, "WSTest");
 //# sourceMappingURL=WSTest.js.map

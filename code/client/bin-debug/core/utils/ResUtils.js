@@ -1,6 +1,3 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -13,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var core;
 (function (core) {
-    var GroupLoader = (function () {
+    var GroupLoader = /** @class */ (function () {
         function GroupLoader() {
             RES.addEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.addEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
@@ -86,8 +83,7 @@ var core;
         };
         return GroupLoader;
     }());
-    __reflect(GroupLoader.prototype, "GroupLoader");
-    var ResUtils = (function () {
+    var ResUtils = /** @class */ (function () {
         function ResUtils() {
         }
         /**
@@ -125,8 +121,7 @@ var core;
         return ResUtils;
     }());
     core.ResUtils = ResUtils;
-    __reflect(ResUtils.prototype, "core.ResUtils");
-    var GroupData = (function (_super) {
+    var GroupData = /** @class */ (function (_super) {
         __extends(GroupData, _super);
         function GroupData() {
             return _super !== null && _super.apply(this, arguments) || this;
@@ -134,6 +129,5 @@ var core;
         return GroupData;
     }(core.Progress));
     core.GroupData = GroupData;
-    __reflect(GroupData.prototype, "core.GroupData");
 })(core || (core = {}));
 //# sourceMappingURL=ResUtils.js.map

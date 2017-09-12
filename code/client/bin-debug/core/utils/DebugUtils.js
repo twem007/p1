@@ -1,6 +1,3 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var core;
 (function (core) {
     /**
@@ -8,7 +5,7 @@ var core;
      * @author
      *
      */
-    var DebugUtils = (function () {
+    var DebugUtils = /** @class */ (function () {
         function DebugUtils() {
         }
         /**
@@ -27,6 +24,5 @@ var core;
         return DebugUtils;
     }());
     core.DebugUtils = DebugUtils;
-    __reflect(DebugUtils.prototype, "core.DebugUtils");
 })(core || (core = {}));
 //# sourceMappingURL=DebugUtils.js.map

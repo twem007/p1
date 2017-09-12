@@ -1,6 +1,3 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -18,7 +15,7 @@ var core;
      * @author yuxuefeng
      *
      */
-    var ByteBuffer = (function (_super) {
+    var ByteBuffer = /** @class */ (function (_super) {
         __extends(ByteBuffer, _super);
         function ByteBuffer(buffer) {
             return _super.call(this, buffer) || this;
@@ -44,6 +41,5 @@ var core;
         return ByteBuffer;
     }(egret.ByteArray));
     core.ByteBuffer = ByteBuffer;
-    __reflect(ByteBuffer.prototype, "core.ByteBuffer");
 })(core || (core = {}));
 //# sourceMappingURL=ByteBuffer.js.map

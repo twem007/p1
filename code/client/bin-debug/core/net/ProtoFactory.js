@@ -1,9 +1,6 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var core;
 (function (core) {
-    var ProtoFactory = (function () {
+    var ProtoFactory = /** @class */ (function () {
         function ProtoFactory() {
         }
         /**
@@ -84,6 +81,5 @@ var core;
         return ProtoFactory;
     }());
     core.ProtoFactory = ProtoFactory;
-    __reflect(ProtoFactory.prototype, "core.ProtoFactory");
 })(core || (core = {}));
 //# sourceMappingURL=ProtoFactory.js.map

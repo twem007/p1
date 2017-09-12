@@ -1,9 +1,6 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var core;
 (function (core) {
-    var WebUtils = (function () {
+    var WebUtils = /** @class */ (function () {
         function WebUtils() {
         }
         WebUtils.addKeyboardListener = function () {
@@ -22,6 +19,5 @@ var core;
         return WebUtils;
     }());
     core.WebUtils = WebUtils;
-    __reflect(WebUtils.prototype, "core.WebUtils");
 })(core || (core = {}));
 //# sourceMappingURL=WebUtils.js.map

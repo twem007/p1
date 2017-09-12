@@ -1,6 +1,3 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -17,7 +14,7 @@ var core;
      * EUIComponent为EUI容器组件，该容器自动关注添加到舞台和从舞台移除事件
      *
      */
-    var EUIComponent = (function (_super) {
+    var EUIComponent = /** @class */ (function (_super) {
         __extends(EUIComponent, _super);
         function EUIComponent() {
             var _this = _super.call(this) || this;
@@ -58,6 +55,5 @@ var core;
         return EUIComponent;
     }(eui.Component));
     core.EUIComponent = EUIComponent;
-    __reflect(EUIComponent.prototype, "core.EUIComponent", ["core.IComponent"]);
 })(core || (core = {}));
 //# sourceMappingURL=EUIComponent.js.map

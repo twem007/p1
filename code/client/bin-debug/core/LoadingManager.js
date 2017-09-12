@@ -1,9 +1,6 @@
-var __reflect = (this && this.__reflect) || function (p, c, t) {
-    p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
-};
 var core;
 (function (core) {
-    var LoadingManager = (function () {
+    var LoadingManager = /** @class */ (function () {
         function LoadingManager() {
         }
         /**
@@ -43,6 +40,5 @@ var core;
         return LoadingManager;
     }());
     core.LoadingManager = LoadingManager;
-    __reflect(LoadingManager.prototype, "core.LoadingManager");
 })(core || (core = {}));
 //# sourceMappingURL=LoadingManager.js.map
