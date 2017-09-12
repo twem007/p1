@@ -672,86 +672,86 @@ var Long = (function () {
         // Throws for non-objects, converts non-instanceof Long:
         return Long.fromBits(val.low, val.high, val.unsigned);
     };
-    Long.INT_CACHE = {};
-    Long.UINT_CACHE = {};
-    /**
-     * @type {number}
-     * @const
-     * @inner
-     */
-    Long.TWO_PWR_16_DBL = 1 << 16;
-    /**
-     * @type {number}
-     * @const
-     * @inner
-     */
-    Long.TWO_PWR_24_DBL = 1 << 24;
-    /**
-     * @type {number}
-     * @const
-     * @inner
-     */
-    Long.TWO_PWR_32_DBL = Long.TWO_PWR_16_DBL * Long.TWO_PWR_16_DBL;
-    /**
-     * @type {number}
-     * @const
-     * @inner
-     */
-    Long.TWO_PWR_64_DBL = Long.TWO_PWR_32_DBL * Long.TWO_PWR_32_DBL;
-    /**
-     * @type {number}
-     * @const
-     * @inner
-     */
-    Long.TWO_PWR_63_DBL = Long.TWO_PWR_64_DBL / 2;
-    /**
-     * @type {!Long}
-     * @const
-     * @inner
-     */
-    Long.TWO_PWR_24 = Long.fromInt(Long.TWO_PWR_24_DBL);
-    /**
-     * @type {!Long}
-     * @inner
-     */
-    Long.ZERO = Long.fromInt(0);
-    /**
-     * @type {!Long}
-     * @inner
-     */
-    Long.UZERO = Long.fromInt(0, true);
-    /**
-     * @type {!Long}
-     * @inner
-     */
-    Long.ONE = Long.fromInt(1);
-    /**
-     * @type {!Long}
-     * @inner
-     */
-    Long.UONE = Long.fromInt(1, true);
-    /**
-     * @type {!Long}
-     * @inner
-     */
-    Long.NEG_ONE = Long.fromInt(-1);
-    /**
-     * @type {!Long}
-     * @inner
-     */
-    Long.MAX_VALUE = Long.fromBits(0xFFFFFFFF | 0, 0x7FFFFFFF | 0, false);
-    /**
-     * @type {!Long}
-     * @inner
-     */
-    Long.MAX_UNSIGNED_VALUE = Long.fromBits(0xFFFFFFFF | 0, 0xFFFFFFFF | 0, true);
-    /**
-     * @type {!Long}
-     * @inner
-     */
-    Long.MIN_VALUE = Long.fromBits(0, 0x80000000 | 0, false);
-    Long.pow_dbl = Math.pow; // Used 4 times (4*8 to 15+4)
     return Long;
 }());
+Long.INT_CACHE = {};
+Long.UINT_CACHE = {};
+/**
+ * @type {number}
+ * @const
+ * @inner
+ */
+Long.TWO_PWR_16_DBL = 1 << 16;
+/**
+ * @type {number}
+ * @const
+ * @inner
+ */
+Long.TWO_PWR_24_DBL = 1 << 24;
+/**
+ * @type {number}
+ * @const
+ * @inner
+ */
+Long.TWO_PWR_32_DBL = Long.TWO_PWR_16_DBL * Long.TWO_PWR_16_DBL;
+/**
+ * @type {number}
+ * @const
+ * @inner
+ */
+Long.TWO_PWR_64_DBL = Long.TWO_PWR_32_DBL * Long.TWO_PWR_32_DBL;
+/**
+ * @type {number}
+ * @const
+ * @inner
+ */
+Long.TWO_PWR_63_DBL = Long.TWO_PWR_64_DBL / 2;
+/**
+ * @type {!Long}
+ * @const
+ * @inner
+ */
+Long.TWO_PWR_24 = Long.fromInt(Long.TWO_PWR_24_DBL);
+/**
+ * @type {!Long}
+ * @inner
+ */
+Long.ZERO = Long.fromInt(0);
+/**
+ * @type {!Long}
+ * @inner
+ */
+Long.UZERO = Long.fromInt(0, true);
+/**
+ * @type {!Long}
+ * @inner
+ */
+Long.ONE = Long.fromInt(1);
+/**
+ * @type {!Long}
+ * @inner
+ */
+Long.UONE = Long.fromInt(1, true);
+/**
+ * @type {!Long}
+ * @inner
+ */
+Long.NEG_ONE = Long.fromInt(-1);
+/**
+ * @type {!Long}
+ * @inner
+ */
+Long.MAX_VALUE = Long.fromBits(0xFFFFFFFF | 0, 0x7FFFFFFF | 0, false);
+/**
+ * @type {!Long}
+ * @inner
+ */
+Long.MAX_UNSIGNED_VALUE = Long.fromBits(0xFFFFFFFF | 0, 0xFFFFFFFF | 0, true);
+/**
+ * @type {!Long}
+ * @inner
+ */
+Long.MIN_VALUE = Long.fromBits(0, 0x80000000 | 0, false);
+Long.pow_dbl = Math.pow; // Used 4 times (4*8 to 15+4)
 __reflect(Long.prototype, "Long");
 //# sourceMappingURL=Long.js.map

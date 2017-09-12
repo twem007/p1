@@ -125,10 +125,10 @@ var core;
             }
             return "";
         };
-        Base64.s_encodeChars = Base64.initEncodeChar();
-        Base64.s_decodeChars = Base64.initDecodeChar();
         return Base64;
     }());
+    Base64.s_encodeChars = Base64.initEncodeChar();
+    Base64.s_decodeChars = Base64.initDecodeChar();
     core.Base64 = Base64;
     __reflect(Base64.prototype, "core.Base64");
 })(core || (core = {}));

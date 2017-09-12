@@ -23,7 +23,7 @@ class EntranceBtn extends core.EUIComponent {
 	}
 
 	private onTouchButton(event: egret.TouchEvent): void {
-		SoundUtils.getInstance().playSound(2);
+		core.SoundUtils.getInstance().playSound(2);
 	}
 	
 	/**

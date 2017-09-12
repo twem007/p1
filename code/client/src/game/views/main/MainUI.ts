@@ -30,7 +30,7 @@ class MainUI extends core.EUIComponent {
 	}
 	protected onShow(): void {
 		super.onShow();
-		SoundUtils.getInstance().playSound(1, 0);
+		core.SoundUtils.getInstance().playSound(1, 0);
 		this.onAdaptive();
 	}
 	protected addListener() {

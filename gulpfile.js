@@ -21,7 +21,7 @@ let every = function () {
 }
 
 // 定义一个所依赖的 task 必须在这个 task 执行之前完成
-gulp.task('test', ['build'], function () {
+gulp.task('test', ['clean', 'build'], function () {
   // 'build' 完成后
   console.log("执行测试流程");
 });
