@@ -3,7 +3,7 @@ var gulp = require('gulp');
 var exec = require('child_process').exec;
 // 返回一个 callback，因此系统可以知道它什么时候完成
 gulp.task('build', function (cb) {
-  // 做一些事 -- 异步的或者其他的
+  console.log("执行构建流程");
   gulp.src('./code/client/src/')
     .pipe(every());
 
@@ -18,6 +18,7 @@ let every = function () {
 // 定义一个所依赖的 task 必须在这个 task 执行之前完成
 gulp.task('test', ['build'], function () {
   // 'build' 完成后
+  console.log("执行测试流程");
 });
 
 gulp.task('default', ['build', 'test']);
