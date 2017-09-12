@@ -5,7 +5,9 @@ var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('clean', function (cb) {
   console.log("执行清理流程");
-  del(['code/client/bin-debug/**/*'], cb);
+  del(['code/client/bin-debug/**/*']).then(paths => {
+    cb();
+  });
 });
 
 // 返回一个 callback，因此系统可以知道它什么时候完成
