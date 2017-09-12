@@ -1,5 +1,5 @@
 module core {
-	class GroupLoader {
+    class GroupLoader {
 
         private m_groupData: GroupData;
 
@@ -81,8 +81,14 @@ module core {
     export class ResUtils {
         /**
          * 加载资源组
+         * @param groups 当前加载资源组列表
+         * @param onLoadProgress 资源组加载进度回调
+         * @param onLoadFaild 资源组加载失败回调
+         * @param onLoadComplete 资源组加载完成回调
+         * @param thisObj
+         * @param param 参数列表
          */
-        public static loadGroups(groups: string[], onLoadProgress: (data: GroupData) => void, onLoadFaild: (data: GroupData) => void, onLoadComplete: (data: GroupData) => void, thisObj: any): void {
+        public static loadGroups(groups: string[], onLoadProgress: (data: GroupData) => void, onLoadFaild: (data: GroupData) => void, onLoadComplete: (data: GroupData) => void, thisObj: any, param?: any): void {
             if (groups) {
                 let groupData: GroupData = new GroupData();
                 groupData.loadQueue = groups;
@@ -93,6 +99,7 @@ module core {
                 groupData.onLoadFaild = onLoadFaild;
                 groupData.onLoadComplete = onLoadComplete;
                 groupData.thisObj = thisObj;
+                groupData.param = param;
                 if (groups.length > 0) {
                     let loader: GroupLoader = new GroupLoader();
                     loader.loadGroups(groupData);
@@ -116,5 +123,6 @@ module core {
         public onLoadFaild: (data: GroupData) => void;
         public onLoadComplete: (data: GroupData) => void;
         public thisObj: any;
+        public param: any;
     }
 }

@@ -13,13 +13,13 @@
 	],
 	"game": [
 		"bin-debug/core/Control.js",
+		"bin-debug/core/com/EUIComponent.js",
+		"bin-debug/core/com/EUILayer.js",
 		"bin-debug/core/data/Callback.js",
 		"bin-debug/core/data/Dictionary.js",
 		"bin-debug/core/event/EventData.js",
 		"bin-debug/core/interfaces/ILoadingUI.js",
 		"bin-debug/core/com/Component.js",
-		"bin-debug/core/com/EUIComponent.js",
-		"bin-debug/core/com/EUILayer.js",
 		"bin-debug/core/utils/DebugUtils.js",
 		"bin-debug/core/LoadingManager.js",
 		"bin-debug/core/TimerManager.js",
@@ -85,6 +85,7 @@
 		"bin-debug/game/views/login/LoginUI.js",
 		"bin-debug/game/views/main/MainPlayerFace.js",
 		"bin-debug/game/views/main/MainUI.js",
+		"bin-debug/unittest/ResUtilsTest.js",
 		"bin-debug/unittest/UnitTest.js",
 		"bin-debug/unittest/UtilsTest.js",
 		"bin-debug/Main.js"

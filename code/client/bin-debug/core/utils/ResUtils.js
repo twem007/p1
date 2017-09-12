@@ -1,11 +1,16 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var core;
 (function (core) {
     var GroupLoader = (function () {
@@ -87,8 +92,14 @@ var core;
         }
         /**
          * 加载资源组
+         * @param groups 当前加载资源组列表
+         * @param onLoadProgress 资源组加载进度回调
+         * @param onLoadFaild 资源组加载失败回调
+         * @param onLoadComplete 资源组加载完成回调
+         * @param thisObj
+         * @param param 参数列表
          */
-        ResUtils.loadGroups = function (groups, onLoadProgress, onLoadFaild, onLoadComplete, thisObj) {
+        ResUtils.loadGroups = function (groups, onLoadProgress, onLoadFaild, onLoadComplete, thisObj, param) {
             if (groups) {
                 var groupData = new GroupData();
                 groupData.loadQueue = groups;
@@ -99,6 +110,7 @@ var core;
                 groupData.onLoadFaild = onLoadFaild;
                 groupData.onLoadComplete = onLoadComplete;
                 groupData.thisObj = thisObj;
+                groupData.param = param;
                 if (groups.length > 0) {
                     var loader = new GroupLoader();
                     loader.loadGroups(groupData);
