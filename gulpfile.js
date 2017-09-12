@@ -1,13 +1,11 @@
 var gulp = require('gulp');
 var del = require('del');
-// 在 shell 中执行一个命令
-var exec = require('child_process').exec;
+var ts = require('gulp-typescript');
+var sourcemaps = require('gulp-sourcemaps');
 
 gulp.task('clean', function (cb) {
   console.log("执行清理流程");
-  del([
-    'code/client/bin-debug/*',
-  ], cb);
+  del(['code/client/bin-debug/**/*'], cb);
 });
 
 // 返回一个 callback，因此系统可以知道它什么时候完成

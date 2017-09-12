@@ -13,13 +13,13 @@ var game_file_list = [
 	"thirdparty/protobuf/bin/protobuf/protobuf.js",
 	"thirdparty/jszip/bin/jszip/jszip.js",
 	"bin-debug/core/com/Component.js",
+	"bin-debug/core/com/EUIComponent.js",
 	"bin-debug/core/com/EUILayer.js",
 	"bin-debug/core/Control.js",
 	"bin-debug/core/data/Callback.js",
 	"bin-debug/core/data/Dictionary.js",
 	"bin-debug/core/event/EventData.js",
 	"bin-debug/core/interfaces/ILoadingUI.js",
-	"bin-debug/core/com/EUIComponent.js",
 	"bin-debug/core/utils/DebugUtils.js",
 	"bin-debug/core/Core.js",
 	"bin-debug/core/com/Layer.js",
@@ -50,7 +50,7 @@ var game_file_list = [
 	"bin-debug/core/utils/CachePool.js",
 	"bin-debug/core/utils/DateUtils.js",
 	"bin-debug/core/utils/DBFactory.js",
-	"bin-debug/unittest/WSTest.js",
+	"bin-debug/core/com/Animation.js",
 	"bin-debug/core/utils/Long.js",
 	"bin-debug/core/utils/MathUtils.js",
 	"bin-debug/core/utils/MCFactory.js",
@@ -88,7 +88,7 @@ var game_file_list = [
 	"bin-debug/unittest/ResUtilsTest.js",
 	"bin-debug/unittest/UnitTest.js",
 	"bin-debug/unittest/UtilsTest.js",
-	"bin-debug/core/com/Animation.js",
+	"bin-debug/unittest/WSTest.js",
 	//----auto game_file_list end----
 ];
 
