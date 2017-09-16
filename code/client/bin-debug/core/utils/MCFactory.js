@@ -10,28 +10,27 @@ var core;
         }
         /**
          * 获取影片剪辑
-         * @param json  影片剪辑JSON名称
-         * @param png   影片剪辑PNG名称
-         * @param name  影片剪辑名称
-         * @param isCenter 是否锚点居中
+         * @param mcFile    影片剪辑文件名前缀
+         * @param mcName    影片剪辑名称
+         * @param isCenter  是否锚点居中
          */
-        MCFactory.prototype.getMovieClip = function (json, png, name, isCenter) {
+        MCFactory.prototype.getMovieClip = function (mcFile, mcName, isCenter) {
             if (isCenter === void 0) { isCenter = true; }
-            var factory = this.m_mcFactorys[json];
+            var factory = this.m_mcFactorys[mcFile];
             if (!factory) {
-                var jsonData = RES.getRes(json);
-                var pngData = RES.getRes(png);
+                var jsonData = RES.getRes(mcFile + "_json");
+                var pngData = RES.getRes(mcFile + "_png");
                 if (!jsonData || !pngData) {
                     return null;
                 }
                 factory = new egret.MovieClipDataFactory(jsonData, pngData);
                 factory.enableCache = true;
-                this.m_mcFactorys[json] = factory;
+                this.m_mcFactorys[mcFile] = factory;
             }
-            var mcList = this.m_factorys[json + ">" + name];
+            var mcList = this.m_factorys[mcFile + ">" + mcName];
             if (!mcList) {
                 mcList = [];
-                this.m_factorys[json + ">" + name] = mcList;
+                this.m_factorys[mcFile + ">" + mcName] = mcList;
             }
             if (mcList.length > 0) {
                 var mc = mcList.pop();
@@ -43,6 +42,8 @@ var core;
                 if (mcData.mcData) {
                     var mc = new egret.MovieClip(mcData);
                     mc.gotoAndStop(1);
+                    mc['mcFile'] = mcFile;
+                    mc['mcName'] = mcName;
                     if (isCenter) {
                         mc.anchorOffsetX = (mc.width + mcData.mcData.frames[0].x * 2) * 0.5;
                         mc.anchorOffsetY = (mc.height + mcData.mcData.frames[0].y * 2) * 0.5;
@@ -58,16 +59,16 @@ var core;
          * @param name  影片剪辑名称
          * @param mc    影片剪辑实例
          */
-        MCFactory.prototype.revertMovieClip = function (json, name, mc) {
+        MCFactory.prototype.revertMovieClip = function (mc) {
             if (mc) {
                 mc.gotoAndStop(1);
                 if (mc.parent) {
                     mc.parent.removeChild(mc);
                 }
-                var mcList = this.m_factorys[json + ">" + name];
+                var mcList = this.m_factorys[mc['mcFile'] + ">" + mc['mcName']];
                 if (!mcList) {
                     mcList = [];
-                    this.m_factorys[json + ">" + name] = mcList;
+                    this.m_factorys[mc['mcFile'] + ">" + mc['mcName']] = mcList;
                 }
                 mcList.push(mc);
             }

@@ -10,6 +10,9 @@ var core;
          * 添加对象
          */
         CachePool.addObj = function (name, obj) {
+            if (!name || !obj) {
+                return;
+            }
             var list = CachePool.s_pool[name];
             if (!list) {
                 CachePool.s_pool[name] = [obj];
@@ -40,9 +43,9 @@ var core;
         CachePool.clearAll = function () {
             CachePool.s_pool = {};
         };
+        CachePool.s_pool = {};
         return CachePool;
     }());
-    CachePool.s_pool = {};
     core.CachePool = CachePool;
     __reflect(CachePool.prototype, "core.CachePool");
 })(core || (core = {}));

@@ -5,6 +5,9 @@ module core {
          * 添加对象
          */
         public static addObj(name: string, obj: any) {
+            if (!name || !obj) {
+                return;
+            }
             let list: any[] = CachePool.s_pool[name];
             if (!list) {
                 CachePool.s_pool[name] = [obj];

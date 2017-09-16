@@ -110,6 +110,25 @@ module core {
                 }
             }
         }
+        /**
+         * 从缓存池获取资源，如没有将新创建，用完后及时调用 revertCacheRes
+         */
+        public getCacheRes(key: string): any {
+            let res: any = CachePool.getObj(key);
+            if (!res) {
+                res = RES.getRes(key);
+                res['key'] = res;
+            }
+            return res;
+        }
+        /**
+         * 将资源归还缓存池
+         */
+        public revertCacheRes(res: any): void {
+            if (res && res['key']) {
+                CachePool.addObj(res['key'], res);
+            }
+        }
     }
 
     export class GroupData extends Progress {

@@ -1,11 +1,16 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 var core;
 (function (core) {
     var GroupLoader = (function () {
@@ -115,6 +120,25 @@ var core;
                         onLoadComplete.call(thisObj, groupData);
                     }
                 }
+            }
+        };
+        /**
+         * 从缓存池获取资源，如没有将新创建，用完后及时调用 revertCacheRes
+         */
+        ResUtils.prototype.getCacheRes = function (key) {
+            var res = core.CachePool.getObj(key);
+            if (!res) {
+                res = RES.getRes(key);
+                res['key'] = res;
+            }
+            return res;
+        };
+        /**
+         * 将资源归还缓存池
+         */
+        ResUtils.prototype.revertCacheRes = function (res) {
+            if (res && res['key']) {
+                core.CachePool.addObj(res['key'], res);
             }
         };
         return ResUtils;

@@ -33,6 +33,11 @@ class MainUI extends core.EUIComponent {
 		core.SoundUtils.getInstance().playSound(1, 0);
 		this.onAdaptive();
 	}
+
+	protected onHide(): void {
+		super.onHide();
+	}
+
 	protected addListener() {
 		super.addListener();
 		core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);

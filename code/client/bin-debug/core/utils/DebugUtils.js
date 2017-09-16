@@ -23,9 +23,9 @@ var core;
         DebugUtils.finish = function (tag) {
             return Date.now() - DebugUtils.s_dic[tag];
         };
+        DebugUtils.s_dic = new Dictionary();
         return DebugUtils;
     }());
-    DebugUtils.s_dic = new Dictionary();
     core.DebugUtils = DebugUtils;
     __reflect(DebugUtils.prototype, "core.DebugUtils");
 })(core || (core = {}));
