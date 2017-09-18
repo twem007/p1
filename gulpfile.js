@@ -1,19 +1,19 @@
 var gulp = require('gulp');
 var del = require('del');
-var spawn = require('child_process').spawn;
+var typescript = require('gulp-typescript');
 
 gulp.task('clean', function (cb) {
   console.log("执行清理流程");
-  del(['code/client/bin-debug/**/*']).then(paths => {
+  del(['./code/client/bin-debug/**/*']).then(paths => {
     cb();
   });
 });
 
 // 返回一个 callback，因此系统可以知道它什么时候完成
 gulp.task('build', ['clean'], function (cb) {
-  gulp.src("code/client/src/**/*.ts")
+  gulp.src("./code/client/src/**/*.ts")
     .pipe(typescript())
-    .pipe(gulp.dest('bin-debug'))
+    .pipe(gulp.dest('./code/client/bin-debug'))
     .on('end', cb);
 });
 

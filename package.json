@@ -7,18 +7,21 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "gulp"
+    "test": "node node_modules/types-publisher/bin/tester/test.js --run-from-definitely-typed"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/twem007/p1.git"
+    "url": "https://github.com/twem007/p1.git"
   },
   "keywords": [
     "egret",
     "typescript",
     "gameframework"
   ],
-  "author": "yuxuefeng",
+   "author": {
+    "name": "yuxuefeng",
+    "email": "339001409@qq.com"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/twem007/p1/issues"
