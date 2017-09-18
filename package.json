@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    
+    "test": "node ./code/client/bin-debug/unittest/UnitTest.js"
   },
   "repository": {
     "type": "git",

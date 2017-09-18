@@ -11,13 +11,12 @@ gulp.task('clean', function (cb) {
   });
 });
 
-gulp.task('compile', function (cb) {
+gulp.task('compile', function () {
     return tsProject.src()
         .pipe(sourcemaps.init())
         .pipe(tsProject())
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./code/client/bin-debug'))
-        .on('end', cb);
 });
 
 gulp.task('test', ['clean', 'compile'], function () {
