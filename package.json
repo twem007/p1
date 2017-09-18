@@ -7,7 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "node node_modules/types-publisher/bin/tester/test.js --run-from-definitely-typed"
+    
   },
   "repository": {
     "type": "git",

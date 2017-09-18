@@ -11,7 +11,7 @@ gulp.task('clean', function (cb) {
   });
 });
 
-gulp.task('compile', function () {
+gulp.task('compile', function (cb) {
     return tsProject.src()
         .pipe(sourcemaps.init())
         .pipe(tsProject())

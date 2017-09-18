@@ -18,4 +18,6 @@ install:
 before_script:
   - npm install --save-dev gulp del typescript gulp-typescript
 
-script: gulp
+script: 
+  - gulp
+  - node ./code/client/bin-debug/unittest/UnitTest.js
