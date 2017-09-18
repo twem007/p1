@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var del = require('del');
-var typescript = require('gulp-typescript');
+var tsProject = ts.createProject('./code/client/tsconfig.json');
 
 gulp.task('clean', function (cb) {
   console.log("执行清理流程");
@@ -12,7 +12,7 @@ gulp.task('clean', function (cb) {
 // 返回一个 callback，因此系统可以知道它什么时候完成
 gulp.task('build', ['clean'], function (cb) {
   gulp.src("./code/client/src/**/*.ts")
-    .pipe(typescript())
+    .pipe(tsProject())
     .pipe(gulp.dest('./code/client/bin-debug'))
     .on('end', cb);
 });
