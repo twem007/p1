@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var del = require('del');
-var tsProject = ts.createProject('./code/client/tsconfig.json');
+var ts = require('gulp-typescript');
+var tsProject = ts.createProject('tsconfig.json');
 
 gulp.task('clean', function (cb) {
   console.log("执行清理流程");
