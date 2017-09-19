@@ -39,7 +39,7 @@ module core {
                 mc.gotoAndStop(1);
                 return mc;
             } else {
-                let mcData: egret.MovieClipData = factory.generateMovieClipData(name);
+                let mcData: egret.MovieClipData = factory.generateMovieClipData(mcName);
                 if (mcData.mcData) {
                     let mc: egret.MovieClip = new egret.MovieClip(mcData);
                     mc.gotoAndStop(1);

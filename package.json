@@ -18,7 +18,7 @@
     "typescript",
     "gameframework"
   ],
-   "author": {
+  "author": {
     "name": "yuxuefeng",
     "email": "339001409@qq.com"
   },
@@ -26,5 +26,11 @@
   "bugs": {
     "url": "https://github.com/twem007/p1/issues"
   },
-  "homepage": "https://github.com/twem007/p1#readme"
+  "homepage": "https://github.com/twem007/p1#readme",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.2.2",
+    "typescript": "^2.5.2"
+  }
 }

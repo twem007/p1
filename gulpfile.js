@@ -5,13 +5,14 @@ var sourcemaps = require('gulp-sourcemaps');
 var tsProject = ts.createProject('./code/client/tsconfig.json');
 
 gulp.task('clean', function (cb) {
-  console.log("执行清理流程");
+  console.log("开始清理");
   del(['./code/client/bin-debug/**/*']).then(paths => {
     cb();
   });
 });
 
 gulp.task('compile', function () {
+    console.log("开始编译");
     return tsProject.src()
         .pipe(sourcemaps.init())
         .pipe(tsProject())
@@ -20,7 +21,7 @@ gulp.task('compile', function () {
 });
 
 gulp.task('test', ['clean', 'compile'], function () {
-  console.log("执行测试流程");
+  console.log("开始测试");
 });
 
 gulp.task('default', ['clean', 'compile', 'test']);
