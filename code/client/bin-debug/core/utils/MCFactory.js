@@ -38,7 +38,7 @@ var core;
                 return mc;
             }
             else {
-                var mcData = factory.generateMovieClipData(name);
+                var mcData = factory.generateMovieClipData(mcName);
                 if (mcData.mcData) {
                     var mc = new egret.MovieClip(mcData);
                     mc.gotoAndStop(1);
