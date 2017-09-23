@@ -123,7 +123,7 @@ module core {
          * 停止播放音乐
          * @param id 声音ID
          */
-        public stopSoundByID(id: string): void {
+        public stopSoundByID(id: number): void {
             let sound: egret.Sound = this.m_sounds[id];
             if (sound) {
                 this.stop(sound);

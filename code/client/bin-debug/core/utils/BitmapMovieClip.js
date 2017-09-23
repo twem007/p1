@@ -17,6 +17,7 @@ var core;
         __extends(BitmapMovieClip, _super);
         function BitmapMovieClip(movieClipData) {
             var _this = _super.call(this) || this;
+            _this.m_index = 0;
             _this.m_mcData = movieClipData;
             _this.m_bitmap = new egret.Bitmap();
             _this.addChild(_this.m_bitmap);

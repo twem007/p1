@@ -10,6 +10,7 @@ var core;
         }
         /**
          * 获取影片剪辑
+         * 注意事项：getMovieClip 获取的MovieClip在使用完成后需调用 revertMovieClip 归还，并需要在调用 revertMovieClip 以后将 MovieClip 变量赋值为null
          * @param mcFile    影片剪辑文件名前缀
          * @param mcName    影片剪辑名称
          * @param isCenter  是否锚点居中
