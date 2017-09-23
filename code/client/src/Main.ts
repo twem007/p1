@@ -63,35 +63,24 @@ class Main extends core.EUILayer {
         //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
         let theme = new eui.Theme("resource/default.thm.json", this.stage);
         theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
-
-        // core.ResUtils.loadGroups(['preload'], this.onResourceProgress, this.onResourceLoadError, this.onResourceLoadComplete, this);
     }
-
-    private isThemeLoadEnd: boolean = false;
     /**
      * 主题文件加载完成,开始预加载
      * Loading of theme configuration file is complete, start to pre-load the 
      */
     private onThemeLoadComplete(): void {
-        this.isThemeLoadEnd = true;
-        this.createScene();
+        core.ResUtils.loadGroups(['preload'], this.onResourceProgress, this.onResourceLoadError, this.onResourceLoadComplete, this);
     }
-    private isResourceLoadEnd: boolean = false;
 
     private createScene() {
-        if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
-            core.LoadingManager.setCurLoading(MainLoadingUI);
-            this.initController();
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
-            //单元测试
-            runUnitTest();
-        }
+        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
     }
 
     /**
      * 资源组加载进度
      */
     private onResourceProgress(data: core.GroupData): void {
+        egret.log(`当前加载进度:${data.curGroup} ${data.curGroupLoaded}/${data.curGroupTotal}`);
         core.LoadingManager.getLoading(PreLoadingUI).setProgress(data);
     }
     /**
@@ -107,10 +96,12 @@ class Main extends core.EUILayer {
      */
     private onResourceLoadComplete(data: core.GroupData): void {
         if (data.curGroup == 'preload') {
+            egret.log("Group:" + data.curGroup + " load complete");
             core.LoadingManager.getLoading(PreLoadingUI).hide();
+            core.LoadingManager.setCurLoading(MainLoadingUI);
             core.Config.init(RES.getRes('config_zip'));
             core.ProtoFactory.init(RES.getRes('protobuf_proto'));
-            this.isResourceLoadEnd = true;
+            this.initController();
             this.createScene();
         }
     }

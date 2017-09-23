@@ -1,42 +1,46 @@
 {
-  "native": {
-    "path_ignore": []
-  },
-  "publish": {
-    "web": 0,
-    "native": 1,
-    "path": "bin-release"
-  },
-  "egret_version": "4.1.0",
-  "modules": [
-    {
-      "name": "egret"
-    },
-    {
-      "name": "game"
-    },
-    {
-      "name": "res"
-    },
-    {
-      "name": "eui"
-    },
-    {
-      "name": "tween"
-    },
-    {
-      "name": "socket"
-    },
-    {
-      "name": "dragonBones"
-    },
-    {
+	"native": {
+		"path_ignore": []
+	},
+	"publish": {
+		"web": 0,
+		"native": 1,
+		"path": "bin-release"
+	},
+	"egret_version": "5.0.6",
+	"modules": [
+		{
+			"name": "egret"
+		},
+		{
+			"name": "game"
+		},
+		{
+			"name": "res"
+		},
+		{
+			"name": "eui"
+		},
+		{
+			"name": "tween"
+		},
+		{
+			"name": "socket"
+		},
+		{
+			"name": "dragonBones"
+		},
+		{
 			"name": "protobuf",
 			"path": "./thirdparty/protobuf/"
 		},
 		{
 			"name": "jszip",
 			"path": "./thirdparty/jszip/"
+		},
+		{
+			"name": "promise",
+			"path": "./promise"
 		}
-  ]
+	]
 }

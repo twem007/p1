@@ -1,6 +1,6 @@
 function runUnitTest(): void {
-    new WSTest();
+    // new WSTest();
     new UtilsTest();
-    new ResUtilsTest();
+    // new ResUtilsTest();
     new MCFactoryTest();
 }

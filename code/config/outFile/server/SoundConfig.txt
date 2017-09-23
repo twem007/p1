@@ -1,1 +1,0 @@
-{"name":"SoundConfig","dataSize":2,"key":"id","data":[{"id":1,"tips":"背景音乐1","soundName":"main_bgm_mp3","coverKey":10,"soundType":1},{"id":2,"tips":"点击按钮","soundName":"button_mp3","coverKey":1,"soundType":0}]}

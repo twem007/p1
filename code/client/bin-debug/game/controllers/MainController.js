@@ -34,6 +34,8 @@ var MainController = (function (_super) {
             this.m_pMainUI = mainUI;
         }
         core.LayerCenter.getInstance().getLayer(LayerEnum.UI).addChild(this.m_pMainUI);
+        //单元测试
+        runUnitTest();
     };
     /**
      * 隐藏

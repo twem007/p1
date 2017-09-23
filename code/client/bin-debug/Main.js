@@ -42,10 +42,7 @@ var __extends = (this && this.__extends) || (function () {
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.isThemeLoadEnd = false;
-        _this.isResourceLoadEnd = false;
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     Main.prototype.createChildren = function () {
         _super.prototype.createChildren.call(this);
@@ -79,29 +76,22 @@ var Main = (function (_super) {
         //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
         var theme = new eui.Theme("resource/default.thm.json", this.stage);
         theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
-        // core.ResUtils.loadGroups(['preload'], this.onResourceProgress, this.onResourceLoadError, this.onResourceLoadComplete, this);
     };
     /**
      * 主题文件加载完成,开始预加载
      * Loading of theme configuration file is complete, start to pre-load the
      */
     Main.prototype.onThemeLoadComplete = function () {
-        this.isThemeLoadEnd = true;
-        this.createScene();
+        core.ResUtils.loadGroups(['preload'], this.onResourceProgress, this.onResourceLoadError, this.onResourceLoadComplete, this);
     };
     Main.prototype.createScene = function () {
-        if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
-            core.LoadingManager.setCurLoading(MainLoadingUI);
-            this.initController();
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
-            //单元测试
-            runUnitTest();
-        }
+        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
     };
     /**
      * 资源组加载进度
      */
     Main.prototype.onResourceProgress = function (data) {
+        egret.log("\u5F53\u524D\u52A0\u8F7D\u8FDB\u5EA6:" + data.curGroup + " " + data.curGroupLoaded + "/" + data.curGroupTotal);
         core.LoadingManager.getLoading(PreLoadingUI).setProgress(data);
     };
     /**
@@ -117,10 +107,12 @@ var Main = (function (_super) {
      */
     Main.prototype.onResourceLoadComplete = function (data) {
         if (data.curGroup == 'preload') {
+            egret.log("Group:" + data.curGroup + " load complete");
             core.LoadingManager.getLoading(PreLoadingUI).hide();
+            core.LoadingManager.setCurLoading(MainLoadingUI);
             core.Config.init(RES.getRes('config_zip'));
             core.ProtoFactory.init(RES.getRes('protobuf_proto'));
-            this.isResourceLoadEnd = true;
+            this.initController();
             this.createScene();
         }
     };

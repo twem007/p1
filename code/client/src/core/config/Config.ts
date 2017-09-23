@@ -20,7 +20,7 @@ module core {
                         let name: string = data.name;
                         let classRef = egret.getDefinitionByName(name);
                         if (!classRef) {
-                            egret.log(`${name}在ConfigBase文件中未定义`);
+                            egret.log(`${name}在ConfigDef文件中未定义`);
                             break;
                         }
                         let values: any[] = data.data;

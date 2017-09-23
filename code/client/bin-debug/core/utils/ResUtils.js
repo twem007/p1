@@ -24,6 +24,7 @@ var core;
             if (this.m_groupData.curGroup != event.groupName) {
                 return;
             }
+            egret.log("\u8D44\u6E90\u7EC4\uFF1A" + event.groupName + " \u52A0\u8F7D\u5931\u8D25");
             this.m_groupData.curGroupLoaded = event.itemsLoaded;
             this.m_groupData.curGroupTotal = event.itemsTotal;
             this.m_groupData.curResItem = event.resItem;
@@ -35,6 +36,7 @@ var core;
             this.updateGroupData(event.groupName, event.itemsLoaded, event.itemsTotal, event.resItem);
         };
         GroupLoader.prototype.onResourceLoadComplete = function (event) {
+            egret.log("\u8D44\u6E90\u7EC4\uFF1A" + event.groupName + " \u52A0\u8F7D\u5B8C\u6210");
             this.updateGroupData(event.groupName, event.itemsTotal, event.itemsTotal, event.resItem);
         };
         GroupLoader.prototype.updateGroupData = function (group, loadedItems, totalItems, resItem) {

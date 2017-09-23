@@ -21,7 +21,7 @@ var core;
                         var name_1 = data.name;
                         var classRef = egret.getDefinitionByName(name_1);
                         if (!classRef) {
-                            egret.log(name_1 + "\u5728ConfigBase\u6587\u4EF6\u4E2D\u672A\u5B9A\u4E49");
+                            egret.log(name_1 + "\u5728ConfigDef\u6587\u4EF6\u4E2D\u672A\u5B9A\u4E49");
                             break;
                         }
                         var values = data.data;

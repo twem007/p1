@@ -14,6 +14,7 @@ module core {
             if (this.m_groupData.curGroup != event.groupName) {
                 return;
             }
+            egret.log(`资源组：${event.groupName} 加载失败`);
             this.m_groupData.curGroupLoaded = event.itemsLoaded;
             this.m_groupData.curGroupTotal = event.itemsTotal;
             this.m_groupData.curResItem = event.resItem;
@@ -27,6 +28,7 @@ module core {
         }
 
         private onResourceLoadComplete(event: RES.ResourceEvent): void {
+            egret.log(`资源组：${event.groupName} 加载完成`);
             this.updateGroupData(event.groupName, event.itemsTotal, event.itemsTotal, event.resItem);
         }
 
