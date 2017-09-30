@@ -2,29 +2,32 @@ import fs = require('fs');
 let JSZip = require('jszip');
 let zip = new JSZip();
 
-let cfgPath: string = process.argv.splice(2, 1)[0] || process.cwd();
-console.log(`读取目录：${cfgPath}`);
-fs.readdir(cfgPath, function (err: NodeJS.ErrnoException, files: string[]): void {
-    if (err) {
-        console.log(`读取目录失败:${err.message}`);
-        return;
-    }
+let filePath: string = process.argv.splice(2, 1)[0] || process.cwd();
+console.log(`读取目录：${filePath}`);
+const imgRegExp: RegExp = /.+\.(jpg|bmp|gif|png)$/i;
+const txtRegExp: RegExp = /.+\.(txt)$/i;
+const jsRegExp: RegExp = /.+\.(js)$/i;
+
+readRegExpFiles(txtRegExp.source);
+
+function readRegExpFiles(regExp: string): void {
+    let files = readFiles(filePath);
     //读取文件
     if (files) {
         for (let i: number = 0, iLen: number = files.length; i < iLen; i++) {
             let file: string = files[i];
-            if (file.indexOf('.txt') >= 0) {
+            if (file.match(regExp)) {
                 console.log(`读取文件：${file}`);
-                zip.file(`${file}`, fs.readFileSync(`${cfgPath}\\${file}`));
+                zip.file(file.substring(file.lastIndexOf('\\') + 1), fs.readFileSync(file));
             }
         }
         zip.generateAsync({ type: "nodebuffer" })
             .then(function (content) {
                 // see FileSaver.js
-                writeFile(`${cfgPath}\\config.zip`, content);
+                writeFile(`${filePath}\\output.zip`, content);
             });
     }
-})
+}
 
 function writeFile(path: string, data: any, options?: {
     encoding?: string;
@@ -37,20 +40,17 @@ function writeFile(path: string, data: any, options?: {
     console.log(`创建文件成功：${path}`);
 }
 
-/**
- *  字符参数替换
- * @param str       "参数替换{0}和{1}"
- * @param args      [x,y]    
- */
-function formatString(str: string, args: string[]): string {
-    if (str) {
-        let reg: RegExp = /\{[0-9]+?\}/;
-        while (str.match(reg)) {
-            let arr: RegExpMatchArray = str.match(reg);
-            let arg: RegExpMatchArray = arr[0].match(/[0-9]+?/);
-            str = str.replace(reg, args[parseInt(arg[0])]);
+function readFiles(path: string): string[] {
+    let results: string[] = [];
+    let list: string[] = fs.readdirSync(path);
+    list.forEach((file: string, index: number, list: string[]) => {
+        file = path + '\\' + file;
+        let stat: fs.Stats = fs.statSync(file)
+        if (stat && stat.isDirectory()) {
+            results = results.concat(readFiles(file));
+        } else {
+            results.push(file);
         }
-        return str;
-    }
-    return "";
+    })
+    return results;
 }
