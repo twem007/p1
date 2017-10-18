@@ -60,4 +60,3 @@ var core;
     core.EUIComponent = EUIComponent;
     __reflect(EUIComponent.prototype, "core.EUIComponent", ["core.IComponent"]);
 })(core || (core = {}));
-//# sourceMappingURL=EUIComponent.js.map

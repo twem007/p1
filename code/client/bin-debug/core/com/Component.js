@@ -28,4 +28,3 @@ var core;
     core.Component = Component;
     __reflect(Component.prototype, "core.Component", ["core.IComponent"]);
 })(core || (core = {}));
-//# sourceMappingURL=Component.js.map

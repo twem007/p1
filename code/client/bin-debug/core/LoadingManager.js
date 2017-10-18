@@ -45,4 +45,3 @@ var core;
     core.LoadingManager = LoadingManager;
     __reflect(LoadingManager.prototype, "core.LoadingManager");
 })(core || (core = {}));
-//# sourceMappingURL=LoadingManager.js.map

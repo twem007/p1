@@ -22,4 +22,3 @@ var ModleBtn = (function (_super) {
     return ModleBtn;
 }(eui.Component));
 __reflect(ModleBtn.prototype, "ModleBtn");
-//# sourceMappingURL=ModleBtn.js.map

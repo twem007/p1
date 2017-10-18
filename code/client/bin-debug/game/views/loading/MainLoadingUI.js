@@ -62,4 +62,3 @@ var MainLoadingUI = (function (_super) {
     return MainLoadingUI;
 }(core.EUIComponent));
 __reflect(MainLoadingUI.prototype, "MainLoadingUI", ["core.ILoadingUI"]);
-//# sourceMappingURL=MainLoadingUI.js.map

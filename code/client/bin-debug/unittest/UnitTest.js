@@ -5,4 +5,3 @@ function runUnitTest() {
     new MCFactoryTest();
     new SoundUtilsTest();
 }
-//# sourceMappingURL=UnitTest.js.map

@@ -29,4 +29,3 @@ var MCFactoryTest = (function () {
     return MCFactoryTest;
 }());
 __reflect(MCFactoryTest.prototype, "MCFactoryTest");
-//# sourceMappingURL=MCFactoryTest.js.map

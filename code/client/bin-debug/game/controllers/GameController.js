@@ -47,4 +47,3 @@ var GameController = (function (_super) {
     return GameController;
 }(core.Control));
 __reflect(GameController.prototype, "GameController");
-//# sourceMappingURL=GameController.js.map

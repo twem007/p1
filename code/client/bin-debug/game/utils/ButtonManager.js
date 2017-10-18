@@ -25,4 +25,3 @@ var ButtonManager = (function () {
     return ButtonManager;
 }());
 __reflect(ButtonManager.prototype, "ButtonManager");
-//# sourceMappingURL=ButtonManager.js.map

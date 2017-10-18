@@ -93,4 +93,3 @@ var core;
     }(core.Callback));
     __reflect(KeyCallBack.prototype, "KeyCallBack");
 })(core || (core = {}));
-//# sourceMappingURL=InputManager.js.map

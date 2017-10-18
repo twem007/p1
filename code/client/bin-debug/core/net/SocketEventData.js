@@ -28,4 +28,3 @@ var core;
     core.SocketEventData = SocketEventData;
     __reflect(SocketEventData.prototype, "core.SocketEventData");
 })(core || (core = {}));
-//# sourceMappingURL=SocketEventData.js.map

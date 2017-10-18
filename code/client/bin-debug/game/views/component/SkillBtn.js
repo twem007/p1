@@ -26,4 +26,3 @@ var SkillBtn = (function (_super) {
     return SkillBtn;
 }(eui.Component));
 __reflect(SkillBtn.prototype, "SkillBtn");
-//# sourceMappingURL=SkillBtn.js.map

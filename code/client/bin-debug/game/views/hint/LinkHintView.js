@@ -53,4 +53,3 @@ var LinkHintView = (function (_super) {
     return LinkHintView;
 }(core.EUIComponent));
 __reflect(LinkHintView.prototype, "LinkHintView");
-//# sourceMappingURL=LinkHintView.js.map

@@ -53,4 +53,3 @@ var core;
     core.LayerCenter = LayerCenter;
     __reflect(LayerCenter.prototype, "core.LayerCenter");
 })(core || (core = {}));
-//# sourceMappingURL=LayerCenter.js.map

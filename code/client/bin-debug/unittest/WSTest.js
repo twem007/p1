@@ -44,4 +44,3 @@ var WSTest = (function () {
     return WSTest;
 }());
 __reflect(WSTest.prototype, "WSTest");
-//# sourceMappingURL=WSTest.js.map

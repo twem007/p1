@@ -172,4 +172,3 @@ function getTextureFromSheet(name, sheetName) {
     var result = sheet.getTexture(name);
     return result;
 }
-//# sourceMappingURL=Utils.js.map

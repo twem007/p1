@@ -13,4 +13,3 @@ var SoundConfig = (function () {
     return SoundConfig;
 }());
 __reflect(SoundConfig.prototype, "SoundConfig");
-//# sourceMappingURL=ConfigDef.js.map

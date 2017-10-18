@@ -27,4 +27,3 @@ var ModuleEnum;
     /**公告 */
     ModuleEnum[ModuleEnum["NOTICE"] = 12] = "NOTICE";
 })(ModuleEnum || (ModuleEnum = {}));
-//# sourceMappingURL=ModuleEnum.js.map

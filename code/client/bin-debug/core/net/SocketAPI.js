@@ -116,4 +116,3 @@ var core;
         WebSocketTypeEnum[WebSocketTypeEnum["TYPE_BINARY"] = 1] = "TYPE_BINARY";
     })(WebSocketTypeEnum = core.WebSocketTypeEnum || (core.WebSocketTypeEnum = {}));
 })(core || (core = {}));
-//# sourceMappingURL=SocketAPI.js.map

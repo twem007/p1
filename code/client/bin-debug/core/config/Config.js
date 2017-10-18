@@ -51,4 +51,3 @@ var core;
     core.Config = Config;
     __reflect(Config.prototype, "core.Config");
 })(core || (core = {}));
-//# sourceMappingURL=Config.js.map

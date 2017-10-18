@@ -26,4 +26,3 @@ var core;
     core.KeyboardEventData = KeyboardEventData;
     __reflect(KeyboardEventData.prototype, "core.KeyboardEventData");
 })(core || (core = {}));
-//# sourceMappingURL=KeyboardEventData.js.map

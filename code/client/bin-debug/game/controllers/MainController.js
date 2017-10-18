@@ -51,4 +51,3 @@ var MainController = (function (_super) {
     return MainController;
 }(core.Control));
 __reflect(MainController.prototype, "MainController");
-//# sourceMappingURL=MainController.js.map

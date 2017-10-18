@@ -49,4 +49,3 @@ var MainUI = (function (_super) {
     return MainUI;
 }(core.EUIComponent));
 __reflect(MainUI.prototype, "MainUI");
-//# sourceMappingURL=MainUI.js.map

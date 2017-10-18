@@ -40,4 +40,3 @@ var EntranceBtn = (function (_super) {
     return EntranceBtn;
 }(core.EUIComponent));
 __reflect(EntranceBtn.prototype, "EntranceBtn");
-//# sourceMappingURL=EntranceBtn.js.map

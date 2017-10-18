@@ -39,4 +39,3 @@ var core;
     core.BitmapMovieClip = BitmapMovieClip;
     __reflect(BitmapMovieClip.prototype, "core.BitmapMovieClip");
 })(core || (core = {}));
-//# sourceMappingURL=BitmapMovieClip.js.map

@@ -13,4 +13,3 @@ var InputType;
     InputType[InputType["SKILL_3"] = 10] = "SKILL_3";
     InputType[InputType["SKILL_4"] = 11] = "SKILL_4";
 })(InputType || (InputType = {}));
-//# sourceMappingURL=InputType.js.map

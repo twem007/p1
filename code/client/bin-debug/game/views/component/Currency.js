@@ -22,4 +22,3 @@ var Currency = (function (_super) {
     return Currency;
 }(eui.Component));
 __reflect(Currency.prototype, "Currency");
-//# sourceMappingURL=Currency.js.map

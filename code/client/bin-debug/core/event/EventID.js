@@ -19,4 +19,3 @@ var core;
     core.EventID = EventID;
     __reflect(EventID.prototype, "core.EventID");
 })(core || (core = {}));
-//# sourceMappingURL=EventID.js.map

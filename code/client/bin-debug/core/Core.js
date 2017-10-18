@@ -25,4 +25,3 @@ var core;
     core.Core = Core;
     __reflect(Core.prototype, "core.Core");
 })(core || (core = {}));
-//# sourceMappingURL=Core.js.map

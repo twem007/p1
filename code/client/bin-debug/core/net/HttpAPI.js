@@ -56,4 +56,3 @@ var HttpAPI = (function () {
     return HttpAPI;
 }());
 __reflect(HttpAPI.prototype, "HttpAPI");
-//# sourceMappingURL=HttpAPI.js.map

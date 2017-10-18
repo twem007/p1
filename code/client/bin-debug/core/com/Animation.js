@@ -43,4 +43,3 @@ var core;
     core.Animation = Animation;
     __reflect(Animation.prototype, "core.Animation");
 })(core || (core = {}));
-//# sourceMappingURL=Animation.js.map

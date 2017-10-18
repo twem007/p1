@@ -22,4 +22,3 @@ var LinkDelay = (function (_super) {
     return LinkDelay;
 }(eui.Component));
 __reflect(LinkDelay.prototype, "LinkDelay");
-//# sourceMappingURL=LinkDelay.js.map

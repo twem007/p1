@@ -56,4 +56,3 @@ var core;
     core.NodeList = NodeList;
     __reflect(NodeList.prototype, "core.NodeList");
 })(core || (core = {}));
-//# sourceMappingURL=NodeList.js.map

@@ -17,4 +17,3 @@ var core;
     core.Node = Node;
     __reflect(Node.prototype, "core.Node");
 })(core || (core = {}));
-//# sourceMappingURL=Node.js.map

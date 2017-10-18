@@ -31,4 +31,3 @@ var core;
     core.Layer = Layer;
     __reflect(Layer.prototype, "core.Layer");
 })(core || (core = {}));
-//# sourceMappingURL=Layer.js.map

@@ -22,4 +22,3 @@ var MainPlayerFace = (function (_super) {
     return MainPlayerFace;
 }(eui.Component));
 __reflect(MainPlayerFace.prototype, "MainPlayerFace");
-//# sourceMappingURL=MainPlayerFace.js.map
