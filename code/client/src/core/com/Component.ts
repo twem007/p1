@@ -9,6 +9,12 @@ module core {
 			super();
 		}
 
+		public removeFromParent(): void {
+			if (this.parent) {
+				this.parent.removeChild(this);
+			}
+		}
+
 		public abstract release(): void;
 	}
 }
