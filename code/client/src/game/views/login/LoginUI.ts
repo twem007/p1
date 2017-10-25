@@ -23,7 +23,7 @@ class LoginUI extends core.EUIComponent {
 	protected onShow(): void {
 		super.onShow();
 		this.m_pLogo.visible = false;
-		this.m_pAccount.text = name;
+		this.m_pAccount.text = 'test';
 		this.onAdaptive();
 	}
 

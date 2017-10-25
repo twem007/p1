@@ -3069,7 +3069,8 @@ var egret;
             CanvasRenderBuffer.prototype.beginClip = function (regions, offsetX, offsetY) {
                 offsetX = +offsetX || 0;
                 offsetY = +offsetY || 0;
-                var pixelRatio = egret.sys.DisplayList.$pixelRatio;
+                var canvasScaleX = egret.sys.DisplayList.$canvasScaleX;
+                var canvasScaleY = egret.sys.DisplayList.$canvasScaleY;
                 var context = this.context;
                 context.save();
                 context.beginPath();
@@ -3077,8 +3078,8 @@ var egret;
                 var length = regions.length;
                 for (var i = 0; i < length; i++) {
                     var region = regions[i];
-                    context.clearRect(region.minX * pixelRatio, region.minY * pixelRatio, region.width * pixelRatio, region.height * pixelRatio);
-                    context.rect(region.minX * pixelRatio, region.minY * pixelRatio, region.width * pixelRatio, region.height * pixelRatio);
+                    context.clearRect(region.minX * canvasScaleX, region.minY * canvasScaleY, region.width * canvasScaleX, region.height * canvasScaleY);
+                    context.rect(region.minX * canvasScaleX, region.minY * canvasScaleY, region.width * canvasScaleX, region.height * canvasScaleY);
                 }
                 context.clip();
             };
@@ -3775,7 +3776,14 @@ var egret;
             }
             egret.sys.CanvasRenderBuffer = web.CanvasRenderBuffer;
             setRenderMode(options.renderMode);
-            if (options.retina) {
+            var canvasScaleFactor;
+            if (options.canvasScaleFactor) {
+                canvasScaleFactor = options.canvasScaleFactor;
+            }
+            else if (options.calculateCanvasScaleFactor) {
+                canvasScaleFactor = options.calculateCanvasScaleFactor(egret.sys.canvasHitTestBuffer.context);
+            }
+            else {
                 //based on : https://github.com/jondavidjohn/hidpi-canvas-polyfill
                 var context_1 = egret.sys.canvasHitTestBuffer.context;
                 var backingStore = context_1.backingStorePixelRatio ||
@@ -3784,8 +3792,9 @@ var egret;
                     context_1.msBackingStorePixelRatio ||
                     context_1.oBackingStorePixelRatio ||
                     context_1.backingStorePixelRatio || 1;
-                egret.sys.DisplayList.$setDevicePixelRatio((window.devicePixelRatio || 1) / backingStore);
+                canvasScaleFactor = (window.devicePixelRatio || 1) / backingStore;
             }
+            egret.sys.DisplayList.$canvasScaleFactor = canvasScaleFactor;
             var ticker = egret.ticker;
             startTicker(ticker);
             if (options.screenAdapter) {
@@ -4329,15 +4338,15 @@ var egret;
                 var stageHeight = stageSize.stageHeight;
                 var displayWidth = stageSize.displayWidth;
                 var displayHeight = stageSize.displayHeight;
-                if (canvas.width !== stageWidth) {
-                    canvas.width = stageWidth;
-                }
-                if (canvas.height !== stageHeight) {
-                    canvas.height = stageHeight;
-                }
                 canvas.style[egret.web.getPrefixStyleName("transformOrigin")] = "0% 0% 0px";
                 canvas.style.width = displayWidth + "px";
                 canvas.style.height = displayHeight + "px";
+                if (canvas.width != stageWidth) {
+                    canvas.width = stageWidth;
+                }
+                if (canvas.height != stageHeight) {
+                    canvas.height = stageHeight;
+                }
                 var rotation = 0;
                 if (shouldRotate) {
                     if (orientation == egret.OrientationMode.LANDSCAPE) {
@@ -4358,6 +4367,7 @@ var egret;
                 var transform = "rotate(" + rotation + "deg)";
                 canvas.style[egret.web.getPrefixStyleName("transform")] = transform;
                 var scalex = displayWidth / stageWidth, scaley = displayHeight / stageHeight;
+                egret.sys.DisplayList.$setCanvasScale(scalex * egret.sys.DisplayList.$canvasScaleFactor, scaley * egret.sys.DisplayList.$canvasScaleFactor);
                 this.webTouchHandler.updateScaleMode(scalex, scaley, rotation);
                 this.webInput.$updateSize();
                 this.player.updateStageSize(stageWidth, stageHeight); //不要在这个方法后面修改属性
@@ -5336,11 +5346,14 @@ var egret;
                 var originalD = locWorldTransform.d;
                 var originalTx = locWorldTransform.tx;
                 var originalTy = locWorldTransform.ty;
-                if (destX != 0 || destY != 0) {
-                    locWorldTransform.append(1, 0, 0, 1, destX, destY);
-                }
-                if (sourceWidth / destWidth != 1 || sourceHeight / destHeight != 1) {
-                    locWorldTransform.append(destWidth / sourceWidth, 0, 0, destHeight / sourceHeight, 0, 0);
+                // Only scale unmeshed texture.
+                if (!meshVertices) {
+                    if (destX != 0 || destY != 0) {
+                        locWorldTransform.append(1, 0, 0, 1, destX, destY);
+                    }
+                    if (sourceWidth / destWidth != 1 || sourceHeight / destHeight != 1) {
+                        locWorldTransform.append(destWidth / sourceWidth, 0, 0, destHeight / sourceHeight, 0, 0);
+                    }
                 }
                 var a = locWorldTransform.a;
                 var b = locWorldTransform.b;
@@ -5362,19 +5375,25 @@ var egret;
                     var i = 0, iD = 0, l = 0;
                     var u = 0, v = 0, x = 0, y = 0;
                     for (i = 0, l = meshUVs.length; i < l; i += 2) {
-                        iD = i * 5 / 2;
+                        iD = index + i * 5 / 2;
                         x = meshVertices[i];
                         y = meshVertices[i + 1];
                         u = meshUVs[i];
                         v = meshUVs[i + 1];
                         // xy
-                        vertices[index + iD + 0] = a * x + c * y + tx;
-                        vertices[index + iD + 1] = b * x + d * y + ty;
+                        vertices[iD + 0] = a * x + c * y + tx;
+                        vertices[iD + 1] = b * x + d * y + ty;
                         // uv
-                        vertices[index + iD + 2] = (sourceX + u * sourceWidth) / textureSourceWidth;
-                        vertices[index + iD + 3] = (sourceY + v * sourceHeight) / textureSourceHeight;
+                        if (rotated) {
+                            vertices[iD + 2] = (sourceX + (1.0 - v) * sourceHeight) / textureSourceWidth;
+                            vertices[iD + 3] = (sourceY + u * sourceWidth) / textureSourceHeight;
+                        }
+                        else {
+                            vertices[iD + 2] = (sourceX + u * sourceWidth) / textureSourceWidth;
+                            vertices[iD + 3] = (sourceY + v * sourceHeight) / textureSourceHeight;
+                        }
                         // alpha
-                        vertices[index + iD + 4] = alpha;
+                        vertices[iD + 4] = alpha;
                     }
                     // 缓存索引数组
                     if (this.hasMesh) {
@@ -6021,7 +6040,7 @@ var egret;
             /**
              * 绘制Mesh
              */
-            WebGLRenderContext.prototype.drawMesh = function (image, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, imageSourceWidth, imageSourceHeight, meshUVs, meshVertices, meshIndices, bounds, smoothing) {
+            WebGLRenderContext.prototype.drawMesh = function (image, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, imageSourceWidth, imageSourceHeight, meshUVs, meshVertices, meshIndices, bounds, rotated, smoothing) {
                 var buffer = this.currentBuffer;
                 if (this.contextLost || !image || !buffer) {
                     return;
@@ -6042,7 +6061,7 @@ var egret;
                 if (!texture) {
                     return;
                 }
-                this.drawTexture(texture, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, imageSourceWidth, imageSourceHeight, meshUVs, meshVertices, meshIndices, bounds, smoothing);
+                this.drawTexture(texture, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, imageSourceWidth, imageSourceHeight, meshUVs, meshVertices, meshIndices, bounds, rotated, smoothing);
                 if (image["texture"] || (image.source && image.source["texture"])) {
                     buffer.restoreTransform();
                 }
@@ -6261,7 +6280,7 @@ var egret;
                         if (this.activatedBuffer) {
                             var target = this.activatedBuffer.rootRenderTarget;
                             if (target.width != 0 || target.height != 0) {
-                                target.clear();
+                                target.clear(true);
                             }
                         }
                         break;
@@ -7093,7 +7112,9 @@ var egret;
                 var node;
                 var filterPushed = false;
                 if (displayList && !root) {
-                    if (displayList.isDirty) {
+                    if (displayList.isDirty ||
+                        displayList.$canvasScaleX != egret.sys.DisplayList.$canvasScaleX ||
+                        displayList.$canvasScaleY != egret.sys.DisplayList.$canvasScaleY) {
                         drawCalls += displayList.drawToSurface();
                     }
                     node = displayList.$renderNode;
@@ -7184,7 +7205,7 @@ var egret;
              */
             WebGLRenderer.prototype.drawWithFilter = function (displayObject, buffer, dirtyList, matrix, clipRegion, root) {
                 var drawCalls = 0;
-                if (displayObject.$children && displayObject.$children.length == 0) {
+                if (displayObject.$children && displayObject.$children.length == 0 && (!displayObject.$renderNode || displayObject.$renderNode.$getRenderCount() == 0)) {
                     return;
                 }
                 var filters = displayObject.$getFilters();
@@ -7195,6 +7216,10 @@ var egret;
                     if (!compositeOp) {
                         compositeOp = defaultCompositeOp;
                     }
+                }
+                var bounds = displayObject.$getOriginalBounds();
+                if (bounds.width <= 0 || bounds.height <= 0) {
+                    return drawCalls;
                 }
                 if (!displayObject.mask && filters.length == 1 && (filters[0].type == "colorTransform" || (filters[0].type === "custom" && filters[0].padding === 0))) {
                     var childrenDrawCount = this.getRenderCount(displayObject);
@@ -7225,7 +7250,6 @@ var egret;
                 // 获取显示对象的矩形区域
                 var region;
                 region = egret.sys.Region.create();
-                var bounds = displayObject.$getOriginalBounds();
                 region.updateRegion(bounds, displayMatrix);
                 // 为显示对象创建一个新的buffer
                 // todo 这里应该计算 region.x region.y
@@ -7356,6 +7380,9 @@ var egret;
                     region = egret.sys.Region.create();
                     bounds = displayObject.$getOriginalBounds();
                     region.updateRegion(bounds, displayMatrix);
+                }
+                if (region.width <= 0 || region.height <= 0) {
+                    return drawCalls;
                 }
                 var found = false;
                 if (!dirtyList) {
@@ -7706,13 +7733,13 @@ var egret;
                 if (node.filter) {
                     buffer.context.$filter = node.filter;
                     while (pos < length) {
-                        buffer.context.drawMesh(image, data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], node.imageWidth, node.imageHeight, node.uvs, node.vertices, node.indices, node.bounds, node.smoothing);
+                        buffer.context.drawMesh(image, data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], node.imageWidth, node.imageHeight, node.uvs, node.vertices, node.indices, node.bounds, node.rotated, node.smoothing);
                     }
                     buffer.context.$filter = null;
                 }
                 else {
                     while (pos < length) {
-                        buffer.context.drawMesh(image, data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], node.imageWidth, node.imageHeight, node.uvs, node.vertices, node.indices, node.bounds, node.smoothing);
+                        buffer.context.drawMesh(image, data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], data[pos++], node.imageWidth, node.imageHeight, node.uvs, node.vertices, node.indices, node.bounds, node.rotated, node.smoothing);
                     }
                 }
                 if (blendMode) {
@@ -7731,23 +7758,32 @@ var egret;
             WebGLRenderer.prototype.renderText = function (node, buffer) {
                 var width = node.width - node.x;
                 var height = node.height - node.y;
-                var pixelRatio = egret.sys.DisplayList.$pixelRatio;
+                var canvasScaleX = egret.sys.DisplayList.$canvasScaleX;
+                var canvasScaleY = egret.sys.DisplayList.$canvasScaleY;
                 var maxTextureSize = buffer.context.$maxTextureSize;
-                if (width * pixelRatio > maxTextureSize || height * pixelRatio > maxTextureSize) {
-                    pixelRatio *= width * pixelRatio > height * pixelRatio ? maxTextureSize / (width * pixelRatio) : maxTextureSize / (height * pixelRatio);
+                if (width * canvasScaleX > maxTextureSize) {
+                    canvasScaleX *= maxTextureSize / (width * canvasScaleX);
                 }
-                width *= pixelRatio;
-                height *= pixelRatio;
-                var x = node.x * pixelRatio;
-                var y = node.y * pixelRatio;
+                if (height * canvasScaleY > maxTextureSize) {
+                    canvasScaleY *= maxTextureSize / (height * canvasScaleY);
+                }
+                width *= canvasScaleX;
+                height *= canvasScaleY;
+                var x = node.x * canvasScaleX;
+                var y = node.y * canvasScaleY;
                 if (node.drawData.length == 0) {
                     return;
+                }
+                if (node.$canvasScaleX != canvasScaleX || node.$canvasScaleY != canvasScaleY) {
+                    node.$canvasScaleX = canvasScaleX;
+                    node.$canvasScaleY = canvasScaleY;
+                    node.dirtyRender = true;
                 }
                 if (!this.canvasRenderBuffer || !this.canvasRenderBuffer.context) {
                     this.canvasRenderer = new egret.CanvasRenderer();
                     this.canvasRenderBuffer = new web.CanvasRenderBuffer(width, height);
-                    if (pixelRatio != 1) {
-                        this.canvasRenderBuffer.context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+                    if (canvasScaleX != 1 || canvasScaleY != 1) {
+                        this.canvasRenderBuffer.context.setTransform(canvasScaleX, 0, 0, canvasScaleY, 0, 0);
                     }
                 }
                 else if (node.dirtyRender) {
@@ -7758,9 +7794,9 @@ var egret;
                 }
                 if (x || y) {
                     if (node.dirtyRender) {
-                        this.canvasRenderBuffer.context.setTransform(pixelRatio, 0, 0, pixelRatio, -x, -y);
+                        this.canvasRenderBuffer.context.setTransform(canvasScaleX, 0, 0, canvasScaleY, -x, -y);
                     }
-                    buffer.transform(1, 0, 0, 1, x / pixelRatio, y / pixelRatio);
+                    buffer.transform(1, 0, 0, 1, x / canvasScaleX, y / canvasScaleY);
                 }
                 if (node.dirtyRender) {
                     var surface = this.canvasRenderBuffer.surface;
@@ -7781,12 +7817,12 @@ var egret;
                 }
                 var textureWidth = node.$textureWidth;
                 var textureHeight = node.$textureHeight;
-                buffer.context.drawTexture(node.$texture, 0, 0, textureWidth, textureHeight, 0, 0, textureWidth / pixelRatio, textureHeight / pixelRatio, textureWidth, textureHeight);
+                buffer.context.drawTexture(node.$texture, 0, 0, textureWidth, textureHeight, 0, 0, textureWidth / canvasScaleX, textureHeight / canvasScaleY, textureWidth, textureHeight);
                 if (x || y) {
                     if (node.dirtyRender) {
-                        this.canvasRenderBuffer.context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+                        this.canvasRenderBuffer.context.setTransform(canvasScaleX, 0, 0, canvasScaleY, 0, 0);
                     }
-                    buffer.transform(1, 0, 0, 1, -x / pixelRatio, -y / pixelRatio);
+                    buffer.transform(1, 0, 0, 1, -x / canvasScaleX, -y / canvasScaleY);
                 }
                 node.dirtyRender = false;
             };
