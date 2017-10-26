@@ -42,7 +42,7 @@ module core {
         }
 
         private sortIndex(a: EventCallBack, b: EventCallBack): number {
-            return a.index - b.index;
+            return b.index - a.index;
         }
         /**
          * 移除事件监听
