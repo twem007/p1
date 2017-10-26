@@ -14,13 +14,13 @@
 	],
 	"game": [
 		"bin-debug/core/Control.js",
-		"bin-debug/core/com/Component.js",
 		"bin-debug/core/com/EUIComponent.js",
 		"bin-debug/core/com/EUILayer.js",
 		"bin-debug/core/data/Callback.js",
 		"bin-debug/core/data/Dictionary.js",
 		"bin-debug/core/event/EventData.js",
 		"bin-debug/core/interfaces/ILoadingUI.js",
+		"bin-debug/core/com/Component.js",
 		"bin-debug/core/utils/DBFactory.js",
 		"bin-debug/core/LoadingManager.js",
 		"bin-debug/core/TimerManager.js",
@@ -52,7 +52,7 @@
 		"bin-debug/core/utils/Base64.js",
 		"bin-debug/core/utils/CachePool.js",
 		"bin-debug/core/utils/DateUtils.js",
-		"bin-debug/Main.js",
+		"bin-debug/unittest/WSTest.js",
 		"bin-debug/core/utils/DebugUtils.js",
 		"bin-debug/core/utils/Long.js",
 		"bin-debug/core/utils/MathUtils.js",
@@ -91,6 +91,6 @@
 		"bin-debug/unittest/SoundUtilsTest.js",
 		"bin-debug/unittest/UnitTest.js",
 		"bin-debug/unittest/UtilsTest.js",
-		"bin-debug/unittest/WSTest.js"
+		"bin-debug/Main.js"
 	]
 }

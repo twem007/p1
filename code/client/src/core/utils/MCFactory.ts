@@ -27,7 +27,6 @@ module core {
             }
             if (mcList.length > 0) {
                 let mc: egret.MovieClip = mcList.pop();
-                mc.visible = true;
                 return mc;
             } else {
                 let factory: egret.MovieClipDataFactory = this.m_mcFactorys.get(mcFile);
@@ -58,15 +57,13 @@ module core {
         /**
          * 归还影片剪辑
          * @param json      影片剪辑JSON名称
-         * @param isHide    是否隐藏且不从舞台移除
          */
-        public revertMovieClip(mc: egret.MovieClip, isHide: boolean = false): void {
+        public revertMovieClip(mc: egret.MovieClip): void {
             if (mc) {
                 let key:string = mc['key'];
-                if (mc.parent && !isHide) {
+                if (mc.parent) {
                     mc.parent.removeChild(mc);
                 }
-                mc.visible = !isHide;
                 let mcList: egret.MovieClip[] = this.m_factorys.get(key);
                 if (!mcList) {
                     mcList = [];

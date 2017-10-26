@@ -59,7 +59,8 @@ class MCFactoryTest {
     private hideMC(): void {
         for (let i: number = 0, iLen: number = this.m_loadings.length; i < iLen; i++) {
             let loading: egret.MovieClip = this.m_loadings[i];
-            core.MCFactory.instance.revertMovieClip(loading, true);
+            core.MCFactory.instance.revertMovieClip(loading);
         }
+        this.m_loadings.length = 0;
     }
 }
