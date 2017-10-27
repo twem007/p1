@@ -22,7 +22,7 @@ class MainController extends core.Control {
 		}
 		core.LayerCenter.getInstance().getLayer(LayerEnum.UI).addChild(this.m_pMainUI);
 		//单元测试
-        runUnitTest();
+        // runUnitTest();
 	}
 	/**
 	 * 隐藏
