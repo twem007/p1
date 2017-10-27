@@ -17,7 +17,7 @@ class EventTest {
         for (let i: number = 0, iLen: number = count; i < iLen; i++) {
             core.EventCenter.getInstance().sendEvent(new core.EventData("b"))
         }
-        console.log("耗时：" + core.DebugUtils.finish('center'));
+        console.log("耗时：" + core.DebugUtils.finish('center'));        
     }
 }
 
