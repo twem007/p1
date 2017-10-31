@@ -32,7 +32,9 @@ class Main extends core.EUILayer {
     protected createChildren(): void {
         super.createChildren();
         //debug等级
-        egret.Logger.logLevel = egret.Logger.ALL;
+        if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
+            egret.Logger.logLevel = egret.Logger.ALL;
+        }
         core.Core.run(this.stage);
         core.LayerCenter.getInstance().addLayer(LayerEnum.UI, new core.EUILayer());
         core.LayerCenter.getInstance().addLayer(LayerEnum.POPUP, new core.Layer());

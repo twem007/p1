@@ -1,6 +1,7 @@
 {
 	"native": {
-		"path_ignore": []
+		"path_ignore": [],
+		"android_path": "../../../../workspace/p1"
 	},
 	"publish": {
 		"web": 0,
