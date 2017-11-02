@@ -15,7 +15,7 @@ class LoginController extends core.Control {
 	/**
 	 * 显示
 	 */
-	protected show(data?: core.ModuleEventData): void {
+	protected show(data?: any): void {
 		if (!this.m_pLoginUI) {
 			let loginUI: LoginUI = new LoginUI();
 			this.m_pLoginUI = loginUI;
