@@ -12,7 +12,7 @@ module core {
 		 */
 		public static EVENT_LOG:boolean = true;
 		/**
-		 * 系统事件日志统计边界
+		 * 系统事件日志超时警告时间
 		 */
 		public static EVENT_LIMIT:number = 5;
 		/**

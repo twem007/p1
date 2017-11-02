@@ -98,7 +98,7 @@ module core {
             }
             let t_end: number = Date.now() - t;
             if (DebugUtils.EVENT_LOG && t_end > DebugUtils.EVENT_LIMIT && max_data) {
-                egret.log(`事件派发总耗时：${t_end} 最高耗时事件：${max_data.messageID} 耗时：${max}`);
+                egret.warn(`事件派发总耗时：${t_end} 最高耗时事件：${max_data.messageID} 耗时：${max}`);
             }
         }
     }

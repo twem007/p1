@@ -21,7 +21,7 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
         fs.mkdirSync(serverDir);
     }
     //创建客户端代码结构
-    let defFileStr: string = "";
+    let defFileStr: string = "\/**\n * 该文件为工具自动生成，请勿自行修改。\n **\/\n";
     let templete: string = `class {0} {\n{1}}\n`
     //读取文件
     if (files) {

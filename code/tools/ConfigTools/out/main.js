@@ -22,7 +22,7 @@ fs.readdir(xlsxPath, function (err, files) {
         fs.mkdirSync(serverDir);
     }
     //创建客户端代码结构
-    var defFileStr = "";
+    var defFileStr = "\/**\n * 该文件为工具自动生成，请勿自行修改。\n **\/\n";
     var templete = "class {0} {\n{1}}\n";
     //读取文件
     if (files) {
