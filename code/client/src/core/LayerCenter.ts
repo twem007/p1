@@ -11,6 +11,10 @@ module core {
         private m_layers: Layer | EUILayer[];
 
         public stage: egret.Stage;
+        
+        public static stageWidth: number;
+
+        public static stageHeight: number;
 
         public constructor() {
         }
@@ -57,9 +61,5 @@ module core {
                 this.m_layers[index] = null;
             }
         }
-
-        public static stageWidth: number;
-
-        public static stageHeight: number;
     }
 }
