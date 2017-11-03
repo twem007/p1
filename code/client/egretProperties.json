@@ -1,13 +1,14 @@
 {
 	"native": {
-		"path_ignore": []
+		"path_ignore": [],
+		"android_path": "../../../../workspace/p1"
 	},
 	"publish": {
 		"web": 0,
 		"native": 1,
 		"path": "bin-release"
 	},
-	"egret_version": "5.0.6",
+	"egret_version": "5.0.11",
 	"modules": [
 		{
 			"name": "egret"

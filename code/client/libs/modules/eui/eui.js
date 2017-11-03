@@ -7831,6 +7831,9 @@ var eui;
                             if (id.match(e) == null) {
                                 egret.$warn(2022, id);
                             }
+                            if (id.match(new RegExp(/ /g)) != null) {
+                                egret.$warn(2022, id);
+                            }
                             if (this.skinParts.indexOf(id) == -1) {
                                 this.skinParts.push(id);
                             }
@@ -14588,7 +14591,7 @@ var eui;
             if (!viewport) {
                 return;
             }
-            var cancelEvent = egret.Event.create(egret.TouchEvent, event.type, event.bubbles, event.cancelable);
+            var cancelEvent = egret.Event.create(egret.TouchEvent, egret.TouchEvent.TOUCH_CANCEL, event.bubbles, event.cancelable);
             cancelEvent.$initTo(event.$stageX, event.$stageY, event.touchPointID);
             var target = this.downTarget;
             cancelEvent.$setTarget(target);
@@ -20729,6 +20732,10 @@ var eui;
              * @private
              */
             _this._widthConstraint = NaN;
+            /**
+             * @private
+             */
+            _this._heightConstraint = NaN;
             _this.initializeUIValues();
             _this.text = text;
             return _this;
@@ -20852,6 +20859,7 @@ var eui;
             var values = this.$UIComponent;
             var textValues = this.$BitmapText;
             var oldWidth = textValues[0 /* textFieldWidth */];
+            var oldHeight = textValues[1 /* textFieldHeight */];
             var availableWidth = NaN;
             if (!isNaN(this._widthConstraint)) {
                 availableWidth = this._widthConstraint;
@@ -20864,8 +20872,21 @@ var eui;
                 availableWidth = values[13 /* maxWidth */];
             }
             _super.prototype.$setWidth.call(this, availableWidth);
+            var availableHeight = NaN;
+            if (!isNaN(this._heightConstraint)) {
+                availableHeight = this._heightConstraint;
+                this._heightConstraint = NaN;
+            }
+            else if (!isNaN(values[9 /* explicitHeight */])) {
+                availableHeight = values[9 /* explicitHeight */];
+            }
+            else if (values[15 /* maxHeight */] != 100000) {
+                availableHeight = values[15 /* maxHeight */];
+            }
+            _super.prototype.$setHeight.call(this, availableHeight);
             this.setMeasuredSize(this.textWidth, this.textHeight);
             _super.prototype.$setWidth.call(this, oldWidth);
+            _super.prototype.$setHeight.call(this, oldHeight);
         };
         /**
          * @copy eui.UIComponent#updateDisplayList
@@ -20979,6 +21000,7 @@ var eui;
                 return;
             }
             this._widthConstraint = layoutWidth;
+            this._heightConstraint = layoutHeight;
             this.invalidateSize();
         };
         /**
@@ -23875,9 +23897,6 @@ var eui;
                     case egret.HorizontalAlign.RIGHT:
                         x = width - (columnIndex + 1) * (columnWidth + horizontalGap) + horizontalGap - paddingR;
                         break;
-                    case egret.HorizontalAlign.CENTER:
-                        x = width / 2 - (columnCount * columnWidth + (columnCount - 1) * horizontalGap) / 2 + columnIndex * (columnWidth + horizontalGap);
-                        break;
                     case egret.HorizontalAlign.LEFT:
                         x = columnIndex * (columnWidth + horizontalGap) + paddingL;
                         break;
@@ -23890,9 +23909,6 @@ var eui;
                         break;
                     case egret.VerticalAlign.BOTTOM:
                         y = height - (rowIndex + 1) * (rowHeight + verticalGap) + verticalGap - paddingB;
-                        break;
-                    case egret.VerticalAlign.MIDDLE:
-                        y = height / 2 - (rowCount * rowHeight + (rowCount - 1) * verticalGap) / 2 + rowIndex * (rowHeight + verticalGap);
                         break;
                     default:
                         y = rowIndex * (rowHeight + verticalGap) + paddingT;

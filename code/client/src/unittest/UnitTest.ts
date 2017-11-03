@@ -4,4 +4,5 @@ function runUnitTest(): void {
     // new ResUtilsTest();
     new MCFactoryTest();
     new SoundUtilsTest();
+    new EventTest();
 }

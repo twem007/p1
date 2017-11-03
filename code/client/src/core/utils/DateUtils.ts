@@ -27,6 +27,7 @@ module core {
         public static getServerTime(): number {
             return Math.floor(DateUtils.getServerTimeMill() * 0.001);
         }
+        
         public static setServerTime(time: number) {
             this.s_serverTimestamp = time;
             this.s_clientTimestamp = egret.getTimer();

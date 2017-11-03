@@ -119,7 +119,7 @@ module core {
             let res: any = CachePool.getObj(key);
             if (!res) {
                 res = RES.getRes(key);
-                res['key'] = res;
+                res['key'] = key;
             }
             return res;
         }

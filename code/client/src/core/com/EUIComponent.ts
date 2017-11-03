@@ -33,6 +33,12 @@ module core {
         protected removeListener(): void {
         }
 
+        public removeFromParent(): void {
+			if (this.parent) {
+				this.parent.removeChild(this);
+			}
+		}
+
         /**
          * 释放资源
          */

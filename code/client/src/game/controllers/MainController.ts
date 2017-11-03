@@ -15,7 +15,8 @@ class MainController extends core.Control {
 	/**
 	 * 显示
 	 */
-	protected show(data?: core.ModuleEventData): void {
+	protected show(data?: any): void {
+		egret.log(`外部传递参数：${data}` );
 		if (!this.m_pMainUI) {
 			let mainUI: MainUI = new MainUI();
 			this.m_pMainUI = mainUI;

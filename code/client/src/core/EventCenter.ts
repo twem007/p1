@@ -42,7 +42,7 @@ module core {
         }
 
         private sortIndex(a: EventCallBack, b: EventCallBack): number {
-            return a.index - b.index;
+            return b.index - a.index;
         }
         /**
          * 移除事件监听
@@ -69,6 +69,9 @@ module core {
          * 发送所有消息
          */
         private sendAll(): void {
+            let t: number = Date.now();
+            let max: number = 0;
+            let max_data: EventCallBack;
             while (this.m_sendBuffer.length > 0) {
                 let event: EventData = this.m_sendBuffer.shift();
                 let dataList: EventCallBack[] = this.m_callbackMaps.get(event.messageID);
@@ -81,11 +84,21 @@ module core {
                     }
                     for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
                         let data: EventCallBack = dataList[i];
+                        let t1: number = Date.now();
                         data.callback.call(data.thisObj, event);
+                        let t1_end: number = Date.now();
+                        if (t1_end - t1 >= max) {
+                            max = t1_end - t1;
+                            max_data = data;
+                        }
                     }
                 } else {
                     egret.log("事件ID:" + event.messageID + "无监听回调");
                 }
+            }
+            let t_end: number = Date.now() - t;
+            if (DebugUtils.EVENT_LOG && t_end > DebugUtils.EVENT_LIMIT && max_data) {
+                egret.warn(`事件派发总耗时：${t_end} 最高耗时事件：${max_data.messageID} 耗时：${max}`);
             }
         }
     }

@@ -3,13 +3,13 @@ module core {
 
         private static s_instance: MCFactory;
 
-        private m_factorys: any;
+        private m_factorys: Dictionary<egret.MovieClip[]>;
 
-        private m_mcFactorys: any;
+        private m_mcFactorys: Dictionary<egret.MovieClipDataFactory>;
 
         public constructor() {
-            this.m_factorys = {};
-            this.m_mcFactorys = {};
+            this.m_factorys = new Dictionary<egret.MovieClip[]>();
+            this.m_mcFactorys = new Dictionary<egret.MovieClipDataFactory>();
         }
         /**
          * 获取影片剪辑
@@ -19,33 +19,32 @@ module core {
          * @param isCenter  是否锚点居中
          */
         public getMovieClip(mcFile: string, mcName: string, isCenter: boolean = true): egret.MovieClip {
-            let factory: egret.MovieClipDataFactory = this.m_mcFactorys[mcFile];
-            if (!factory) {
-                let jsonData: any = RES.getRes(`${mcFile}_json`);
-                let pngData: egret.Texture = RES.getRes(`${mcFile}_png`);
-                if (!jsonData || !pngData) {
-                    return null;
-                }
-                factory = new egret.MovieClipDataFactory(jsonData, pngData);
-                factory.enableCache = true;
-                this.m_mcFactorys[mcFile] = factory;
-            }
-            let mcList: egret.MovieClip[] = this.m_factorys[`${mcFile}>${mcName}`];
+            let key:string = `${mcFile}>${mcName}`;
+            let mcList: egret.MovieClip[] = this.m_factorys.get(key);
             if (!mcList) {
                 mcList = [];
-                this.m_factorys[`${mcFile}>${mcName}`] = mcList;
+                this.m_factorys.add(key, mcList);
             }
             if (mcList.length > 0) {
                 let mc: egret.MovieClip = mcList.pop();
-                mc.gotoAndStop(1);
                 return mc;
             } else {
+                let factory: egret.MovieClipDataFactory = this.m_mcFactorys.get(mcFile);
+                if (!factory) {
+                    let jsonData: any = RES.getRes(`${mcFile}_json`);
+                    let pngData: egret.Texture = RES.getRes(`${mcFile}_png`);
+                    if (!jsonData || !pngData) {
+                        return null;
+                    }
+                    factory = new egret.MovieClipDataFactory(jsonData, pngData);
+                    factory.enableCache = true;
+                    this.m_mcFactorys.add(mcFile, factory);
+                }
                 let mcData: egret.MovieClipData = factory.generateMovieClipData(mcName);
                 if (mcData.mcData) {
                     let mc: egret.MovieClip = new egret.MovieClip(mcData);
                     mc.gotoAndStop(1);
-                    mc['mcFile'] = mcFile;
-                    mc['mcName'] = mcName;
+                    mc['key'] = key;
                     if (isCenter) {
                         mc.anchorOffsetX = (mc.width + mcData.mcData.frames[0].x * 2) * 0.5;
                         mc.anchorOffsetY = (mc.height + mcData.mcData.frames[0].y * 2) * 0.5;
@@ -57,20 +56,18 @@ module core {
         }
         /**
          * 归还影片剪辑
-         * @param json  影片剪辑JSON名称
-         * @param name  影片剪辑名称
-         * @param mc    影片剪辑实例
+         * @param json      影片剪辑JSON名称
          */
         public revertMovieClip(mc: egret.MovieClip): void {
             if (mc) {
-                mc.gotoAndStop(1);
+                let key:string = mc['key'];
                 if (mc.parent) {
                     mc.parent.removeChild(mc);
                 }
-                let mcList: egret.MovieClip[] = this.m_factorys[`${mc['mcFile']}>${mc['mcName']}`];
+                let mcList: egret.MovieClip[] = this.m_factorys.get(key);
                 if (!mcList) {
                     mcList = [];
-                    this.m_factorys[`${mc['mcFile']}>${mc['mcName']}`] = mcList;
+                    this.m_factorys.add(key, mcList);
                 }
                 mcList.push(mc);
             }

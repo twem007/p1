@@ -2,6 +2,9 @@
 
 [![Build Status](https://travis-ci.org/twem007/p1.svg?branch=master)](https://travis-ci.org/twem007/p1)
 
+
+交流QQ群：65384669
+
 ## 目录
 
  1. [框架定位](#框架定位)
