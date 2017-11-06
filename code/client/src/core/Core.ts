@@ -30,7 +30,7 @@ module core {
 		}
 
 		public static run(stage: egret.Stage): void {
-			egret.log(`Github:https://github.com/twem007/p1 框架交流QQ群：65384669`);
+			egret.log(`框架交流QQ群：65384669 Github:https://github.com/twem007/p1 欢迎一起完善框架fork后pull request修改后的代码，我将根据情况进行合并。如果觉得不错，点击star支持下我们。`);
 			egret.ImageLoader.crossOrigin = 'anonymous';
 			core.FrameEventCenter.getInstance().init(stage);
 			core.LayerCenter.getInstance().init(stage);

@@ -28,22 +28,24 @@ module core {
          */
         public addEventListener(messageID: string, callback: (data: EventData) => void, thisObj: any, index?: number): void {
             if (callback && thisObj) {
-                let data: EventCallBack = new EventCallBack(callback, thisObj);
-                data.messageID = messageID;
-                data.index = index ? index : 0;
-                let callbacks: EventCallBack[] = this.m_callbackMaps.get(messageID);
-                if (callbacks) {
-                    callbacks.push(data);
-                    callbacks.sort(this.sortIndex);
-                } else {
-                    this.m_callbackMaps.add(messageID, [data]);
-                }
-            }
+				let data: EventCallBack = new EventCallBack(callback, thisObj);
+				data.index = index;
+				data.messageID = messageID;
+				let callbacks: EventCallBack[] = this.m_callbackMaps.get(messageID);
+				if (callbacks) {
+					for (let i: number = 0, iLen: number = callbacks.length; i < iLen; i++) {
+						if (data.index < callbacks[i].index) {
+							callbacks.splice(i, 0, data);
+							return;
+						}
+					}
+					callbacks.push(data);
+				} else {
+					this.m_callbackMaps.add(messageID, [data]);
+				}
+			}
         }
 
-        private sortIndex(a: EventCallBack, b: EventCallBack): number {
-            return b.index - a.index;
-        }
         /**
          * 移除事件监听
          */
@@ -76,25 +78,23 @@ module core {
                 let event: EventData = this.m_sendBuffer.shift();
                 let dataList: EventCallBack[] = this.m_callbackMaps.get(event.messageID);
                 if (dataList) {
-                    for (let i: number = dataList.length; i > 0; i--) {
-                        let data: EventCallBack = dataList[i - 1];
-                        if (!data.isValid) {
-                            dataList.splice(i - 1, 1);
-                        }
-                    }
-                    for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
-                        let data: EventCallBack = dataList[i];
-                        let t1: number = Date.now();
-                        data.callback.call(data.thisObj, event);
-                        let t1_end: number = Date.now();
-                        if (t1_end - t1 >= max) {
-                            max = t1_end - t1;
-                            max_data = data;
-                        }
-                    }
-                } else {
-                    egret.log("事件ID:" + event.messageID + "无监听回调");
-                }
+					for (let i: number = dataList.length; i > 0; i--) {
+						let data: EventCallBack = dataList[i - 1];
+						if (!data.isValid) {
+							dataList.splice(i - 1, 1);
+						} else {
+							let t1: number = Date.now();
+							data.callback.call(data.thisObj, event);
+							let t1_end: number = Date.now();
+							if (t1_end - t1 > max) {
+								max = t1_end - t1;
+								max_data = data;
+							}
+						}
+					}
+				} else {
+					egret.log("事件ID:" + event.messageID + "无监听回调");
+				}
             }
             let t_end: number = Date.now() - t;
             if (DebugUtils.EVENT_LOG && t_end > DebugUtils.EVENT_LIMIT && max_data) {
