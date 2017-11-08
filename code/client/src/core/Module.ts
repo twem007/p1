@@ -5,7 +5,7 @@ module core {
 	 * @author yuxuefeng
 	 * 
 	 */
-    export abstract class Control {
+    export abstract class Module {
         /**
          * 进入模块传入数据
          */

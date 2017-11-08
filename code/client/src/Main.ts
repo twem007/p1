@@ -99,16 +99,16 @@ class Main extends core.EUILayer {
             core.LoadingManager.setCurLoading(MainLoadingUI);
             core.Config.init(RES.getRes('config_zip'));
             core.ProtoFactory.init(RES.getRes('protobuf_proto'));
-            this.initController();
+            this.initModule();
             this.createScene();
         }
     }
     /**
      * 初始化控制器
      */
-    private initController(): void {
-        new GameController();
-        new LoginController();
-        new MainController();
+    private initModule(): void {
+        new GameModule();
+        new LoginModule();
+        new MainModule();
     }
 }

@@ -14,16 +14,10 @@ module core {
         }
 
         private onTick(timeStamp: number): boolean {
-            let dataList: TickData[] = this.m_tickList;
-            for (let i: number = dataList.length; i > 0; i--) {
-                let data: TickData = dataList[i - 1];
-                if (!data.isValid) {
-                    dataList.splice(i - 1, 1);
-                }
-            }
+            let dataList: TickData[] = this.m_tickList.concat();
             for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
                 let data: TickData = dataList[i];
-                if ((timeStamp - data.timestamp) > data.delay) {
+                if ((timeStamp - data.timestamp) > data.delay && data.isValid) {
                     data.timestamp = timeStamp;
                     data.count++;
                     if (data.callback) {
@@ -44,24 +38,7 @@ module core {
 
         public addTick(delay: number, replayCount: number, callback: Function, thisObj: any, ...args): void {
             let dataList: TickData[] = this.m_tickList;
-            if (dataList) {
-                for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
-                    let data: TickData = dataList[i];
-                    if (data.callback == callback && data.thisObj == thisObj && data.delay == delay && data.maxCount == replayCount) {
-                        if (!data.isValid) {
-                            data.isValid = true;
-                            data.delay = delay;
-                            data.count = 0;
-                            data.maxCount = replayCount <= 0 ? Number.MAX_VALUE : replayCount;
-                            data.callback = callback;
-                            data.thisObj = thisObj;
-                            data.args = args;
-                            data.timestamp = egret.getTimer();
-                        }
-                        return;
-                    }
-                }
-            } else {
+            if (!dataList) {
                 dataList = [];
                 this.m_tickList = dataList;
             }
@@ -81,11 +58,10 @@ module core {
             let dataList: TickData[] = this.m_tickList;
             if (dataList) {
                 let tickData: TickData;
-                for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
-                    let data: TickData = dataList[i];
-                    if (data.callback == callback && data.thisObj == thisObj) {
-                        data.isValid = false;
-                        return;
+                for (let i: number = dataList.length; i > 0; i--) {
+                    let data: TickData = dataList[i - 1];
+                    if (!data.isValid || (data.callback == callback && data.thisObj == thisObj)) {
+                        dataList.splice(i - 1, 1);
                     }
                 }
             }
@@ -95,10 +71,10 @@ module core {
             let dataList: TickData[] = this.m_tickList;
             if (dataList) {
                 let tickData: TickData;
-                for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
-                    let data: TickData = dataList[i];
-                    if (data.thisObj == thisObj) {
-                        data.isValid = false;
+                for (let i: number = dataList.length; i > 0; i--) {
+                    let data: TickData = dataList[i - 1];
+                    if (!data.isValid || data.thisObj == thisObj) {
+                        dataList.splice(i - 1, 1);
                     }
                 }
             }

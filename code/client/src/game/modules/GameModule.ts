@@ -1,4 +1,4 @@
-class GameController extends core.Control {
+class GameModule extends core.Module {
 
     constructor() {
         super(ModuleEnum.GAME);

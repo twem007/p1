@@ -1,7 +1,7 @@
 /**
  * 主界面控制器
  */
-class MainController extends core.Control {
+class MainModule extends core.Module {
 	public constructor() {
 		super(ModuleEnum.MAINUI);
 	}

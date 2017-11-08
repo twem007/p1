@@ -1,7 +1,7 @@
 /**
  * 登录界面控制器
  */
-class LoginController extends core.Control {
+class LoginModule extends core.Module {
 	public constructor() {
 		super(ModuleEnum.LOGIN);
 	}
