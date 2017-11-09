@@ -8,10 +8,10 @@ module core {
 
         private static s_instance: LayerCenter;
 
-        private m_layers: Layer | EUILayer[];
+        private m_layerDic: Dictionary<core.Layer | core.EUILayer>;
 
         public stage: egret.Stage;
-        
+
         public static stageWidth: number;
 
         public static stageHeight: number;
@@ -30,7 +30,7 @@ module core {
             if (stage) {
                 this.stage = stage;
                 stage.addEventListener(egret.Event.RESIZE, this.onStageResize, this);
-                this.m_layers = [];
+                this.m_layerDic = new Dictionary<core.Layer | core.EUILayer>();
                 LayerCenter.stageWidth = stage.stageWidth;
                 LayerCenter.stageHeight = stage.stageHeight;
             }
@@ -42,24 +42,34 @@ module core {
             EventCenter.getInstance().sendEvent(new EventData(egret.Event.RESIZE));
         }
 
+        private updateLayer(): void {
+            let keys: number[] = this.m_layerDic.keys.concat();
+            keys.sort(function (a: number, b: number): number {
+                return a - b;
+            });
+            for (let i: number = 0, iLen: number = keys.length; i < iLen; i++) {
+                let layer: core.Layer | core.EUILayer = this.m_layerDic.get(keys[i]);
+                if (!layer.parent) {
+                    this.stage.addChildAt(layer, i);
+                } else {
+                    layer.parent.setChildIndex(layer, i);
+                }
+            }
+        }
+
         public addLayer(index: number, layer: core.Layer | core.EUILayer): void {
-            this.m_layers[index] = layer;
-            this.stage.addChildAt(layer, index);
+            this.m_layerDic.add(index, layer);
+            egret.callLater(this.updateLayer, this);
         }
 
         public getLayer(index: number): core.Layer | core.EUILayer {
-            return this.m_layers[index];
+            return this.m_layerDic.get(index);
         }
 
-        public removeLayer(index: number): void {
-            var layer: core.Layer | core.EUILayer = this.m_layers[index];
-            if (layer) {
-                if (layer.parent) {
-                    layer.parent.removeChild(layer);
-                }
-                layer.removeChildren();
-                this.m_layers[index] = null;
-            }
+        public removeLayer(index: number): core.Layer | core.EUILayer {
+            let layer: core.Layer | core.EUILayer = this.m_layerDic.remove(index);
+            this.updateLayer();
+            return layer;
         }
     }
 }
