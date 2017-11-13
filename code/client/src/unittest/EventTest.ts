@@ -1,28 +1,32 @@
 class EventTest {
     constructor() {
-        let dispatcher: EventCenter = new EventCenter();
-        dispatcher.addEventListener("a", (event: egret.Event) => {
-            console.log('a');
-        }, this);
-        core.EventCenter.getInstance().addEventListener('b', (data: core.EventData) => {
-            console.log('b');
-        }, this)
-        core.DebugUtils.begin('dispatcher');
-        let count:number = 500;
-        for (let i: number = 0, iLen: number = count; i < iLen; i++) {
-            dispatcher.dispatchEvent(new egret.Event('a'))
-        }
-        console.log("耗时：" + core.DebugUtils.finish('dispatcher'));
-        core.DebugUtils.begin('center');
-        for (let i: number = 0, iLen: number = count; i < iLen; i++) {
-            core.EventCenter.getInstance().sendEvent(new core.EventData("b"))
-        }
-        console.log("耗时：" + core.DebugUtils.finish('center'));        
-    }
-}
 
-class EventCenter extends egret.EventDispatcher {
-    constructor() {
-        super();
+
+
+        core.EventCenter.getInstance().addEventListener('test1', this.test1Callback, this, 1);
+        core.EventCenter.getInstance().addEventListener('test2', this.test2Callback, this);
+        core.TimerManager.instance.addTick(5000, -1, this.sendTest1, this);
+        core.TimerManager.instance.addTick(10000, 1, this.sendTest2, this);
+    }
+
+    private sendTest1(): void {
+        core.EventCenter.getInstance().sendEvent(new core.EventData('test1', 'test1'))
+    }
+
+    private sendTest2(): void {
+        core.EventCenter.getInstance().sendEvent(new core.EventData('test1', 'test2'));
+        core.EventCenter.getInstance().addEventListener('test1', this.test1Callback2, this, 2);
+    }
+
+    private test1Callback(data: core.EventData): void {
+        console.log('test1');
+    }
+
+    private test2Callback(data: core.EventData): void {
+        console.log('test2');
+    }
+
+    private test1Callback2(data: core.EventData): void {
+        console.log('test1_2');
     }
 }
