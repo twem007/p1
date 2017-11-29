@@ -56,6 +56,8 @@ module core {
                     let data: EventCallBack = callbacks[i];
                     if (data.callback === callback && data.thisObj === thisObj) {
                         data.isValid = false;
+                        data.callback = null;
+                        data.thisObj = null;
                     }
                 }
             }
@@ -114,14 +116,6 @@ module core {
         constructor(callback: (data?: any) => void, thisObj: any) {
             super(callback, thisObj);
             this.isValid = true;
-        }
-
-        public clone(): EventCallBack {
-            let data: EventCallBack = new EventCallBack(<any>this.callback, this.thisObj);
-            data.index = this.index;
-            data.messageID = this.messageID;
-            data.isValid = this.isValid;
-            return data;
         }
     }
 }

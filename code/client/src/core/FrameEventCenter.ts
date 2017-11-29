@@ -75,6 +75,8 @@ module core {
                     let data: FrameCallBack = callbacks[i];
                     if (data.callback === callback && data.thisObj === thisObj) {
                         data.isValid = false;
+                        data.callback = null;
+                        data.thisObj = null;
                     }
                 }
             }

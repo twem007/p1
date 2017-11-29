@@ -27,6 +27,8 @@ module core {
                     let item: KeyCallBack = list[i];
                     if (item && item.callback === callback && item.thisObj === thisObj) {
                         item.isValid = false;
+                        item.callback = null;
+                        item.thisObj = null;
                     }
                 }
             }
@@ -47,16 +49,14 @@ module core {
         public sendKey(key: number): void {
             let data: KeyData = this.m_keyMap.get(key);
             if (data) {
-                let list: KeyCallBack[] = data.callbacks;
+                let list: KeyCallBack[] = data.callbacks.concat().reverse();
                 for (let i: number = list.length; i > 0; i--) {
                     let data: KeyCallBack = list[i - 1];
                     if (!data.isValid) {
                         list.splice(i - 1, 1);
+                    } else {
+                        data.callback.call(data.thisObj);
                     }
-                }
-                for (let i: number = 0, iLen: number = list.length; i < iLen; i++) {
-                    let data: KeyCallBack = list[i];
-                    data.callback.call(data.thisObj);
                 }
             }
         }
