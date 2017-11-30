@@ -14,8 +14,8 @@ class EventTest {
     }
 
     private sendTest2(): void {
-        core.EventCenter.getInstance().sendEvent(new core.EventData('test1', 'test2'));
-        core.EventCenter.getInstance().addEventListener('test1', this.test1Callback2, this, 2);
+        core.EventCenter.getInstance().addEventListener('test1_2', this.test1Callback2, this, 2);
+        core.EventCenter.getInstance().sendEvent(new core.EventData('test1_2', 'test1_2'));
     }
 
     private test1Callback(data: core.EventData): void {
@@ -28,5 +28,6 @@ class EventTest {
 
     private test1Callback2(data: core.EventData): void {
         console.log('test1_2');
+        core.EventCenter.getInstance().removeEventListener('test1', this.test1Callback, this);
     }
 }

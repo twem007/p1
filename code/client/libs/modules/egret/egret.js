@@ -11070,10 +11070,10 @@ var egret;
          */
         Graphics.prototype.updateNodeBounds = function () {
             var node = this.$renderNode;
-            node.x = this.minX;
-            node.y = this.minY;
-            node.width = Math.ceil(this.maxX - this.minX);
-            node.height = Math.ceil(this.maxY - this.minY);
+            node.x = this.minX - 2;
+            node.y = this.minY - 2;
+            node.width = Math.ceil(this.maxX - this.minX) + 4;
+            node.height = Math.ceil(this.maxY - this.minY) + 4;
         };
         /**
          * 更新当前的lineX和lineY值，并标记尺寸失效。
@@ -13359,7 +13359,7 @@ var egret;
                         renderNode.image = this.bitmapData;
                         renderNode.imageWidth = width;
                         renderNode.imageHeight = height;
-                        renderNode.drawImage(0, 0, width, height, -this.offsetX / this.$canvasScaleX, -this.offsetY / this.$canvasScaleY, width / this.$canvasScaleX, height / this.$canvasScaleY);
+                        renderNode.drawImage(0, 0, width, height, -this.offsetX, -this.offsetY, width / this.$canvasScaleX, height / this.$canvasScaleY);
                     }
                 }
                 this.dirtyList = null;
@@ -13378,8 +13378,8 @@ var egret;
                 var bounds = this.root.$getOriginalBounds();
                 var scaleX = this.$canvasScaleX;
                 var scaleY = this.$canvasScaleY;
-                this.offsetX = -bounds.x * scaleX;
-                this.offsetY = -bounds.y * scaleY;
+                this.offsetX = -bounds.x;
+                this.offsetY = -bounds.y;
                 this.offsetMatrix.setTo(this.offsetMatrix.a, 0, 0, this.offsetMatrix.d, this.offsetX, this.offsetY);
                 var buffer = this.renderBuffer;
                 //在chrome里，小等于256*256的canvas会不启用GPU加速。
@@ -18080,7 +18080,7 @@ var egret;
              * @language zh_CN
              */
             get: function () {
-                return "5.0.12";
+                return "5.0.13";
             },
             enumerable: true,
             configurable: true
@@ -21340,6 +21340,10 @@ var egret;
                 }
             }
             else if (this.$TextField[3 /* textFieldWidth */] == 0) {
+                var graphics = this.graphicsNode;
+                if (graphics) {
+                    graphics.clear();
+                }
                 return;
             }
             var underLines = this.drawText();
