@@ -13,13 +13,12 @@ module core {
         }
         /**
          * 获取影片剪辑
-         * 注意事项：getMovieClip 获取的MovieClip在使用完成后需调用 revertMovieClip 归还，并需要在调用 revertMovieClip 以后将 MovieClip 变量赋值为null
          * @param mcFile    影片剪辑文件名前缀
          * @param mcName    影片剪辑名称
          * @param isCenter  是否锚点居中
          */
         public getMovieClip(mcFile: string, mcName: string, isCenter: boolean = true): egret.MovieClip {
-            let key:string = `${mcFile}>${mcName}`;
+            let key: string = `${mcFile}>${mcName}`;
             let mcList: egret.MovieClip[] = this.m_factorys.get(key);
             if (!mcList) {
                 mcList = [];
@@ -55,12 +54,37 @@ module core {
             return null;
         }
         /**
+         * 检查影片剪辑是否有效
+         * @param mcFile    影片剪辑文件名前缀
+         * @param mcName    影片剪辑名称
+         * @param mc        影片剪辑
+         */
+        public checkValid(mcFile: string, mcName: string, mc: egret.MovieClip): boolean {
+            return mc && this.getFormatKey(mcFile, mcName) === this.getCacheKey(mc);
+        }
+        /**
+         * 得到影片剪辑的缓存KEY
+         * @param mc        影片剪辑
+         */
+        public getCacheKey(mc: egret.MovieClip): string {
+            return mc && mc['key'];
+        }
+        /**
+         * 格式化缓存KEY
+         * @param mcFile    影片剪辑文件名前缀
+         * @param mcName    影片剪辑名称
+         */
+        public getFormatKey(mcFile: string, mcName: string): string {
+            return `${mcFile}>${mcName}`;
+        }
+        /**
          * 归还影片剪辑
          * @param json      影片剪辑JSON名称
          */
         public revertMovieClip(mc: egret.MovieClip): void {
             if (mc) {
-                let key:string = mc['key'];
+                mc.gotoAndStop(1);
+                let key: string = mc['key'];
                 if (mc.parent) {
                     mc.parent.removeChild(mc);
                 }
