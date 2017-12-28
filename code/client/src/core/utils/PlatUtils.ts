@@ -4,27 +4,54 @@ module core {
         }
 
         public static get isPC(): boolean {
-            return egret.Capabilities.os == 'Windows PC';
+            if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
+                var userAgentInfo: string = navigator.userAgent.toString();
+                var Agents: string[] = ["Android", "iPhone",
+                    "SymbianOS", "Windows Phone",
+                    "iPad", "iPod"];
+                var flag: boolean = true;
+                for (var v = 0; v < Agents.length; v++) {
+                    if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                        flag = false;
+                        break;
+                    }
+                }
+                return flag;
+            } else {
+                return egret.Capabilities.os.indexOf('Mac OS') != -1 || egret.Capabilities.os.indexOf('Windows PC') != -1;
+            }
         }
 
-        public static get isiOS(): boolean {
-            return egret.Capabilities.os == 'iOS';
+        public static get isiPhone(): boolean {
+            return egret.Capabilities.os.indexOf('iOS') != -1;
+        }
+
+        public static get isiPad(): boolean {
+            if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
+                var userAgentInfo: string = navigator.userAgent.toString();
+                if (userAgentInfo.indexOf("iPad") > 0) {
+                    return true;
+                }
+                return false;
+            } else {
+                return PlatUtils.isiPhone;
+            }
+        }
+
+        public static get isiPod(): boolean {
+            if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
+                var userAgentInfo: string = navigator.userAgent.toString();
+                if (userAgentInfo.indexOf("iPod") > 0) {
+                    return true;
+                }
+                return false;
+            } else {
+                return PlatUtils.isiPhone;
+            }
         }
 
         public static get isAndroid(): boolean {
-            return egret.Capabilities.os == 'Android';
-        }
-
-        public static get isWindowPhone(): boolean {
-            return egret.Capabilities.os == 'Windows Phone';
-        }
-
-        public static get isMacOS(): boolean {
-            return egret.Capabilities.os == 'Mac OS';
-        }
-
-        public static get isUnknown(): boolean {
-            return egret.Capabilities.os == 'Unknown';
+            return egret.Capabilities.os.indexOf('Android') != -1;
         }
     }
 }
