@@ -93,7 +93,7 @@ module core {
         public static loadGroups(groups: string[], onLoadProgress: (data: GroupData) => void, onLoadFaild: (data: GroupData) => void, onLoadComplete: (data: GroupData) => void, thisObj: any, param?: any): void {
             if (groups) {
                 let groupData: GroupData = new GroupData();
-                groupData.loadQueue = groups;
+                groupData.loadQueue = groups.concat();
                 groupData.loadedQueue = [];
                 groupData.loaded = 0;
                 groupData.total = groups.length;

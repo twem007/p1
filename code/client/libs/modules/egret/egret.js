@@ -9112,7 +9112,7 @@ var egret;
                 egret.WebGLUtils.deleteWebGLTexture(this.webGLTexture);
                 this.webGLTexture = null;
             }
-            //native
+            //native or WebGLRenderTarget
             if (this.source && this.source.dispose) {
                 this.source.dispose();
             }
@@ -10743,8 +10743,9 @@ var egret;
             var strokePath = this.strokePath;
             fillPath && fillPath.drawCircle(x, y, radius);
             strokePath && strokePath.drawCircle(x, y, radius);
-            this.extendBoundsByPoint(x - radius, y - radius);
-            this.extendBoundsByPoint(x + radius, y + radius);
+            //-1 +2 解决WebGL裁切问题
+            this.extendBoundsByPoint(x - radius - 1, y - radius - 1);
+            this.extendBoundsByPoint(x + radius + 2, y + radius + 2);
             this.updatePosition(x + radius, y);
             this.$renderNode.dirtyRender = true;
         };
@@ -10777,8 +10778,9 @@ var egret;
             var strokePath = this.strokePath;
             fillPath && fillPath.drawEllipse(x, y, width, height);
             strokePath && strokePath.drawEllipse(x, y, width, height);
-            this.extendBoundsByPoint(x, y);
-            this.extendBoundsByPoint(x + width, y + height);
+            //-1 +2 解决WebGL裁切问题
+            this.extendBoundsByPoint(x - 1, y - 1);
+            this.extendBoundsByPoint(x + width + 2, y + height + 2);
             this.updatePosition(x + width, y + height * 0.5);
             this.$renderNode.dirtyRender = true;
         };
@@ -11070,10 +11072,10 @@ var egret;
          */
         Graphics.prototype.updateNodeBounds = function () {
             var node = this.$renderNode;
-            node.x = this.minX - 2;
-            node.y = this.minY - 2;
-            node.width = Math.ceil(this.maxX - this.minX) + 4;
-            node.height = Math.ceil(this.maxY - this.minY) + 4;
+            node.x = this.minX;
+            node.y = this.minY;
+            node.width = Math.ceil(this.maxX - this.minX);
+            node.height = Math.ceil(this.maxY - this.minY);
         };
         /**
          * 更新当前的lineX和lineY值，并标记尺寸失效。
@@ -16772,6 +16774,8 @@ var egret;
                 region.updateRegion(bounds, displayMatrix);
             }
             if (region.width <= 0 || region.height <= 0) {
+                egret.sys.Region.release(region);
+                egret.Matrix.release(displayMatrix);
                 return drawCalls;
             }
             var found = false;
@@ -16873,8 +16877,9 @@ var egret;
                         return drawCalls;
                     }
                     maskContext.setTransform(matrix.a, 0, 0, matrix.d, -region.minX, -region.minY);
-                    offsetM = egret.Matrix.create().setTo(matrix.a, 0, 0, matrix.d, -region.minX, -region.minY);
-                    drawCalls += this.drawDisplayObject(mask, maskContext, dirtyList, offsetM, mask.$displayList, region, root);
+                    var offsetM_2 = egret.Matrix.create().setTo(matrix.a, 0, 0, matrix.d, -region.minX, -region.minY);
+                    drawCalls += this.drawDisplayObject(mask, maskContext, dirtyList, offsetM_2, mask.$displayList, region, root);
+                    egret.Matrix.release(offsetM_2);
                     displayContext.globalCompositeOperation = "destination-in";
                     displayContext.setTransform(1, 0, 0, 1, 0, 0);
                     displayContext.globalAlpha = 1;
@@ -18080,7 +18085,7 @@ var egret;
              * @language zh_CN
              */
             get: function () {
-                return "5.0.13";
+                return "5.0.14";
             },
             enumerable: true,
             configurable: true
