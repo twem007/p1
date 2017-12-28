@@ -68,6 +68,10 @@ module core {
 
         public sendData(data: egret.ByteArray): void {
             this.m_webSocket.writeBytes(data);
+            egret.callLater(this.flushToServer, this);
+        }
+
+        private flushToServer(): void {
             this.m_webSocket.flush();
         }
 
@@ -93,10 +97,26 @@ module core {
 
         public connect(): void {
             this.m_state = WebSocketStateEnum.CONNECTING;
-            if (this.m_host.indexOf(":") > 0) {
-                this.m_webSocket.connectByUrl(this.m_host);
+            if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
+                if (location.href.indexOf('https') >= 0) {
+                    if (this.m_host.indexOf(":") >= 0) {
+                        this.m_webSocket.connectByUrl(this.m_host);
+                    } else {
+                        this.m_webSocket.connectByUrl(`wss:\\${this.m_host}:${this.m_port}`);
+                    }
+                } else {
+                    if (this.m_host.indexOf(":") > 0) {
+                        this.m_webSocket.connectByUrl(this.m_host);
+                    } else {
+                        this.m_webSocket.connect(this.m_host, this.m_port);
+                    }
+                }
             } else {
-                this.m_webSocket.connect(this.m_host, this.m_port);
+                if (this.m_host.indexOf(":") > 0) {
+                    this.m_webSocket.connectByUrl(this.m_host);
+                } else {
+                    this.m_webSocket.connect(this.m_host, this.m_port);
+                }
             }
         }
 
