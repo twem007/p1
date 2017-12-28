@@ -4,30 +4,30 @@ module core {
 	 * @author yuxuefeng
 	 *
 	 */
-    export class EventCenter {
+	export class EventCenter {
 
-        private static s_instance: EventCenter;
+		private static s_instance: EventCenter;
 
-        private m_callbackMaps: Dictionary<EventCallBack[]>;
+		private m_callbackMaps: Dictionary<EventCallBack[]>;
 
-        private m_sendBuffer: EventData[];
+		private m_sendBuffer: EventData[];
 
-        public constructor() {
-            this.m_callbackMaps = new Dictionary<EventCallBack[]>();
-            this.m_sendBuffer = [];
-        }
+		public constructor() {
+			this.m_callbackMaps = new Dictionary<EventCallBack[]>();
+			this.m_sendBuffer = [];
+		}
 
-        public static getInstance(): EventCenter {
-            if (EventCenter.s_instance == null) {
-                EventCenter.s_instance = new EventCenter();
-            }
-            return EventCenter.s_instance;
-        }
+		public static getInstance(): EventCenter {
+			if (EventCenter.s_instance == null) {
+				EventCenter.s_instance = new EventCenter();
+			}
+			return EventCenter.s_instance;
+		}
         /**
          * 注册事件监听
          */
-        public addEventListener(messageID: string, callback: (data: EventData) => void, thisObj: any, index?: number): void {
-            if (callback && thisObj) {
+		public addEventListener(messageID: string, callback: (data: EventData) => void, thisObj: any, index: number = 0): void {
+			if (callback && thisObj) {
 				let data: EventCallBack = new EventCallBack(callback, thisObj);
 				data.index = index;
 				data.messageID = messageID;
@@ -44,24 +44,23 @@ module core {
 					this.m_callbackMaps.add(messageID, [data]);
 				}
 			}
-        }
+		}
 
         /**
          * 移除事件监听
          */
-        public removeEventListener(messageID: string, callback: (data: EventData) => void, thisObj: any): void {
-            let callbacks: EventCallBack[] = this.m_callbackMaps.get(messageID);
-            if (callbacks) {
-                for (let i: number = 0, iLen: number = callbacks.length; i < iLen; i++) {
-                    let data: EventCallBack = callbacks[i];
-                    if (data.callback === callback && data.thisObj === thisObj) {
-                        data.isValid = false;
-                        data.callback = null;
-                        data.thisObj = null;
-                    }
-                }
-            }
-        }
+		public removeEventListener(messageID: string, callback: (data: EventData) => void, thisObj: any): void {
+			let callbacks: EventCallBack[] = this.m_callbackMaps.get(messageID);
+			if (callbacks) {
+				for (let i: number = callbacks.length; i > 0; i--) {
+					let data: EventCallBack = callbacks[i - 1];
+					if (data.callback === callback && data.thisObj === thisObj) {
+						data.isValid = false;
+						callbacks.splice(i - 1, 1);
+					}
+				}
+			}
+		}
         /**
          * 发送消息
          */
@@ -69,22 +68,34 @@ module core {
             this.m_sendBuffer.push(message);
             egret.callLater(this.sendAll, this);
         }
+		/**
+		 * 立即发送
+		 */
+		public flush(): void {
+			this.sendAll();
+		}
         /**
          * 发送所有消息
          */
-        private sendAll(): void {
-            let t: number = Date.now();
-            let max: number = 0;
-            let max_data: EventCallBack;
-            while (this.m_sendBuffer.length > 0) {
-                let event: EventData = this.m_sendBuffer.shift();
-                let dataList: EventCallBack[] = this.m_callbackMaps.get(event.messageID);
-                if (dataList) {
+		private sendAll(): void {
+			let t: number = Date.now();
+			let max: number = 0;
+			let max_data: EventCallBack;
+			let buffLen:number = this.m_sendBuffer.length;
+			let sendBuff:EventData[] = this.m_sendBuffer;
+			const buffMax:number = 30;
+			if(buffLen > buffMax){
+				sendBuff = this.m_sendBuffer.splice(0, buffMax);
+				// AGame.R.app.hintLabel(`分帧剩余未处理请求数：${this.m_sendBuffer.length}`)
+			}
+			while (sendBuff.length > 0) {
+				let event: EventData = sendBuff.shift();
+				let dataList: EventCallBack[] = this.m_callbackMaps.get(event.messageID);
+				if (dataList) {
+					dataList = dataList.concat()
 					for (let i: number = dataList.length; i > 0; i--) {
 						let data: EventCallBack = dataList[i - 1];
-						if (!data.isValid) {
-							dataList.splice(i - 1, 1);
-						} else {
+						if (data.isValid) {
 							let t1: number = Date.now();
 							data.callback.call(data.thisObj, event);
 							let t1_end: number = Date.now();
@@ -95,27 +106,27 @@ module core {
 						}
 					}
 				} else {
-					egret.log("事件ID:" + event.messageID + "无监听回调");
+					// egret.log("事件ID:" + event.messageID + "无监听回调");
 				}
-            }
-            let t_end: number = Date.now() - t;
-            if (DebugUtils.EVENT_LOG && t_end > DebugUtils.EVENT_LIMIT && max_data) {
-                egret.warn(`事件派发总耗时：${t_end} 最高耗时事件：${max_data.messageID} 耗时：${max}`);
-            }
-        }
-    }
+			}
+			let t_end: number = Date.now() - t;
+			if (t_end > 10 && max_data) {
+				egret.log(`单帧事件派发耗时：${t_end} 最高耗时事件：${max_data.messageID} 耗时：${max}`);
+			}
+		}
+	}
 
-    class EventCallBack extends Callback implements IMessage {
+	class EventCallBack extends Callback {
 
-        public index: number;
+		public index: number;
 
-        public messageID: string;
+		public messageID: string;
 
-        public isValid: boolean;
+		public isValid: boolean;
 
-        constructor(callback: (data?: any) => void, thisObj: any) {
-            super(callback, thisObj);
-            this.isValid = true;
-        }
-    }
+		constructor(callback: (data?: any) => void, thisObj: any) {
+			super(callback, thisObj);
+			this.isValid = true;
+		}
+	}
 }
