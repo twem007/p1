@@ -4,44 +4,47 @@ module core {
      */
     export class SoundUtils {
         /**
-         * 玩家id
-         */
-        private m_playerId: number;
-        /**
          * 声音字典
          */
-        private m_sounds: {};
-        /**
-         * 声音类型组 0:音效组 1:背景音乐组 
-         */
-        private m_soundGroups: {};
+        private m_sounds: Dictionary<egret.Sound>;
         /**
          * 音频字典
          */
-        private m_channels: {};
+        private m_channels: Dictionary<egret.SoundChannel>;
+        /**
+         * 当前播放音效字典
+         */
+        private m_curEffect: Dictionary<egret.Sound>;
+        /**
+         * 当前播放背景音乐字典
+         */
+        private m_curBGM: Dictionary<egret.Sound>;
         /**
          * 回调字典
          */
-        private m_callbacks: {};
+        private m_callbacks: Dictionary<() => void>;
         /**
          * 播放通道 同一通道音乐覆盖
          */
-        private m_playChannel: {};
+        private m_playChannel: Dictionary<egret.Sound>;
 
         private m_BGMVolume: number = 1;
 
         private m_effectVolume: number = 1;
+        /**
+         * 是否停止播放音乐
+         */
+        private m_isStop: boolean = false;
 
         private static s_instance: SoundUtils;
 
         public constructor() {
-            this.m_sounds = {};
-            this.m_channels = {};
-            this.m_callbacks = {};
-            this.m_playChannel = {};
-            this.m_soundGroups = {};
-            this.m_soundGroups[egret.Sound.EFFECT] = [];
-            this.m_soundGroups[egret.Sound.MUSIC] = [];
+            this.m_sounds = new Dictionary<egret.Sound>();
+            this.m_channels = new Dictionary<egret.SoundChannel>();
+            this.m_curBGM = new Dictionary<egret.Sound>();
+            this.m_curEffect = new Dictionary<egret.Sound>();
+            this.m_callbacks = new Dictionary<() => void>();
+            this.m_playChannel = new Dictionary<egret.Sound>();
             let value: string = egret.localStorage.getItem('soundEffect');
             if (value) {
                 this.m_effectVolume = parseInt(value);
@@ -60,31 +63,38 @@ module core {
          * @version Egret 2.4
          */
         public playSound(id: number, loop: number = 1, onPlayComplete?: () => void): void {
-            let config: SoundConfig = core.Config.getConfig(SoundConfig).get(id);
+            let config: SoundConfig = Config.getConfig(SoundConfig).get(id);
             if (config) {
-                this.stopSound(config.coverKey.toString());
+                this.stopSound(config.coverKey);
             } else {
                 egret.log(`ID为${id}的音效在SoundConfig中不存在`);
                 return;
             }
-            let sound: egret.Sound = this.m_sounds[id];
+            let sound: egret.Sound = this.m_sounds.get(id);
             if (!sound) {
                 sound = RES.getRes(config.soundName);
                 if (sound) {
                     sound.type = config.soundType == 0 ? egret.Sound.EFFECT : egret.Sound.MUSIC;
-                    this.m_sounds[id] = sound;
-                    this.m_soundGroups[sound.type].push(sound);
+                    this.m_sounds.add(id, sound);
                 }
             }
             if (sound) {
-                this.m_playChannel[config.coverKey.toString()] = sound;
-                sound['cover'] = config.coverKey.toString();
+                if (sound.type == egret.Sound.EFFECT) {
+                    this.m_curEffect.add(id, sound);
+                } else {
+                    this.m_curBGM.add(id, sound);
+                }
+                if (this.m_isStop) {
+                    return;
+                }
+                this.m_playChannel.add(config.coverKey, sound);
+                sound['cover'] = config.coverKey;
                 let channel: egret.SoundChannel;
                 try {
                     channel = sound.play(0, loop);
                 } catch (e) {
                     egret.log(`ID为${id}的音乐播放失败`);
-                    delete this.m_playChannel[config.coverKey.toString()];
+                    this.m_playChannel.remove(config.coverKey);
                     return;
                 }
                 channel['owner'] = sound;
@@ -96,10 +106,10 @@ module core {
                     channel.volume = this.m_BGMVolume;
                 }
                 if (onPlayComplete) {
-                    this.m_callbacks[channel.hashCode.toString()] = onPlayComplete;
+                    this.m_callbacks.add(channel.hashCode, onPlayComplete);
                 }
                 channel.addEventListener(egret.Event.SOUND_COMPLETE, this.onPlayComplete, this);
-                this.m_channels[sound.hashCode.toString()] = channel;
+                this.m_channels.add(sound.hashCode, channel);
             } else {
                 egret.log(`名称为${config.soundName}的音效资源不存在`);
                 return;
@@ -110,7 +120,7 @@ module core {
          */
         private onPlayComplete(event: egret.Event): void {
             let channel: egret.SoundChannel = event.currentTarget;
-            let callback: () => void = this.m_callbacks[channel.hashCode.toString()];
+            let callback: () => void = this.m_callbacks.get(channel.hashCode);
             if (callback) {
                 callback();
             }
@@ -124,17 +134,38 @@ module core {
          * @param id 声音ID
          */
         public stopSoundByID(id: number): void {
-            let sound: egret.Sound = this.m_sounds[id];
+            let sound: egret.Sound = this.m_sounds.get(id);
             if (sound) {
                 this.stop(sound);
             }
         }
         /**
-         * 停止播放音乐
-         * @param type 声音类型
+         * 停止播放所有音乐及音效
          */
-        private stopSound(type: string): void {
-            let sound: egret.Sound = this.m_playChannel[type];
+        public stopAllSound(): void {
+            //停止所有音效
+            let sounds: egret.Sound[] = this.m_curEffect.values;
+            for (let i: number = 0, iLen: number = sounds.length; i < iLen; i++) {
+                let sound: egret.Sound = sounds[i];
+                if (sound) {
+                    this.stop(sound);
+                }
+            }
+            //停止所有背景音乐
+            sounds = this.m_curBGM.values;
+            for (let i: number = 0, iLen: number = sounds.length; i < iLen; i++) {
+                let sound: egret.Sound = sounds[i];
+                if (sound) {
+                    this.stop(sound);
+                }
+            }
+        }
+        /**
+         * 停止音乐通道播放
+         * @param coverChannel 音乐通道
+         */
+        private stopSound(coverChannel: number): void {
+            let sound: egret.Sound = this.m_playChannel.get(coverChannel);
             if (sound) {
                 this.stop(sound);
             }
@@ -143,7 +174,7 @@ module core {
          * 停止播放音乐
          */
         private stop(sound: egret.Sound): void {
-            let channel: egret.SoundChannel = this.m_channels[sound.hashCode.toString()];
+            let channel: egret.SoundChannel = this.m_channels.get(sound.hashCode);
             if (channel) {
                 try {
                     channel.stop();
@@ -153,10 +184,15 @@ module core {
                 if (channel.hasEventListener(egret.Event.SOUND_COMPLETE)) {
                     channel.removeEventListener(egret.Event.SOUND_COMPLETE, this.onPlayComplete, this);
                 }
-                delete this.m_callbacks[channel.hashCode.toString()];
-                delete this.m_channels[sound.hashCode.toString()];
+                this.m_callbacks.remove(channel.hashCode);
+                this.m_channels.remove(sound.hashCode);
             }
-            delete this.m_playChannel[sound['cover']];
+            this.m_playChannel.remove(sound['cover']);
+            if (sound.type == egret.Sound.EFFECT) {
+                this.m_curEffect.remove(this.m_sounds.keyOfValue(sound));
+            } else {
+                this.m_curBGM.remove(this.m_sounds.keyOfValue(sound));
+            }
         }
         /**
          * 设置背景音乐音量
@@ -164,11 +200,11 @@ module core {
         public setBGMValume(volume: number): void {
             egret.localStorage.setItem('soundBGM', volume.toString());
             this.m_BGMVolume = volume;
-            let sounds: egret.Sound[] = this.m_soundGroups[egret.Sound.MUSIC];
+            let sounds: egret.Sound[] = this.m_curBGM.values;
             for (let i: number = 0, iLen: number = sounds.length; i < iLen; i++) {
                 let sound: egret.Sound = sounds[i];
                 if (sound) {
-                    let channel: egret.SoundChannel = this.m_channels[sound.hashCode.toString()];
+                    let channel: egret.SoundChannel = this.m_channels.get(sound.hashCode);
                     if (channel) {
                         try {
                             channel.volume = volume;
@@ -191,16 +227,16 @@ module core {
         public setEffectValume(volume: number): void {
             egret.localStorage.setItem('soundEffect', volume.toString());
             this.m_effectVolume = volume;
-            let sounds: egret.Sound[] = this.m_soundGroups[egret.Sound.EFFECT];
+            let sounds: egret.Sound[] = this.m_curEffect.values;
             for (let i: number = 0, iLen: number = sounds.length; i < iLen; i++) {
                 let sound: egret.Sound = sounds[i];
                 if (sound) {
-                    let channel: egret.SoundChannel = this.m_channels[sound.hashCode.toString()];
+                    let channel: egret.SoundChannel = this.m_channels.get(sound.hashCode);
                     if (channel) {
                         try {
                             channel.volume = volume;
                         } catch (e) {
-                            egret.log(`音效音量设置失败`);
+                            egret.log(`音效音量设置失败`)
                         }
                     }
                 }

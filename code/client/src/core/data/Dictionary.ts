@@ -21,23 +21,29 @@ class Dictionary<T> {
 	public get keys(): any[] {
 		return this.m_keys.concat();
 	}
-
 	/**
 	 * 获取指定对象的键名索引。
 	 * @param	key 键名对象。
 	 * @return 键名索引。
 	 */
-	public indexOf(key: any): number {
+	public indexOfKey(key: any): number {
 		return this.m_keys.indexOf(key);
 	}
 
+	public indexOfValue(val: T) {
+		return this.m_values.indexOf(val);
+	}
+
+	public keyOfValue(value: T): any {
+		return this.m_keys[this.indexOfValue(value)];
+	}
 	/**
 	 * 添加指定键名的值。
 	 * @param	key 键名。
 	 * @param	value 值。
 	 */
 	public add(key: any, value: T): void {
-		var index: number = this.indexOf(key);
+		var index: number = this.indexOfKey(key);
 		if (index >= 0) {
 			this.m_values[index] = value;
 		} else {
@@ -52,7 +58,7 @@ class Dictionary<T> {
 	 * @return 指定键名的值。
 	 */
 	public get(key: any): T {
-		var index: number = this.indexOf(key);
+		var index: number = this.indexOfKey(key);
 		if (index >= 0) {
 			return this.m_values[index];
 		}
@@ -65,7 +71,7 @@ class Dictionary<T> {
 	 * @return 是否成功移除。
 	 */
 	public remove(key: any): T {
-		var index: number = this.indexOf(key);
+		var index: number = this.indexOfKey(key);
 		if (index >= 0) {
 			this.m_keys.splice(index, 1);
 			return this.m_values.splice(index, 1)[0];
