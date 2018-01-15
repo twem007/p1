@@ -189,9 +189,9 @@ module core {
             }
             this.m_playChannel.remove(sound['cover']);
             if (sound.type == egret.Sound.EFFECT) {
-                this.m_curEffect.remove(this.m_sounds.keyOfValue(sound));
+                this.m_curEffect.remove(this.m_sounds.getKeyByValue(sound));
             } else {
-                this.m_curBGM.remove(this.m_sounds.keyOfValue(sound));
+                this.m_curBGM.remove(this.m_sounds.getKeyByValue(sound));
             }
         }
         /**
