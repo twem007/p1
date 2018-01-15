@@ -33,8 +33,10 @@ class Dictionary<T> {
 	public indexOfValue(val: T) {
 		return this.m_values.indexOf(val);
 	}
-
-	public keyOfValue(value: T): any {
+	/**
+	 * 通过value得到对应的key
+	 */
+	public getKeyByValue(value: T): any {
 		return this.m_keys[this.indexOfValue(value)];
 	}
 	/**
