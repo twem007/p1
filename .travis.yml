@@ -20,4 +20,3 @@ before_script:
 
 script: 
   - gulp
-  - node ./code/client/bin-debug/unittest/UnitTest.js
