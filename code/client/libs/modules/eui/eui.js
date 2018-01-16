@@ -1,16 +1,13 @@
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
+var __extends = this && this.__extends || function __extends(t, e) { 
+ function r() { 
+ this.constructor = t;
+}
+for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
+r.prototype = e.prototype, t.prototype = new r();
+};
 //////////////////////////////////////////////////////////////////////////////////////
 //
 //  Copyright (c) 2014-present, Egret Technology.
@@ -1552,8 +1549,8 @@ var eui;
             /**
              * @private
              */
-            UIComponentImpl.prototype.$invalidateMatrix = function () {
-                this.$super.$invalidateMatrix.call(this);
+            UIComponentImpl.prototype.$updateUseTransform = function () {
+                this.$super.$updateUseTransform.call(this);
                 this.invalidateParentLayout();
             };
             /**
@@ -3301,10 +3298,7 @@ var eui;
             var values = this.$Component;
             values[7 /* explicitTouchEnabled */] = value;
             if (values[3 /* enabled */]) {
-                return _super.prototype.$setTouchEnabled.call(this, value);
-            }
-            else {
-                return true;
+                _super.prototype.$setTouchEnabled.call(this, value);
             }
         };
         Object.defineProperty(Component.prototype, "enabled", {
@@ -10423,7 +10417,7 @@ var eui;
             },
             set: function (value) {
                 this.$scale9Grid = value;
-                this.$invalidateContentBounds();
+                this.$renderDirty = true;
                 this.invalidateDisplayList();
             },
             enumerable: true,
@@ -10515,11 +10509,11 @@ var eui;
             enumerable: true,
             configurable: true
         });
-        Image.prototype.$setBitmapData = function (value) {
-            if (value == this.$Bitmap[0 /* bitmapData */]) {
+        Image.prototype.$setTexture = function (value) {
+            if (value == this.$texture) {
                 return false;
             }
-            var result = _super.prototype.$setBitmapData.call(this, value);
+            var result = _super.prototype.$setTexture.call(this, value);
             this.sourceChanged = false;
             this.invalidateSize();
             this.invalidateDisplayList();
@@ -10540,7 +10534,7 @@ var eui;
                     if (!egret.is(data, "egret.Texture")) {
                         return;
                     }
-                    _this.$setBitmapData(data);
+                    _this.$setTexture(data);
                     if (data) {
                         _this.dispatchEventWith(egret.Event.COMPLETE);
                     }
@@ -10550,12 +10544,11 @@ var eui;
                 });
             }
             else {
-                this.$setBitmapData(source);
+                this.$setTexture(source);
             }
         };
         Image.prototype.$measureContentBounds = function (bounds) {
-            var values = this.$Bitmap;
-            var image = this.$Bitmap[0 /* bitmapData */];
+            var image = this.$texture;
             if (image) {
                 var uiValues = this.$UIComponent;
                 var width = uiValues[10 /* width */];
@@ -10583,8 +10576,8 @@ var eui;
          *
          * @param context
          */
-        Image.prototype.$render = function () {
-            var image = this.$Bitmap[0 /* bitmapData */];
+        Image.prototype.$updateRenderNode = function () {
+            var image = this.$bitmapData;
             if (!image) {
                 return;
             }
@@ -10594,8 +10587,19 @@ var eui;
             if (width === 0 || height === 0) {
                 return;
             }
-            var values = this.$Bitmap;
-            egret.sys.BitmapNode.$updateTextureData(this.$renderNode, values[1 /* image */], values[2 /* bitmapX */], values[3 /* bitmapY */], values[4 /* bitmapWidth */], values[5 /* bitmapHeight */], values[6 /* offsetX */], values[7 /* offsetY */], values[8 /* textureWidth */], values[9 /* textureHeight */], width, height, values[13 /* sourceWidth */], values[14 /* sourceHeight */], this.scale9Grid || values[0 /* bitmapData */]["scale9Grid"], this.$fillMode, values[10 /* smoothing */]);
+            var scale9Grid = this.scale9Grid || this.$texture["scale9Grid"];
+            if (scale9Grid) {
+                if (this.$renderNode instanceof egret.sys.NormalBitmapNode) {
+                    this.$renderNode = new egret.sys.BitmapNode();
+                }
+                egret.sys.BitmapNode.$updateTextureDataWithScale9Grid(this.$renderNode, this.$bitmapData, scale9Grid, this.$bitmapX, this.$bitmapY, this.$bitmapWidth, this.$bitmapHeight, this.$offsetX, this.$offsetY, this.$textureWidth, this.$textureHeight, width, height, this.$sourceWidth, this.$sourceHeight, this.$smoothing);
+            }
+            else {
+                if (this.fillMode == egret.BitmapFillMode.REPEAT && this.$renderNode instanceof egret.sys.NormalBitmapNode) {
+                    this.$renderNode = new egret.sys.BitmapNode();
+                }
+                egret.sys.BitmapNode.$updateTextureData(this.$renderNode, this.$bitmapData, this.$bitmapX, this.$bitmapY, this.$bitmapWidth, this.$bitmapHeight, this.$offsetX, this.$offsetY, this.$textureWidth, this.$textureHeight, width, height, this.$sourceWidth, this.$sourceHeight, this.$fillMode, this.$smoothing);
+            }
         };
         /**
          * @copy eui.UIComponent#createChildren
@@ -10639,9 +10643,9 @@ var eui;
          * @platform Web,Native
          */
         Image.prototype.measure = function () {
-            var bitmapData = this.$Bitmap[0 /* bitmapData */];
-            if (bitmapData) {
-                this.setMeasuredSize(bitmapData.$getTextureWidth(), bitmapData.$getTextureHeight());
+            var texture = this.$texture;
+            if (texture) {
+                this.setMeasuredSize(texture.$getTextureWidth(), texture.$getTextureHeight());
             }
             else {
                 this.setMeasuredSize(0, 0);
@@ -10655,7 +10659,7 @@ var eui;
          * @platform Web,Native
          */
         Image.prototype.updateDisplayList = function (unscaledWidth, unscaledHeight) {
-            this.$invalidateContentBounds();
+            this.$renderDirty = true;
         };
         /**
          * @copy eui.UIComponent#invalidateParentLayout
@@ -11369,8 +11373,8 @@ var eui;
          * @private
          *
          */
-        Label.prototype.$invalidateContentBounds = function () {
-            _super.prototype.$invalidateContentBounds.call(this);
+        Label.prototype.$invalidateTextField = function () {
+            _super.prototype.$invalidateTextField.call(this);
             this.invalidateSize();
         };
         /**
@@ -13907,7 +13911,6 @@ var eui;
                 g.drawRoundRect(this.$strokeWeight, this.$strokeWeight, unscaledWidth - this.$strokeWeight * 2, unscaledHeight - this.$strokeWeight * 2, this.$ellipseWidth, this.$ellipseHeight);
             }
             g.endFill();
-            this.$invalidateContentBounds();
         };
         /**
          * @private
@@ -17756,8 +17759,8 @@ var eui;
          * @private
          *
          */
-        EditableText.prototype.$invalidateContentBounds = function () {
-            _super.prototype.$invalidateContentBounds.call(this);
+        EditableText.prototype.$invalidateTextField = function () {
+            _super.prototype.$invalidateTextField.call(this);
             this.invalidateSize();
         };
         /**
@@ -18996,6 +18999,10 @@ var eui;
             }
             if (data.styles) {
                 this.$styles = data.styles;
+            }
+            var paths = data.paths;
+            for (var path in paths) {
+                window[path] = EXML.update(path, paths[path]);
             }
             if (!data.exmls || data.exmls.length == 0) {
                 this.onLoaded();
@@ -20753,10 +20760,9 @@ var eui;
         }
         /**
          * @private
-         *
          */
-        BitmapLabel.prototype.$invalidateContentBounds = function () {
-            _super.prototype.$invalidateContentBounds.call(this);
+        BitmapLabel.prototype.$invalidateBitmapText = function () {
+            _super.prototype.$invalidateBitmapText.call(this);
             this.invalidateSize();
         };
         /**
@@ -20825,7 +20831,7 @@ var eui;
                 return false;
             }
             this.$BitmapText[5 /* font */] = value;
-            this.$invalidateContentBounds();
+            this.$invalidateBitmapText();
             return true;
         };
         /**
@@ -21212,6 +21218,18 @@ var EXML;
         });
         callBack && callBack.call(thisObject, clazzes, urls);
     }
+    function update(url, clazz) {
+        parsedClasses[url] = clazz;
+        var list = callBackMap[url];
+        delete callBackMap[url];
+        var length = list ? list.length : 0;
+        for (var i = 0; i < length; i++) {
+            var arr = list[i];
+            if (arr[0] && arr[1])
+                arr[0].call(arr[1], clazz, url);
+        }
+    }
+    EXML.update = update;
     /**
      * @private
      * @param url
@@ -21221,19 +21239,8 @@ var EXML;
         var clazz = null;
         if (text) {
             clazz = parser.$parseCode(text, className);
+            update(url, clazz);
         }
-        if (url) {
-            parsedClasses[url] = clazz;
-            var list = callBackMap[url];
-            delete callBackMap[url];
-            var length_30 = list ? list.length : 0;
-            for (var i = 0; i < length_30; i++) {
-                var arr = list[i];
-                if (arr[0] && arr[1])
-                    arr[0].call(arr[1], clazz, url);
-            }
-        }
-        return clazz;
     }
     EXML.$parseURLContentAsJs = $parseURLContentAsJs;
     /**
@@ -21255,8 +21262,8 @@ var EXML;
             }
             var list = callBackMap[url];
             delete callBackMap[url];
-            var length_31 = list ? list.length : 0;
-            for (var i = 0; i < length_31; i++) {
+            var length_30 = list ? list.length : 0;
+            for (var i = 0; i < length_30; i++) {
                 var arr = list[i];
                 if (arr[0] && arr[1])
                     arr[0].call(arr[1], clazz, url);
@@ -22248,8 +22255,8 @@ var eui;
                 if (totalPercentWidth > 0) {
                     this.flexChildrenProportionally(targetWidth, widthToDistribute, totalPercentWidth, childInfoArray);
                     var roundOff_1 = 0;
-                    var length_32 = childInfoArray.length;
-                    for (i = 0; i < length_32; i++) {
+                    var length_31 = childInfoArray.length;
+                    for (i = 0; i < length_31; i++) {
                         childInfo = childInfoArray[i];
                         var childSize = Math.round(childInfo.size + roundOff_1);
                         roundOff_1 += childInfo.size - childSize;
@@ -24322,8 +24329,8 @@ var eui;
                 if (totalPercentHeight > 0) {
                     this.flexChildrenProportionally(targetHeight, heightToDistribute, totalPercentHeight, childInfoArray);
                     var roundOff_2 = 0;
-                    var length_33 = childInfoArray.length;
-                    for (i = 0; i < length_33; i++) {
+                    var length_32 = childInfoArray.length;
+                    for (i = 0; i < length_32; i++) {
                         childInfo = childInfoArray[i];
                         var childSize = Math.round(childInfo.size + roundOff_2);
                         roundOff_2 += childInfo.size - childSize;

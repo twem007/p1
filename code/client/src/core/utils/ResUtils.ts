@@ -29,7 +29,9 @@ module core {
 
         private onResourceLoadComplete(event: RES.ResourceEvent): void {
             egret.log(`资源组：${event.groupName} 加载完成`);
-            this.updateGroupData(event.groupName, event.itemsTotal, event.itemsTotal, event.resItem);
+            this.m_groupData.loadedQueue.push(event.groupName);
+            this.m_groupData.loaded = this.m_groupData.loadedQueue.length;
+            this.loadNext();
         }
 
         private updateGroupData(group: string, loadedItems: number = 0, totalItems: number = 0, resItem?: RES.ResourceItem): void {
@@ -41,11 +43,6 @@ module core {
             this.m_groupData.curResItem = resItem;
             if (this.m_groupData.onLoadProgress) {
                 this.m_groupData.onLoadProgress.call(this.m_groupData.thisObj, this.m_groupData);
-            }
-            if (loadedItems == totalItems) {
-                this.m_groupData.loadedQueue.push(group);
-                this.m_groupData.loaded = this.m_groupData.loadedQueue.length;
-                this.loadNext();
             }
         }
 
