@@ -5,7 +5,7 @@ class WSTest {
         core.EventCenter.getInstance().addEventListener(core.EventID.SOCKET_DATA, this.onSocketData, this);
         core.EventCenter.getInstance().addEventListener(core.EventID.SOCKET_IOERROR, this.onSocketIOError, this);
         core.SocketAPI.instance.setType(core.WebSocketTypeEnum.TYPE_BINARY);
-        core.SocketAPI.instance.setAddressURL('ws://192.168.17.246:8080');
+        core.SocketAPI.instance.setAddress('ws://192.168.17.246:8080');
         core.SocketAPI.instance.connect();
         let enums:any = core.ProtoFactory.createEnums('E_ErrorCode');
         egret.log(enums);
