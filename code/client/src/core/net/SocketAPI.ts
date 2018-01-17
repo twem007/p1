@@ -10,13 +10,9 @@ module core {
 
         private m_webSocket: egret.WebSocket;
         /**
-         * 目标服务器地址 IP或者url
+         * 目标服务器地址
          */
-        private m_host: string;
-        /**
-         * 目标服务器端口
-         */
-        private m_port: number;
+        private m_address: string;
         /**
          * WebSocket连接状态
          */
@@ -74,14 +70,19 @@ module core {
         private flushToServer(): void {
             this.m_webSocket.flush();
         }
-
-        public setAddress(host: string, port: number): void {
-            this.m_host = host;
-            this.m_port = port;
+        /**
+         * @param host 服务器IP 如：127.0.0.1
+         * @param port 服务器端口 如：8080
+         * @param isSSL 是否应用SSL
+         */
+        public setAddress(host: string, port: number, isSSL: boolean = false): void {
+            this.m_address = `${isSSL ? 'wss' : 'ws'}${host}:${port}`;
         }
-
-        public setAddressURL(hostURL: string): void {
-            this.m_host = hostURL;
+        /**
+         * @param address 服务器地址 如：ws://127.0.0.1:8080 或 wss://127.0.0.1:8080
+         */
+        public setAddressURL(address: string): void {
+            this.m_address = address;
         }
 
         public setType(type: WebSocketTypeEnum): void {
@@ -97,27 +98,7 @@ module core {
 
         public connect(): void {
             this.m_state = WebSocketStateEnum.CONNECTING;
-            if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
-                if (location.href.indexOf('https') >= 0) {
-                    if (this.m_host.indexOf(":") >= 0) {
-                        this.m_webSocket.connectByUrl(this.m_host);
-                    } else {
-                        this.m_webSocket.connectByUrl(`wss:\\${this.m_host}:${this.m_port}`);
-                    }
-                } else {
-                    if (this.m_host.indexOf(":") > 0) {
-                        this.m_webSocket.connectByUrl(this.m_host);
-                    } else {
-                        this.m_webSocket.connect(this.m_host, this.m_port);
-                    }
-                }
-            } else {
-                if (this.m_host.indexOf(":") > 0) {
-                    this.m_webSocket.connectByUrl(this.m_host);
-                } else {
-                    this.m_webSocket.connect(this.m_host, this.m_port);
-                }
-            }
+            this.m_webSocket.connectByUrl(this.m_address);
         }
 
         public close(): void {

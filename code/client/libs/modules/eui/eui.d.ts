@@ -1279,7 +1279,7 @@ declare namespace eui.sys {
         /**
          * @private
          */
-        protected $updateUseTransform(): void;
+        $invalidateMatrix(): void;
         /**
          * @private
          */
@@ -2271,7 +2271,7 @@ declare namespace eui {
          *
          * @param value
          */
-        $setTouchEnabled(value: boolean): void;
+        $setTouchEnabled(value: boolean): boolean;
         /**
          * Whether the component can accept user interaction.
          * After setting the <code>enabled</code> property to <code>false</code>, components will disabled touch event
@@ -6248,7 +6248,7 @@ declare namespace eui {
          * @language zh_CN
          */
         source: string | egret.Texture;
-        $setTexture(value: egret.Texture): boolean;
+        $setBitmapData(value: egret.Texture): boolean;
         /**
          * @private
          * 解析source
@@ -6260,7 +6260,7 @@ declare namespace eui {
          *
          * @param context
          */
-        $updateRenderNode(): void;
+        $render(): void;
         /**
          * @private
          * UIComponentImpl 定义的所有变量请不要添加任何初始值，必须统一在此处初始化。
@@ -6823,7 +6823,7 @@ declare namespace eui {
          * @private
          *
          */
-        $invalidateTextField(): void;
+        $invalidateContentBounds(): void;
         /**
          * @private
          *
@@ -10562,7 +10562,7 @@ declare namespace eui {
          * @private
          *
          */
-        $invalidateTextField(): void;
+        $invalidateContentBounds(): void;
         /**
          * @private
          *
@@ -12810,8 +12810,9 @@ declare namespace eui {
         constructor(text?: string);
         /**
          * @private
+         *
          */
-        $invalidateBitmapText(): void;
+        $invalidateContentBounds(): void;
         /**
          * @private
          *
@@ -13211,13 +13212,12 @@ declare namespace EXML {
      * @private
      */
     function $loadAll(urls: string[], callBack?: (clazz: any[], url: string[]) => void, thisObject?: any, useCache?: boolean): void;
-    function update(url: string, clazz: any): void;
     /**
      * @private
      * @param url
      * @param text
      */
-    function $parseURLContentAsJs(url: string, text: string, className: string): void;
+    function $parseURLContentAsJs(url: string, text: string, className: string): any;
     /**
      * @private
      */
