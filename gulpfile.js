@@ -5,10 +5,10 @@ var tsProject = ts.createProject('./code/client/tsconfig.json');
 
 gulp.task('clean', function (cb) {
   console.log("开始清理");
-  del(['./code/client/bin-debug/**/*'], cb);
+  return del(['./code/client/bin-debug/**/*']);
 });
 
-gulp.task('compile', function () {
+gulp.task('compile', ['clean'], function () {
   console.log("开始编译");
   return tsProject.src()
     .pipe(tsProject())
