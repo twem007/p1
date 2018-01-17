@@ -76,7 +76,7 @@ module core {
          * @param isSSL 是否应用SSL
          */
         public setAddress(host: string, port: number, isSSL: boolean = false): void {
-            this.m_address = `${isSSL ? 'wss' : 'ws'}${host}:${port}`;
+            this.m_address = `${isSSL ? 'wss' : 'ws'}://${host}:${port}`;
         }
         /**
          * @param address 服务器地址 如：ws://127.0.0.1:8080 或 wss://127.0.0.1:8080
