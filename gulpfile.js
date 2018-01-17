@@ -8,7 +8,7 @@ gulp.task('clean', function (cb) {
   del(['./code/client/bin-debug/**/*'], cb);
 });
 
-gulp.task('compile', ['clean'], function () {
+gulp.task('compile', function () {
   console.log("开始编译");
   return tsProject.src()
     .pipe(tsProject())
