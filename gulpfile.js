@@ -9,7 +9,7 @@ gulp.task('clean', function (cb) {
 
 gulp.task('compile', ['clean'], function () {
   return tsProject.src()
-    .pipe(tsProject())
+    .pipe(tsProject({ "noEmit": true }))
     .pipe(gulp.dest('./code/client/bin-debug'))
 });
 
