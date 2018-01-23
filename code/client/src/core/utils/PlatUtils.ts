@@ -53,5 +53,18 @@ module core {
         public static get isAndroid(): boolean {
             return egret.Capabilities.os.indexOf('Android') != -1;
         }
+
+        public static get isWeChat(): boolean {
+            if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
+                let ua = navigator.userAgent.toLowerCase();
+                let matchArr: RegExpMatchArray = ua.match(/MicroMessenger/i);
+                if (matchArr && matchArr[0] == "micromessenger") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            return false;
+        }
     }
 }
