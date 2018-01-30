@@ -18,6 +18,8 @@
  9. [代码示例](#代码示例)
  10. [Lisence](#Lisence)
 
+###[protobuf使用教程][2]
+
 ## 框架定位：
 > 「让做游戏变简单！」
 
@@ -298,3 +300,4 @@ class LoginController extends core.Control {
 [MIT][1]
 
 [1]: http://opensource.org/licenses/mit-license.html
+[2]: code/docs/Protobuf.md
