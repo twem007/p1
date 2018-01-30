@@ -1,14 +1,19 @@
 {
-	"native": {
-		"path_ignore": [],
-		"android_path": "../../../../workspace/p1"
+	"engineVersion": "5.1.4",
+	"compilerVersion": "5.1.4",
+	"template": {},
+	"target": {
+		"current": "web"
 	},
-	"publish": {
-		"web": 0,
-		"native": 1,
-		"path": "bin-release"
+	"eui": {
+		"exmlRoot": [
+			"resource/skins"
+		],
+		"themes": [
+			"resource/default.thm.json"
+		],
+		"exmlPublishPolicy": "commonjs"
 	},
-	"egret_version": "5.0.14",
 	"modules": [
 		{
 			"name": "egret"
@@ -17,13 +22,13 @@
 			"name": "game"
 		},
 		{
-			"name": "res"
+			"name": "tween"
+		},
+		{
+			"name": "assetsmanager"
 		},
 		{
 			"name": "eui"
-		},
-		{
-			"name": "tween"
 		},
 		{
 			"name": "socket"
@@ -32,16 +37,19 @@
 			"name": "dragonBones"
 		},
 		{
-			"name": "protobuf",
-			"path": "./thirdparty/protobuf/"
+			"name": "promise"
+		},
+		{
+			"name": "protobuf-library",
+			"path": "../thirdparty/protobuf/library"
+		},
+		{
+			"name": "protobuf-bundles",
+			"path": "../thirdparty/protobuf/bundles"
 		},
 		{
 			"name": "jszip",
-			"path": "./thirdparty/jszip/"
-		},
-		{
-			"name": "promise",
-			"path": "./promise"
+			"path": "../thirdparty/jszip"
 		}
 	]
 }

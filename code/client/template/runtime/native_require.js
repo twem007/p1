@@ -1,100 +1,5 @@
-
-var game_file_list = [
-    //以下为自动修改，请勿修改
-    //----auto game_file_list start----
-	"libs/modules/egret/egret.js",
-	"libs/modules/egret/egret.native.js",
-	"libs/modules/game/game.js",
-	"libs/modules/res/res.js",
-	"libs/modules/eui/eui.js",
-	"libs/modules/tween/tween.js",
-	"libs/modules/socket/socket.js",
-	"libs/modules/dragonBones/dragonBones.js",
-	"thirdparty/protobuf/bin/protobuf/protobuf.js",
-	"thirdparty/jszip/bin/jszip/jszip.js",
-	"promise/promise.js",
-	"bin-debug/core/Module.js",
-	"bin-debug/core/com/EUIComponent.js",
-	"bin-debug/core/com/EUILayer.js",
-	"bin-debug/core/data/Callback.js",
-	"bin-debug/core/data/Dictionary.js",
-	"bin-debug/core/event/EventData.js",
-	"bin-debug/core/interfaces/ILoadingUI.js",
-	"bin-debug/core/com/Component.js",
-	"bin-debug/core/utils/DebugUtils.js",
-	"bin-debug/AssetAdapter.js",
-	"bin-debug/core/TimerManager.js",
-	"bin-debug/core/com/Animation.js",
-	"bin-debug/ThemeAdapter.js",
-	"bin-debug/core/Core.js",
-	"bin-debug/core/EventCenter.js",
-	"bin-debug/core/com/Layer.js",
-	"bin-debug/core/config/Config.js",
-	"bin-debug/core/config/ConfigDef.js",
-	"bin-debug/core/FrameEventCenter.js",
-	"bin-debug/core/InputManager.js",
-	"bin-debug/core/data/Node.js",
-	"bin-debug/core/data/NodeList.js",
-	"bin-debug/core/enum/Keyboard.js",
-	"bin-debug/core/LayerCenter.js",
-	"bin-debug/core/event/EventID.js",
-	"bin-debug/core/event/KeyboardEventData.js",
-	"bin-debug/core/event/ModuleEventData.js",
-	"bin-debug/core/interfaces/IComponent.js",
-	"bin-debug/core/interfaces/IFactory.js",
-	"bin-debug/core/LoadingManager.js",
-	"bin-debug/core/interfaces/IMessage.js",
-	"bin-debug/core/net/ByteBuffer.js",
-	"bin-debug/core/net/HttpAPI.js",
-	"bin-debug/core/net/ProtoFactory.js",
-	"bin-debug/core/net/SocketAPI.js",
-	"bin-debug/core/net/SocketEventData.js",
-	"bin-debug/core/utils/Base64.js",
-	"bin-debug/core/utils/CachePool.js",
-	"bin-debug/core/utils/DateUtils.js",
-	"bin-debug/core/utils/DBFactory.js",
-	"bin-debug/unittest/WSTest.js",
-	"bin-debug/core/utils/Long.js",
-	"bin-debug/core/utils/MathUtils.js",
-	"bin-debug/core/utils/MCFactory.js",
-	"bin-debug/core/utils/MD5.js",
-	"bin-debug/core/utils/PlatUtils.js",
-	"bin-debug/core/utils/ResUtils.js",
-	"bin-debug/core/utils/SoundUtils.js",
-	"bin-debug/core/utils/TextUtils.js",
-	"bin-debug/core/utils/WebUtils.js",
-	"bin-debug/core/utils/XMLUtils.js",
-	"bin-debug/game/enums/LayerEnum.js",
-	"bin-debug/game/enums/ModuleEnum.js",
-	"bin-debug/game/keyBoard/KeyBoardManager.js",
-	"bin-debug/game/modules/GameModule.js",
-	"bin-debug/game/modules/LoginModule.js",
-	"bin-debug/game/modules/MainModule.js",
-	"bin-debug/game/uimanager/UIManager.js",
-	"bin-debug/game/utils/ButtonManager.js",
-	"bin-debug/game/utils/LocalData.js",
-	"bin-debug/game/utils/Utils.js",
-	"bin-debug/game/views/component/Currency.js",
-	"bin-debug/game/views/component/EntranceBtn.js",
-	"bin-debug/game/views/component/LinkDelay.js",
-	"bin-debug/game/views/component/ModleBtn.js",
-	"bin-debug/game/views/component/SkillBtn.js",
-	"bin-debug/game/views/enum/InputType.js",
-	"bin-debug/game/views/hint/LinkHintView.js",
-	"bin-debug/game/views/loading/MainLoadingUI.js",
-	"bin-debug/game/views/loading/PreLoadingUI.js",
-	"bin-debug/game/views/login/LoginUI.js",
-	"bin-debug/game/views/main/MainPlayerFace.js",
-	"bin-debug/game/views/main/MainUI.js",
-	"bin-debug/unittest/EventTest.js",
-	"bin-debug/unittest/MCFactoryTest.js",
-	"bin-debug/unittest/ResUtilsTest.js",
-	"bin-debug/unittest/SoundUtilsTest.js",
-	"bin-debug/unittest/UnitTest.js",
-	"bin-debug/unittest/UtilsTest.js",
-	"bin-debug/Main.js",
-	//----auto game_file_list end----
-];
+var manifest = JSON.parse(egret_native.readFileSync("manifest.json"));
+var game_file_list = manifest.initial.concat(manifest.game);
 
 var window = this;
 
@@ -110,12 +15,12 @@ egret_native.requireFiles = function () {
 egret_native.egretInit = function () {
     if(egret_native.featureEnable) {
         //控制一些优化方案是否开启
+        //Control whether some optimization options are open
         var result = egret_native.featureEnable({
             
         });
     }
     egret_native.requireFiles();
-    //egret.dom为空实现
     egret.dom = {};
     egret.dom.drawAsCanvas = function () {
     };
@@ -124,16 +29,17 @@ egret_native.egretInit = function () {
 egret_native.egretStart = function () {
     var option = {
         //以下为自动修改，请勿修改
+        //The following is automatically modified, please do not modify
         //----auto option start----
 		entryClassName: "Main",
-		frameRate: 60,
-		scaleMode: "fixedWide",
+		frameRate: 30,
+		scaleMode: "fixedWidth",
 		contentWidth: 1334,
 		contentHeight: 750,
 		showPaintRect: false,
-		showFPS: true,
+		showFPS: false,
 		fpsStyles: "x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9",
-		showLog: true,
+		showLog: false,
 		logFilter: "",
 		maxTouches: 2,
 		textureScaleFactor: 1

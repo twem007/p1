@@ -25,7 +25,6 @@ module core {
 
 	///////////////////////////////////////////////////////////////////////
 	export class Core {
-
 		public constructor() {
 		}
 
@@ -38,7 +37,6 @@ module core {
 				core.WebUtils.addKeyboardListener();
 				egret.Logger.logLevel = egret.Logger.ALL;
 			}
-			RES.setMaxRetryTimes(2);
 		}
 	}
 }

@@ -1,0 +1,40 @@
+package game;
+//********************************常量枚举定义*********************************
+
+//错误码常量定义
+enum E_ErrorCode {
+    // 无错误
+    NO_ERROR = 0;
+    // 已在其他设备登陆
+    LOGIN_ON_OTHER_DEVICE = 1;
+}
+
+//**********************************协议定义***********************************
+
+// 游戏登陆请求
+message GameLoginReq {
+    required string token = 1;
+    required string open_id = 2;
+}
+
+// 游戏登陆返回
+message GameLoginResp {
+    required G_Player player = 1; //玩家数据
+    required int32 gold = 2; //金币
+    required int32 volume = 3; //点卷
+    required int32 diamonds = 4; //钻石
+    required int64 time = 5; //服务器当前时间戳
+    required int32 checkCode = 6; //校验码
+}
+
+//********************************数据结构定义*********************************
+
+// 玩家信息
+message G_Player {
+    required int64 id = 1; //玩家id
+    required string account = 2; //账号名
+    required string nickname = 3; //昵称
+    required int32 level = 4; //等级
+    required int32 exp = 5; //经验
+    required int32 vipLv = 6; //vip等级
+}

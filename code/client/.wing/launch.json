@@ -2,7 +2,7 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Wing 内置播放器调试",
+			"name": "Launch Wing Player",
 			"type": "chrome",
 			"request": "launch",
 			"file": "index.html",
@@ -11,10 +11,10 @@
 			"sourceMaps": true,
 			"webRoot": "${workspaceRoot}",
 			"preLaunchTask":"build",
-			"port":5143
+			"port":5611
 		},
 		{
-			"name": "使用本机 Chrome 调试",
+			"name": "Launch Chrome",
 			"type": "chrome",
 			"request": "launch",
 			"file": "index.html",
@@ -23,7 +23,7 @@
 			"webRoot": "${workspaceRoot}",
 			"preLaunchTask":"build",
 			"userDataDir":"${tmpdir}",
-			"port":5143
+			"port":5611
 		}
 	]
 }

@@ -27,38 +27,38 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////
 
+class LoadingUI extends core.Component implements core.ILoadingUI {
 
-class ThemeAdapter implements eui.IThemeAdapter {
+    public constructor() {
+        super();
+        this.createView();
+    }
 
-    /**
-     * 解析主题
-     * @param url 待解析的主题url
-     * @param onSuccess 解析完成回调函数，示例：compFunc(e:egret.Event):void;
-     * @param onError 解析失败回调函数，示例：errorFunc():void;
-     * @param thisObject 回调的this引用
-     */
-    public getTheme(url: string, onSuccess: Function, onError: Function, thisObject: any): void {
+    private textField: egret.TextField;
 
-        function onResGet(e: string): void {
-            onSuccess.call(thisObject, e);
-        }
-        function onResError(e: RES.ResourceEvent): void {
-            if (e.resItem.url == url) {
-                RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, onResError, null);
-                onError.call(thisObject);
-            }
-        }
+    private createView(): void {
+        this.textField = new egret.TextField();
+        this.addChild(this.textField);
+        this.textField.y = 300;
+        this.textField.width = 480;
+        this.textField.height = 100;
+        this.textField.textAlign = "center";
+    }
 
-        if (typeof generateEUI !== 'undefined') {
-            egret.callLater(() => {
-                onSuccess.call(thisObject, generateEUI);
-            }, this);
-        }
-        else {
-            RES.addEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, onResError, null);
-            RES.getResByUrl(url, onResGet, this, RES.ResourceItem.TYPE_TEXT);
+    public setProgress(data: core.GroupData): void {
+        this.textField.text = `Loading...${data.curGroupLoaded}/${data.curGroupTotal}`;
+    }
+
+    public show(): void {
+        core.LayerCenter.getInstance().getLayer(LayerEnum.LOADING).addChild(this);
+    }
+
+    public hide(): void {
+        if (this.parent) {
+            this.parent.removeChild(this);
         }
     }
-}
 
-declare var generateEUI: { paths: string[], skins: any }
+    public release(): void {
+    }
+}
