@@ -1,5 +1,5 @@
 #Protobuf使用说明
-> 「该解决方案由Egret首席架构师王泽提供的，开源库地址：https://github.com/WanderWang/protobuf-egret, 本着便利，统一管理的原则对使用方式进行了少量修改。」
+该解决方案由Egret首席架构师王泽提供的，开源库地址：https://github.com/WanderWang/protobuf-egret, 本着便利，统一管理的原则对使用方式进行了少量修改。
 ##.proto文件的格式要求
 proto 文件中的每一个协议一定要从属于一个 package，否则.d.ts生成会出现错误导致 ts 文件无法正确的找到这些类
 ##目录约定
