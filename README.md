@@ -300,4 +300,4 @@ class LoginController extends core.Control {
 [MIT][1]
 
 [1]: http://opensource.org/licenses/mit-license.html
-[2]: code/docs/Protobuf.md
+[2]: ./docs/Protobuf.md
