@@ -12,10 +12,9 @@ bundles为生成的目标文件，是项目中实际使用的文件，该文件�
 
 ## 使用方式
 1. 安装环境依赖：
-
-npm install protobufjs@6.8.4 -g  
-npm install @egret/protobuf -g  
-
+> 「
+    npm install protobufjs@6.8.4 -g  
+    npm install @egret/protobuf -g  」
 2. 生成.proto文件，并将文件放入protofile目录下  
 3. 打开命令行，进入code/thirdparty/目录，执行pb-egret generate，待执行完成后bundles目录下会生成目标文件  
 4. 在Egret Wing下清理、编译项目，目标文件将会自动在code/client/modules/protobuf-bundles下生成。  
