@@ -118,7 +118,7 @@ module core {
                 for (let i: number = 0, iLen: number = groups.length; i < iLen; i++) {
                     let items: RES.ResourceItem[] = RES.getGroupByName(groups[i]);
                     if (items) {
-                        for (let j: number = 0, jLen: number = items.length; j < 0; j++) {
+                        for (let j: number = 0, jLen: number = items.length; j < jLen; j++) {
                             RES.destroyRes(items[j].name, false);
                         }
                     }
