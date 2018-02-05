@@ -111,24 +111,20 @@ module core {
         }
         /**
          * 释放资源组
-         * @param groups 资源组数组
+         * @param name 资源组数组。
+         * @param force 销毁一个资源组时其他资源组有同样资源情况资源是否会被删除，默认值 false。
          */
-        public destoryGroups(groups: string[]): void {
+        public static destoryGroups(groups: string[], force: boolean = false): void {
             if (groups) {
                 for (let i: number = 0, iLen: number = groups.length; i < iLen; i++) {
-                    let items: RES.ResourceItem[] = RES.getGroupByName(groups[i]);
-                    if (items) {
-                        for (let j: number = 0, jLen: number = items.length; j < jLen; j++) {
-                            RES.destroyRes(items[j].name, false);
-                        }
-                    }
+                    RES.destroyRes(groups[i], false);
                 }
             }
         }
         /**
          * 从缓存池获取资源，如没有将新创建，用完后及时调用 revertCacheRes
          */
-        public getCacheRes(key: string): any {
+        public static getCacheRes(key: string): any {
             let res: any = CachePool.getObj(key);
             if (!res) {
                 res = RES.getRes(key);
@@ -139,7 +135,7 @@ module core {
         /**
          * 将资源归还缓存池
          */
-        public revertCacheRes(res: any): void {
+        public static revertCacheRes(res: any): void {
             if (res && res['key']) {
                 CachePool.addObj(res['key'], res);
             }
