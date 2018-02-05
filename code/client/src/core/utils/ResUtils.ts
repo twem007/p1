@@ -110,6 +110,22 @@ module core {
             }
         }
         /**
+         * 释放资源组
+         * @param groups 资源组数组
+         */
+        public destoryGroups(groups: string[]): void {
+            if (groups) {
+                for (let i: number = 0, iLen: number = groups.length; i < iLen; i++) {
+                    let items: RES.ResourceItem[] = RES.getGroupByName(groups[i]);
+                    if (items) {
+                        for (let j: number = 0, jLen: number = items.length; j < 0; j++) {
+                            RES.destroyRes(items[j].name, false);
+                        }
+                    }
+                }
+            }
+        }
+        /**
          * 从缓存池获取资源，如没有将新创建，用完后及时调用 revertCacheRes
          */
         public getCacheRes(key: string): any {

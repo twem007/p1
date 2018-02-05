@@ -6,6 +6,28 @@ module core {
 
         public static isKeyboard: boolean = true;
 
+        /**
+         * URL参数
+         */
+        public static urlParams: any;
+        /**
+         * 解析URL参数
+         */
+        public static parseURLParams(): void {
+            let params: any = {};
+            egret.log(`解析URL参数${location.search}`);
+            let matchArr: string[] = location.search.match(/(\w+)=.+?(?=(\&|$))/ig);
+            if (matchArr) {
+                for (let i: number = 0, iLen: number = matchArr.length; i < iLen; i++) {
+                    let param: string[] = matchArr[i].split('=');
+                    if (param && param.length == 2) {
+                        params[param[0]] = param[1];
+                    }
+                }
+            }
+            WebUtils.urlParams = params;
+        }
+
         public static addKeyboardListener(): void {
             document.onkeydown = function (event: KeyboardEvent): any {
                 if (event && WebUtils.isKeyboard) {

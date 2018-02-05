@@ -92,15 +92,15 @@ module core {
         /**
          * 预显示
          */
-        protected preShow(data?: any): void { };
+        protected preShow(data?: any): void { }
         /**
          * 显示
          */
-        protected abstract show(data?: any): void
+        protected abstract show(data?: any): void;
         /**
          * 隐藏
          */
-        protected abstract hide(): void
+        protected abstract hide(): void;
         /**
          * 释放资源
          */
