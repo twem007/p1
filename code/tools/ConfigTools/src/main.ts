@@ -45,9 +45,15 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                 //创建客户端配置定义代码
                 let keyTemplate: string = "";
                 for (let i: number = 0, iLen: number = keys.length; i < iLen; i++) {
-                    let remarkStr = `\t\/**\n\t * ${remarks[i]}\n\t **\/`;
-                    let variableStr = `public ${keys[i]}:${formatKeyType(types[i])};\n`
-                    keyTemplate += `${remarkStr}\n\t${variableStr}`;
+                    let channel: number = channels[i];
+                    switch (channel & 1) {
+                        case 1:
+                        case 3:
+                            let remarkStr = `\t\/**\n\t * ${remarks[i]}\n\t **\/`;
+                            let variableStr = `public ${keys[i]}:${formatKeyType(types[i])};\n`
+                            keyTemplate += `${remarkStr}\n\t${variableStr}`;
+                            break;
+                    }
                 }
                 defFileStr += formatString(templete, [fileName, keyTemplate]);
                 //创建文件数据

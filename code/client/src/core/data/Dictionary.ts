@@ -30,7 +30,7 @@ class Dictionary<T> {
 		return this.m_keys.indexOf(key);
 	}
 
-	public indexOfValue(val: T) {
+	public indexOfValue(val: T): number {
 		return this.m_values.indexOf(val);
 	}
 	/**
