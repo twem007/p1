@@ -49,7 +49,9 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                     switch (channel & 1) {
                         case 1:
                         case 3:
-                            let remarkStr = `\t\/**\n\t * ${remarks[i]}\n\t **\/`;
+                            let remark: string = remarks[i] || "";
+                            remark = remark.replace(/\n/g, '\n\t * ');
+                            let remarkStr = `\t\/**\n\t * ${remark}\n\t **\/`;
                             let variableStr = `public ${keys[i]}:${formatKeyType(types[i])};\n`
                             keyTemplate += `${remarkStr}\n\t${variableStr}`;
                             break;
