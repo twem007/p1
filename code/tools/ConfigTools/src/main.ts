@@ -46,15 +46,12 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                 let keyTemplate: string = "";
                 for (let i: number = 0, iLen: number = keys.length; i < iLen; i++) {
                     let channel: number = channels[i];
-                    switch (channel & 1) {
-                        case 1:
-                        case 3:
-                            let remark: string = remarks[i] || "";
-                            remark = remark.replace(/\n/g, '\n\t * ');
-                            let remarkStr = `\t\/**\n\t * ${remark}\n\t **\/`;
-                            let variableStr = `public ${keys[i]}:${formatKeyType(types[i])};\n`
-                            keyTemplate += `${remarkStr}\n\t${variableStr}`;
-                            break;
+                    if ((channel & 1) == 1) {
+                        let remark: string = remarks[i] || "";
+                        remark = remark.replace(/\n/g, '\n\t * ');
+                        let remarkStr = `\t\/**\n\t * ${remark}\n\t **\/`;
+                        let variableStr = `public ${keys[i]}:${formatKeyType(types[i])};\n`
+                        keyTemplate += `${remarkStr}\n\t${variableStr}`;
                     }
                 }
                 defFileStr += formatString(templete, [fileName, keyTemplate]);
@@ -81,7 +78,7 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                             if ((channel & 1) == 1) {
                                 data_client[keys[j]] = formatValueType(types[j], rowData[j]);
                             }
-                            if ((channel & 2) == 2) {
+                            if ((channel & 2) == 1) {
                                 data_server[keys[j]] = rowData[j];
                             }
                         }

@@ -47,15 +47,12 @@ fs.readdir(xlsxPath, function (err, files) {
                 var keyTemplate = "";
                 for (var i_1 = 0, iLen_1 = keys.length; i_1 < iLen_1; i_1++) {
                     var channel = channels[i_1];
-                    switch (channel & 1) {
-                        case 1:
-                        case 3:
-                            var remark = remarks[i_1] || "";
-                            remark = remark.replace(/\n/g, '\n\t * ');
-                            var remarkStr = "\t/**\n\t * " + remark + "\n\t **/";
-                            var variableStr = "public " + keys[i_1] + ":" + formatKeyType(types[i_1]) + ";\n";
-                            keyTemplate += remarkStr + "\n\t" + variableStr;
-                            break;
+                    if ((channel & 1) == 1) {
+                        var remark = remarks[i_1] || "";
+                        remark = remark.replace(/\n/g, '\n\t * ');
+                        var remarkStr = "\t/**\n\t * " + remark + "\n\t **/";
+                        var variableStr = "public " + keys[i_1] + ":" + formatKeyType(types[i_1]) + ";\n";
+                        keyTemplate += remarkStr + "\n\t" + variableStr;
                     }
                 }
                 defFileStr += formatString(templete, [fileName, keyTemplate]);
@@ -82,7 +79,7 @@ fs.readdir(xlsxPath, function (err, files) {
                             if ((channel & 1) == 1) {
                                 data_client[keys[j]] = formatValueType(types[j], rowData[j]);
                             }
-                            if ((channel & 2) == 2) {
+                            if ((channel & 2) == 1) {
                                 data_server[keys[j]] = rowData[j];
                             }
                         }
