@@ -4,6 +4,8 @@ module core {
 
         public static MODULE_SHOW: string = 'core.EventID.MODULE_SHOW';
 
+        public static MODULE_LOADED:string = 'core.EventID.MODULE_LOADED';
+
         public static MODULE_HIDE: string = 'core.EventID.MODULE_HIDE';
 
         public static SOCKET_CONNECT: string = 'core.EventID.SOCKET_CONNECT';

@@ -5,6 +5,11 @@ module core {
 
         public static setHashID(openid: string): void {
             LocalStorageData.hashID = openid;
+            LocalStorageData.setItem('hashID', openid, true);
+        }
+
+        public static getHashID(): string {
+            return LocalStorageData.getItem('hashID', true);
         }
 
         public static setItem(key: string, value: string, isGlobal: boolean = false): void {

@@ -52,6 +52,7 @@ module core {
                 this.m_groupData.curGroup = group;
                 if (RES.isGroupLoaded(group) || this.m_groupData.loadedQueue.indexOf(group) >= 0) {
                     this.updateGroupData(group, this.m_groupData.total, this.m_groupData.total, this.m_groupData.curResItem);
+                    return this.loadNext();
                 } else {
                     RES.loadGroup(group);
                 }
@@ -73,7 +74,7 @@ module core {
 
         public loadGroups(data: GroupData): void {
             this.m_groupData = data;
-            this.loadNext();
+            return this.loadNext();
         }
     }
 

@@ -42,8 +42,8 @@ module core {
          * let configs:Dictionary<HeadConfig> = Config.getConfig(HeadConfig);
          * configs.get('1').emojiID;
          */
-        public static getConfig(ref: any): Dictionary<any> {
-            let name: string = egret.getQualifiedClassName(ref);
+        public static getConfig<T>(className: { new (): T; }): Dictionary<T> {
+            let name: string = egret.getQualifiedClassName(className);
             return Config.s_configs[name];
         }
     }

@@ -72,12 +72,15 @@ module core {
          * 加载失败
          */
         private onLoadFaild(data: core.GroupData): void {
-            egret.log(`资源组${data.curGroup}加载失败, 失败URL：${data.curResItem.url}`);
+            if (data.curResItem) {
+                egret.log(`失败URL：${data.curResItem.url}`);
+            }
         }
         /**
          * 加载完成
          */
         private onLoadComplete(data: core.GroupData): void {
+            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_LOADED, this.p_moduleName));
             this.preShow(this.p_data);
             let loading: core.ILoadingUI = LoadingManager.getCurLoading();
             if (loading) {
