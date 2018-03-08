@@ -105,6 +105,10 @@ module core {
             this.m_state = WebSocketStateEnum.CLOSING;
             this.m_webSocket.close();
         }
+
+        public get state(): WebSocketStateEnum {
+            return this.m_state;
+        }
     }
 
     /**

@@ -20,22 +20,22 @@ class LoginUI extends core.EUIComponent {
 		super();
 		this.skinName = "resource/skins/login/LoginsSkin.exml";
 	}
-	protected onShow(): void {
-		super.onShow();
+	
+	protected childrenCreated() {
+		super.childrenCreated();
+		this.addListener();
 		this.m_pLogo.visible = false;
 		this.m_pAccount.text = 'test';
 		this.onAdaptive();
 	}
 
 	protected addListener() {
-		super.addListener();
 		core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
 		this.m_pLoginBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
 		this.m_pPassword.addEventListener(egret.Event.CHANGE, this.onChangePassword, this);
 	}
 
 	protected removeListener(): void {
-		super.removeListener();
 		core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
 		this.m_pLoginBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
 		this.m_pPassword.removeEventListener(egret.Event.CHANGE, this.onChangePassword, this);
@@ -73,5 +73,10 @@ class LoginUI extends core.EUIComponent {
 			password = password.substring(0, 20);
 			this.m_pPassword.text = password;
 		}
+	}
+
+
+	public release() {
+		this.removeListener();
 	}
 }

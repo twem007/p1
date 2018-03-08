@@ -26,7 +26,7 @@ module core {
         /**
          * 注册事件监听
          */
-		public addEventListener(messageID: string, callback: (data: EventData) => void, thisObj: any, index: number = 0): void {
+		public addEventListener(messageID: string | number, callback: (data: EventData) => void, thisObj: any, index: number = 0): void {
 			if (callback && thisObj) {
 				let data: EventCallBack = new EventCallBack(callback, thisObj);
 				data.index = index;
@@ -64,10 +64,10 @@ module core {
         /**
          * 发送消息
          */
-        public sendEvent(message: EventData): void {
-            this.m_sendBuffer.push(message);
-            egret.callLater(this.sendAll, this);
-        }
+		public sendEvent(message: EventData): void {
+			this.m_sendBuffer.push(message);
+			egret.callLater(this.sendAll, this);
+		}
 		/**
 		 * 立即发送
 		 */
@@ -81,10 +81,10 @@ module core {
 			let t: number = Date.now();
 			let max: number = 0;
 			let max_data: EventCallBack;
-			let buffLen:number = this.m_sendBuffer.length;
-			let sendBuff:EventData[] = this.m_sendBuffer;
-			const buffMax:number = 30;
-			if(buffLen > buffMax){
+			let buffLen: number = this.m_sendBuffer.length;
+			let sendBuff: EventData[] = this.m_sendBuffer;
+			const buffMax: number = 30;
+			if (buffLen > buffMax) {
 				sendBuff = this.m_sendBuffer.splice(0, buffMax);
 				// AGame.R.app.hintLabel(`分帧剩余未处理请求数：${this.m_sendBuffer.length}`)
 			}
@@ -120,7 +120,7 @@ module core {
 
 		public index: number;
 
-		public messageID: string;
+		public messageID: string | number;
 
 		public isValid: boolean;
 

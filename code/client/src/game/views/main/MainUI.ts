@@ -28,24 +28,23 @@ class MainUI extends core.EUIComponent {
 		super();
 		this.skinName = "resource/skins/main/MainSkin.exml";
 	}
-	protected onShow(): void {
-		super.onShow();
+
+	protected childrenCreated() {
+		this.addListener();
+		super.childrenCreated();
 		core.SoundUtils.getInstance().playSound(1, 0);
 		this.onAdaptive();
 	}
 
 	protected onHide(): void {
-		super.onHide();
 	}
 
 	protected addListener() {
-		super.addListener();
 		core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
 		this.m_pHeroBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
 	}
 
 	protected removeListener(): void {
-		super.removeListener();
 		core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
 		this.m_pHeroBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
 	}
@@ -56,7 +55,7 @@ class MainUI extends core.EUIComponent {
 	}
 
 	public release() {
-		super.release();
+		this.removeListener();
 	}
 
 	private onClickRankBtn() {

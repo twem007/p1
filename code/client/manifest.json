@@ -15,13 +15,13 @@
 	],
 	"game": [
 		"bin-debug/core/Module.js",
-		"bin-debug/core/com/Component.js",
 		"bin-debug/core/com/EUIComponent.js",
 		"bin-debug/core/data/Callback.js",
 		"bin-debug/core/data/Dictionary.js",
 		"bin-debug/core/event/EventData.js",
 		"bin-debug/core/interfaces/ILoadingUI.js",
-		"bin-debug/core/utils/DBFactory.js",
+		"bin-debug/core/com/Component.js",
+		"bin-debug/core/utils/DateUtils.js",
 		"bin-debug/core/InputManager.js",
 		"bin-debug/core/LayerCenter.js",
 		"bin-debug/core/LoadingManager.js",
@@ -36,6 +36,7 @@
 		"bin-debug/core/config/ConfigDef.js",
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/core/Core.js",
+		"bin-debug/core/data/LocalStorageData.js",
 		"bin-debug/core/data/Node.js",
 		"bin-debug/core/data/NodeList.js",
 		"bin-debug/core/enum/Keyboard.js",
@@ -53,8 +54,8 @@
 		"bin-debug/core/net/SocketEventData.js",
 		"bin-debug/core/utils/Base64.js",
 		"bin-debug/core/utils/CachePool.js",
-		"bin-debug/core/utils/DateUtils.js",
-		"bin-debug/LoadingUI.js",
+		"bin-debug/unittest/WSTest.js",
+		"bin-debug/core/utils/DBFactory.js",
 		"bin-debug/core/utils/DebugUtils.js",
 		"bin-debug/core/utils/MathUtils.js",
 		"bin-debug/core/utils/MCFactory.js",
@@ -93,6 +94,6 @@
 		"bin-debug/unittest/SoundUtilsTest.js",
 		"bin-debug/unittest/UnitTest.js",
 		"bin-debug/unittest/UtilsTest.js",
-		"bin-debug/unittest/WSTest.js"
+		"bin-debug/LoadingUI.js"
 	]
 }

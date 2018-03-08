@@ -13238,10 +13238,10 @@ var egret;
     if (egret.nativeRender) {
         var nrABIVersion = egret_native.nrABIVersion;
         var nrMinEgretVersion = egret_native.nrMinEgretVersion;
-        var requiredNrABIVersion = 1;
+        var requiredNrABIVersion = 2;
         if (nrABIVersion < requiredNrABIVersion) {
             egret.nativeRender = false;
-            var msg = "需要升级微端版本到 0.1.2 才可以开启原生渲染加速";
+            var msg = "需要升级微端版本到 0.1.3 才可以开启原生渲染加速";
             egret.sys.$warnToFPS(msg);
             egret.warn(msg);
         }
@@ -15625,20 +15625,24 @@ var egret;
                 }
             }
             var displayBounds = displayObject.$getOriginalBounds();
-            if (displayBounds.width <= 0 || displayBounds.height <= 0) {
+            var displayBoundsX = displayBounds.x;
+            var displayBoundsY = displayBounds.y;
+            var displayBoundsWidth = displayBounds.width;
+            var displayBoundsHeight = displayBounds.height;
+            if (displayBoundsWidth <= 0 || displayBoundsHeight <= 0) {
                 return drawCalls;
             }
             // 为显示对象创建一个新的buffer
-            var displayBuffer = this.createRenderBuffer(displayBounds.width - displayBounds.x, displayBounds.height - displayBounds.y, true);
+            var displayBuffer = this.createRenderBuffer(displayBoundsWidth - displayBoundsX, displayBoundsHeight - displayBoundsY, true);
             var displayContext = displayBuffer.context;
             if (displayObject.$mask) {
-                drawCalls += this.drawWithClip(displayObject, displayContext, -displayBounds.x, -displayBounds.y);
+                drawCalls += this.drawWithClip(displayObject, displayContext, -displayBoundsX, -displayBoundsY);
             }
             else if (displayObject.$scrollRect || displayObject.$maskRect) {
-                drawCalls += this.drawWithScrollRect(displayObject, displayContext, -displayBounds.x, -displayBounds.y);
+                drawCalls += this.drawWithScrollRect(displayObject, displayContext, -displayBoundsX, -displayBoundsY);
             }
             else {
-                drawCalls += this.drawDisplayObject(displayObject, displayContext, -displayBounds.x, -displayBounds.y);
+                drawCalls += this.drawDisplayObject(displayObject, displayContext, -displayBoundsX, -displayBoundsY);
             }
             //绘制结果到屏幕
             if (drawCalls > 0) {
@@ -15676,7 +15680,7 @@ var egret;
                 displayContext.putImageData(imageData, 0, 0);
                 context.globalAlpha = 1;
                 // 绘制结果的时候，应用滤镜
-                context.drawImage(displayBuffer.surface, offsetX + displayBounds.x, offsetY + displayBounds.y);
+                context.drawImage(displayBuffer.surface, offsetX + displayBoundsX, offsetY + displayBoundsY);
                 if (hasBlendMode) {
                     context.globalCompositeOperation = defaultCompositeOp;
                 }
@@ -15753,19 +15757,23 @@ var egret;
             //todo 若显示对象是容器，同时子项有混合模式，则需要先绘制背景到displayBuffer并清除背景区域
             //绘制显示对象自身，若有scrollRect，应用clip
             var displayBounds = displayObject.$getOriginalBounds();
-            var displayBuffer = this.createRenderBuffer(displayBounds.width, displayBounds.height);
+            var displayBoundsX = displayBounds.x;
+            var displayBoundsY = displayBounds.y;
+            var displayBoundsWidth = displayBounds.width;
+            var displayBoundsHeight = displayBounds.height;
+            var displayBuffer = this.createRenderBuffer(displayBoundsWidth, displayBoundsHeight);
             var displayContext = displayBuffer.context;
             if (!displayContext) {
                 drawCalls += this.drawDisplayObject(displayObject, context, offsetX, offsetY);
                 return drawCalls;
             }
-            drawCalls += this.drawDisplayObject(displayObject, displayContext, -displayBounds.x, -displayBounds.y);
+            drawCalls += this.drawDisplayObject(displayObject, displayContext, -displayBoundsX, -displayBoundsY);
             //绘制遮罩
             if (mask) {
                 var maskMatrix = egret.Matrix.create();
                 maskMatrix.copyFrom(mask.$getConcatenatedMatrix());
                 mask.$getConcatenatedMatrixAt(displayObject, maskMatrix);
-                maskMatrix.translate(-displayBounds.x, -displayBounds.y);
+                maskMatrix.translate(-displayBoundsX, -displayBoundsY);
                 //如果只有一次绘制或是已经被cache直接绘制到displayContext
                 if (maskRenderNode && maskRenderNode.$getRenderCount() == 1 || mask.$displayList) {
                     displayContext.globalCompositeOperation = "destination-in";
@@ -15775,7 +15783,7 @@ var egret;
                     displayContext.restore();
                 }
                 else {
-                    var maskBuffer = this.createRenderBuffer(displayBounds.width, displayBounds.height);
+                    var maskBuffer = this.createRenderBuffer(displayBoundsWidth, displayBoundsHeight);
                     var maskContext = maskBuffer.context;
                     maskContext.setTransform(maskMatrix.a, maskMatrix.b, maskMatrix.c, maskMatrix.d, maskMatrix.tx, maskMatrix.ty);
                     drawCalls += this.drawDisplayObject(mask, maskContext, 0, 0);
@@ -15799,7 +15807,7 @@ var egret;
                     context.clip();
                 }
                 context.globalAlpha = 1;
-                context.drawImage(displayBuffer.surface, offsetX + displayBounds.x, offsetY + displayBounds.y);
+                context.drawImage(displayBuffer.surface, offsetX + displayBoundsX, offsetY + displayBoundsY);
                 if (scrollRect) {
                     context.restore();
                 }
@@ -16725,14 +16733,12 @@ var egret;
         /**
          * Running on Web
          * @version Egret 2.4
-         * @deprecated
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 运行在Web上
          * @version Egret 2.4
-         * @deprecated
          * @platform Web,Native
          * @language zh_CN
          */
@@ -16752,6 +16758,32 @@ var egret;
          * @language zh_CN
          */
         RuntimeType.NATIVE = "native";
+        /**
+         * Running on Runtime2.0
+         * @version Egret 5.1.5
+         * @platform Web,Native
+         * @language en_US
+         */
+        /**
+         * 运行在Runtime2.0上
+         * @version Egret 5.1.5
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        RuntimeType.RUNTIME2 = "runtime2";
+        /**
+         * Running on WeChat mini game
+         * @version Egret 5.1.5
+         * @platform All
+         * @language en_US
+         */
+        /**
+         * 运行在微信小游戏上
+         * @version Egret 5.1.5
+         * @platform All
+         * @language zh_CN
+         */
+        RuntimeType.WXGAME = "wxgame";
     })(RuntimeType = egret.RuntimeType || (egret.RuntimeType = {}));
     /**
      * The Capabilities class provides properties that describe the system and runtime that are hosting the application.
@@ -16770,242 +16802,159 @@ var egret;
     var Capabilities = (function () {
         function Capabilities() {
         }
-        Object.defineProperty(Capabilities, "language", {
-            /**
-             * Specifies the language code of the system on which the content is running. The language is specified as a lowercase
-             * two-letter language code from ISO 639-1. For Chinese, an additional uppercase two-letter country code from ISO 3166
-             * distinguishes between Simplified and Traditional Chinese.<br/>
-             * The following table lists the possible values,but not limited to them:
-             * <ul>
-             * <li>Simplified    Chinese  zh-CN</li>
-             * <li>Traditional   Chinese  zh-TW</li>
-             * <li>English       en</li>
-             * <li>Japanese      ja</li>
-             * <li>Korean        ko</li>
-             * </ul>
-             * @version Egret 2.4
-             * @platform Web,Native
-             * @language en_US
-             */
-            /**
-             * 表示运行内容的系统的语言代码。语言指定为 ISO 639-1 中的小写双字母语言代码。
-             * 对于中文，另外使用 ISO 3166 中的大写双字母国家/地区代码，以区分简体中文和繁体中文。<br/>
-             * 以下是可能但不限于的语言和值：
-             * <ul>
-             * <li>简体中文  zh-CN</li>
-             * <li>繁体中文  zh-TW</li>
-             * <li>英语      en</li>
-             * <li>日语      ja</li>
-             * <li>韩语      ko</li>
-             * </ul>
-             * @version Egret 2.4
-             * @platform Web,Native
-             * @language zh_CN
-             */
-            get: function () {
-                return Capabilities.$language;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Capabilities, "isMobile", {
-            /**
-             * Specifies whether the system is running in a mobile device.(such as a mobile phone or tablet)
-             * @version Egret 2.4
-             * @platform Web,Native
-             * @language en_US
-             */
-            /**
-             * 表示程序内容是否运行在移动设备中（例如移动电话或平板电脑）。
-             * @version Egret 2.4
-             * @platform Web,Native
-             * @language zh_CN
-             */
-            get: function () {
-                return Capabilities.$isMobile;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Capabilities, "os", {
-            /**
-             * Specifies the current operating system. The os property can return the following strings:
-             * <ul>
-             * <li>iPhone            "iOS"</li>
-             * <li>Android Phone     "Android"</li>
-             * <li>Windows Phone     "Windows Phone"</li>
-             * <li>Windows Desktop   "Windows PC"</li>
-             * <li>Mac Desktop       "Mac OS"</li>
-             * <li>Unknown OS        "Unknown"</li>
-             * </ul>
-             * @version Egret 2.4
-             * @platform Web,Native
-             * @language en_US
-             */
-            /**
-             * 指示当前的操作系统。os 属性返回下列字符串：
-             * <ul>
-             * <li>苹果手机操作系统     "iOS"</li>
-             * <li>安卓手机操作系统     "Android"</li>
-             * <li>微软手机操作系统     "Windows Phone"</li>
-             * <li>微软桌面操作系统     "Windows PC"</li>
-             * <li>苹果桌面操作系统     "Mac OS"</li>
-             * <li>未知操作系统        "Unknown"</li>
-             * </ul>
-             * @version Egret 2.4
-             * @platform Web,Native
-             * @language zh_CN
-             */
-            get: function () {
-                return Capabilities.$os;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Capabilities, "runtimeType", {
-            /**
-             * It indicates the current type of operation. runtimeType property returns the following string:
-             * <ul>
-             * <li>Run on Web     egret.RuntimeType.WEB</li>
-             * <li>Run on Native     egret.RuntimeType.NATIVE</li>
-             * </ul>
-             * @version Egret 2.4
-             * @deprecated
-             * @platform Web,Native
-             * @language en_US
-             */
-            /**
-             * 指示当前的运行类型。runtimeType 属性返回下列字符串：
-             * <ul>
-             * <li>运行在Web上     egret.RuntimeType.WEB</li>
-             * <li>运行在Native上     egret.RuntimeType.NATIVE</li>
-             * </ul>
-             * @version Egret 2.4
-             * @deprecated
-             * @platform Web,Native
-             * @language zh_CN
-             */
-            get: function () {
-                return Capabilities.$runtimeType;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Capabilities, "engineVersion", {
-            /***
-             * version of Egret.
-             * @type {string}
-             * @version Egret 3.2.0
-             * @platform Web,Native
-             * @language en_US
-             */
-            /***
-             * Egret 的版本号。
-             * @type {string}
-             * @version Egret 3.2.0
-             * @platform Web,Native
-             * @language zh_CN
-             */
-            get: function () {
-                return "5.1.4";
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Capabilities, "renderMode", {
-            /***
-             * current render mode.
-             * @type {string}
-             * @version Egret 3.0.7
-             * @platform Web,Native
-             * @language en_US
-             */
-            /***
-             * 当前渲染模式。
-             * @type {string}
-             * @version Egret 3.0.7
-             * @platform Web,Native
-             * @language zh_CN
-             */
-            get: function () {
-                return Capabilities.$renderMode;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Capabilities, "boundingClientWidth", {
-            /***
-             * Clients border width.
-             * The value before the document class initialization is always 0.
-             * This value will change after the distribution Event.RESIZE and StageOrientationEvent.ORIENTATION_CHANGE.
-             * @version Egret 3.1.3
-             * @platform Web,Native
-             * @language en_US
-             */
-            /***
-             * 客户端边界宽度。
-             * 该值在文档类初始化之前始终是0。
-             * 该值在派发 Event.RESIZE 以及 StageOrientationEvent.ORIENTATION_CHANGE 之后会发生改变。
-             * @version Egret 3.1.3
-             * @platform Web,Native
-             * @language zh_CN
-             */
-            get: function () {
-                return Capabilities.$boundingClientWidth;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        Object.defineProperty(Capabilities, "boundingClientHeight", {
-            /***
-             * Clients border height.
-             * The value before the document class initialization is always 0.
-             * This value will change after the distribution Event.RESIZE and StageOrientationEvent.ORIENTATION_CHANGE.
-             * @version Egret 3.1.3
-             * @platform Web,Native
-             * @language en_US
-             */
-            /***
-             * 客户端边界高度。
-             * 该值在文档类初始化之前始终是0。
-             * 该值在派发 Event.RESIZE 以及 StageOrientationEvent.ORIENTATION_CHANGE 之后会发生改变。
-             * @version Egret 3.1.3
-             * @platform Web,Native
-             * @language zh_CN
-             */
-            get: function () {
-                return Capabilities.$boundingClientHeight;
-            },
-            enumerable: true,
-            configurable: true
-        });
         /**
-         * @private
+         * Specifies the language code of the system on which the content is running. The language is specified as a lowercase
+         * two-letter language code from ISO 639-1. For Chinese, an additional uppercase two-letter country code from ISO 3166
+         * distinguishes between Simplified and Traditional Chinese.<br/>
+         * The following table lists the possible values,but not limited to them:
+         * <ul>
+         * <li>Simplified    Chinese  zh-CN</li>
+         * <li>Traditional   Chinese  zh-TW</li>
+         * <li>English       en</li>
+         * <li>Japanese      ja</li>
+         * <li>Korean        ko</li>
+         * </ul>
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @language en_US
          */
-        Capabilities.$language = "zh-CN";
         /**
-         * @private
+         * 表示运行内容的系统的语言代码。语言指定为 ISO 639-1 中的小写双字母语言代码。
+         * 对于中文，另外使用 ISO 3166 中的大写双字母国家/地区代码，以区分简体中文和繁体中文。<br/>
+         * 以下是可能但不限于的语言和值：
+         * <ul>
+         * <li>简体中文  zh-CN</li>
+         * <li>繁体中文  zh-TW</li>
+         * <li>英语      en</li>
+         * <li>日语      ja</li>
+         * <li>韩语      ko</li>
+         * </ul>
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @language zh_CN
          */
-        Capabilities.$os = "Unknown";
+        Capabilities.language = "zh-CN";
         /**
-         * @private
+         * Specifies the current operating system. The os property can return the following strings:
+         * <ul>
+         * <li>iPhone            "iOS"</li>
+         * <li>Android Phone     "Android"</li>
+         * <li>Windows Phone     "Windows Phone"</li>
+         * <li>Windows Desktop   "Windows PC"</li>
+         * <li>Mac Desktop       "Mac OS"</li>
+         * <li>Unknown OS        "Unknown"</li>
+         * </ul>
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @language en_US
          */
-        Capabilities.$runtimeType = egret.RuntimeType.WEB;
-        Capabilities.$renderMode = "Unknown";
-        Capabilities.$boundingClientWidth = 0;
-        Capabilities.$boundingClientHeight = 0;
+        /**
+         * 指示当前的操作系统。os 属性返回下列字符串：
+         * <ul>
+         * <li>苹果手机操作系统     "iOS"</li>
+         * <li>安卓手机操作系统     "Android"</li>
+         * <li>微软手机操作系统     "Windows Phone"</li>
+         * <li>微软桌面操作系统     "Windows PC"</li>
+         * <li>苹果桌面操作系统     "Mac OS"</li>
+         * <li>未知操作系统        "Unknown"</li>
+         * </ul>
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        Capabilities.os = "Unknown";
+        /**
+         * It indicates the current type of operation. runtimeType property returns the following string:
+         * <ul>
+         * <li>Run on Web     egret.RuntimeType.WEB</li>
+         * <li>Run on Runtime2.0     egret.RuntimeType.RUNTIME2</li>
+         * <li>Run on WeChat mini game     egret.RuntimeType.WXGAME</li>
+         * </ul>
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @language en_US
+         */
+        /**
+         * 指示当前的运行类型。runtimeType 属性返回下列字符串：
+         * <ul>
+         * <li>运行在Web上     egret.RuntimeType.WEB</li>
+         * <li>运行在Runtime2.0上     egret.RuntimeType.RUNTIME2</li>
+         * <li>运行在微信小游戏上    egret.RuntimeType.WXGAME</li>
+         * </ul>
+         * @version Egret 2.4
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        Capabilities.runtimeType = egret.RuntimeType.WEB;
+        /***
+         * version of Egret.
+         * @type {string}
+         * @version Egret 3.2.0
+         * @platform Web,Native
+         * @language en_US
+         */
+        /***
+         * Egret 的版本号。
+         * @type {string}
+         * @version Egret 3.2.0
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        Capabilities.engineVersion = "5.1.5";
+        /***
+         * current render mode.
+         * @type {string}
+         * @version Egret 3.0.7
+         * @platform Web,Native
+         * @language en_US
+         */
+        /***
+         * 当前渲染模式。
+         * @type {string}
+         * @version Egret 3.0.7
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        Capabilities.renderMode = "Unknown";
+        /***
+         * Clients border width.
+         * The value before the document class initialization is always 0.
+         * This value will change after the distribution Event.RESIZE and StageOrientationEvent.ORIENTATION_CHANGE.
+         * @version Egret 3.1.3
+         * @platform Web,Native
+         * @language en_US
+         */
+        /***
+         * 客户端边界宽度。
+         * 该值在文档类初始化之前始终是0。
+         * 该值在派发 Event.RESIZE 以及 StageOrientationEvent.ORIENTATION_CHANGE 之后会发生改变。
+         * @version Egret 3.1.3
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        Capabilities.boundingClientWidth = 0;
+        /***
+         * Clients border height.
+         * The value before the document class initialization is always 0.
+         * This value will change after the distribution Event.RESIZE and StageOrientationEvent.ORIENTATION_CHANGE.
+         * @version Egret 3.1.3
+         * @platform Web,Native
+         * @language en_US
+         */
+        /***
+         * 客户端边界高度。
+         * 该值在文档类初始化之前始终是0。
+         * 该值在派发 Event.RESIZE 以及 StageOrientationEvent.ORIENTATION_CHANGE 之后会发生改变。
+         * @version Egret 3.1.3
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        Capabilities.boundingClientHeight = 0;
         return Capabilities;
     }());
     egret.Capabilities = Capabilities;
     __reflect(Capabilities.prototype, "egret.Capabilities");
 })(egret || (egret = {}));
-egret.Capabilities.$isMobile = function () {
-    if (!global["navigator"]) {
-        return true;
-    }
-    var ua = navigator.userAgent.toLowerCase();
-    return (ua.indexOf('mobile') != -1 || ua.indexOf('android') != -1);
-}();
 //////////////////////////////////////////////////////////////////////////////////////
 //
 //  Copyright (c) 2014-present, Egret Technology.
@@ -17571,6 +17520,10 @@ var egret;
              * @private
              */
             _this.$textStartY = 0;
+            /**
+             * @private
+             */
+            _this.textLines = [];
             /**
              * @private
              */
@@ -21949,7 +21902,10 @@ var egret;
                 egret.$error(1025);
                 return;
             }
+            var position = bytes._position;
+            bytes._position = 0;
             bytes.validateBuffer(offset + length);
+            bytes._position = position;
             bytes._bytes.set(this._bytes.subarray(pos, pos + length), offset);
             this.position += length;
         };

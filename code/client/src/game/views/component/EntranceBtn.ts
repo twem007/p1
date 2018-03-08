@@ -13,6 +13,7 @@ class EntranceBtn extends core.EUIComponent {
 	public m_pMarkRedDot: eui.Image;
 	protected createChildren() {
 		super.createChildren();
+		this.addListener();
 	}
 
 	/**
@@ -25,11 +26,15 @@ class EntranceBtn extends core.EUIComponent {
 	private onTouchButton(event: egret.TouchEvent): void {
 		core.SoundUtils.getInstance().playSound(2);
 	}
-	
+
 	/**
 	 * 删除监听
 	 */
 	protected removeListener(): void {
 		this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouchButton, this);
+	}
+
+	public release(): void {
+		this.removeListener();
 	}
 }

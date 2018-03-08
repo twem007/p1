@@ -13,8 +13,8 @@ class LinkHintView extends core.EUIComponent {
 		this.skinName = "resource/skins/hint/LinkHintSkin.exml";
 	}
 	/**初始化子对象 */
-	protected onShow() {
-		super.onShow();
+	protected childrenCreated() {
+		super.childrenCreated();
 		let loadingAnim: egret.MovieClip = core.MCFactory.instance.getMovieClip('loading', 'loading', true);
 		loadingAnim.gotoAndPlay("run", -1);
 		this.m_pLoadingGroup.addChild(loadingAnim);
@@ -26,14 +26,7 @@ class LinkHintView extends core.EUIComponent {
 		egret.clearInterval(this.m_pIntervalIndex);
 		this.m_pIntervalIndex = egret.setInterval(this.hintLab, this, 10000);
 	}
-	protected addListener() {
-		super.addListener();
-	}
-	/**删除监听 */
-	protected removeListener() {
-		super.removeListener();
-		egret.clearInterval(this.m_pIntervalIndex);
-	}
+	
 	public onAdaptive() {
 		UIManager.updataPoint(this.m_pLoadingGroup, 685, 375);
 	}
@@ -41,5 +34,9 @@ class LinkHintView extends core.EUIComponent {
 	private hintLab() {
 		core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.LINK));
 		core.TextUtils.showTextTip("网络较差，请到网络更好的地方体验游戏");
+	}
+
+	public release(): void {
+		egret.clearInterval(this.m_pIntervalIndex);
 	}
 }

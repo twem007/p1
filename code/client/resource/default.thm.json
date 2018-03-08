@@ -3,9 +3,9 @@
 	"autoGenerateExmlsList": true,
 	"exmls": [
 		"resource/skins/LoadingSkin.exml",
-		"resource/skins/loading/LoadingSkin.exml",
 		"resource/skins/hint/CommonHintSkin.exml",
 		"resource/skins/hint/GameDisconnectHintSkin.exml",
+		"resource/skins/loading/LoadingSkin.exml",
 		"resource/skins/login/LoginsSkin.exml",
 		"resource/skins/main/MainPlayerFaceSkin.exml",
 		"resource/skins/main/MainRankFaceSkin.exml",
