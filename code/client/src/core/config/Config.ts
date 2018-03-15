@@ -23,13 +23,14 @@ module core {
                             egret.log(`${name}在ConfigDef文件中未定义`);
                             break;
                         }
-                        let values: any[] = data.data;
-                        let size: number = data.dataSize;
                         let dic: Dictionary<any> = new Dictionary<any>();
                         Config.s_configs[name] = dic;
-                        for (let i: number = 0; i < size; i++) {
-                            let value: any = values[i];
-                            dic.add(value[data.key], value);
+                        let values: any[] = data.data;
+                        if (values) {
+                            for (let i: number = 0, iLen: number = values.length; i < iLen; i++) {
+                                let value: any = values[i];
+                                dic.add(value[data.key], value);
+                            }
                         }
                     }
                 }
