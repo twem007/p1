@@ -70,13 +70,10 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                 //解析表数据
                 for (let i: number = 6, iLen: number = sheetData.length; i < iLen; i++) {
                     let rowData: any[] = sheetData[i];
-                    if (rowData) {
+                    if (rowData && rowData.length > 0) {
                         let data_client: any = {};
                         let data_server: any = {};
                         for (let j: number = 0, jLen: number = rowData.length; j < jLen; j++) {
-                            if (!rowData[j]) {
-                                continue;
-                            }
                             let channel: number = channels[j];
                             switch (channel & 1) {
                                 case 1:

@@ -71,13 +71,10 @@ fs.readdir(xlsxPath, function (err, files) {
                 //解析表数据
                 for (var i_2 = 6, iLen_2 = sheetData.length; i_2 < iLen_2; i_2++) {
                     var rowData = sheetData[i_2];
-                    if (rowData) {
+                    if (rowData && rowData.length > 0) {
                         var data_client = {};
                         var data_server = {};
                         for (var j = 0, jLen = rowData.length; j < jLen; j++) {
-                            if (!rowData[j]) {
-                                continue;
-                            }
                             var channel = channels[j];
                             switch (channel & 1) {
                                 case 1:
