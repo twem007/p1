@@ -75,12 +75,21 @@ fs.readdir(xlsxPath, function (err, files) {
                         var data_client = {};
                         var data_server = {};
                         for (var j = 0, jLen = rowData.length; j < jLen; j++) {
-                            var channel = channels[j];
-                            if ((channel & 1) == 1) {
-                                data_client[keys[j]] = formatValueType(types[j], rowData[j]);
+                            if (!rowData[j]) {
+                                continue;
                             }
-                            if ((channel & 2) == 1) {
-                                data_server[keys[j]] = rowData[j];
+                            var channel = channels[j];
+                            switch (channel & 1) {
+                                case 1:
+                                    data_client[keys[j]] = formatValueType(types[j], rowData[j]);
+                                    break;
+                                case 2:
+                                    data_server[keys[j]] = rowData[j];
+                                    break;
+                                case 3:
+                                    data_client[keys[j]] = formatValueType(types[j], rowData[j]);
+                                    data_server[keys[j]] = rowData[j];
+                                    break;
                             }
                         }
                         clientData.data.push(data_client);

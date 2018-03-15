@@ -74,12 +74,21 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                         let data_client: any = {};
                         let data_server: any = {};
                         for (let j: number = 0, jLen: number = rowData.length; j < jLen; j++) {
-                            let channel: number = channels[j];
-                            if ((channel & 1) == 1) {
-                                data_client[keys[j]] = formatValueType(types[j], rowData[j]);
+                            if (!rowData[j]) {
+                                continue;
                             }
-                            if ((channel & 2) == 1) {
-                                data_server[keys[j]] = rowData[j];
+                            let channel: number = channels[j];
+                            switch (channel & 1) {
+                                case 1:
+                                    data_client[keys[j]] = formatValueType(types[j], rowData[j]);
+                                    break;
+                                case 2:
+                                    data_server[keys[j]] = rowData[j];
+                                    break;
+                                case 3:
+                                    data_client[keys[j]] = formatValueType(types[j], rowData[j]);
+                                    data_server[keys[j]] = rowData[j];
+                                    break;
                             }
                         }
                         clientData.data.push(data_client);
