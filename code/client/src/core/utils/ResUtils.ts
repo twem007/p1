@@ -24,14 +24,18 @@ module core {
         }
 
         private onResourceProgress(event: RES.ResourceEvent): void {
-            this.updateGroupData(event.groupName, event.itemsLoaded, event.itemsTotal, event.resItem);
+            return this.updateGroupData(event.groupName, event.itemsLoaded, event.itemsTotal, event.resItem);
         }
 
         private onResourceLoadComplete(event: RES.ResourceEvent): void {
+            if (this.m_groupData.curGroup != event.groupName) {
+                return;
+            }
             egret.log(`资源组：${event.groupName} 加载完成`);
             this.m_groupData.loadedQueue.push(event.groupName);
             this.m_groupData.loaded = this.m_groupData.loadedQueue.length;
-            this.loadNext();
+            this.updateGroupData(event.groupName, this.m_groupData.curGroupTotal, this.m_groupData.curGroupTotal);
+            return this.loadNext();
         }
 
         private updateGroupData(group: string, loadedItems: number = 0, totalItems: number = 0, resItem?: RES.ResourceItem): void {
@@ -50,12 +54,7 @@ module core {
             let group: string = this.m_groupData.loadQueue.shift();
             if (group) {
                 this.m_groupData.curGroup = group;
-                if (RES.isGroupLoaded(group) || this.m_groupData.loadedQueue.indexOf(group) >= 0) {
-                    this.updateGroupData(group, this.m_groupData.total, this.m_groupData.total, this.m_groupData.curResItem);
-                    return this.loadNext();
-                } else {
-                    RES.loadGroup(group);
-                }
+                RES.loadGroup(group);
             } else {
                 if (this.m_groupData.onLoadComplete) {
                     this.m_groupData.onLoadComplete.call(this.m_groupData.thisObj, this.m_groupData);
@@ -119,6 +118,7 @@ module core {
             if (groups) {
                 for (let i: number = 0, iLen: number = groups.length; i < iLen; i++) {
                     RES.destroyRes(groups[i], false);
+                    egret.log(`释放资源或资源组${groups[i]}`)
                 }
             }
         }
@@ -140,6 +140,12 @@ module core {
             if (res && res['key']) {
                 CachePool.addObj(res['key'], res);
             }
+        }
+        /**
+         * 清空资源缓存
+         */
+        public static clearCacheRes(key: string): void {
+            CachePool.clear(key);
         }
     }
 
