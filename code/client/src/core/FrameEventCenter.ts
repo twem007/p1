@@ -8,7 +8,7 @@ module core {
 
         private static s_instance: FrameEventCenter;
 
-        private m_callbacks: FrameCallBack[];
+        private m_callbacks: Callback[];
 
         private m_stage: egret.Stage;
 
@@ -37,21 +37,11 @@ module core {
 
         private onEnterFrame(event: egret.Event): void {
             let curTick: number = Date.now();
-            let callbacks: FrameCallBack[] = this.m_callbacks;
+            const callbacks: Callback[] = this.m_callbacks.concat();
             if (callbacks) {
-                for (let i: number = callbacks.length; i > 0; i--) {
-                    let data: FrameCallBack = callbacks[i - 1];
-                    if (!data.isValid) {
-                        callbacks.splice(i - 1, 1);
-                    }
-                }
                 for (let i: number = 0, iLen: number = callbacks.length; i < iLen; i++) {
-                    let data: FrameCallBack = callbacks[i];
-                    if (data.isValid) {
-                        if (data.callback) {
-                            data.callback.call(data.thisObj, curTick - this.m_preTick);
-                        }
-                    }
+                    let callback: Callback = callbacks[i];
+                    callback.bindCallback(curTick - this.m_preTick);
                 }
             }
             this.m_preTick = curTick;
@@ -61,7 +51,7 @@ module core {
          */
         public addFrameEventListener(callback: (offset: number) => void, thisObj: any): void {
             if (callback && thisObj) {
-                let data: FrameCallBack = new FrameCallBack(callback, thisObj);
+                let data: Callback = new Callback(callback, thisObj);
                 this.m_callbacks.push(data);
             }
         }
@@ -69,36 +59,16 @@ module core {
          * 移除事件监听
          */
         public removeFrameEventListener(callback: (offset: number) => void, thisObj: any): void {
-            let callbacks: FrameCallBack[] = this.m_callbacks;
+            let callbacks: Callback[] = this.m_callbacks;
             if (callbacks) {
-                for (let i: number = 0, iLen: number = callbacks.length; i < iLen; i++) {
-                    let data: FrameCallBack = callbacks[i];
-                    if (data.callback === callback && data.thisObj === thisObj) {
-                        data.isValid = false;
-                        data.callback = null;
-                        data.thisObj = null;
+                for (let i: number = callbacks.length; i > 0; i--) {
+                    let data: Callback = callbacks[i - 1];
+                    if (data.callback == callback && data.thisObj == thisObj) {
+                        callbacks.splice(i - 1, 1);
+                        break;
                     }
                 }
             }
-        }
-    }
-
-    class FrameCallBack extends Callback {
-
-        public index: number;
-
-        public isValid: boolean;
-
-        constructor(callback: (data?: any) => void, thisObj: any) {
-            super(callback, thisObj);
-            this.isValid = true;
-        }
-
-        public clone(): FrameCallBack {
-            let data: FrameCallBack = new FrameCallBack(<any>this.callback, this.thisObj);
-            data.index = this.index;
-            data.isValid = this.isValid;
-            return data;
         }
     }
 }

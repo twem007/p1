@@ -104,17 +104,36 @@ var dragonBones;
         return DragonBones;
     }());
     dragonBones.DragonBones = DragonBones;
-    if (!console.warn) {
-        console.warn = function () { };
-    }
-    if (!console.assert) {
-        console.assert = function () { };
-    }
 })(dragonBones || (dragonBones = {}));
 //
-if (typeof global === 'undefined') {
+if (typeof global === "undefined") {
     var global = window;
 }
+//
+if (!console.warn) {
+    console.warn = function () { };
+}
+if (!console.assert) {
+    console.assert = function () { };
+}
+//
+if (!Date.now) {
+    Date.now = function now() {
+        return new Date().getTime();
+    };
+}
+//
+var __extends = function (t, e) {
+    function r() {
+        this.constructor = t;
+    }
+    for (var i in e) {
+        if (e.hasOwnProperty(i)) {
+            t[i] = e[i];
+        }
+    }
+    r.prototype = e.prototype, t.prototype = new r();
+};
 /**
  * The MIT License (MIT)
  *
@@ -3730,10 +3749,10 @@ var dragonBones;
         Armature.prototype._bufferAction = function (action, append) {
             if (this._actions.indexOf(action) < 0) {
                 if (append) {
-                    this._actions.push(action);
+                    this._actions.unshift(action);
                 }
                 else {
-                    this._actions.unshift(action);
+                    this._actions.push(action);
                 }
             }
         };
@@ -3825,8 +3844,31 @@ var dragonBones;
                 this._lockUpdate = true;
                 for (var _i = 0, _a = this._actions; _i < _a.length; _i++) {
                     var action = _a[_i];
-                    if (action.type === 0 /* Play */) {
-                        this._animation.fadeIn(action.name);
+                    var actionData = action.actionData;
+                    if (actionData === null) {
+                        continue;
+                    }
+                    if (actionData.type === 0 /* Play */) {
+                        if (action.slot !== null) {
+                            var childArmature = action.slot.childArmature;
+                            if (childArmature !== null) {
+                                childArmature.animation.fadeIn(actionData.name);
+                            }
+                        }
+                        else if (action.bone !== null) {
+                            for (var _b = 0, _c = this.getSlots(); _b < _c.length; _b++) {
+                                var slot = _c[_b];
+                                if (slot.parent === action.bone) {
+                                    var childArmature = slot.childArmature;
+                                    if (childArmature !== null) {
+                                        childArmature.animation.fadeIn(actionData.name);
+                                    }
+                                }
+                            }
+                        }
+                        else {
+                            this._animation.fadeIn(actionData.name);
+                        }
                     }
                 }
                 this._actions.length = 0;
@@ -6156,7 +6198,10 @@ var dragonBones;
                         if (actions !== null && actions.length > 0) {
                             for (var _i = 0, actions_1 = actions; _i < actions_1.length; _i++) {
                                 var action = actions_1[_i];
-                                this._childArmature._bufferAction(action, false); // Make sure default action at the beginning.
+                                var eventObject = dragonBones.BaseObject.borrowObject(dragonBones.EventObject);
+                                dragonBones.EventObject.actionDataToInstance(action, eventObject, this._armature);
+                                eventObject.slot = this;
+                                this._armature._bufferAction(eventObject, false);
                             }
                         }
                         else {
@@ -7109,7 +7154,7 @@ var dragonBones;
          * @language zh_CN
          */
         function WorldClock(time) {
-            if (time === void 0) { time = -1.0; }
+            if (time === void 0) { time = 0.0; }
             /**
              * - Current time. (In seconds)
              * @version DragonBones 3.0
@@ -7136,14 +7181,11 @@ var dragonBones;
              * @language zh_CN
              */
             this.timeScale = 1.0;
+            this._systemTime = 0.0;
             this._animatebles = [];
             this._clock = null;
-            if (time < 0.0) {
-                this.time = new Date().getTime() * 0.001;
-            }
-            else {
-                this.time = time;
-            }
+            this.time = time;
+            this._systemTime = new Date().getTime() * 0.001;
         }
         /**
          * - Advance time for all IAnimatable instances.
@@ -7161,20 +7203,22 @@ var dragonBones;
             if (passedTime !== passedTime) {
                 passedTime = 0.0;
             }
+            var currentTime = Date.now() * 0.001;
             if (passedTime < 0.0) {
-                passedTime = new Date().getTime() * 0.001 - this.time;
+                passedTime = currentTime - this._systemTime;
             }
+            this._systemTime = currentTime;
             if (this.timeScale !== 1.0) {
                 passedTime *= this.timeScale;
+            }
+            if (passedTime === 0.0) {
+                return;
             }
             if (passedTime < 0.0) {
                 this.time -= passedTime;
             }
             else {
                 this.time += passedTime;
-            }
-            if (passedTime === 0.0) {
-                return;
             }
             var i = 0, r = 0, l = this._animatebles.length;
             for (; i < l; ++i) {
@@ -9822,27 +9866,12 @@ var dragonBones;
                     var actionIndex = this._frameArray[frameOffset + 2 + i];
                     var action = actions[actionIndex];
                     if (action.type === 0 /* Play */) {
-                        if (action.slot !== null) {
-                            var slot = this._armature.getSlot(action.slot.name);
-                            if (slot !== null) {
-                                var childArmature = slot.childArmature;
-                                if (childArmature !== null) {
-                                    childArmature._bufferAction(action, true);
-                                }
-                            }
-                        }
-                        else if (action.bone !== null) {
-                            for (var _i = 0, _a = this._armature.getSlots(); _i < _a.length; _i++) {
-                                var slot = _a[_i];
-                                var childArmature = slot.childArmature;
-                                if (childArmature !== null && slot.parent._boneData === action.bone) {
-                                    childArmature._bufferAction(action, true);
-                                }
-                            }
-                        }
-                        else {
-                            this._armature._bufferAction(action, true);
-                        }
+                        var eventObject = dragonBones.BaseObject.borrowObject(dragonBones.EventObject);
+                        // eventObject.time = this._frameArray[frameOffset] * this._frameRateR; // Precision problem
+                        eventObject.time = this._frameArray[frameOffset] / this._frameRate;
+                        eventObject.animationState = this._animationState;
+                        dragonBones.EventObject.actionDataToInstance(action, eventObject, this._armature);
+                        this._armature._bufferAction(eventObject, true);
                     }
                     else {
                         var eventType = action.type === 10 /* Frame */ ? dragonBones.EventObject.FRAME_EVENT : dragonBones.EventObject.SOUND_EVENT;
@@ -9850,17 +9879,8 @@ var dragonBones;
                             var eventObject = dragonBones.BaseObject.borrowObject(dragonBones.EventObject);
                             // eventObject.time = this._frameArray[frameOffset] * this._frameRateR; // Precision problem
                             eventObject.time = this._frameArray[frameOffset] / this._frameRate;
-                            eventObject.type = eventType;
-                            eventObject.name = action.name;
-                            eventObject.data = action.data;
-                            eventObject.armature = this._armature;
                             eventObject.animationState = this._animationState;
-                            if (action.bone !== null) {
-                                eventObject.bone = this._armature.getBone(action.bone.name);
-                            }
-                            if (action.slot !== null) {
-                                eventObject.slot = this._armature.getSlot(action.slot.name);
-                            }
+                            dragonBones.EventObject.actionDataToInstance(action, eventObject, this._armature);
                             this._armature._dragonBones.bufferEvent(eventObject);
                         }
                     }
@@ -10912,6 +10932,28 @@ var dragonBones;
         function EventObject() {
             return _super !== null && _super.apply(this, arguments) || this;
         }
+        /**
+         * @internal
+         * @private
+         */
+        EventObject.actionDataToInstance = function (data, instance, armature) {
+            if (data.type === 0 /* Play */) {
+                instance.type = EventObject.FRAME_EVENT;
+            }
+            else {
+                instance.type = data.type === 10 /* Frame */ ? EventObject.FRAME_EVENT : EventObject.SOUND_EVENT;
+            }
+            instance.name = data.name;
+            instance.armature = armature;
+            instance.actionData = data;
+            instance.data = data.data;
+            if (data.bone !== null) {
+                instance.bone = armature.getBone(data.bone.name);
+            }
+            if (data.slot !== null) {
+                instance.slot = armature.getSlot(data.slot.name);
+            }
+        };
         EventObject.toString = function () {
             return "[class dragonBones.EventObject]";
         };
@@ -10926,6 +10968,7 @@ var dragonBones;
             this.bone = null;
             this.slot = null;
             this.animationState = null;
+            this.actionData = null;
             this.data = null;
         };
         /**
@@ -13745,7 +13788,10 @@ var dragonBones;
                             if (actions.length > 0) {
                                 for (var _i = 0, actions_6 = actions; _i < actions_6.length; _i++) {
                                     var action = actions_6[_i];
-                                    childArmature._bufferAction(action, true);
+                                    var eventObject = dragonBones.BaseObject.borrowObject(dragonBones.EventObject);
+                                    dragonBones.EventObject.actionDataToInstance(action, eventObject, slot.armature);
+                                    eventObject.slot = slot;
+                                    slot.armature._bufferAction(eventObject, false);
                                 }
                             }
                             else {
@@ -15639,11 +15685,9 @@ var dragonBones;
             _super.prototype.init.call(this, slotData, displayDatas, rawDisplay, meshDisplay);
             if (dragonBones.isV5) {
                 this._updateTransform = this._updateTransformV5;
-                this._identityTransform = this._identityTransformV5;
             }
             else {
                 this._updateTransform = this._updateTransformV4;
-                this._identityTransform = this._identityTransformV4;
             }
         };
         /**
@@ -16079,9 +16123,6 @@ var dragonBones;
          * @inheritDoc
          */
         EgretSlot.prototype._identityTransform = function () {
-            throw new Error();
-        };
-        EgretSlot.prototype._identityTransformV4 = function () {
             if (this._armatureDisplay._batchEnabled) {
                 this._armatureDisplay._childDirty = true;
                 var displayMatrix = this._renderDisplay.$renderNode.matrix;
@@ -16096,10 +16137,6 @@ var dragonBones;
                 egret.$TempMatrix.identity();
                 this._renderDisplay.$setMatrix(egret.$TempMatrix, this.transformUpdateEnabled);
             }
-        };
-        EgretSlot.prototype._identityTransformV5 = function () {
-            egret.$TempMatrix.identity();
-            this._renderDisplay.$setMatrix(egret.$TempMatrix, this.transformUpdateEnabled);
         };
         EgretSlot.prototype._updateTransformV4 = function () {
             var globalTransformMatrix = this.globalTransformMatrix;
@@ -16200,7 +16237,7 @@ var dragonBones;
                 //
                 var eventManager = new dragonBones.EgretArmatureDisplay();
                 EgretFactory._dragonBonesInstance = new dragonBones.DragonBones(eventManager);
-                EgretFactory._dragonBonesInstance.clock.time = egret.getTimer() * 0.001;
+                EgretFactory._time = egret.getTimer() * 0.001;
                 egret.startTick(EgretFactory._clockHandler, EgretFactory);
             }
             _this._dragonBones = EgretFactory._dragonBonesInstance;
@@ -16208,10 +16245,9 @@ var dragonBones;
         }
         EgretFactory._clockHandler = function (time) {
             time *= 0.001;
-            var clock = EgretFactory._dragonBonesInstance.clock;
-            var passedTime = time - clock.time;
+            var passedTime = time - this._time;
             EgretFactory._dragonBonesInstance.advanceTime(passedTime);
-            clock.time = time;
+            this._time = time;
             return false;
         };
         Object.defineProperty(EgretFactory, "factory", {
@@ -16508,6 +16544,7 @@ var dragonBones;
             console.warn("已废弃");
             this.clear();
         };
+        EgretFactory._time = 0.0;
         EgretFactory._dragonBonesInstance = null;
         EgretFactory._factory = null;
         return EgretFactory;

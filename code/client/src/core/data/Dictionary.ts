@@ -39,6 +39,7 @@ class Dictionary<T> {
 	public getKeyByValue(value: T): any {
 		return this.m_keys[this.indexOfValue(value)];
 	}
+
 	/**
 	 * 添加指定键名的值。
 	 * @param	key 键名。
@@ -88,7 +89,6 @@ class Dictionary<T> {
 		this.m_keys.length = 0;
 		this.m_values.length = 0;
 	}
-
 	/**
 	 * 随机获取一条数据
 	 */

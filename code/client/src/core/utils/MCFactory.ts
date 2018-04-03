@@ -18,6 +18,9 @@ module core {
          * @param isCenter  是否锚点居中
          */
         public getMovieClip(mcFile: string, mcName: string, isCenter: boolean = true): egret.MovieClip {
+            if (!mcFile || mcFile == 'undefined' || mcFile == 'null') {
+                return null;
+            }
             let key: string = `${mcFile}>${mcName}`;
             let mcList: egret.MovieClip[] = this.m_factorys.get(key);
             if (!mcList) {
@@ -33,6 +36,7 @@ module core {
                     let jsonData: any = RES.getRes(`${mcFile}_json`);
                     let pngData: egret.Texture = RES.getRes(`${mcFile}_png`);
                     if (!jsonData || !pngData) {
+                        egret.warn(`名称为${mcFile}的图集资源不存在`);
                         return null;
                     }
                     factory = new egret.MovieClipDataFactory(jsonData, pngData);
@@ -88,13 +92,26 @@ module core {
                 if (mc.parent) {
                     mc.parent.removeChild(mc);
                 }
+                mc.visible = true;
                 let mcList: egret.MovieClip[] = this.m_factorys.get(key);
-                if (!mcList) {
-                    mcList = [];
-                    this.m_factorys.add(key, mcList);
+                if (mcList) {
+                    mcList.push(mc);
                 }
-                mcList.push(mc);
             }
+        }
+        /**
+         * 清空缓存
+         */
+        public clear(mcFile: string, mcName: string): void {
+            this.m_mcFactorys.remove(mcFile);
+            this.m_factorys.remove(this.getFormatKey(mcFile, mcName));
+        }
+        /**
+         * 清空所有缓存
+         */
+        public clearAll(): void {
+            this.m_mcFactorys.clear();
+            this.m_factorys.clear();
         }
 
         public static get instance(): MCFactory {

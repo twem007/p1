@@ -67,7 +67,7 @@ module core {
             if (config) {
                 this.stopSound(config.coverKey);
             } else {
-                egret.log(`ID为${id}的音效在SoundConfig中不存在`);
+                egret.warn(`ID为${id}的音效在SoundConfig中不存在`);
                 return;
             }
             let sound: egret.Sound = this.m_sounds.get(id);
@@ -111,7 +111,7 @@ module core {
                 channel.addEventListener(egret.Event.SOUND_COMPLETE, this.onPlayComplete, this);
                 this.m_channels.add(sound.hashCode, channel);
             } else {
-                egret.log(`名称为${config.soundName}的音效资源不存在`);
+                egret.warn(`名称为${config.soundName}的音效资源不存在`);
                 return;
             }
         }

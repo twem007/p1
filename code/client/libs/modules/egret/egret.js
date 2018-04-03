@@ -3298,7 +3298,15 @@ var egret;
             var xMin = 0, xMax = 0, yMin = 0, yMax = 0;
             var found = false;
             for (var i = -1; i < length; i++) {
-                var childBounds = i == -1 ? bounds : children[i].$getTransformedBounds(this, egret.$TempRectangle);
+                var childBounds = void 0;
+                if (i == -1) {
+                    childBounds = bounds;
+                }
+                else {
+                    children[i].getBounds(egret.$TempRectangle);
+                    children[i].$getMatrix().$transformBounds(egret.$TempRectangle);
+                    childBounds = egret.$TempRectangle;
+                }
                 if (childBounds.isEmpty()) {
                     continue;
                 }
@@ -9705,6 +9713,9 @@ var egret;
             if (alpha === void 0) { alpha = 1; }
             color = +color || 0;
             alpha = +alpha || 0;
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setBeginFill(color, alpha);
+            }
             this.fillPath = this.$renderNode.beginFill(color, alpha, this.strokePath);
             if (this.$renderNode.drawData.length > 1) {
                 this.fillPath.moveTo(this.lastX, this.lastY);
@@ -9736,6 +9747,9 @@ var egret;
          */
         Graphics.prototype.beginGradientFill = function (type, colors, alphas, ratios, matrix) {
             if (matrix === void 0) { matrix = null; }
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setBeginGradientFill(type, colors, alphas, ratios, matrix);
+            }
             this.fillPath = this.$renderNode.beginGradientFill(type, colors, alphas, ratios, matrix, this.strokePath);
             if (this.$renderNode.drawData.length > 1) {
                 this.fillPath.moveTo(this.lastX, this.lastY);
@@ -9754,6 +9768,9 @@ var egret;
          * @language zh_CN
          */
         Graphics.prototype.endFill = function () {
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setEndFill();
+            }
             this.fillPath = null;
         };
         /**
@@ -9796,19 +9813,19 @@ var egret;
             if (joints === void 0) { joints = null; }
             if (miterLimit === void 0) { miterLimit = 3; }
             thickness = +thickness || 0;
+            color = +color || 0;
+            alpha = +alpha || 0;
+            miterLimit = +miterLimit || 0;
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setLineStyle(thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit);
+            }
             if (thickness <= 0) {
                 this.strokePath = null;
                 this.setStrokeWidth(0);
             }
             else {
-                color = +color || 0;
-                alpha = +alpha || 0;
-                miterLimit = +miterLimit || 0;
                 this.setStrokeWidth(thickness);
-                this.strokePath = this.$renderNode.lineStyle(thickness, color, alpha, caps, joints, miterLimit);
-                if (lineDash) {
-                    this.strokePath.setLineDash(lineDash);
-                }
+                this.strokePath = this.$renderNode.lineStyle(thickness, color, alpha, caps, joints, miterLimit, lineDash);
                 if (this.$renderNode.drawData.length > 1) {
                     this.strokePath.moveTo(this.lastX, this.lastY);
                 }
@@ -9839,6 +9856,9 @@ var egret;
             y = +y || 0;
             width = +width || 0;
             height = +height || 0;
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setDrawRect(x, y, width, height);
+            }
             var fillPath = this.fillPath;
             var strokePath = this.strokePath;
             fillPath && fillPath.drawRect(x, y, width, height);
@@ -9878,6 +9898,9 @@ var egret;
             height = +height || 0;
             ellipseWidth = +ellipseWidth || 0;
             ellipseHeight = +ellipseHeight || 0;
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setDrawRoundRect(x, y, width, height, ellipseWidth, ellipseHeight);
+            }
             var fillPath = this.fillPath;
             var strokePath = this.strokePath;
             fillPath && fillPath.drawRoundRect(x, y, width, height, ellipseWidth, ellipseHeight);
@@ -9914,6 +9937,9 @@ var egret;
             x = +x || 0;
             y = +y || 0;
             radius = +radius || 0;
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setDrawCircle(x, y, radius);
+            }
             var fillPath = this.fillPath;
             var strokePath = this.strokePath;
             fillPath && fillPath.drawCircle(x, y, radius);
@@ -9949,6 +9975,9 @@ var egret;
             y = +y || 0;
             width = +width || 0;
             height = +height || 0;
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setDrawEllipse(x, y, width, height);
+            }
             var fillPath = this.fillPath;
             var strokePath = this.strokePath;
             fillPath && fillPath.drawEllipse(x, y, width, height);
@@ -9978,6 +10007,9 @@ var egret;
         Graphics.prototype.moveTo = function (x, y) {
             x = +x || 0;
             y = +y || 0;
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setMoveTo(x, y);
+            }
             var fillPath = this.fillPath;
             var strokePath = this.strokePath;
             fillPath && fillPath.moveTo(x, y);
@@ -10006,6 +10038,9 @@ var egret;
         Graphics.prototype.lineTo = function (x, y) {
             x = +x || 0;
             y = +y || 0;
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setLineTo(x, y);
+            }
             var fillPath = this.fillPath;
             var strokePath = this.strokePath;
             fillPath && fillPath.lineTo(x, y);
@@ -10042,6 +10077,9 @@ var egret;
             controlY = +controlY || 0;
             anchorX = +anchorX || 0;
             anchorY = +anchorY || 0;
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setCurveTo(controlX, controlY, anchorX, anchorY);
+            }
             var fillPath = this.fillPath;
             var strokePath = this.strokePath;
             fillPath && fillPath.curveTo(controlX, controlY, anchorX, anchorY);
@@ -10082,6 +10120,9 @@ var egret;
             controlY2 = +controlY2 || 0;
             anchorX = +anchorX || 0;
             anchorY = +anchorY || 0;
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setCubicCurveTo(controlX1, controlY1, controlX2, controlY2, anchorX, anchorY);
+            }
             var fillPath = this.fillPath;
             var strokePath = this.strokePath;
             fillPath && fillPath.cubicCurveTo(controlX1, controlY1, controlX2, controlY2, anchorX, anchorY);
@@ -10129,6 +10170,9 @@ var egret;
             anticlockwise = !!anticlockwise;
             startAngle = clampAngle(startAngle);
             endAngle = clampAngle(endAngle);
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setDrawArc(x, y, radius, startAngle, endAngle, anticlockwise);
+            }
             var fillPath = this.fillPath;
             var strokePath = this.strokePath;
             if (fillPath) {
@@ -10155,9 +10199,6 @@ var egret;
         Graphics.prototype.dirty = function () {
             var self = this;
             self.$renderNode.dirtyRender = true;
-            if (egret.nativeRender) {
-                egret_native.dirtyGraphics(self);
-            }
         };
         /**
          * @private
@@ -10219,6 +10260,9 @@ var egret;
          * @language zh_CN
          */
         Graphics.prototype.clear = function () {
+            if (egret.nativeRender) {
+                this.$targetDisplay.$nativeDisplayObject.setGraphicsClear();
+            }
             this.$renderNode.clear();
             this.updatePosition(0, 0);
             this.minX = Infinity;
@@ -13238,10 +13282,10 @@ var egret;
     if (egret.nativeRender) {
         var nrABIVersion = egret_native.nrABIVersion;
         var nrMinEgretVersion = egret_native.nrMinEgretVersion;
-        var requiredNrABIVersion = 2;
+        var requiredNrABIVersion = 3;
         if (nrABIVersion < requiredNrABIVersion) {
             egret.nativeRender = false;
-            var msg = "需要升级微端版本到 0.1.3 才可以开启原生渲染加速";
+            var msg = "需要升级微端版本到 0.1.6 才可以开启原生渲染加速";
             egret.sys.$warnToFPS(msg);
             egret.warn(msg);
         }
@@ -14582,9 +14626,10 @@ var egret;
              * @param joints 指定用于拐角的连接外观的类型。默认值：JointStyle.ROUND
              * @param miterLimit 用于表示剪切斜接的极限值的数字。
              */
-            GraphicsNode.prototype.lineStyle = function (thickness, color, alpha, caps, joints, miterLimit) {
+            GraphicsNode.prototype.lineStyle = function (thickness, color, alpha, caps, joints, miterLimit, lineDash) {
                 if (alpha === void 0) { alpha = 1; }
                 if (miterLimit === void 0) { miterLimit = 3; }
+                if (lineDash === void 0) { lineDash = []; }
                 if (CAPS_STYLES.indexOf(caps) == -1) {
                     caps = "round";
                 }
@@ -14598,6 +14643,7 @@ var egret;
                 path.caps = caps || egret.CapsStyle.ROUND;
                 path.joints = joints;
                 path.miterLimit = miterLimit;
+                path.lineDash = lineDash;
                 this.drawData.push(path);
                 this.renderCount++;
                 return path;
@@ -15426,12 +15472,6 @@ var egret;
                 _this.type = 3 /* Stroke */;
                 return _this;
             }
-            StrokePath.prototype.setLineDash = function (segments) {
-                this.$commands[this.commandPosition++] = 5 /* SetLineDash */;
-                var pos = this.dataPosition;
-                this.$data[pos++] = segments;
-                this.dataPosition = pos;
-            };
             return StrokePath;
         }(sys.Path2D));
         sys.StrokePath = StrokePath;
@@ -15678,7 +15718,6 @@ var egret;
                     }
                 }
                 displayContext.putImageData(imageData, 0, 0);
-                context.globalAlpha = 1;
                 // 绘制结果的时候，应用滤镜
                 context.drawImage(displayBuffer.surface, offsetX + displayBoundsX, offsetY + displayBoundsY);
                 if (hasBlendMode) {
@@ -15788,7 +15827,6 @@ var egret;
                     maskContext.setTransform(maskMatrix.a, maskMatrix.b, maskMatrix.c, maskMatrix.d, maskMatrix.tx, maskMatrix.ty);
                     drawCalls += this.drawDisplayObject(mask, maskContext, 0, 0);
                     displayContext.globalCompositeOperation = "destination-in";
-                    displayContext.globalAlpha = 1;
                     displayContext.drawImage(maskBuffer.surface, 0, 0);
                     renderBufferPool.push(maskBuffer);
                 }
@@ -15806,7 +15844,6 @@ var egret;
                     context.rect(scrollRect.x + offsetX, scrollRect.y + offsetY, scrollRect.width, scrollRect.height);
                     context.clip();
                 }
-                context.globalAlpha = 1;
                 context.drawImage(displayBuffer.surface, offsetX + displayBoundsX, offsetY + displayBoundsY);
                 if (scrollRect) {
                     context.restore();
@@ -16143,6 +16180,9 @@ var egret;
                         context.lineCap = CAPS_STYLES[strokeFill.caps];
                         context.lineJoin = strokeFill.joints;
                         context.miterLimit = strokeFill.miterLimit;
+                        if (context.setLineDash) {
+                            context.setLineDash(strokeFill.lineDash);
+                        }
                         //对1像素和3像素特殊处理，向右下角偏移0.5像素，以显示清晰锐利的线条。
                         var isSpecialCaseWidth = lineWidth === 1 || lineWidth === 3;
                         if (isSpecialCaseWidth) {
@@ -16178,9 +16218,6 @@ var egret;
                         break;
                     case 1 /* MoveTo */:
                         context.moveTo(data[pos++] + context.$offsetX, data[pos++] + context.$offsetY);
-                        break;
-                    case 5 /* SetLineDash */:
-                        context.setLineDash(data[pos++]);
                         break;
                 }
             }
@@ -16900,7 +16937,7 @@ var egret;
          * @platform Web,Native
          * @language zh_CN
          */
-        Capabilities.engineVersion = "5.1.5";
+        Capabilities.engineVersion = "5.1.8";
         /***
          * current render mode.
          * @type {string}
@@ -18681,8 +18718,7 @@ var egret;
             if (!this._isFocus) {
                 this._isFocus = true;
                 if (!event["showing"]) {
-                    this._text.$isTyping = true;
-                    this._text.$invalidateTextField();
+                    this._text.$setIsTyping(true);
                 }
                 this._text.dispatchEvent(new egret.FocusEvent(egret.FocusEvent.FOCUS_IN, true));
             }
@@ -18697,8 +18733,7 @@ var egret;
                 //不再显示竖线，并且输入框显示最开始
                 this._isFocus = false;
                 this.tempStage.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.onStageDownHandler, this);
-                this._text.$isTyping = false;
-                this._text.$invalidateTextField();
+                this._text.$setIsTyping(false);
                 //失去焦点后调用
                 this.stageText.$onBlur();
                 this._text.dispatchEvent(new egret.FocusEvent(egret.FocusEvent.FOCUS_OUT, true));
@@ -18721,6 +18756,9 @@ var egret;
             egret.callLater(function () {
                 _this.tempStage.addEventListener(egret.TouchEvent.TOUCH_BEGIN, _this.onStageDownHandler, _this);
             }, this);
+            if (egret.nativeRender) {
+                this.stageText.$setText(this._text.$TextField[13 /* text */]);
+            }
             //强制更新输入框位置
             this.stageText.$show();
         };
@@ -18803,23 +18841,6 @@ var egret;
                 this.stageText.$resetStageText();
                 this.updateInput();
                 return;
-            }
-            var stage = this._text.$stage;
-            if (stage == null) {
-            }
-            else {
-                var item = this._text;
-                var visible = item.$visible;
-                while (true) {
-                    if (!visible) {
-                        break;
-                    }
-                    item = item.parent;
-                    if (item == stage) {
-                        break;
-                    }
-                    visible = item.$visible;
-                }
             }
             this.stageText.$setText(this._text.$TextField[13 /* text */]);
             //整体修改
@@ -19056,6 +19077,9 @@ var egret;
             }
             values[8 /* fontFamily */] = value;
             this.invalidateFontString();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setFontFamily(value);
+            }
             return true;
         };
         Object.defineProperty(TextField.prototype, "size", {
@@ -19089,6 +19113,9 @@ var egret;
             }
             values[0 /* fontSize */] = value;
             this.invalidateFontString();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setFontSize(value);
+            }
             return true;
         };
         Object.defineProperty(TextField.prototype, "bold", {
@@ -19122,6 +19149,9 @@ var egret;
             }
             values[15 /* bold */] = value;
             this.invalidateFontString();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setBold(value);
+            }
             return true;
         };
         Object.defineProperty(TextField.prototype, "italic", {
@@ -19155,6 +19185,9 @@ var egret;
             }
             values[16 /* italic */] = value;
             this.invalidateFontString();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setItalic(value);
+            }
             return true;
         };
         /**
@@ -19196,6 +19229,9 @@ var egret;
             }
             values[9 /* textAlign */] = value;
             this.$invalidateTextField();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setTextAlign(value);
+            }
             return true;
         };
         Object.defineProperty(TextField.prototype, "verticalAlign", {
@@ -19229,6 +19265,9 @@ var egret;
             }
             values[10 /* verticalAlign */] = value;
             this.$invalidateTextField();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setVerticalAlign(value);
+            }
             return true;
         };
         Object.defineProperty(TextField.prototype, "lineSpacing", {
@@ -19261,6 +19300,9 @@ var egret;
                 return false;
             values[1 /* lineSpacing */] = value;
             this.$invalidateTextField();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setLineSpacing(value);
+            }
             return true;
         };
         Object.defineProperty(TextField.prototype, "textColor", {
@@ -19297,6 +19339,9 @@ var egret;
                 this.inputUtils._setColor(this.$TextField[2 /* textColor */]);
             }
             this.$invalidateTextField();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setTextColor(value);
+            }
             return true;
         };
         Object.defineProperty(TextField.prototype, "wordWrap", {
@@ -19335,6 +19380,9 @@ var egret;
             }
             values[19 /* wordWrap */] = value;
             this.$invalidateTextField();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setWordWrap(value);
+            }
         };
         Object.defineProperty(TextField.prototype, "type", {
             /**
@@ -19371,6 +19419,9 @@ var egret;
             var values = this.$TextField;
             if (values[24 /* type */] != value) {
                 values[24 /* type */] = value;
+                if (egret.nativeRender) {
+                    this.$nativeDisplayObject.setType(value);
+                }
                 if (value == egret.TextFieldType.INPUT) {
                     if (isNaN(values[3 /* textFieldWidth */])) {
                         this.$setWidth(100);
@@ -19420,6 +19471,9 @@ var egret;
              */
             set: function (value) {
                 this.$TextField[37 /* inputType */] = value;
+                if (egret.nativeRender) {
+                    this.$nativeDisplayObject.setInputType(value);
+                }
             },
             enumerable: true,
             configurable: true
@@ -19466,6 +19520,9 @@ var egret;
             if (value == null) {
                 value = "";
             }
+            else {
+                value = value.toString();
+            }
             this.isFlow = false;
             var values = this.$TextField;
             if (values[13 /* text */] != value) {
@@ -19477,6 +19534,9 @@ var egret;
                 }
                 else {
                     text = value;
+                }
+                if (egret.nativeRender) {
+                    this.$nativeDisplayObject.setText(text);
                 }
                 this.setMiddleStyle([{ text: text }]);
                 return true;
@@ -19537,6 +19597,9 @@ var egret;
                 else {
                     text = values[13 /* text */];
                 }
+                if (egret.nativeRender) {
+                    this.$nativeDisplayObject.setText(text);
+                }
                 this.setMiddleStyle([{ text: text }]);
                 return true;
             }
@@ -19578,6 +19641,9 @@ var egret;
             if (values[25 /* strokeColor */] != value) {
                 this.$invalidateTextField();
                 values[25 /* strokeColor */] = value;
+                if (egret.nativeRender) {
+                    this.$nativeDisplayObject.setStrokeColor(value);
+                }
                 values[26 /* strokeColorString */] = egret.toColorString(value);
                 return true;
             }
@@ -19618,6 +19684,9 @@ var egret;
             if (this.$TextField[27 /* stroke */] != value) {
                 this.$invalidateTextField();
                 this.$TextField[27 /* stroke */] = value;
+                if (egret.nativeRender) {
+                    this.$nativeDisplayObject.setStroke(value);
+                }
                 return true;
             }
             return false;
@@ -19652,6 +19721,9 @@ var egret;
         TextField.prototype.$setMaxChars = function (value) {
             if (this.$TextField[21 /* maxChars */] != value) {
                 this.$TextField[21 /* maxChars */] = value;
+                if (egret.nativeRender) {
+                    this.$nativeDisplayObject.setMaxChars(value);
+                }
                 return true;
             }
             return false;
@@ -19678,6 +19750,9 @@ var egret;
              */
             set: function (value) {
                 this.$TextField[28 /* scrollV */] = Math.max(value, 1);
+                if (egret.nativeRender) {
+                    this.$nativeDisplayObject.setScrollV(value);
+                }
                 this.$invalidateTextField();
             },
             enumerable: true,
@@ -19806,6 +19881,9 @@ var egret;
         TextField.prototype.$setMultiline = function (value) {
             this.$TextField[30 /* multiline */] = value;
             this.$invalidateTextField();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setMultiline(value);
+            }
             return true;
         };
         Object.defineProperty(TextField.prototype, "restrict", {
@@ -19899,6 +19977,9 @@ var egret;
          * @param value
          */
         TextField.prototype.$setWidth = function (value) {
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setTextFieldWidth(value);
+            }
             var values = this.$TextField;
             if (isNaN(value)) {
                 if (isNaN(values[3 /* textFieldWidth */])) {
@@ -19925,6 +20006,9 @@ var egret;
          * @param value
          */
         TextField.prototype.$setHeight = function (value) {
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setTextFieldHeight(value);
+            }
             var values = this.$TextField;
             if (isNaN(value)) {
                 if (isNaN(values[4 /* textFieldHeight */])) {
@@ -19993,7 +20077,11 @@ var egret;
          * @private
          */
         TextField.prototype.$setBorder = function (value) {
-            this.$TextField[31 /* border */] = !!value;
+            value = !!value;
+            this.$TextField[31 /* border */] = value;
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setBorder(value);
+            }
         };
         Object.defineProperty(TextField.prototype, "borderColor", {
             /**
@@ -20025,7 +20113,11 @@ var egret;
          * @private
          */
         TextField.prototype.$setBorderColor = function (value) {
-            this.$TextField[32 /* borderColor */] = +value || 0;
+            value = +value || 0;
+            this.$TextField[32 /* borderColor */] = value;
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setBorderColor(value);
+            }
         };
         Object.defineProperty(TextField.prototype, "background", {
             /**
@@ -20060,6 +20152,9 @@ var egret;
          */
         TextField.prototype.$setBackground = function (value) {
             this.$TextField[33 /* background */] = value;
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setBackground(value);
+            }
         };
         Object.defineProperty(TextField.prototype, "backgroundColor", {
             /**
@@ -20092,6 +20187,9 @@ var egret;
          */
         TextField.prototype.$setBackgroundColor = function (value) {
             this.$TextField[34 /* backgroundColor */] = value;
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setBackgroundColor(value);
+            }
         };
         /**
          * @private
@@ -20209,7 +20307,7 @@ var egret;
             self.$renderDirty = true;
             self.$TextField[18 /* textLinesChanged */] = true;
             if (egret.nativeRender) {
-                egret_native.dirtyTextField(this);
+                // egret_native.dirtyTextField(this);
             }
             else {
                 var p = self.$parent;
@@ -20248,8 +20346,16 @@ var egret;
          */
         TextField.prototype.$measureContentBounds = function (bounds) {
             this.$getLinesArr();
-            var w = !isNaN(this.$TextField[3 /* textFieldWidth */]) ? this.$TextField[3 /* textFieldWidth */] : this.$TextField[5 /* textWidth */];
-            var h = !isNaN(this.$TextField[4 /* textFieldHeight */]) ? this.$TextField[4 /* textFieldHeight */] : egret.TextFieldUtils.$getTextHeight(this);
+            var w = 0;
+            var h = 0;
+            if (egret.nativeRender) {
+                w = egret_native.nrGetTextFieldWidth(this.$nativeDisplayObject.id);
+                h = egret_native.nrGetTextFieldHeight(this.$nativeDisplayObject.id);
+            }
+            else {
+                w = !isNaN(this.$TextField[3 /* textFieldWidth */]) ? this.$TextField[3 /* textFieldWidth */] : this.$TextField[5 /* textWidth */];
+                h = !isNaN(this.$TextField[4 /* textFieldHeight */]) ? this.$TextField[4 /* textFieldHeight */] : egret.TextFieldUtils.$getTextHeight(this);
+            }
             bounds.setTo(0, 0, w, h);
         };
         TextField.prototype.$updateRenderNode = function () {
@@ -20310,6 +20416,9 @@ var egret;
                 else {
                     this.$TextField[13 /* text */] = text;
                     this.setMiddleStyle(textArr);
+                    if (egret.nativeRender) {
+                        this.$nativeDisplayObject.setTextFlow(textArr);
+                    }
                 }
             },
             enumerable: true,
@@ -20364,6 +20473,9 @@ var egret;
              */
             get: function () {
                 this.$getLinesArr();
+                if (egret.nativeRender) {
+                    return egret_native.nrGetTextFieldWidth(this.$nativeDisplayObject.id);
+                }
                 return this.$TextField[5 /* textWidth */];
             },
             enumerable: true,
@@ -20384,6 +20496,9 @@ var egret;
              */
             get: function () {
                 this.$getLinesArr();
+                if (egret.nativeRender) {
+                    return egret_native.nrGetTextFieldHeight(this.$nativeDisplayObject.id);
+                }
                 return egret.TextFieldUtils.$getTextHeight(this);
             },
             enumerable: true,
@@ -20406,6 +20521,13 @@ var egret;
          */
         TextField.prototype.appendElement = function (element) {
             var text = this.$TextField[13 /* text */] + element.text;
+            if (egret.nativeRender) {
+                this.textArr.push(element);
+                this.$TextField[13 /* text */] = text;
+                this.$TextField[18 /* textLinesChanged */] = true;
+                this.$nativeDisplayObject.setTextFlow(this.textArr);
+                return;
+            }
             if (this.$TextField[20 /* displayAsPassword */]) {
                 this.$setBaseText(text);
             }
@@ -20422,6 +20544,11 @@ var egret;
          */
         TextField.prototype.$getLinesArr = function () {
             var values = this.$TextField;
+            if (egret.nativeRender && values[18 /* textLinesChanged */]) {
+                egret_native.updateNativeRender();
+                values[18 /* textLinesChanged */] = false;
+                return;
+            }
             if (!values[18 /* textLinesChanged */]) {
                 return this.linesArr;
             }
@@ -20639,6 +20766,16 @@ var egret;
             }
             values[29 /* numLines */] = linesArr.length;
             return linesArr;
+        };
+        /**
+         * @private
+         */
+        TextField.prototype.$setIsTyping = function (value) {
+            this.$isTyping = value;
+            this.$invalidateTextField();
+            if (egret.nativeRender) {
+                this.$nativeDisplayObject.setIsTyping(value);
+            }
         };
         /**
          * @private

@@ -27,7 +27,7 @@ module core {
         public static getServerTime(): number {
             return Math.floor(DateUtils.getServerTimeMill() * 0.001);
         }
-        
+
         public static setServerTime(time: number) {
             this.s_serverTimestamp = time;
             this.s_clientTimestamp = egret.getTimer();
@@ -64,5 +64,91 @@ module core {
                 if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
             return fmt;
         }
+
+
+        /**
+     * 将时间长度格式化
+     */
+        public static diffTimeFormat(fmt: string, time: number, type: number = 1) {
+            var day = Math.floor(time / 86400); //Utils.number2int(time / 86400);
+            var hour = Math.floor(time % 86400 / 3600); //Utils.number2int(time % 86400 / 3600);
+            var minutent = Math.floor(time % 3600 / 60); //Utils.number2int(time % 3600 / 60);
+            var seconds = Math.floor(time % 60); //Utils.number2int(time % 60);
+            if (!new RegExp("(d+)").test(fmt)) {
+                hour += day * 24;
+            }
+            if (!new RegExp("(h+)").test(fmt)) {
+                minutent += hour * 60;
+            }
+
+            var o = {
+                "d+": day, //日 
+                "h+": hour, //小时 
+                "m+": minutent, //分 
+                "s+": seconds, //秒 
+            };
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) {
+                    //                    debug((("00" + o[k]).substr(("" + o[k]).length)));
+                    fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : ("" + o[k]).length == 1 ? "0" + o[k] : o[k]);
+                }
+
+            return fmt;
+        }
+
+        /**
+     * 返回 12:00:00这种格式
+     * @param time
+     * @returns {string}
+     */
+        public static format1(time) {
+            return DateUtils.diffTimeFormat('hh:mm:ss', time);
+        }
+
+        /**
+         * 返回 12-15 12:00这种格式
+         * @param time
+         * @returns {string}
+         */
+        public static format2(time) {
+            return DateUtils.dateFormat('MM-dd hh:mm', time);
+        }
+
+        /**
+         * 返回 00分00秒这种格式
+         * @param time
+         * @returns {string}
+         */
+        public static format3(time) {
+            return DateUtils.dateFormat('mm分ss秒', time);
+        }
+
+        /**
+         * 返回 00小时00分00秒这种格式
+         * @param time
+         * @returns {string}
+         */
+        public static format4(time) {
+            return DateUtils.dateFormat('hh小时mm分ss秒', time);
+        }
+
+        /**
+         * 返回 00:00这种格式
+         * @param time
+         * @returns {string}
+         */
+        public static format5(time) {
+            return DateUtils.dateFormat('mm:ss', time);
+        }
+
+        /**
+         * 返回 00日00时00分这种格式
+         * @param time
+         * @returns {string}
+         */
+        public static format6(time) {
+            return DateUtils.diffTimeFormat('dd日hh时mm分', time);
+        }
+
     }
 }

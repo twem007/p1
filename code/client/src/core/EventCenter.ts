@@ -54,9 +54,10 @@ module core {
 			if (callbacks) {
 				for (let i: number = callbacks.length; i > 0; i--) {
 					let data: EventCallBack = callbacks[i - 1];
-					if (data.callback === callback && data.thisObj === thisObj) {
+					if (data.callback == callback && data.thisObj === thisObj) {
 						data.isValid = false;
 						callbacks.splice(i - 1, 1);
+						break;
 					}
 				}
 			}
@@ -83,21 +84,21 @@ module core {
 			let max_data: EventCallBack;
 			let buffLen: number = this.m_sendBuffer.length;
 			let sendBuff: EventData[] = this.m_sendBuffer;
-			const buffMax: number = 30;
+			const buffMax: number = 100;
 			if (buffLen > buffMax) {
 				sendBuff = this.m_sendBuffer.splice(0, buffMax);
-				// AGame.R.app.hintLabel(`分帧剩余未处理请求数：${this.m_sendBuffer.length}`)
+				egret.log(`分帧剩余未处理请求数：${this.m_sendBuffer.length}`)
 			}
 			while (sendBuff.length > 0) {
 				let event: EventData = sendBuff.shift();
 				let dataList: EventCallBack[] = this.m_callbackMaps.get(event.messageID);
 				if (dataList) {
-					dataList = dataList.concat()
-					for (let i: number = dataList.length; i > 0; i--) {
-						let data: EventCallBack = dataList[i - 1];
+					dataList = dataList.concat();
+					for (let i: number = 0, iLen: number = dataList.length; i < iLen; i++) {
+						let data: EventCallBack = dataList[i];
 						if (data.isValid) {
 							let t1: number = Date.now();
-							data.callback.call(data.thisObj, event);
+							data.bindCallback(event);
 							let t1_end: number = Date.now();
 							if (t1_end - t1 > max) {
 								max = t1_end - t1;
@@ -110,8 +111,14 @@ module core {
 				}
 			}
 			let t_end: number = Date.now() - t;
-			if (t_end > 10 && max_data) {
-				egret.log(`单帧事件派发耗时：${t_end} 最高耗时事件：${max_data.messageID} 耗时：${max}`);
+			const allLimit: number = 10;
+			const limit: number = 5;
+			if (t_end > allLimit) {
+				if (max_data && max > limit) {
+					egret.log(`单帧事件派发耗时：${t_end} 最高耗时事件：${max_data.messageID} 耗时：${max}`);
+				} else {
+					egret.log(`单帧事件派发耗时：${t_end}`);
+				}
 			}
 		}
 	}

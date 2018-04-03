@@ -14,6 +14,14 @@ module core {
          * 当前模块
          */
         protected p_moduleName: number;
+        /**
+         * loadingUI
+         */
+        protected p_loadingUI: ILoadingUI;
+        /**
+         * 是否已打开
+         */
+        private m_isOpened: boolean = false;
 
         public constructor(moduleName: number) {
             this.p_moduleName = moduleName;
@@ -32,13 +40,12 @@ module core {
         private preload(): void {
             let groups: string[] = this.getLoadGroup(this.p_data);
             if (groups && groups.length > 0) {
-                let loading: core.ILoadingUI = LoadingManager.getCurLoading();
-                if (loading) {
-                    loading.show();
+                this.p_loadingUI = this.getLoading();
+                if (this.p_loadingUI) {
+                    this.p_loadingUI.show();
                 }
                 core.ResUtils.loadGroups(groups, this.onLoadProgress, this.onLoadFaild, this.onLoadComplete, this);
             } else {
-                this.preShow(this.p_data);
                 this.show(this.p_data);
             }
         }
@@ -48,7 +55,13 @@ module core {
         private onModuleShow(data: ModuleEventData): void {
             if (this.p_moduleName === data.moduleEnum) {
                 this.p_data = data.messageData;
-                this.preload();
+                if (this.m_isOpened) {
+                    core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_LOADED, this.p_moduleName));
+                    this.update(this.p_data);
+                } else {
+                    this.m_isOpened = true;
+                    this.preload();
+                }
             }
         }
         /**
@@ -56,6 +69,7 @@ module core {
          */
         private onModuleHide(data: ModuleEventData): void {
             if (this.p_moduleName === data.moduleEnum) {
+                this.m_isOpened = false;
                 this.hide();
             }
         }
@@ -63,9 +77,8 @@ module core {
          * 加载进度
          */
         private onLoadProgress(data: core.GroupData): void {
-            let loading: core.ILoadingUI = LoadingManager.getCurLoading();
-            if (loading) {
-                loading.setProgress(data);
+            if (this.p_loadingUI) {
+                this.p_loadingUI.setProgress(data);
             }
         }
         /**
@@ -80,12 +93,10 @@ module core {
          * 加载完成
          */
         private onLoadComplete(data: core.GroupData): void {
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_LOADED, this.p_moduleName));
-            this.preShow(this.p_data);
-            let loading: core.ILoadingUI = LoadingManager.getCurLoading();
-            if (loading) {
-                loading.hide();
+            if (this.p_loadingUI) {
+                this.p_loadingUI.hide();
             }
+            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_LOADED, this.p_moduleName));
             this.show(this.p_data);
         }
         /**
@@ -93,9 +104,11 @@ module core {
          */
         protected abstract getLoadGroup(data?: any): string[];
         /**
-         * 预显示
+         * 获取loading
          */
-        protected preShow(data?: any): void { }
+        protected getLoading(): core.ILoadingUI {
+            return null;
+        }
         /**
          * 显示
          */
@@ -105,11 +118,17 @@ module core {
          */
         protected abstract hide(): void;
         /**
+         * 更新
+         */
+        protected update(data?: any): void { };
+        /**
          * 释放资源
          */
         protected release(): void {
             core.EventCenter.getInstance().removeEventListener(core.EventID.MODULE_SHOW, this.onModuleShow, this);
             core.EventCenter.getInstance().removeEventListener(core.EventID.MODULE_HIDE, this.onModuleHide, this);
+            this.p_loadingUI = null;
+            this.p_data = null;
         }
     }
 }

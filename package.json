@@ -30,7 +30,7 @@
   "devDependencies": {
     "del": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-typescript": "^3.2.2",
-    "typescript": "^2.5.2"
+    "gulp-typescript": "^3.2.4",
+    "typescript": "^2.8.1"
   }
 }

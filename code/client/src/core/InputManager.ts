@@ -10,35 +10,41 @@ module core {
             this.m_keyMap = new Dictionary<KeyData>();
         }
 
-        public addKeyListener(key: number, callback: () => void, thisObj: any): void {
-            let data: KeyData = this.m_keyMap.get(key);
+        public addInputListener(input: number, callback: (input: InputData) => void, thisObj: any): void {
+            let data: KeyData = this.m_keyMap.get(input);
             if (!data) {
-                data = new KeyData(key);
+                data = new KeyData(input);
+                this.m_keyMap.add(input, data);
             }
-            data.callbacks.push(new KeyCallBack(callback, thisObj));
-            this.m_keyMap.add(key, data);
+            let callbackData: Callback = new Callback(callback, thisObj);
+            data.callbacks.push(callbackData);
         }
 
-        public removeKeyListener(key: number, callback: () => void, thisObj: any): void {
-            let data: KeyData = this.m_keyMap.get(key);
+        public removeInputListener(input: number, callback: (input: InputData) => void, thisObj: any): void {
+            let data: KeyData = this.m_keyMap.get(input);
             if (data) {
-                let list: KeyCallBack[] = data.callbacks;
-                for (let i: number = 0, iLen: number = list.length; i < iLen; i++) {
-                    let item: KeyCallBack = list[i];
+                let list: Callback[] = data.callbacks;
+                for (let i: number = list.length; i > 0; i--) {
+                    let item: Callback = list[i - 1];
                     if (item && item.callback === callback && item.thisObj === thisObj) {
-                        item.isValid = false;
-                        item.callback = null;
-                        item.thisObj = null;
+                        list.splice(i - 1, 1);
+                        return;
                     }
                 }
             }
         }
-
-        public enableKey(key: number, enable: boolean): void {
-            this.m_keyMap.get(key).keyEnable = enable;
+        /**
+         * 移除所有监听
+         */
+        public removeAllListener(): void {
+            this.m_keyMap.clear();
         }
 
-        public enable(enable: boolean): void {
+        public enableInput(input: number, enable: boolean): void {
+            this.m_keyMap.get(input).keyEnable = enable;
+        }
+
+        public set enable(enable: boolean) {
             let map: Dictionary<KeyData> = this.m_keyMap;
             let values: KeyData[] = map.values;
             for (let i: number = 0, iLen: number = values.length; i < iLen; i++) {
@@ -46,17 +52,16 @@ module core {
             }
         }
 
-        public sendKey(key: number): void {
-            let data: KeyData = this.m_keyMap.get(key);
-            if (data) {
-                let list: KeyCallBack[] = data.callbacks.concat().reverse();
+        public sendInput(input: number, priority?: number): void {
+            let data: KeyData = this.m_keyMap.get(input);
+            if (data && data.keyEnable) {
+                let list: Callback[] = data.callbacks;
                 for (let i: number = list.length; i > 0; i--) {
-                    let data: KeyCallBack = list[i - 1];
-                    if (!data.isValid) {
-                        list.splice(i - 1, 1);
-                    } else {
-                        data.callback.call(data.thisObj);
-                    }
+                    let callback: Callback = list[i - 1];
+                    let inputData: InputData = new InputData();
+                    inputData.curInput = input;
+                    inputData.priorityInput = priority;
+                    callback.bindCallback(inputData);
                 }
             }
         }
@@ -75,7 +80,7 @@ module core {
 
         public keyEnable: boolean;
 
-        public callbacks: KeyCallBack[];
+        public callbacks: Callback[];
 
         constructor(key: number) {
             this.key = key;
@@ -84,13 +89,11 @@ module core {
         }
     }
 
-    class KeyCallBack extends Callback {
+    export class InputData {
 
-        public isValid: boolean;
+        public curInput: number;
 
-        constructor(callback: (data?: any) => void, thisObj: any) {
-            super(callback, thisObj);
-            this.isValid = true;
-        }
+        public priorityInput: number;
+
     }
 }

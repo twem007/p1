@@ -3,9 +3,6 @@ module core {
 
         public static PAGE_HIDE: string = "WebUtils.PAGE_HIDE";
         public static PAGE_SHOW: string = "WebUtils.PAGE_SHOW";
-
-        public static isKeyboard: boolean = true;
-
         /**
          * URL参数
          */
@@ -28,15 +25,19 @@ module core {
             WebUtils.urlParams = params;
         }
 
-        public static addKeyboardListener(): void {
+        public static addKeyboardListener(validChecker?: (event: KeyboardEvent) => boolean): void {
             document.onkeydown = function (event: KeyboardEvent): any {
-                if (event && WebUtils.isKeyboard) {
-                    core.EventCenter.getInstance().sendEvent(new KeyboardEventData(core.EventID.KEYBOARD_DOWN, event));
+                if (event) {
+                    if (!validChecker || validChecker(event)) {
+                        core.EventCenter.getInstance().sendEvent(new KeyboardEventData(core.EventID.KEYBOARD_DOWN, event));
+                    }
                 }
             }
             document.onkeyup = function (event: KeyboardEvent): any {
-                if (event && WebUtils.isKeyboard) {
-                    core.EventCenter.getInstance().sendEvent(new KeyboardEventData(core.EventID.KEYBOARD_UP, event));
+                if (event) {
+                    if (!validChecker || validChecker(event)) {
+                        core.EventCenter.getInstance().sendEvent(new KeyboardEventData(core.EventID.KEYBOARD_UP, event));
+                    }
                 }
             }
         }

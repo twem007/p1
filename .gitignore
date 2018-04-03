@@ -1,3 +1,4 @@
 code/client/.wing/*
 code/client/bin-debug/*
-code/client/libs/modules/*
+code/client/libs/*
+node_modules/
