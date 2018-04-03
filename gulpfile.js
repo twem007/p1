@@ -8,7 +8,7 @@ gulp.task('clean', function (cb) {
 });
 
 gulp.task('compile', ['clean'], function () {
-  tsProject.src()
+  return tsProject.src()
     .pipe(tsProject())
     .pipe(gulp.dest('./code/client/bin-debug'));
 });
