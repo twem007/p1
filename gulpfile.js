@@ -10,7 +10,10 @@ gulp.task('clean', function (cb) {
 gulp.task('compile', ['clean'], function () {
   return tsProject.src()
     .pipe(tsProject())
-    .pipe(gulp.dest('./code/client/bin-debug'));
+    .pipe(gulp.dest('./code/client/bin-debug'))
+    .on('error', function (err) {
+      throw Error(err.message);
+    });
 });
 
 gulp.task('default', ['clean', 'compile']);
