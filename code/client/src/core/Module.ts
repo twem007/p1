@@ -96,8 +96,10 @@ module core {
             if (this.p_loadingUI) {
                 this.p_loadingUI.hide();
             }
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_LOADED, this.p_moduleName));
-            this.show(this.p_data);
+            if (this.m_isOpened) {
+                core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_LOADED, this.p_moduleName));
+                this.show(this.p_data);
+            }
         }
         /**
          * 预加载资源组
