@@ -60,7 +60,5 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
         }
     }
     public updateAdaptive(): void {
-        UIManager.updataPoint(this.m_pMainGroup, 667, 375);
-        UIManager.updataPoint(this.m_pProgressGroup, 667, 653);
     }
 }

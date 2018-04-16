@@ -50,8 +50,7 @@ class MainUI extends core.EUIComponent {
 	}
 
 	public onAdaptive() {
-		UIManager.updataPoint(this.m_pBgImg, 667, 375);
-		UIManager.rightBelowAdaptive(this.m_pRightLowGroup, 1067, 704);
+		
 	}
 
 	public release() {
@@ -59,6 +58,5 @@ class MainUI extends core.EUIComponent {
 	}
 
 	private onClickRankBtn() {
-		// core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.MAINUI));
 	}
 }

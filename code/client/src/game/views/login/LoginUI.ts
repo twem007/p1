@@ -20,7 +20,7 @@ class LoginUI extends core.EUIComponent {
 		super();
 		this.skinName = "resource/skins/login/LoginsSkin.exml";
 	}
-	
+
 	protected childrenCreated() {
 		super.childrenCreated();
 		this.addListener();
@@ -43,9 +43,7 @@ class LoginUI extends core.EUIComponent {
 
 	/**更新舞台 */
 	public onAdaptive() {
-		UIManager.updataPoint(this.m_pLogoGroup, 668, 308);
-		UIManager.updataPoint(this.m_pAccountGroup, 668, 334);
-		UIManager.updataPoint(this.m_pLoginBtn, 667, 614);
+
 	}
 
 	private onButtonClick(event: egret.TouchEvent): void {
@@ -58,8 +56,8 @@ class LoginUI extends core.EUIComponent {
 		else {
 			if (this.m_pAccount.text != null && this.m_pAccount.text != "") {
 				this.release();
-				core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, ModuleEnum.LOGIN));
-				core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.MAINUI));
+				UIManager.instance.closeModule(ModuleEnum.LOGIN);
+				UIManager.instance.openModule(ModuleEnum.MAINUI);
 			}
 			else {
 				core.TextUtils.showTextTip("请输入账号");

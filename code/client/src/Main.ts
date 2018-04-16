@@ -125,8 +125,7 @@ class Main extends egret.DisplayObjectContainer {
             core.LoadingManager.setCurLoading(MainLoadingUI);
             core.Config.init(RES.getRes('config_zip'));
             this.initModule();
-
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
+            UIManager.instance.closeModule(ModuleEnum.LOGIN);
         }
     }
 
