@@ -22,6 +22,10 @@ module core {
          * 是否已打开
          */
         private m_isOpened: boolean = false;
+        /**
+         * 是否加载完成
+         */
+        protected p_isLoaded: boolean = false;
 
         public constructor(moduleName: number) {
             this.p_moduleName = moduleName;
@@ -47,6 +51,7 @@ module core {
                 core.ResUtils.loadGroups(groups, this.onLoadProgress, this.onLoadFaild, this.onLoadComplete, this);
             } else {
                 this.show(this.p_data);
+                this.p_data = null;
             }
         }
         /**
@@ -54,13 +59,13 @@ module core {
          */
         private onModuleShow(data: ModuleEventData): void {
             if (this.p_moduleName === data.moduleEnum) {
-                this.p_data = data.messageData;
-                if (this.m_isOpened) {
-                    core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_LOADED, this.p_moduleName));
-                    this.update(this.p_data);
-                } else {
+                if (!this.m_isOpened) {
+                    this.p_data = data.messageData;
+                    this.p_isLoaded = false;
                     this.m_isOpened = true;
                     this.preload();
+                } else if (this.p_isLoaded) {
+                    this.update(data.messageData);
                 }
             }
         }
@@ -68,7 +73,7 @@ module core {
          * 关闭前
          */
         private onModuleHide(data: ModuleEventData): void {
-            if (this.p_moduleName === data.moduleEnum) {
+            if (this.p_moduleName === data.moduleEnum && this.m_isOpened) {
                 this.m_isOpened = false;
                 this.hide();
             }
@@ -93,12 +98,15 @@ module core {
          * 加载完成
          */
         private onLoadComplete(data: core.GroupData): void {
+            this.p_isLoaded = true;
             if (this.p_loadingUI) {
                 this.p_loadingUI.hide();
+                this.p_loadingUI = null;
             }
             if (this.m_isOpened) {
                 core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_LOADED, this.p_moduleName));
                 this.show(this.p_data);
+                this.p_data = null;
             }
         }
         /**
@@ -129,8 +137,6 @@ module core {
         protected release(): void {
             core.EventCenter.getInstance().removeEventListener(core.EventID.MODULE_SHOW, this.onModuleShow, this);
             core.EventCenter.getInstance().removeEventListener(core.EventID.MODULE_HIDE, this.onModuleHide, this);
-            this.p_loadingUI = null;
-            this.p_data = null;
         }
     }
 }

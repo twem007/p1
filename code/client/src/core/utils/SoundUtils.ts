@@ -65,6 +65,9 @@ module core {
         public playSound(id: number, loop: number = 1, onPlayComplete?: () => void): void {
             let config: SoundConfig = Config.getConfig(SoundConfig).get(id);
             if (config) {
+                if (this.isSoundPlaying(id) && config.soundType == 1) {
+                    return;
+                }
                 this.stopSound(config.coverKey);
             } else {
                 egret.warn(`ID为${id}的音效在SoundConfig中不存在`);
@@ -247,6 +250,17 @@ module core {
          */
         public getEffectValue(): number {
             return this.m_effectVolume;
+        }
+
+        public isSoundPlaying(id: number): boolean {
+            let sound: egret.Sound = this.m_sounds.get(id);
+            if (sound) {
+                let channel: egret.SoundChannel = this.m_channels.get(sound.hashCode);
+                if (channel) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public static getInstance(): SoundUtils {

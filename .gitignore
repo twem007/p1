@@ -1,4 +1,5 @@
 code/client/.wing/*
 code/client/bin-debug/*
+code/client/bin-release/*
 node_modules/
 .wing/
