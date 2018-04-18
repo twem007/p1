@@ -44,11 +44,18 @@ class LoadingUI extends core.Component implements core.ILoadingUI {
         this.textField.height = 100;
         this.textField.textAlign = "center";
     }
-
+    
+    /**
+     * 更新loading进度
+     * @param  {core.GroupData} data
+     * @returns void
+     */
     public setProgress(data: core.GroupData): void {
         this.textField.text = `Loading...${data.curGroupLoaded}/${data.curGroupTotal}`;
     }
-
+    /**
+     * 显示loading
+     */
     public show(): void {
         core.LayerCenter.getInstance().getLayer(LayerEnum.LOADING).addChild(this);
     }

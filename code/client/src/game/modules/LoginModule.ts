@@ -6,6 +6,13 @@ class LoginModule extends core.Module {
 		super(ModuleEnum.LOGIN);
 	}
 	private m_pLoginUI: LoginUI;
+
+	/**
+	* 获取loading
+	*/
+	protected getLoading(): core.ILoadingUI {
+		return core.LoadingManager.getLoading(MainLoadingUI);
+	}
 	/**
 	 * 预加载资源组
 	 */
@@ -31,7 +38,7 @@ class LoginModule extends core.Module {
 		}
 		this.m_pLoginUI = null;
 	}
-	
+
 	protected release(): void {
 		super.release();
 	}

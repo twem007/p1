@@ -100,16 +100,19 @@ class Main extends egret.DisplayObjectContainer {
         })
     }
 
+   
     /**
      * 资源组加载进度
+     * @param  {core.GroupData} data
      */
     private onResourceProgress(data: core.GroupData): void {
         egret.log(`当前加载进度:${data.curGroup} ${data.curGroupLoaded}/${data.curGroupTotal}`);
         core.LoadingManager.getLoading(LoadingUI).setProgress(data);
     }
+    
     /**
      * 资源组加载出错
-     * Resource group loading failed
+     * @param  {core.GroupData} data
      */
     private onResourceLoadError(data: core.GroupData): void {
         //TODO
@@ -117,15 +120,15 @@ class Main extends egret.DisplayObjectContainer {
     }
     /**
      * preload资源组加载完成
+     * @param  {core.GroupData} data
      */
     private onResourceLoadComplete(data: core.GroupData): void {
         if (data.curGroup == 'preload') {
             egret.log("Group:" + data.curGroup + " load complete");
             core.LoadingManager.getLoading(LoadingUI).hide();
-            core.LoadingManager.setCurLoading(MainLoadingUI);
             core.Config.init(RES.getRes('config_zip'));
             this.initModule();
-            UIManager.instance.closeModule(ModuleEnum.LOGIN);
+            UIManager.instance.openModule(ModuleEnum.LOGIN);
         }
     }
 

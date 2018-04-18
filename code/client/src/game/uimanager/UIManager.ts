@@ -10,8 +10,10 @@ class UIManager {
         this.m_moduleList = [];
         this.m_popupList = [];
     }
+    
     /**
      * 得到Module索引
+     * @param  {ModuleEnum} moduleEnum
      */
     private getIndex(moduleEnum: ModuleEnum): number {
         let list: ModuleData[] = this.m_moduleList;
@@ -23,8 +25,8 @@ class UIManager {
         return -1;
     }
     /**
-     * @param openModule    打开的module
-     * @param openData      打开所需参数
+     * @param  {ModuleEnum} openModule  打开的module
+     * @param  {any} openData?  打开所需参数
      */
     public openModule(openModule: ModuleEnum, openData?: any): void {
         let list: ModuleData[] = this.m_moduleList;
@@ -36,7 +38,8 @@ class UIManager {
         core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, openModule, openData));
     }
     /**
-     * @param closeModule   关闭的module
+     * 
+     * @param  {ModuleEnum} closeModule 关闭的module
      */
     public closeModule(closeModule: ModuleEnum): void {
         let index: number = this.getIndex(closeModule);
@@ -50,14 +53,19 @@ class UIManager {
             core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, moduleData.moduleEnum, moduleData.data));
         }
     }
-
+    /**
+     * @param  {ModuleEnum} openModule  要打开的Popup
+     * @param  {any} openData?          打开附加参数
+     */
     public openPopup(openModule: ModuleEnum, openData?: any): void {
         if (this.m_popupList.indexOf(openModule) < 0) {
             this.m_popupList.push(openModule);
         }
         core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, openModule, openData));
     }
-
+    /**
+     * @param  {ModuleEnum} closeModule 要关闭的Popup
+     */
     public closePopup(closeModule: ModuleEnum): void {
         let index: number = this.m_popupList.indexOf(closeModule);
         if (index >= 0) {
@@ -65,7 +73,10 @@ class UIManager {
             core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, closeModule));
         }
     }
-
+   
+    /**
+     * 关闭所有module
+     */
     public closeAllModule(): void {
         let list: ModuleData[] = this.m_moduleList;
         for (let i: number = 0, iLen: number = list.length; i < iLen; i++) {
@@ -74,7 +85,9 @@ class UIManager {
         }
         list.length = 0;
     }
-
+    /**
+     * 关闭所有module及Popup
+     */
     public closeAll(): void {
         this.closeAllModule();
         let list: ModuleEnum[] = this.m_popupList;
@@ -97,7 +110,10 @@ class ModuleData {
     public moduleEnum: ModuleEnum;
 
     public data: any;
-
+    /**
+     * @param  {ModuleEnum} moduleEnum
+     * @param  {any} data
+     */
     constructor(moduleEnum: ModuleEnum, data: any) {
         this.moduleEnum = moduleEnum;
         this.data = data;

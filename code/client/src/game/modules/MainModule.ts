@@ -7,8 +7,14 @@ class MainModule extends core.Module {
 	}
 	private m_pMainUI: MainUI;
 	/**
-         * 预加载资源组
-         */
+	* 获取loading
+	*/
+	protected getLoading(): core.ILoadingUI {
+		return core.LoadingManager.getLoading(MainLoadingUI);
+	}
+	/**
+	 * 预加载资源组
+	 */
 	protected getLoadGroup(data?: core.ModuleEventData): string[] {
 		return ['mainUI'];
 	}
