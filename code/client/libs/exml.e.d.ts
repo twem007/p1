@@ -1,9 +1,5 @@
 declare class LoadingSkin extends eui.Skin{
 }
-declare class CommonHintSkin extends eui.Skin{
-}
-declare class GameDisconnectHintSkin extends eui.Skin{
-}
 declare class LoginsSkin extends eui.Skin{
 }
 declare class MainPlayerFaceSkin extends eui.Skin{

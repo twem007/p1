@@ -181,12 +181,12 @@ module core {
                         this.m_loadings.add(id, data);
                     }
                     RES.getResAsync(config.soundName, function (): RES.GetResAsyncCallback {
-                        return function (data, key): any {
+                        return function (value, key): void {
                             egret.log(`名称为${config.soundName}的音效资源加载完成`);
                             if (this.m_loadings.remove(id)) {
                                 this.playSound(id, loop, onPlayComplete);
                             }
-                        };
+                        }
                     } (), this);
                 }
             }

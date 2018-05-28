@@ -1542,7 +1542,7 @@ var egret;
                 self.$nativeDisplayObject.setVisible(value);
             }
             else {
-                self.updateRenderMode();
+                self.$updateRenderMode();
                 var p = self.$parent;
                 if (p && !p.$cacheDirty) {
                     p.$cacheDirty = true;
@@ -1656,7 +1656,7 @@ var egret;
                 self.$nativeDisplayObject.setAlpha(value);
             }
             else {
-                self.updateRenderMode();
+                self.$updateRenderMode();
                 var p = self.$parent;
                 if (p && !p.$cacheDirty) {
                     p.$cacheDirty = true;
@@ -1767,7 +1767,7 @@ var egret;
         DisplayObject.prototype.$setScrollRect = function (value) {
             var self = this;
             if (!value && !self.$scrollRect) {
-                self.updateRenderMode();
+                self.$updateRenderMode();
                 return;
             }
             if (value) {
@@ -1786,7 +1786,7 @@ var egret;
                 }
             }
             if (!egret.nativeRender) {
-                self.updateRenderMode();
+                self.$updateRenderMode();
             }
         };
         Object.defineProperty(DisplayObject.prototype, "blendMode", {
@@ -1820,7 +1820,7 @@ var egret;
                     self.$nativeDisplayObject.setBlendMode(mode);
                 }
                 else {
-                    self.updateRenderMode();
+                    self.$updateRenderMode();
                     var p = self.$parent;
                     if (p && !p.$cacheDirty) {
                         p.$cacheDirty = true;
@@ -1886,7 +1886,7 @@ var egret;
                         value.$maskedObject = self;
                         self.$mask = value;
                         if (!egret.nativeRender) {
-                            value.updateRenderMode();
+                            value.$updateRenderMode();
                         }
                         if (self.$maskRect) {
                             if (egret.nativeRender) {
@@ -1909,7 +1909,7 @@ var egret;
                         if (self.$mask) {
                             self.$mask.$maskedObject = null;
                             if (!egret.nativeRender) {
-                                self.$mask.updateRenderMode();
+                                self.$mask.$updateRenderMode();
                             }
                         }
                         if (self.mask) {
@@ -1924,7 +1924,7 @@ var egret;
                     if (self.$mask) {
                         self.$mask.$maskedObject = null;
                         if (!egret.nativeRender) {
-                            self.$mask.updateRenderMode();
+                            self.$mask.$updateRenderMode();
                         }
                     }
                     if (self.mask) {
@@ -1941,7 +1941,7 @@ var egret;
                     }
                 }
                 if (!egret.nativeRender) {
-                    self.updateRenderMode();
+                    self.$updateRenderMode();
                 }
             },
             enumerable: true,
@@ -1982,12 +1982,12 @@ var egret;
                 var self = this;
                 var filters = self.$filters;
                 if (!filters && !value) {
-                    self.$filters = null;
+                    self.$filters = value;
                     if (egret.nativeRender) {
                         self.$nativeDisplayObject.setFilters(null);
                     }
                     else {
-                        self.updateRenderMode();
+                        self.$updateRenderMode();
                     }
                     return;
                 }
@@ -1999,13 +1999,13 @@ var egret;
                     }
                 }
                 else {
-                    self.$filters = null;
+                    self.$filters = value;
                     if (egret.nativeRender) {
                         self.$nativeDisplayObject.setFilters(null);
                     }
                 }
                 if (!egret.nativeRender) {
-                    self.updateRenderMode();
+                    self.$updateRenderMode();
                 }
             },
             enumerable: true,
@@ -2235,7 +2235,7 @@ var egret;
             }
             return node;
         };
-        DisplayObject.prototype.updateRenderMode = function () {
+        DisplayObject.prototype.$updateRenderMode = function () {
             var self = this;
             if (!self.$visible || self.$alpha <= 0 || self.$maskedObject) {
                 self.$renderMode = 1 /* NONE */;
@@ -2243,7 +2243,7 @@ var egret;
             else if (self.filters && self.filters.length > 0) {
                 self.$renderMode = 2 /* FILTER */;
             }
-            else if (self.$blendMode !== 0 || self.$mask) {
+            else if (self.$blendMode !== 0 || (self.$mask && self.$mask.$stage)) {
                 self.$renderMode = 3 /* CLIP */;
             }
             else if (self.$scrollRect || self.$maskRect) {
@@ -4413,6 +4413,9 @@ var egret;
                 self.$nativeDisplayObject.addChildAt(child.$nativeDisplayObject.id, index);
             }
             else {
+                if (child.$maskedObject) {
+                    child.$maskedObject.$updateRenderMode();
+                }
                 if (!self.$cacheDirty) {
                     self.$cacheDirty = true;
                     var p = self.$parent;
@@ -4640,6 +4643,9 @@ var egret;
                 self.$nativeDisplayObject.removeChild(child.$nativeDisplayObject.id);
             }
             else {
+                if (child.$maskedObject) {
+                    child.$maskedObject.$updateRenderMode();
+                }
                 if (!self.$cacheDirty) {
                     self.$cacheDirty = true;
                     var p = self.$parent;
@@ -4868,6 +4874,9 @@ var egret;
             for (var i = 0; i < length; i++) {
                 var child = this.$children[i];
                 child.$onAddToStage(stage, nestLevel);
+                if (child.$maskedObject) {
+                    child.$maskedObject.$updateRenderMode();
+                }
             }
         };
         /**
@@ -8297,7 +8306,7 @@ var egret;
             var tempList = BitmapData._displayList[hashCode];
             var index = tempList.indexOf(displayObject);
             if (index >= 0) {
-                tempList.splice(index);
+                tempList.splice(index, 1);
             }
         };
         BitmapData.$invalidate = function (bitmapData) {
@@ -12387,9 +12396,8 @@ var egret;
      * @platform Web,Native
      * @language zh_CN
      */
-    var HttpMethod = (function () {
-        function HttpMethod() {
-        }
+    var HttpMethod;
+    (function (HttpMethod) {
         /**
          * Specifies that the HttpRequest object is a GET.
          * @version Egret 2.4
@@ -12416,10 +12424,7 @@ var egret;
          * @language zh_CN
          */
         HttpMethod.POST = "POST";
-        return HttpMethod;
-    }());
-    egret.HttpMethod = HttpMethod;
-    __reflect(HttpMethod.prototype, "egret.HttpMethod");
+    })(HttpMethod = egret.HttpMethod || (egret.HttpMethod = {}));
 })(egret || (egret = {}));
 //////////////////////////////////////////////////////////////////////////////////////
 //
@@ -15460,7 +15465,7 @@ var egret;
 (function (egret) {
     var blendModes = ["source-over", "lighter", "destination-out"];
     var defaultCompositeOp = "source-over";
-    egret.BLACK_COLOR = "#000000";
+    var BLACK_COLOR = "#000000";
     var CAPS_STYLES = { none: 'butt', square: 'square', round: 'round' };
     var renderBufferPool = []; //渲染缓冲区对象池
     var renderBufferPool_Filters = []; //滤镜缓冲区对象池
@@ -16103,7 +16108,7 @@ var egret;
                 switch (path.type) {
                     case 1 /* Fill */:
                         var fillPath = path;
-                        context.fillStyle = forHitTest ? egret.BLACK_COLOR : getRGBAString(fillPath.fillColor, fillPath.fillAlpha);
+                        context.fillStyle = forHitTest ? BLACK_COLOR : getRGBAString(fillPath.fillColor, fillPath.fillAlpha);
                         this.renderPath(path, context);
                         if (this.renderingMask) {
                             context.clip();
@@ -16114,7 +16119,7 @@ var egret;
                         break;
                     case 2 /* GradientFill */:
                         var g = path;
-                        context.fillStyle = forHitTest ? egret.BLACK_COLOR : getGradient(context, g.gradientType, g.colors, g.alphas, g.ratios, g.matrix);
+                        context.fillStyle = forHitTest ? BLACK_COLOR : getGradient(context, g.gradientType, g.colors, g.alphas, g.ratios, g.matrix);
                         context.save();
                         var m = g.matrix;
                         this.renderPath(path, context);
@@ -16126,7 +16131,7 @@ var egret;
                         var strokeFill = path;
                         var lineWidth = strokeFill.lineWidth;
                         context.lineWidth = lineWidth;
-                        context.strokeStyle = forHitTest ? egret.BLACK_COLOR : getRGBAString(strokeFill.lineColor, strokeFill.lineAlpha);
+                        context.strokeStyle = forHitTest ? BLACK_COLOR : getRGBAString(strokeFill.lineColor, strokeFill.lineAlpha);
                         context.lineCap = CAPS_STYLES[strokeFill.caps];
                         context.lineJoin = strokeFill.joints;
                         context.miterLimit = strokeFill.miterLimit;
@@ -16887,7 +16892,7 @@ var egret;
          * @platform Web,Native
          * @language zh_CN
          */
-        Capabilities.engineVersion = "5.1.9";
+        Capabilities.engineVersion = "5.1.12";
         /***
          * current render mode.
          * @type {string}
@@ -17622,6 +17627,9 @@ var egret;
         BitmapText.prototype.$setText = function (value) {
             if (value == null) {
                 value = "";
+            }
+            else {
+                value = String(value);
             }
             var self = this;
             if (value == self.$text)
@@ -19020,7 +19028,8 @@ var egret;
                 34: 0xffffff,
                 35: null,
                 36: null,
-                37: egret.TextFieldInputType.TEXT //inputType
+                37: egret.TextFieldInputType.TEXT,
+                38: false //textLinesChangedForNativeRender
             };
             return _this;
         }
@@ -20299,6 +20308,7 @@ var egret;
             var self = this;
             self.$renderDirty = true;
             self.$TextField[18 /* textLinesChanged */] = true;
+            self.$TextField[38 /* textLinesChangedForNativeRender */] = true;
             if (egret.nativeRender) {
                 // egret_native.dirtyTextField(this);
             }
@@ -20448,6 +20458,7 @@ var egret;
          */
         TextField.prototype.setMiddleStyle = function (textArr) {
             this.$TextField[18 /* textLinesChanged */] = true;
+            this.$TextField[38 /* textLinesChangedForNativeRender */] = true;
             this.textArr = textArr;
             this.$invalidateTextField();
         };
@@ -20518,6 +20529,7 @@ var egret;
                 this.textArr.push(element);
                 this.$TextField[13 /* text */] = text;
                 this.$TextField[18 /* textLinesChanged */] = true;
+                this.$TextField[38 /* textLinesChangedForNativeRender */] = true;
                 this.$nativeDisplayObject.setTextFlow(this.textArr);
                 return;
             }
@@ -20530,18 +20542,24 @@ var egret;
                 this.setMiddleStyle(this.textArr);
             }
         };
+        TextField.prototype.$getLinesArr = function () {
+            var values = this.$TextField;
+            if (egret.nativeRender && values[38 /* textLinesChangedForNativeRender */]) {
+                egret_native.updateNativeRender();
+                values[38 /* textLinesChangedForNativeRender */] = false;
+                return;
+            }
+            else {
+                return this.$getLinesArr2();
+            }
+        };
         /**
          * @private
          *
          * @returns
          */
-        TextField.prototype.$getLinesArr = function () {
+        TextField.prototype.$getLinesArr2 = function () {
             var values = this.$TextField;
-            if (egret.nativeRender && values[18 /* textLinesChanged */]) {
-                egret_native.updateNativeRender();
-                values[18 /* textLinesChanged */] = false;
-                return;
-            }
             if (!values[18 /* textLinesChanged */]) {
                 return this.linesArr;
             }
@@ -21138,7 +21156,7 @@ var egret;
          * @private
          */
         TextFieldUtils.$getHalign = function (textfield) {
-            var lineArr = textfield.$getLinesArr();
+            var lineArr = textfield.$getLinesArr2();
             var halign = 0;
             if (textfield.$TextField[9 /* textAlign */] == egret.HorizontalAlign.CENTER) {
                 halign = 0.5;
@@ -21199,7 +21217,7 @@ var egret;
          */
         TextFieldUtils.$getTextElement = function (textfield, x, y) {
             var hitTextEle = TextFieldUtils.$getHit(textfield, x, y);
-            var lineArr = textfield.$getLinesArr();
+            var lineArr = textfield.$getLinesArr2();
             if (hitTextEle && lineArr[hitTextEle.lineIndex] && lineArr[hitTextEle.lineIndex].elements[hitTextEle.textElementIndex]) {
                 return lineArr[hitTextEle.lineIndex].elements[hitTextEle.textElementIndex];
             }
@@ -21214,7 +21232,7 @@ var egret;
          * @private
          */
         TextFieldUtils.$getHit = function (textfield, x, y) {
-            var lineArr = textfield.$getLinesArr();
+            var lineArr = textfield.$getLinesArr2();
             if (textfield.$TextField[3 /* textFieldWidth */] == 0) {
                 return null;
             }
@@ -24065,8 +24083,8 @@ var egret;
      */
     /**
      * 调用父类的setter属性，代替其他语言的写法，如 super.alpha = 1;
-     * @param thisObj 当前对象。永远都this
      * @param currentClass 当前 class 类名，非字符串
+     * @param thisObj 当前对象。永远都this
      * @param type 需要调用的setter属性名称
      * @param values 传给父类的值
      *
@@ -24115,9 +24133,9 @@ var egret;
      */
     /**
      * 获取父类的getter属性值。代替其他语言的写法，如 super.alpha;
-     * @param thisObj 当前对象。永远都this
      * @param currentClass 当前 class 类名，非字符串
-     * @param type 需要调用的setter属性名称
+     * @param thisObj 当前对象。永远都this
+     * @param type 需要调用的getter属性名称
      * @returns {any} 父类返回的值
      *
      * @exmaple egret.superGetter(egret.Sprite, this, "alpha");

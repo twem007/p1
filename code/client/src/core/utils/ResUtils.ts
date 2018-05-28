@@ -133,20 +133,6 @@ module core {
             }
             return res;
         }
-        /**
-         * 将资源归还缓存池
-         */
-        public static revertCacheRes(res: any): void {
-            if (res && res['key']) {
-                CachePool.addObj(res['key'], res);
-            }
-        }
-        /**
-         * 清空资源缓存
-         */
-        public static clearCacheRes(key: string): void {
-            CachePool.clear(key);
-        }
     }
 
     export class GroupData extends Progress {

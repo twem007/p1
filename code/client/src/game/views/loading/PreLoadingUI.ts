@@ -14,6 +14,7 @@ class PreLoadingUI extends core.Component implements core.ILoadingUI {
         this.textField.width = 480;
         this.textField.height = 100;
         this.textField.textAlign = "center";
+        this.textField.text = `Loading...${0}/${0}`;
     }
 
     public setProgress(data: core.GroupData): void {

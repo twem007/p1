@@ -18,10 +18,10 @@ class HttpAPI {
     public static HttpGET(path: string, param: any, onComplete: (event?: egret.Event) => void, onIOError: (event?: egret.IOErrorEvent) => void, thisObj: any): void {
         let url: string = param ? `${path}?${encodeURI(this.encode(param))}` : path;
         let request: egret.HttpRequest = new egret.HttpRequest();
+        request.open(url, egret.HttpMethod.GET);
         request.responseType = egret.HttpResponseType.TEXT;
         request.addEventListener(egret.Event.COMPLETE, onComplete, thisObj);
         request.addEventListener(egret.IOErrorEvent.IO_ERROR, onIOError, thisObj);
-        request.open(url, egret.HttpMethod.GET);
         request.send();
     }
 
@@ -35,11 +35,11 @@ class HttpAPI {
      */
     public static HttpPOST(path: string, data: any, onComplete: (event?: egret.Event) => void, onIOError: (event?: egret.IOErrorEvent) => void, thisObj: any): void {
         let request: egret.HttpRequest = new egret.HttpRequest();
+        request.open(path, egret.URLRequestMethod.POST);
         request.responseType = egret.HttpResponseType.TEXT;
         request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         request.addEventListener(egret.Event.COMPLETE, onComplete, thisObj);
         request.addEventListener(egret.IOErrorEvent.IO_ERROR, onIOError, thisObj);
-        request.open(path, egret.URLRequestMethod.POST);
         request.send(data);
     }
 
