@@ -140,9 +140,6 @@
 - [ ] 为未开始
 ***********************************
 - [X] 修复框架中的BUG
-- [X] 部署自动化测试环境
-- [X] 优化框架结构，统一代码风格
-- [ ] 添加EventCenter分块管理
 - [ ] 常用UI组件的开发
 
 ## 代码示例：
@@ -262,13 +259,20 @@ class Main extends egret.DisplayObjectContainer {
 }
 ```
 
-# LoginController.ts
+# LoginModule.ts
 ```javascript
-class LoginController extends core.Control {
+class LoginModule extends core.Module {
 	public constructor() {
 		super(ModuleEnum.LOGIN);
 	}
 	private m_pLoginUI: LoginUI;
+
+	/**
+	* 获取loading
+	*/
+	protected getLoading(): core.ILoadingUI {
+		return core.LoadingManager.getLoading(MainLoadingUI);
+	}
 	/**
 	 * 预加载资源组
 	 */
@@ -278,7 +282,7 @@ class LoginController extends core.Control {
 	/**
 	 * 显示
 	 */
-	protected show(data?: core.ModuleEventData): void {
+	protected show(data?: any): void {
 		if (!this.m_pLoginUI) {
 			let loginUI: LoginUI = new LoginUI();
 			this.m_pLoginUI = loginUI;
@@ -294,7 +298,7 @@ class LoginController extends core.Control {
 		}
 		this.m_pLoginUI = null;
 	}
-	
+
 	protected release(): void {
 		super.release();
 	}

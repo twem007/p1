@@ -8,12 +8,12 @@ gulp.task('clean', function (cb) {
   return del(['./code/client/bin-debug/**/*']);
 });
 
-gulp.task('compile', ['clean'], function () {
+gulp.task('compile', ['clean'], function (cb) {
   return tsProject.src()
     .pipe(tsProject())
     .pipe(gulp.dest('./code/client/bin-debug'))
     .on('error', function (err) {
-      throw Error(err.message);
+      cb(err);
     });
 });
 

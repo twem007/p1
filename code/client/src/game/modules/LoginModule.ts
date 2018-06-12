@@ -1,5 +1,5 @@
 /**
- * 登录界面控制器
+ * 登录模块
  */
 class LoginModule extends core.Module {
 	public constructor() {
