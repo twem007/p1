@@ -1,9 +1,11 @@
 module core {
 	/**
-	 *
-	 * @author yuxuefeng
-	 *
-	 */
+     * webSocket的基础封装
+     * 本类定位于解决H5及Native中webSocket的各种问题，由于是基础封装，所以本类仅包含以下功能
+     * 1、与服务器的链接、断开、异常捕获和接收及发送数据
+     * 2、链接状态维护
+     * 注意：本类不包括心跳保活功能，实际使用过程中如有需要请自行扩展。
+     */
     export class SocketAPI {
 
         private static s_instance: SocketAPI;
@@ -41,27 +43,30 @@ module core {
         private onConnected(event: egret.Event): void {
             egret.log("与WebSocket服务器链接成功");
             this.m_state = WebSocketStateEnum.CONNECTED;
-            core.EventCenter.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_CONNECT));
+            core.EventManager.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_CONNECT));
         }
 
         private onSocketData(event: egret.ProgressEvent): void {
             let buffer: core.ByteBuffer = new core.ByteBuffer();
             this.m_webSocket.readBytes(buffer, buffer.length);
-            core.EventCenter.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_DATA, buffer));
+            core.EventManager.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_DATA, buffer));
         }
 
         private onIOError(event: egret.IOErrorEvent): void {
             egret.log("与WebSocket服务器链接失败");
             this.m_state = WebSocketStateEnum.CLOSED;
-            core.EventCenter.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_IOERROR));
+            core.EventManager.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_IOERROR));
         }
 
         private onClosed(event: egret.Event): void {
             egret.log("与WebSocket服务器断开链接");
             this.m_state = WebSocketStateEnum.CLOSED;
-            core.EventCenter.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_CLOSE));
+            core.EventManager.getInstance().sendEvent(new SocketEventData(EventID.SOCKET_CLOSE));
         }
-
+        /**
+         * 发送数据
+         * @param  {egret.ByteArray} data
+         */
         public sendData(data: egret.ByteArray): void {
             this.m_webSocket.writeBytes(data);
             egret.callLater(this.flushToServer, this);
@@ -84,7 +89,12 @@ module core {
         public setAddressURL(address: string): void {
             this.m_address = address;
         }
-
+        
+        /**
+         * 设置发送数据类型
+         * @param  {WebSocketTypeEnum} type
+         * @returns this
+         */
         public setType(type: WebSocketTypeEnum): void {
             switch (type) {
                 case WebSocketTypeEnum.TYPE_STRING:
@@ -95,17 +105,24 @@ module core {
                     break;
             }
         }
-
+        
+        /**
+         * 连接服务器
+         */
         public connect(): void {
             this.m_state = WebSocketStateEnum.CONNECTING;
             this.m_webSocket.connectByUrl(this.m_address);
         }
-
+        /**
+         * 断开与服务器的连接
+         */
         public close(): void {
             this.m_state = WebSocketStateEnum.CLOSING;
             this.m_webSocket.close();
         }
-
+        /**
+         * 获取当前链接状态
+         */
         public get state(): WebSocketStateEnum {
             return this.m_state;
         }

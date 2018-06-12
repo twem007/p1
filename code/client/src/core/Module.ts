@@ -1,10 +1,8 @@
 module core {
 	/**
-	 *  此为模块入口 除release()外都为底层自动调用
-     *    
-	 * @author yuxuefeng
-	 * 
-	 */
+     * 模块基类
+     * 除release()外都为底层自动调用
+     */
     export abstract class Module {
         /**
          * 进入模块传入数据
@@ -35,8 +33,8 @@ module core {
          * 初始化
          */
         private init(): void {
-            core.EventCenter.getInstance().addEventListener(core.EventID.MODULE_SHOW, this.onModuleShow, this);
-            core.EventCenter.getInstance().addEventListener(core.EventID.MODULE_HIDE, this.onModuleHide, this);
+            core.EventManager.getInstance().addEventListener(core.EventID.MODULE_SHOW, this.onModuleShow, this);
+            core.EventManager.getInstance().addEventListener(core.EventID.MODULE_HIDE, this.onModuleHide, this);
         }
         /**
          * 预加载
@@ -104,7 +102,7 @@ module core {
                 this.p_loadingUI = null;
             }
             if (this.m_isOpened) {
-                core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_LOADED, this.p_moduleName));
+                core.EventManager.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_LOADED, this.p_moduleName));
                 this.show(this.p_data);
                 this.p_data = null;
             }
@@ -135,8 +133,8 @@ module core {
          * 释放资源
          */
         protected release(): void {
-            core.EventCenter.getInstance().removeEventListener(core.EventID.MODULE_SHOW, this.onModuleShow, this);
-            core.EventCenter.getInstance().removeEventListener(core.EventID.MODULE_HIDE, this.onModuleHide, this);
+            core.EventManager.getInstance().removeEventListener(core.EventID.MODULE_SHOW, this.onModuleShow, this);
+            core.EventManager.getInstance().removeEventListener(core.EventID.MODULE_HIDE, this.onModuleHide, this);
         }
     }
 }

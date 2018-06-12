@@ -1,23 +1,23 @@
 module core {
     /**
-     * EUIComponent为EUI容器组件，该容器自动关注添加到舞台和从舞台移除事件
-     * 
+     * EUIComponent为EUI容器组件，所有EUI组件及窗口都应该继承本类
      */
     export abstract class EUIComponent extends eui.Component implements IComponent {
 
         constructor() {
             super();
         }
-
+        /**
+		 * 从父容器移除
+		 */
         public removeFromParent(): void {
             if (this.parent) {
                 this.parent.removeChild(this);
             }
         }
-
         /**
-         * 释放资源
-         */
+		 * 所有子类都必需实现此方法并在此方法释放资源
+		 */
         public abstract release(): void;
     }
 }

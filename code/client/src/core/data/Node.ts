@@ -1,8 +1,6 @@
 module core {
 	/**
-	 *
-	 * @author 
-	 *
+	 * 链表节点
 	 */
 	export class Node {
     	

@@ -1,6 +1,13 @@
 module core {
+    /**
+     * 数学工具类
+     */
     export class MathUtils {
-
+        /**
+         * 向上取整
+         * @param  {number} value
+         * @return number
+         */
         public static ceil(value: number): number {
             if (value % 1 == 0) {
                 return value;
@@ -12,55 +19,59 @@ module core {
             }
         }
         /**
-         * 得到 [min,max) 范围内的随机数
+         * [min,max)范围内随机一个整数
+         * @param  {number} min 最小值
+         * @param  {number} max 最大值
+         * @return number   随机值
          */
         public static random(min: number, max: number): number {
             return Math.random() * (max - min) + min << 0;
         }
         /**
-         * 随机一个整数[n,m)
+         * (n,m]范围内随机一个整数
+         * @param  {number} min 最小值
+         * @param  {number} max 最大值
+         * @return number   随机值
          */
-        public static randomIntN(n: number, m: number): number {
-            return parseInt(MathUtils.number2str(Math.random() * (m - n) + n), 10);
+        public static randomintM(min: number, max: number): number {
+            return Math.floor(Math.random() * (max - min) + min) + 1;
         }
         /**
-         * 随机一个整数(n,m]
+         * (n,m)范围内随机一个整数
+         * @param  {number} min 最小值
+         * @param  {number} max 最大值
+         * @return number  随机值
          */
-        public static randomintM(n: number, m: number): number {
-            return Math.floor(Math.random() * (m - n) + n) + 1;
+        public static randomInt(min: number, max: number): number {
+            return Math.round(Math.random() * (max - min - 2) + min + 1);
         }
         /**
-         * 随机一个整数(n,m)
+         * [n,m]范围内随机一个整数
+         * @param  {number} min 最小值
+         * @param  {number} max 最大值
+         * @return number   随机值
          */
-        public static randomInt(n: number, m: number): number {
-            return Math.round(Math.random() * (m - n - 2) + n + 1);
+        public static randomIntNM(min: number, max: number): number {
+            return Math.round(Math.random() * (max - min) + min);
         }
+       
         /**
-         * 随机一个整数[n,m]
+         * 数组内随机一个元素
+         * @param  {T[]} arr    数组
+         * @return T
          */
-        public static randomIntNM(n: number, m: number): number {
-            return Math.round(Math.random() * (m - n) + n);
-        }
-        /**
-         * 数组里随机一个元素
-         */
-        public static getRandomElement(arr: any[]): any {
+        public static getRandomElement<T>(arr: T[]): T {
             var key: number = Math.floor(Math.random() * arr.length);
             return arr[key];
-        }
-
-        public static number2str(num: number): string {
-            return <string><any>num;
         }
         /**
           * 计算两点距离
           * @param p1
           * @param p2
-          * @returns {number}
+          * @return {number}
           */
         public static distance(p1: egret.Point, p2: egret.Point): number {
             return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
         }
-
     }
 }

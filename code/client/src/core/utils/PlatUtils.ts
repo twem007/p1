@@ -1,8 +1,14 @@
 module core {
+    /**
+     * 平台工具类
+     */
     export class PlatUtils {
         public constructor() {
         }
-
+        /**
+         * 判断是否PC平台
+         * @return boolean
+         */
         public static get isPC(): boolean {
             if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
                 var userAgentInfo: string = navigator.userAgent.toString();
@@ -21,11 +27,17 @@ module core {
                 return egret.Capabilities.os.indexOf('Mac OS') != -1 || egret.Capabilities.os.indexOf('Windows PC') != -1;
             }
         }
-
+        /**
+         * 判断是否iOS
+         * @return boolean
+         */
         public static get isiPhone(): boolean {
             return egret.Capabilities.os.indexOf('iOS') != -1;
         }
-
+        /**
+         * 判断是否iPad
+         * @return boolean
+         */
         public static get isiPad(): boolean {
             if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
                 var userAgentInfo: string = navigator.userAgent.toString();
@@ -37,7 +49,10 @@ module core {
                 return PlatUtils.isiPhone;
             }
         }
-
+        /**
+         * 判断是否iPod
+         * @return boolean
+         */
         public static get isiPod(): boolean {
             if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
                 var userAgentInfo: string = navigator.userAgent.toString();
@@ -49,11 +64,17 @@ module core {
                 return PlatUtils.isiPhone;
             }
         }
-
+        /**
+         * 判断是否Android
+         * @return boolean
+         */
         public static get isAndroid(): boolean {
             return egret.Capabilities.os.indexOf('Android') != -1;
         }
-
+        /**
+         * 判断是否微信
+         * @return boolean
+         */
         public static get isWeChat(): boolean {
             if (egret.Capabilities.runtimeType == egret.RuntimeType.WEB) {
                 let ua = navigator.userAgent.toLowerCase();

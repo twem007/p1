@@ -1,9 +1,7 @@
 module core {
 	/**
-	 *
-	 * @author 
-	 *
-	 */
+     * 文字处理工具类
+     */
     export class TextUtils {
 
         private static s_textFlowParser: egret.HtmlTextParser = new egret.HtmlTextParser();

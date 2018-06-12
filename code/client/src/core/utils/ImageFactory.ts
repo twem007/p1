@@ -1,4 +1,10 @@
 module core {
+	/**
+	 * 图片工厂
+	 * 本类功能：
+	 * 1、图片对象池管理
+	 * 2、如对象池无图片对象则创建对象
+	 */
 	export class ImageFactory {
 
 		private static s_instance: ImageFactory;
@@ -15,7 +21,13 @@ module core {
 		public constructor() {
 			this.m_caches = new Dictionary<egret.Bitmap[]>();
 		}
-
+		/**
+		 * 通过图集和资源名称获取图片实例
+		 * @param  {string} resFile		图集名称
+		 * @param  {string} resName		资源名称
+		 * @param  {boolean=false} isCenter	是否锚点自动居中
+		 * @return egret.Bitmap	图片实例
+		 */
 		public getImage(resFile: string, resName: string, isCenter: boolean = false): egret.Bitmap {
 			if (!resFile || resFile == 'undefined' || resFile == 'null') {
 				return null;
@@ -43,10 +55,10 @@ module core {
 				}
 			}
 		}
-
 		/**
-		* 归还图片
-		*/
+		 * 归还图片
+		 * @param  {egret.Bitmap} image	图片实例
+		 */
 		public revertImage(image: egret.Bitmap): void {
 			if (image) {
 				let key: string = image['key'];
@@ -59,37 +71,40 @@ module core {
 				}
 			}
 		}
-
 		/**
-		 * 格式化缓存KEY
-		 * @param mcFile    影片剪辑文件名前缀
-		 * @param mcName    影片剪辑名称
+		 * 得到图片缓存KEY
+		 * @param  {string} resFile	图集名称
+		 * @param  {string} resName	资源名称
+		 * @return string
 		 */
 		public getFormatKey(resFile: string, resName: string): string {
 			return `${resFile}>${resName}`;
 		}
 
 		/**
-         * 检查图片是否有效
-         * @param resFile    图片文件名前缀
-         * @param resName    图片名称
-         * @param image      图片
-         */
+		 * 检查图片是否匹配图集和资源名称
+		 * @param  {string} resFile	图集名称
+		 * @param  {string} resName	资源名称
+		 * @param  {egret.Bitmap} image	图片实例
+		 * @return boolean
+		 */
 		public checkValid(resFile: string, resName: string, image: egret.Bitmap): boolean {
 			return image && this.getFormatKey(resFile, resName) === this.getCacheKey(image);
 		}
         /**
          * 得到图片的缓存KEY
-         * @param mc        影片剪辑
+         * @param string	缓存key
          */
 		public getCacheKey(image: egret.Bitmap): string {
 			return image && image['key'];
 		}
 		/**
-         * 清空缓存
-         */
-		public clear(mcFile: string, mcName: string): void {
-			this.m_caches.remove(this.getFormatKey(mcFile, mcName));
+		 * 清空缓存
+		 * @param  {string} resFile	图集名称
+		 * @param  {string} resName	资源名称
+		 */
+		public clear(resFile: string, resName: string): void {
+			this.m_caches.remove(this.getFormatKey(resFile, resName));
 		}
         /**
          * 清空所有缓存

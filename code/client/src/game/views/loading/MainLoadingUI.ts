@@ -46,7 +46,7 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
     }
 
     public show(): void {
-        core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.updateAdaptive, this);
+        core.EventManager.getInstance().addEventListener(egret.Event.RESIZE, this.updateAdaptive, this);
         core.LayerCenter.getInstance().getLayer(LayerEnum.LOADING).addChild(this);
         this.updateAdaptive();
     }
@@ -54,7 +54,7 @@ class MainLoadingUI extends core.EUIComponent implements core.ILoadingUI {
     }
 
     public hide(): void {
-        core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.updateAdaptive, this);
+        core.EventManager.getInstance().removeEventListener(egret.Event.RESIZE, this.updateAdaptive, this);
         if (this.parent) {
             this.parent.removeChild(this);
         }

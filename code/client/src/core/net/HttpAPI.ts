@@ -1,7 +1,8 @@
 /**
- *
- * @author 
- *
+ * HTTP通信的基础封装
+ * 使用说明：
+ * 1、http get请求将会将发送的参数进行url编码，并将参数附加在url请求链接以后，数据格式url?key1=value1&key2=value2
+ * 2、http post将会以application/x-www-form-urlencoded方式，将数据发送至服务器
  */
 class HttpAPI {
     public constructor() {

@@ -1,9 +1,9 @@
 class WSTest {
     constructor() {
-        core.EventCenter.getInstance().addEventListener(core.EventID.SOCKET_CONNECT, this.onSocketConnect, this);
-        core.EventCenter.getInstance().addEventListener(core.EventID.SOCKET_CLOSE, this.onSocketClose, this);
-        core.EventCenter.getInstance().addEventListener(core.EventID.SOCKET_DATA, this.onSocketData, this);
-        core.EventCenter.getInstance().addEventListener(core.EventID.SOCKET_IOERROR, this.onSocketIOError, this);
+        core.EventManager.getInstance().addEventListener(core.EventID.SOCKET_CONNECT, this.onSocketConnect, this);
+        core.EventManager.getInstance().addEventListener(core.EventID.SOCKET_CLOSE, this.onSocketClose, this);
+        core.EventManager.getInstance().addEventListener(core.EventID.SOCKET_DATA, this.onSocketData, this);
+        core.EventManager.getInstance().addEventListener(core.EventID.SOCKET_IOERROR, this.onSocketIOError, this);
         core.SocketAPI.instance.setType(core.WebSocketTypeEnum.TYPE_BINARY);
         
         egret.setInterval(function (): void {

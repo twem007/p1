@@ -1,15 +1,22 @@
 module core {
 	/**
-	 *  
-	 * @author yuxuefeng
-	 *
+	 * 事件管理类
+	 * 实现功能：
+	 * 1、默认派发逻辑由发送事件触发，并延迟到下帧执行
+	 * 2、允许设置事件优先级
+	 * 3、设置每帧派发事件的上限、防止单帧执行事件过多
+	 * 4、监测性能耗时较多的回调事件，方便性能优化。
 	 */
-	export class EventCenter {
+	export class EventManager {
 
-		private static s_instance: EventCenter;
-
+		private static s_instance: EventManager;
+		/**
+		 * 事件回调字典
+		 */
 		private m_callbackMaps: Dictionary<EventCallBack[]>;
-
+		/**
+		 * 发送缓存池
+		 */
 		private m_sendBuffer: EventData[];
 
 		public constructor() {
@@ -17,19 +24,24 @@ module core {
 			this.m_sendBuffer = [];
 		}
 
-		public static getInstance(): EventCenter {
-			if (EventCenter.s_instance == null) {
-				EventCenter.s_instance = new EventCenter();
+		public static getInstance(): EventManager {
+			if (EventManager.s_instance == null) {
+				EventManager.s_instance = new EventManager();
 			}
-			return EventCenter.s_instance;
+			return EventManager.s_instance;
 		}
-        /**
-         * 注册事件监听
-         */
-		public addEventListener(messageID: string | number, callback: (data: EventData) => void, thisObj: any, index: number = 0): void {
+
+		/**
+		 * 注册事件监听
+		 * @param  {string|number} messageID		事件ID
+		 * @param  {(data:EventData)=>void} callback	事件回调
+		 * @param  {any} thisObj	this绑定
+		 * @param  {number=0} index	优先级 数字越小优先级越高
+		 */
+		public addEventListener(messageID: string | number, callback: (data: core.EventData) => void, thisObj: any, index: number = 0): void {
 			if (callback && thisObj) {
 				let data: EventCallBack = new EventCallBack(callback, thisObj);
-				data.index = index;
+				data.index = index < 0 ? 0 : index;
 				data.messageID = messageID;
 				let callbacks: EventCallBack[] = this.m_callbackMaps.get(messageID);
 				if (callbacks) {
@@ -45,11 +57,13 @@ module core {
 				}
 			}
 		}
-
-        /**
-         * 移除事件监听
-         */
-		public removeEventListener(messageID: string, callback: (data: EventData) => void, thisObj: any): void {
+		/**
+		 * 移除事件监听
+		 * @param  {string} messageID	事件ID
+		 * @param  {(data:EventData)=>void} callback
+		 * @param  {any} thisObj
+		 */
+		public removeEventListener(messageID: string | number, callback: (data: EventData) => void, thisObj: any): void {
 			let callbacks: EventCallBack[] = this.m_callbackMaps.get(messageID);
 			if (callbacks) {
 				for (let i: number = callbacks.length; i > 0; i--) {
@@ -62,21 +76,23 @@ module core {
 				}
 			}
 		}
-        /**
-         * 发送消息
-         */
+        
+		/**
+		 * 发送消息
+		 * @param  {EventData} message
+		 */
 		public sendEvent(message: EventData): void {
 			this.m_sendBuffer.push(message);
 			egret.callLater(this.sendAll, this);
 		}
 		/**
-		 * 立即发送
+		 * 立即发送缓存池中的消息
 		 */
 		public flush(): void {
 			this.sendAll();
 		}
         /**
-         * 发送所有消息
+         * 发送缓存池中的消息
          */
 		private sendAll(): void {
 			let t: number = Date.now();
@@ -122,7 +138,9 @@ module core {
 			}
 		}
 	}
-
+	/**
+	 * 事件回调数据
+	 */
 	class EventCallBack extends Callback {
 
 		public index: number;
@@ -130,7 +148,10 @@ module core {
 		public messageID: string | number;
 
 		public isValid: boolean;
-
+		/**
+		 * @param  {(data?:any)=>void} callback	回调函数
+		 * @param  {any} thisObj	this绑定
+		 */
 		constructor(callback: (data?: any) => void, thisObj: any) {
 			super(callback, thisObj);
 			this.isValid = true;

@@ -1,6 +1,7 @@
 module core {
     /**
      * 声音控制
+     * 本类为游戏音乐及音效管理类，并依赖于音效配置表的配置，使用本类先应先熟悉音效配置表的相关字段说明。
      */
     export class SoundUtils {
         /**
@@ -262,7 +263,7 @@ module core {
         }
         /**
          * 得到背景音乐音量
-         * @returns number
+         * @return number
          */
         public getBGMValue(): number {
             return this.m_BGMVolume;

@@ -1,4 +1,8 @@
 module core {
+    /**
+     * 龙骨工厂类
+     * 本类为未测试，请自行实现。
+     */
     export class DBFactory {
 
         private static s_instance: DBFactory;
@@ -10,6 +14,7 @@ module core {
         public constructor() {
             this.m_factorys = {};
             this.m_dbFactory = new dragonBones.EgretFactory();
+            egret.warn('本类为未经测试类')
         }
         /**
          * 获取影片剪辑

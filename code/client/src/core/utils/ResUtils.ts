@@ -1,4 +1,7 @@
 module core {
+    /**
+     * 资源组加载器
+     */
     class GroupLoader {
 
         private m_groupData: GroupData;
@@ -62,7 +65,9 @@ module core {
                 this.destory();
             }
         }
-
+        /**
+         * 释放加载器
+         */
         public destory(): void {
             RES.removeEventListener(RES.ResourceEvent.GROUP_COMPLETE, this.onResourceLoadComplete, this);
             RES.removeEventListener(RES.ResourceEvent.GROUP_LOAD_ERROR, this.onResourceLoadError, this);
@@ -70,13 +75,20 @@ module core {
             RES.removeEventListener(RES.ResourceEvent.ITEM_LOAD_ERROR, this.onResourceLoadError, this);
             this.m_groupData = null;
         }
-
+        /**
+         * 开始加载资源组
+         */
         public loadGroups(data: GroupData): void {
             this.m_groupData = data;
             return this.loadNext();
         }
     }
-
+    /**
+     * 资源工具类
+     * 本类功能：
+     * 1、实现资源组加载管理
+     * 2、实现资源组加载的进度统计
+     */
     export class ResUtils {
         /**
          * 加载资源组
@@ -85,7 +97,7 @@ module core {
          * @param onLoadFaild 资源组加载失败回调
          * @param onLoadComplete 资源组加载完成回调
          * @param thisObj
-         * @param param 参数列表
+         * @param param? 参数列表
          */
         public static loadGroups(groups: string[], onLoadProgress: (data: GroupData) => void, onLoadFaild: (data: GroupData) => void, onLoadComplete: (data: GroupData) => void, thisObj: any, param?: any): void {
             if (groups) {
@@ -122,20 +134,11 @@ module core {
                 }
             }
         }
-        /**
-         * 从缓存池获取资源，如没有将新创建，用完后及时调用 revertCacheRes
-         */
-        public static getCacheRes(key: string): any {
-            let res: any = CachePool.getObj(key);
-            if (!res) {
-                res = RES.getRes(key);
-                res['key'] = key;
-            }
-            return res;
-        }
     }
-
-    export class GroupData extends Progress {
+    /**
+     * 资源组数据
+     */
+    export class GroupData extends core.Progress {
         public loadQueue: string[];
         public loadedQueue: string[];
         public curGroup: string;

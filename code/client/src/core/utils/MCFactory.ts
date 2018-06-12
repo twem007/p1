@@ -1,4 +1,10 @@
 module core {
+    /**
+     * 影片剪辑工厂
+     * 本类功能：
+     * 1、影片剪辑对象池管理
+     * 2、如对象池无影片剪辑对象则创建对象
+     */
     export class MCFactory {
 
         private static s_instance: MCFactory;
@@ -13,9 +19,10 @@ module core {
         }
         /**
          * 获取影片剪辑
-         * @param mcFile    影片剪辑文件名前缀
-         * @param mcName    影片剪辑名称
-         * @param isCenter  是否锚点居中
+         * @param  {string} mcFile  影片剪辑图集名称
+         * @param  {string} mcName  影片剪辑资源名
+         * @param  {boolean=true} isCenter  是否锚点居中
+         * @returns egret.MovieClip 影片剪辑对象
          */
         public getMovieClip(mcFile: string, mcName: string, isCenter: boolean = true): egret.MovieClip {
             if (!mcFile || mcFile == 'undefined' || mcFile == 'null') {
@@ -58,32 +65,35 @@ module core {
             return null;
         }
         /**
-         * 检查影片剪辑是否有效
-         * @param mcFile    影片剪辑文件名前缀
-         * @param mcName    影片剪辑名称
-         * @param mc        影片剪辑
+         * 检查影片剪辑是否匹配图集和资源名称
+         * @param  {string} mcFile  影片剪辑图集名称
+         * @param  {string} mcName  影片剪辑资源名
+         * @param  {egret.MovieClip} mc 影片剪辑
+         * @return boolean
          */
         public checkValid(mcFile: string, mcName: string, mc: egret.MovieClip): boolean {
             return mc && this.getFormatKey(mcFile, mcName) === this.getCacheKey(mc);
         }
         /**
          * 得到影片剪辑的缓存KEY
-         * @param mc        影片剪辑
+         * @param  {egret.MovieClip} mc 影片剪辑
+         * @return string   缓存KEY
          */
         public getCacheKey(mc: egret.MovieClip): string {
             return mc && mc['key'];
         }
         /**
-         * 格式化缓存KEY
-         * @param mcFile    影片剪辑文件名前缀
-         * @param mcName    影片剪辑名称
+         * 生成缓存KEY
+         * @param  {string} mcFile  影片剪辑图集名称
+         * @param  {string} mcName  影片剪辑资源名
+         * @return string
          */
         public getFormatKey(mcFile: string, mcName: string): string {
             return `${mcFile}>${mcName}`;
         }
         /**
          * 归还影片剪辑
-         * @param json      影片剪辑JSON名称
+         * @param  {egret.MovieClip} mc 影片剪辑
          */
         public revertMovieClip(mc: egret.MovieClip): void {
             if (mc) {
@@ -101,6 +111,8 @@ module core {
         }
         /**
          * 清空缓存
+         * @param  {string} mcFile  影片剪辑图集名称
+         * @param  {string} mcName  影片剪辑资源名
          */
         public clear(mcFile: string, mcName: string): void {
             this.m_mcFactorys.remove(mcFile);

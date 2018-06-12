@@ -1,4 +1,7 @@
 module core {
+    /**
+     * web工具类
+     */
     export class WebUtils {
 
         public static PAGE_HIDE: string = "WebUtils.PAGE_HIDE";
@@ -29,14 +32,14 @@ module core {
             document.onkeydown = function (event: KeyboardEvent): any {
                 if (event) {
                     if (!validChecker || validChecker(event)) {
-                        core.EventCenter.getInstance().sendEvent(new KeyboardEventData(core.EventID.KEYBOARD_DOWN, event));
+                        core.EventManager.getInstance().sendEvent(new KeyboardEventData(core.EventID.KEYBOARD_DOWN, event));
                     }
                 }
             }
             document.onkeyup = function (event: KeyboardEvent): any {
                 if (event) {
                     if (!validChecker || validChecker(event)) {
-                        core.EventCenter.getInstance().sendEvent(new KeyboardEventData(core.EventID.KEYBOARD_UP, event));
+                        core.EventManager.getInstance().sendEvent(new KeyboardEventData(core.EventID.KEYBOARD_UP, event));
                     }
                 }
             }
@@ -71,9 +74,9 @@ module core {
                 document.addEventListener(evtname, function () {
                     egret.log(`通用API：页面是否隐藏:${!WebUtils.isHidden()}`);
                     if (WebUtils.isHidden()) {
-                        core.EventCenter.getInstance().sendEvent(new EventData(WebUtils.PAGE_HIDE));
+                        core.EventManager.getInstance().sendEvent(new EventData(WebUtils.PAGE_HIDE));
                     } else {
-                        core.EventCenter.getInstance().sendEvent(new EventData(WebUtils.PAGE_SHOW));
+                        core.EventManager.getInstance().sendEvent(new EventData(WebUtils.PAGE_SHOW));
                     }
                 }, false);
             }

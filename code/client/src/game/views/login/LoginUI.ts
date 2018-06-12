@@ -30,13 +30,13 @@ class LoginUI extends core.EUIComponent {
 	}
 
 	protected addListener() {
-		core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
+		core.EventManager.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
 		this.m_pLoginBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
 		this.m_pPassword.addEventListener(egret.Event.CHANGE, this.onChangePassword, this);
 	}
 
 	protected removeListener(): void {
-		core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
+		core.EventManager.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
 		this.m_pLoginBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onButtonClick, this);
 		this.m_pPassword.removeEventListener(egret.Event.CHANGE, this.onChangePassword, this);
 	}

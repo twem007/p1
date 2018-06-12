@@ -1,4 +1,7 @@
 module core {
+    /**
+     * 事件数据类
+     */
     export class EventData extends egret.HashObject implements core.IMessage {
 
         public messageID: string | number;

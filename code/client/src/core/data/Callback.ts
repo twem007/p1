@@ -1,13 +1,20 @@
 module core {
-    export class Callback {
+    /**
+     * 回调数据结构，提供this绑定功能
+     */
+    export class Callback extends egret.HashObject {
 
-        public callback: Function;
+        readonly callback: Function;
 
-        public thisObj: any;
+        readonly thisObj: any;
 
-        public bindCallback: Function;
-
+        readonly bindCallback: Function;
+        /**
+         * @param  {Function} callback
+         * @param  {any} thisObj
+         */
         constructor(callback: Function, thisObj: any) {
+            super();
             this.bindCallback = callback.bind(thisObj);
             this.callback = callback;
             this.thisObj = thisObj;

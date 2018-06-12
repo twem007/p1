@@ -40,12 +40,12 @@ class MainUI extends core.EUIComponent {
 	}
 
 	protected addListener() {
-		core.EventCenter.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
+		core.EventManager.getInstance().addEventListener(egret.Event.RESIZE, this.onAdaptive, this);
 		this.m_pHeroBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
 	}
 
 	protected removeListener(): void {
-		core.EventCenter.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
+		core.EventManager.getInstance().removeEventListener(egret.Event.RESIZE, this.onAdaptive, this);
 		this.m_pHeroBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onClickRankBtn, this);
 	}
 

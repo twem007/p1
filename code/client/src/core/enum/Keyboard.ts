@@ -1,3 +1,6 @@
+ /**
+  * 本类为键盘常用的key值枚举
+  */
  enum Keyboard {
     BACKSPACE = 8,
     TAB = 9,

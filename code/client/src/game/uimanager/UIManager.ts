@@ -32,10 +32,10 @@ class UIManager {
         let list: ModuleData[] = this.m_moduleList;
         if (list.length > 0) {
             let moduleData: ModuleData = list[list.length - 1];
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, moduleData.moduleEnum));
+            core.EventManager.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, moduleData.moduleEnum));
         }
         list.push(new ModuleData(openModule, openData));
-        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, openModule, openData));
+        core.EventManager.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, openModule, openData));
     }
     /**
      * 
@@ -46,11 +46,11 @@ class UIManager {
         let list: ModuleData[] = this.m_moduleList;
         if (index >= 0) {
             let moduleData: ModuleData = list.splice(index, 1)[0];
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, moduleData.moduleEnum));
+            core.EventManager.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, moduleData.moduleEnum));
         }
         if (list.length > 0) {
             let moduleData: ModuleData = list[list.length - 1];
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, moduleData.moduleEnum, moduleData.data));
+            core.EventManager.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, moduleData.moduleEnum, moduleData.data));
         }
     }
     /**
@@ -61,7 +61,7 @@ class UIManager {
         if (this.m_popupList.indexOf(openModule) < 0) {
             this.m_popupList.push(openModule);
         }
-        core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, openModule, openData));
+        core.EventManager.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, openModule, openData));
     }
     /**
      * @param  {ModuleEnum} closeModule 要关闭的Popup
@@ -70,7 +70,7 @@ class UIManager {
         let index: number = this.m_popupList.indexOf(closeModule);
         if (index >= 0) {
             this.m_popupList.splice(index, 1);
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, closeModule));
+            core.EventManager.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, closeModule));
         }
     }
    
@@ -81,7 +81,7 @@ class UIManager {
         let list: ModuleData[] = this.m_moduleList;
         for (let i: number = 0, iLen: number = list.length; i < iLen; i++) {
             let moduleData: ModuleData = list[i];
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, moduleData.moduleEnum));
+            core.EventManager.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, moduleData.moduleEnum));
         }
         list.length = 0;
     }
@@ -92,7 +92,7 @@ class UIManager {
         this.closeAllModule();
         let list: ModuleEnum[] = this.m_popupList;
         for (let i: number = 0, iLen: number = list.length; i < iLen; i++) {
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, list[i]));
+            core.EventManager.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_HIDE, list[i]));
         }
         list.length = 0;
     }

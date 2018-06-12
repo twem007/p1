@@ -1,9 +1,7 @@
 module core {
 	/**
-	 *
-	 * @author 
-	 *
-	 */
+     * 本类为Base64编码的基础实现，本类为与C++服务器通信的定制实现，通用实现请使用DOMAPI。
+     */
     export class Base64 {
         private static s_encodeChars: number[] = Base64.initEncodeChar();
         private static s_decodeChars: number[] = Base64.initDecodeChar();

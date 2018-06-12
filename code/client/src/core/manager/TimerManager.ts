@@ -1,4 +1,9 @@
 module core {
+    /**
+     * 定时器管理器
+     * 本类为setTimeout及setInterval和Timer的替代实现，主要是方便程序中Timer事件的生命周期管理，使用起来更为便利。
+     * 程序中如用到setTimeout，setInterval及Timer的地方应尽量选择此方案。
+     */
     export class TimerManager {
 
         private static s_instance: TimerManager;
@@ -22,7 +27,7 @@ module core {
                     data.count++;
                     if (data.callback) {
                         let t: number = egret.getTimer();
-                        data.callback.call(data.thisObj, data.clone());
+                        data.callback.call(data.thisObj, data);
                         let t1: number = egret.getTimer();
                         if (t1 - t > 2) {
                             egret.log(`tick回调耗时:${t1 - t}`);
@@ -35,25 +40,34 @@ module core {
             }
             return false;
         }
-
+        /**
+         * 添加计时器
+         * @param  {number} delay       执行周期执行，延迟delay毫秒后执行。
+         * @param  {number} replayCount 执行次数，当replayCount <= 0时为无限执行
+         * @param  {Function} callback  回调函数，每周期执行一次回调函数
+         * @param  {any} thisObj        this绑定
+         * @param  {} ...args           透传参数
+         */
         public addTick(delay: number, replayCount: number, callback: Function, thisObj: any, ...args): void {
             let dataList: TickData[] = this.m_tickList;
             if (!dataList) {
                 dataList = [];
                 this.m_tickList = dataList;
             }
-            let tick: TickData = new TickData();
+            let tick: TickData = new TickData(callback, thisObj);
             tick.delay = delay;
             tick.count = 0;
             tick.maxCount = replayCount <= 0 ? Number.MAX_VALUE : replayCount;
-            tick.callback = callback;
-            tick.thisObj = thisObj;
             tick.args = args;
             tick.timestamp = egret.getTimer();
             tick.isValid = true;
             dataList.push(tick);
         }
-
+        /**
+         * 通过回调函数移除对应监听
+         * @param  {Function} callback  回调函数
+         * @param  {any} thisObj    this绑定
+         */
         public removeTick(callback: Function, thisObj: any): void {
             let dataList: TickData[] = this.m_tickList;
             if (dataList) {
@@ -66,7 +80,10 @@ module core {
                 }
             }
         }
-
+        /**
+         * 移除this绑定相关的计时器
+         * @param  {any} thisObj
+         */
         public removeTicks(thisObj: any): void {
             let dataList: TickData[] = this.m_tickList;
             if (dataList) {
@@ -79,7 +96,9 @@ module core {
                 }
             }
         }
-
+        /**
+         * 移除所有计时器
+         */
         public removeAllTicks(): void {
             this.m_tickList.length = 0;
         }
@@ -92,17 +111,13 @@ module core {
         }
     }
 
-    export class TickData extends egret.HashObject {
-
+    export class TickData extends core.Callback {
+        
         public delay: number;
 
         public count: number;
 
         public maxCount: number;
-
-        public callback: Function;
-
-        public thisObj: any;
 
         public args: any[];
 
@@ -110,20 +125,8 @@ module core {
 
         public isValid: boolean;
 
-        public constructor() {
-            super();
-        }
-
-        public clone(): TickData {
-            let data: TickData = new TickData();
-            data.delay = this.delay;
-            data.count = this.count;
-            data.maxCount = this.maxCount;
-            data.callback = this.callback;
-            data.thisObj = this.thisObj;
-            data.args = this.args;
-            data.isValid = this.isValid;
-            return data;
+        public constructor(callback: Function, thisObj: any) {
+            super(callback, thisObj);
         }
     }
 }
