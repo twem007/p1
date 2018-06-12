@@ -149,111 +149,115 @@
 
 # Main.ts
 ```javascript
-class Main extends core.EUILayer {
+class Main extends egret.DisplayObjectContainer {
 
-    protected createChildren(): void {
-        super.createChildren();
-        //debug等级
-        egret.Logger.logLevel = egret.Logger.OFF;
-        //初始化框架
-        core.Core.run(this.stage);
-        //初始化层
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_BG, new TileLayer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_EFFECT, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_GOODS, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_ROLE, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MAP_TOP, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.UI, new core.EUILayer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.POPUP, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.MENU, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.LOADING, new core.EUILayer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.HINT, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.HINTSEC, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.TOP, new core.Layer());
-        //Config loading process interface
-        //显示预加载进度条
-        core.LoadingManager.getLoading(PreLoadingUI).show();
-        // initialize the Resource loading library
-        //初始化Resource资源加载库
-        RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
-        RES.loadConfig("resource/default.res.json", "resource/");
+
+
+    public constructor() {
+        super();
+        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
     }
-    /**
-     * 配置文件加载完成,开始预加载皮肤主题资源和preload资源组。
-     * Loading of configuration file is complete, start to pre-load the theme configuration file and the preload resource group
-     */
-    private onConfigComplete(event: RES.ResourceEvent): void {
-        RES.removeEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
 
+    private onAddToStage(event: egret.Event) {
+
+        egret.lifecycle.addLifecycleListener((context) => {
+            // custom lifecycle plugin
+
+            context.onUpdate = () => {
+
+            }
+        })
+
+        egret.lifecycle.onPause = () => {
+            egret.ticker.pause();
+        }
+
+        egret.lifecycle.onResume = () => {
+            egret.ticker.resume();
+        }
+        //inject the custom material parser
+        //注入自定义的素材解析器
         let assetAdapter = new AssetAdapter();
         egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
         egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
-
-        //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
-        let theme = new eui.Theme("resource/default.thm.json", this.stage);
-        theme.addEventListener(eui.UIEvent.COMPLETE, this.onThemeLoadComplete, this);
-        //加载preload资源组
-        core.ResUtils.loadGroups(['preload'], this.onResourceProgress, this.onResourceLoadError, this.onResourceLoadComplete, this);
+        core.Core.run(this.stage);
+        core.LayerCenter.getInstance().addLayer(LayerEnum.BG, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.UI, new core.EUILayer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.POPUP, new core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.LOADING, new core.EUILayer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.TOP, new core.Layer());
+        this.runGame().catch(e => {
+            console.log(e);
+        });
     }
 
-    private isThemeLoadEnd: boolean = false;
-    /**
-     * 主题文件加载完成,开始预加载
-     * Loading of theme configuration file is complete, start to pre-load the 
-     */
-    private onThemeLoadComplete(): void {
-        this.isThemeLoadEnd = true;
-        this.createScene();
+    private async runGame() {
+        core.LoadingManager.setCurLoading(LoadingUI).show();
+        await this.loadResource()
+        await platform.login();
+        const userInfo = await platform.getUserInfo();
+        console.log(userInfo);
+        core.ResUtils.loadGroups(["preload"], this.onResourceProgress, this.onResourceLoadError, this.onResourceLoadComplete, this);
     }
-    private isResourceLoadEnd: boolean = false;
 
-    private createScene() {
-        if (this.isThemeLoadEnd && this.isResourceLoadEnd) {
-            //设置当前loading，设置后模块的加载都会显示当前loading，如需自定义loading，请调用LoadingManager的getLoading方法
-            core.LoadingManager.setCurLoading(MainLoadingUI);
-            //初始化模块控制器
-            this.initController();
-            //通知Login模块打开
-            core.EventCenter.getInstance().sendEvent(new core.ModuleEventData(core.EventID.MODULE_SHOW, ModuleEnum.LOGIN));
-			//单元测试
-            runUnitTest();
+    private async loadResource() {
+        try {
+            await RES.loadConfig("resource/default.res.json", "resource/");
+            await this.loadTheme();
+        }
+        catch (e) {
+            console.error(e);
         }
     }
 
+    private loadTheme() {
+        return new Promise((resolve, reject) => {
+            // load skin theme configuration file, you can manually modify the file. And replace the default skin.
+            //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
+            let theme = new eui.Theme("resource/default.thm.json", this.stage);
+            theme.addEventListener(eui.UIEvent.COMPLETE, () => {
+                resolve();
+            }, this);
+
+        })
+    }
+
+   
     /**
      * 资源组加载进度
+     * @param  {core.GroupData} data
      */
     private onResourceProgress(data: core.GroupData): void {
-        core.LoadingManager.getLoading(PreLoadingUI).setProgress(data);
+        egret.log(`当前加载进度:${data.curGroup} ${data.curGroupLoaded}/${data.curGroupTotal}`);
+        core.LoadingManager.getLoading(LoadingUI).setProgress(data);
     }
+    
     /**
      * 资源组加载出错
-     * Resource group loading failed
+     * @param  {core.GroupData} data
      */
     private onResourceLoadError(data: core.GroupData): void {
         //TODO
-        Log("Group:" + data.curGroup + " has failed to load");
+        egret.log("Group:" + data.curGroup + " has failed to load");
     }
     /**
      * preload资源组加载完成
+     * @param  {core.GroupData} data
      */
     private onResourceLoadComplete(data: core.GroupData): void {
         if (data.curGroup == 'preload') {
-            //隐藏预加载进度条
-            core.LoadingManager.getLoading(PreLoadingUI).hide();
-            //初始化配置表
-            Config.init(RES.getRes('config_zip'));
-            this.isResourceLoadEnd = true;
-            this.createScene();
+            egret.log("Group:" + data.curGroup + " load complete");
+            core.LoadingManager.getLoading(LoadingUI).hide();
+            core.Config.init(RES.getRes('config_zip'));
+            this.initModule();
+            UIManager.instance.openModule(ModuleEnum.LOGIN);
         }
     }
-    /**
-     * 初始化控制器
-     */
-    private initController(): void {
-        new GameController();
-        new LoginController();
-        new MainController();
+
+    private initModule(): void {
+        new GameModule();
+        new LoginModule();
+        new MainModule();
     }
 }
 ```

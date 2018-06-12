@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var del = require('del');
 var ts = require('gulp-typescript');
+var typedoc = require("gulp-typedoc");
 var tsProject = ts.createProject('./code/client/tsconfig.json', { "noEmit": false });
 
 gulp.task('clean', function (cb) {
@@ -16,4 +17,17 @@ gulp.task('compile', ['clean'], function () {
     });
 });
 
-gulp.task('default', ['clean', 'compile']);
+gulp.task('doc', ['compile'], function () {
+  return gulp.src(['./code/client/libs/**/*.ts',
+    './code/client/src/core/**/*.ts'])
+    .pipe(typedoc({
+      version: true,
+      module: "commonjs",
+      target: "ES5",
+      tsconfig: "./code/client/tsconfig.json",
+      out: "docs/wiki/",
+      name: "p1 wiki"
+    }));
+});
+
+gulp.task('default', ['clean', 'compile', 'doc']);

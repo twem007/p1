@@ -16,7 +16,7 @@ install:
   - npm install
 
 before_script:
-  - npm install --save-dev gulp del typescript gulp-typescript
+  - npm install --save-dev gulp del typescript gulp-typescript gulp-typedoc typedoc
 
 script: 
   - gulp

@@ -3,3 +3,4 @@ code/client/bin-debug/*
 code/client/bin-release/*
 node_modules/
 .wing/
+docs/wiki/*
