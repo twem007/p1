@@ -1,0 +1,1942 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ByteBuffer | p1 wiki</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">p1 wiki</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="../modules/_net_bytebuffer_.html">&quot;net/ByteBuffer&quot;</a>
+				</li>
+				<li>
+					<a href="../modules/_net_bytebuffer_.core.html">core</a>
+				</li>
+				<li>
+					<a href="_net_bytebuffer_.core.bytebuffer.html">ByteBuffer</a>
+				</li>
+			</ul>
+			<h1>Class ByteBuffer</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>字节数组的扩展
+						本类对读写字符串进行了覆盖，在读写方法中添加了字符串长度解决了二进制数据中字符串发送问题。</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="tsd-signature-type">ByteArray</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">ByteBuffer</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite"><a href="_net_bytebuffer_.core.bytebuffer.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section tsd-is-inherited">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_net_bytebuffer_.core.bytebuffer.html#_endian" class="tsd-kind-icon">$endian</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_net_bytebuffer_.core.bytebuffer.html#_bytes" class="tsd-kind-icon">_bytes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private"><a href="_net_bytebuffer_.core.bytebuffer.html#_position" class="tsd-kind-icon">_position</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private"><a href="_net_bytebuffer_.core.bytebuffer.html#buffer" class="tsd-kind-icon">buffer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private"><a href="_net_bytebuffer_.core.bytebuffer.html#bufferextsize" class="tsd-kind-icon">buffer<wbr>Ext<wbr>Size</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private"><a href="_net_bytebuffer_.core.bytebuffer.html#bufferoffset" class="tsd-kind-icon">buffer<wbr>Offset</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#bytes" class="tsd-kind-icon">bytes</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#bytesavailable" class="tsd-kind-icon">bytes<wbr>Available</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_net_bytebuffer_.core.bytebuffer.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private"><a href="_net_bytebuffer_.core.bytebuffer.html#dataview" class="tsd-kind-icon">data<wbr>View</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#endian" class="tsd-kind-icon">endian</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#length" class="tsd-kind-icon">length</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#position" class="tsd-kind-icon">position</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#rawbuffer" class="tsd-kind-icon">raw<wbr>Buffer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readavailable" class="tsd-kind-icon">read<wbr>Available</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_net_bytebuffer_.core.bytebuffer.html#write_position" class="tsd-kind-icon">write_<wbr>position</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_net_bytebuffer_.core.bytebuffer.html#_validatebuffer" class="tsd-kind-icon">_validate<wbr>Buffer</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private"><a href="_net_bytebuffer_.core.bytebuffer.html#_writeuint8array" class="tsd-kind-icon">_write<wbr>Uint8<wbr>Array</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#clear" class="tsd-kind-icon">clear</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_net_bytebuffer_.core.bytebuffer.html#clone" class="tsd-kind-icon">clone</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_net_bytebuffer_.core.bytebuffer.html#getstringbyteslen" class="tsd-kind-icon">get<wbr>String<wbr>Bytes<wbr>Len</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readboolean" class="tsd-kind-icon">read<wbr>Boolean</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readbyte" class="tsd-kind-icon">read<wbr>Byte</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readbytes" class="tsd-kind-icon">read<wbr>Bytes</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readdouble" class="tsd-kind-icon">read<wbr>Double</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readfloat" class="tsd-kind-icon">read<wbr>Float</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readint" class="tsd-kind-icon">read<wbr>Int</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readshort" class="tsd-kind-icon">read<wbr>Short</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readutf" class="tsd-kind-icon">readUTF</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readutfbytes" class="tsd-kind-icon">readUTFBytes</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_net_bytebuffer_.core.bytebuffer.html#readutfdata" class="tsd-kind-icon">readUTFData</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readunsignedbyte" class="tsd-kind-icon">read<wbr>Unsigned<wbr>Byte</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readunsignedint" class="tsd-kind-icon">read<wbr>Unsigned<wbr>Int</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#readunsignedshort" class="tsd-kind-icon">read<wbr>Unsigned<wbr>Short</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#setarraybuffer" class="tsd-kind-icon">set<wbr>Array<wbr>Buffer</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private"><a href="_net_bytebuffer_.core.bytebuffer.html#validate" class="tsd-kind-icon">validate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private"><a href="_net_bytebuffer_.core.bytebuffer.html#validatebuffer" class="tsd-kind-icon">validate<wbr>Buffer</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#writeboolean" class="tsd-kind-icon">write<wbr>Boolean</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#writebyte" class="tsd-kind-icon">write<wbr>Byte</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#writebytes" class="tsd-kind-icon">write<wbr>Bytes</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#writedouble" class="tsd-kind-icon">write<wbr>Double</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#writefloat" class="tsd-kind-icon">write<wbr>Float</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#writeint" class="tsd-kind-icon">write<wbr>Int</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#writeshort" class="tsd-kind-icon">write<wbr>Short</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#writeutf" class="tsd-kind-icon">writeUTF</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="_net_bytebuffer_.core.bytebuffer.html#writeutfbytes" class="tsd-kind-icon">writeUTFBytes</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#writeunsignedint" class="tsd-kind-icon">write<wbr>Unsigned<wbr>Int</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_net_bytebuffer_.core.bytebuffer.html#writeunsignedshort" class="tsd-kind-icon">write<wbr>Unsigned<wbr>Short</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Byte<wbr>Buffer<span class="tsd-signature-symbol">(</span>buffer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_net_bytebuffer_.core.bytebuffer.html" class="tsd-signature-type">ByteBuffer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides ByteArray.__constructor</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/net/ByteBuffer.ts#L6">net/ByteBuffer.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> buffer: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_net_bytebuffer_.core.bytebuffer.html" class="tsd-signature-type">ByteBuffer</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="_endian" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> $endian</h3>
+					<div class="tsd-signature tsd-kind-icon">$endian<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">EndianConst</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.$endian</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13117">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13117</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="_bytes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _bytes</h3>
+					<div class="tsd-signature tsd-kind-icon">_bytes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Uint8Array</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray._bytes</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13089">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13089</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+					<a name="_position" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _position</h3>
+					<div class="tsd-signature tsd-kind-icon">_position<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray._position</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13093">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13093</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+					<a name="buffer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> buffer</h3>
+					<div class="tsd-signature tsd-kind-icon">buffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ArrayBuffer</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.buffer</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13140">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13140</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+					<a name="bufferextsize" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> buffer<wbr>Ext<wbr>Size</h3>
+					<div class="tsd-signature tsd-kind-icon">buffer<wbr>Ext<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.bufferExtSize</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13087">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13087</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+					<a name="bufferoffset" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> buffer<wbr>Offset</h3>
+					<div class="tsd-signature tsd-kind-icon">buffer<wbr>Offset<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.bufferOffset</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13155">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13155</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="bytes" class="tsd-anchor"></a>
+					<h3>bytes</h3>
+					<div class="tsd-signature tsd-kind-icon">bytes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Uint8Array</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.bytes</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13142">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13142</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="bytesavailable" class="tsd-anchor"></a>
+					<h3>bytes<wbr>Available</h3>
+					<div class="tsd-signature tsd-kind-icon">bytes<wbr>Available<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.bytesAvailable</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13201">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13201</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>可从字节数组的当前位置到数组末尾读取的数据的字节数。
+							每次访问 ByteArray 对象时，将 bytesAvailable 属性与读取方法结合使用，以确保读取有效的数据。</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>version</dt>
+							<dd><p>Egret 2.4</p>
+							</dd>
+							<dt>platform</dt>
+							<dd><p>Web,Native</p>
+							</dd>
+							<dt>language</dt>
+							<dd><p>zh_CN</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="data" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> data</h3>
+					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DataView</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.data</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13088">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13088</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+					<a name="dataview" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> data<wbr>View</h3>
+					<div class="tsd-signature tsd-kind-icon">data<wbr>View<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DataView</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.dataView</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13151">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13151</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="endian" class="tsd-anchor"></a>
+					<h3>endian</h3>
+					<div class="tsd-signature tsd-kind-icon">endian<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.endian</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13116">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13116</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>更改或读取数据的字节顺序；egret.EndianConst.BIG_ENDIAN 或 egret.EndianConst.LITTLE_ENDIAN。</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>default</dt>
+							<dd><p>egret.EndianConst.BIG_ENDIAN</p>
+							</dd>
+							<dt>version</dt>
+							<dd><p>Egret 2.4</p>
+							</dd>
+							<dt>platform</dt>
+							<dd><p>Web,Native</p>
+							</dd>
+							<dt>language</dt>
+							<dd><p>zh_CN</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="length" class="tsd-anchor"></a>
+					<h3>length</h3>
+					<div class="tsd-signature tsd-kind-icon">length<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.length</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13185">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13185</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>ByteArray 对象的长度（以字节为单位）。
+								如果将长度设置为大于当前长度的值，则用零填充字节数组的右侧。
+							如果将长度设置为小于当前长度的值，将会截断该字节数组。</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>version</dt>
+							<dd><p>Egret 2.4</p>
+							</dd>
+							<dt>platform</dt>
+							<dd><p>Web,Native</p>
+							</dd>
+							<dt>language</dt>
+							<dd><p>zh_CN</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="position" class="tsd-anchor"></a>
+					<h3>position</h3>
+					<div class="tsd-signature tsd-kind-icon">position<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.position</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13168">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13168</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>将文件指针的当前位置（以字节为单位）移动或返回到 ByteArray 对象中。下一次调用读取方法时将在此位置开始读取，或者下一次调用写入方法时将在此位置开始写入。</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>version</dt>
+							<dd><p>Egret 2.4</p>
+							</dd>
+							<dt>platform</dt>
+							<dd><p>Web,Native</p>
+							</dd>
+							<dt>language</dt>
+							<dd><p>zh_CN</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="rawbuffer" class="tsd-anchor"></a>
+					<h3>raw<wbr>Buffer</h3>
+					<div class="tsd-signature tsd-kind-icon">raw<wbr>Buffer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">ArrayBuffer</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.rawBuffer</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13141">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13141</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+					<a name="readavailable" class="tsd-anchor"></a>
+					<h3>read<wbr>Available</h3>
+					<div class="tsd-signature tsd-kind-icon">read<wbr>Available<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.readAvailable</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13136">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13136</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>可读的剩余字节数</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>returns</dt>
+							<dd></dd>
+							<dt>memberof</dt>
+							<dd><p>ByteArray</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="write_position" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> write_<wbr>position</h3>
+					<div class="tsd-signature tsd-kind-icon">write_<wbr>position<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from ByteArray.write_position</p>
+						<ul>
+							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13101">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13101</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>已经使用的字节偏移量</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>ByteArray</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="_validatebuffer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _validate<wbr>Buffer</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">_validate<wbr>Buffer<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray._validateBuffer</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13186">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13186</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+					<a name="_writeuint8array" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _write<wbr>Uint8<wbr>Array</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">_write<wbr>Uint8<wbr>Array<span class="tsd-signature-symbol">(</span>bytes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ArrayLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span>, validateBuffer<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray._writeUint8Array</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13589">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13589</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>bytes: <span class="tsd-signature-type">Uint8Array</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ArrayLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>要写入的Uint8Array</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> validateBuffer: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="clear" class="tsd-anchor"></a>
+					<h3>clear</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">clear<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.clear</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13214">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13214</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>清除字节数组的内容，并将 length 和 position 属性重置为 0。</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="clone" class="tsd-anchor"></a>
+					<h3>clone</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">clone<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_net_bytebuffer_.core.bytebuffer.html" class="tsd-signature-type">ByteBuffer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/net/ByteBuffer.ts#L38">net/ByteBuffer.ts:38</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>深拷贝字节数据</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_net_bytebuffer_.core.bytebuffer.html" class="tsd-signature-type">ByteBuffer</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="getstringbyteslen" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> get<wbr>String<wbr>Bytes<wbr>Len</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>String<wbr>Bytes<wbr>Len<span class="tsd-signature-symbol">(</span>str<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/net/ByteBuffer.ts#L30">net/ByteBuffer.ts:30</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>str: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readboolean" class="tsd-anchor"></a>
+					<h3>read<wbr>Boolean</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Boolean<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readBoolean</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13229">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13229</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取布尔值。读取单个字节，如果字节非零，则返回 true，否则返回 false</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<p>如果字节不为零，则返回 true，否则返回 false</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readbyte" class="tsd-anchor"></a>
+					<h3>read<wbr>Byte</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Byte<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readByte</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13244">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13244</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取带符号的字节</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>介于 -128 和 127 之间的整数</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readbytes" class="tsd-anchor"></a>
+					<h3>read<wbr>Bytes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Bytes<span class="tsd-signature-symbol">(</span>bytes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ByteArray</span>, offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, length<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readBytes</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13263">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13263</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取 length 参数指定的数据字节数。从 offset 指定的位置开始，将字节读入 bytes 参数指定的 ByteArray 对象中，并将字节写入目标 ByteArray 中</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>bytes: <span class="tsd-signature-type">ByteArray</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>要将数据读入的 ByteArray 对象</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> offset: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>bytes 中的偏移（位置），应从该位置写入读取的数据</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> length: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>要读取的字节数。默认值 0 导致读取所有可用的数据</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readdouble" class="tsd-anchor"></a>
+					<h3>read<wbr>Double</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Double<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readDouble</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13278">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13278</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取一个 IEEE 754 双精度（64 位）浮点数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>双精度（64 位）浮点数</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readfloat" class="tsd-anchor"></a>
+					<h3>read<wbr>Float</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Float<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readFloat</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13293">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13293</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取一个 IEEE 754 单精度（32 位）浮点数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>单精度（32 位）浮点数</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readint" class="tsd-anchor"></a>
+					<h3>read<wbr>Int</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Int<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readInt</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13308">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13308</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取一个带符号的 32 位整数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>介于 -2147483648 和 2147483647 之间的 32 位带符号整数</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readshort" class="tsd-anchor"></a>
+					<h3>read<wbr>Short</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Short<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readShort</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13323">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13323</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取一个带符号的 16 位整数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>介于 -32768 和 32767 之间的 16 位带符号整数</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readutf" class="tsd-anchor"></a>
+					<h3>readUTF</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">readUTF<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readUTF</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13383">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13383</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取一个 UTF-8 字符串。假定字符串的前缀是无符号的短整型（以字节表示长度）</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>UTF-8 编码的字符串</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readutfbytes" class="tsd-anchor"></a>
+					<h3>readUTFBytes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">readUTFBytes<span class="tsd-signature-symbol">(</span>length<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readUTFBytes</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13400">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13400</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取一个由 length 参数指定的 UTF-8 字节序列，并返回一个字符串</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>length: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>指明 UTF-8 字节长度的无符号短整型数</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>由指定长度的 UTF-8 字节组成的字符串</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="readutfdata" class="tsd-anchor"></a>
+					<h3>readUTFData</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">readUTFData<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/net/ByteBuffer.ts#L16">net/ByteBuffer.ts:16</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>读取字符串
+									本方法将会从buffer中先读取short类型的字符串长度，然后通过长度读取字符串。</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>string</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readunsignedbyte" class="tsd-anchor"></a>
+					<h3>read<wbr>Unsigned<wbr>Byte</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Unsigned<wbr>Byte<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readUnsignedByte</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13338">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13338</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取无符号的字节</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>介于 0 和 255 之间的 32 位无符号整数</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readunsignedint" class="tsd-anchor"></a>
+					<h3>read<wbr>Unsigned<wbr>Int</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Unsigned<wbr>Int<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readUnsignedInt</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13353">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13353</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取一个无符号的 32 位整数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>介于 0 和 4294967295 之间的 32 位无符号整数</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="readunsignedshort" class="tsd-anchor"></a>
+					<h3>read<wbr>Unsigned<wbr>Short</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">read<wbr>Unsigned<wbr>Short<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.readUnsignedShort</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13368">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13368</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>从字节流中读取一个无符号的 16 位整数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>介于 0 和 65535 之间的 16 位无符号整数</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="setarraybuffer" class="tsd-anchor"></a>
+					<h3>set<wbr>Array<wbr>Buffer</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Array<wbr>Buffer<span class="tsd-signature-symbol">(</span>buffer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ArrayBuffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.setArrayBuffer</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13128">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13128</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>deprecated</dt>
+									<dd></dd>
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>buffer: <span class="tsd-signature-type">ArrayBuffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="tostring" class="tsd-anchor"></a>
+					<h3>to<wbr>String</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.toString</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13582">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13582</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+					<a name="validate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> validate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">validate<span class="tsd-signature-symbol">(</span>len<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.validate</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13597">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13597</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>len: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+					<a name="validatebuffer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> validate<wbr>Buffer</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">validate<wbr>Buffer<span class="tsd-signature-symbol">(</span>len<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.validateBuffer</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13605">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13605</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>len: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="writeboolean" class="tsd-anchor"></a>
+					<h3>write<wbr>Boolean</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Boolean<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.writeBoolean</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13415">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13415</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>写入布尔值。根据 value 参数写入单个字节。如果为 true，则写入 1，如果为 false，则写入 0</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>确定写入哪个字节的布尔值。如果该参数为 true，则该方法写入 1；如果该参数为 false，则该方法写入 0</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="writebyte" class="tsd-anchor"></a>
+					<h3>write<wbr>Byte</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Byte<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.writeByte</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13432">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13432</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>在字节流中写入一个字节
+									使用参数的低 8 位。忽略高 24 位</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>一个 32 位整数。低 8 位将被写入字节流</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="writebytes" class="tsd-anchor"></a>
+					<h3>write<wbr>Bytes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Bytes<span class="tsd-signature-symbol">(</span>bytes<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ByteArray</span>, offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, length<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.writeBytes</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13455">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13455</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>将指定字节数组 bytes（起始偏移量为 offset，从零开始的索引）中包含 length 个字节的字节序列写入字节流
+										如果省略 length 参数，则使用默认长度 0；该方法将从 offset 开始写入整个缓冲区。如果还省略了 offset 参数，则写入整个缓冲区
+									如果 offset 或 length 超出范围，它们将被锁定到 bytes 数组的开头和结尾</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>bytes: <span class="tsd-signature-type">ByteArray</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>ByteArray 对象</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> offset: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>从 0 开始的索引，表示在数组中开始写入的位置</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> length: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>一个无符号整数，表示在缓冲区中的写入范围</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="writedouble" class="tsd-anchor"></a>
+					<h3>write<wbr>Double</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Double<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.writeDouble</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13470">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13470</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>在字节流中写入一个 IEEE 754 双精度（64 位）浮点数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>双精度（64 位）浮点数</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="writefloat" class="tsd-anchor"></a>
+					<h3>write<wbr>Float</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Float<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.writeFloat</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13485">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13485</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>在字节流中写入一个 IEEE 754 单精度（32 位）浮点数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>单精度（32 位）浮点数</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="writeint" class="tsd-anchor"></a>
+					<h3>write<wbr>Int</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Int<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.writeInt</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13500">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13500</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>在字节流中写入一个带符号的 32 位整数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>要写入字节流的整数</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="writeshort" class="tsd-anchor"></a>
+					<h3>write<wbr>Short</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Short<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.writeShort</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13515">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13515</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>在字节流中写入一个 16 位整数。使用参数的低 16 位。忽略高 16 位</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>32 位整数，该整数的低 16 位将被写入字节流</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="writeutf" class="tsd-anchor"></a>
+					<h3>writeUTF</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">writeUTF<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.writeUTF</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13560">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13560</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>将 UTF-8 字符串写入字节流。先写入以字节表示的 UTF-8 字符串长度（作为 16 位整数），然后写入表示字符串字符的字节</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>要写入的字符串值</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="writeutfbytes" class="tsd-anchor"></a>
+					<h3>writeUTFBytes</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">writeUTFBytes<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides ByteArray.writeUTFBytes</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/net/ByteBuffer.ts#L25">net/ByteBuffer.ts:25</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>写入字符串
+									本方法将会向buffer中先写入short类型的字符串长度，然后再写入字符串。</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="writeunsignedint" class="tsd-anchor"></a>
+					<h3>write<wbr>Unsigned<wbr>Int</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Unsigned<wbr>Int<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.writeUnsignedInt</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13530">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13530</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>在字节流中写入一个无符号的 32 位整数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.4</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>要写入字节流的无符号整数</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="writeunsignedshort" class="tsd-anchor"></a>
+					<h3>write<wbr>Unsigned<wbr>Short</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">write<wbr>Unsigned<wbr>Short<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from ByteArray.writeUnsignedShort</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/libs/modules/egret/egret.d.ts#L13545">E:/git_home/p1/code/client/libs/modules/egret/egret.d.ts:13545</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>在字节流中写入一个无符号的 16 位整数</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>version</dt>
+									<dd><p>Egret 2.5</p>
+									</dd>
+									<dt>platform</dt>
+									<dd><p>Web,Native</p>
+									</dd>
+									<dt>language</dt>
+									<dd><p>zh_CN</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>要写入字节流的无符号整数</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+					<li class="current tsd-kind-external-module">
+						<a href="../modules/_net_bytebuffer_.html">"net/<wbr>Byte<wbr>Buffer"</a>
+						<ul>
+							<li class="current tsd-kind-module tsd-parent-kind-external-module tsd-is-not-exported">
+								<a href="../modules/_net_bytebuffer_.core.html">core</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-module">
+						<a href="_net_bytebuffer_.core.bytebuffer.html" class="tsd-kind-icon">Byte<wbr>Buffer</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#_endian" class="tsd-kind-icon">$endian</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#_bytes" class="tsd-kind-icon">_bytes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#_position" class="tsd-kind-icon">_position</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#buffer" class="tsd-kind-icon">buffer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#bufferextsize" class="tsd-kind-icon">buffer<wbr>Ext<wbr>Size</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#bufferoffset" class="tsd-kind-icon">buffer<wbr>Offset</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#bytes" class="tsd-kind-icon">bytes</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#bytesavailable" class="tsd-kind-icon">bytes<wbr>Available</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#data" class="tsd-kind-icon">data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#dataview" class="tsd-kind-icon">data<wbr>View</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#endian" class="tsd-kind-icon">endian</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#length" class="tsd-kind-icon">length</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#position" class="tsd-kind-icon">position</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#rawbuffer" class="tsd-kind-icon">raw<wbr>Buffer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readavailable" class="tsd-kind-icon">read<wbr>Available</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#write_position" class="tsd-kind-icon">write_<wbr>position</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#_validatebuffer" class="tsd-kind-icon">_validate<wbr>Buffer</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#_writeuint8array" class="tsd-kind-icon">_write<wbr>Uint8<wbr>Array</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#clear" class="tsd-kind-icon">clear</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#clone" class="tsd-kind-icon">clone</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#getstringbyteslen" class="tsd-kind-icon">get<wbr>String<wbr>Bytes<wbr>Len</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readboolean" class="tsd-kind-icon">read<wbr>Boolean</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readbyte" class="tsd-kind-icon">read<wbr>Byte</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readbytes" class="tsd-kind-icon">read<wbr>Bytes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readdouble" class="tsd-kind-icon">read<wbr>Double</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readfloat" class="tsd-kind-icon">read<wbr>Float</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readint" class="tsd-kind-icon">read<wbr>Int</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readshort" class="tsd-kind-icon">read<wbr>Short</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readutf" class="tsd-kind-icon">readUTF</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readutfbytes" class="tsd-kind-icon">readUTFBytes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readutfdata" class="tsd-kind-icon">readUTFData</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readunsignedbyte" class="tsd-kind-icon">read<wbr>Unsigned<wbr>Byte</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readunsignedint" class="tsd-kind-icon">read<wbr>Unsigned<wbr>Int</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#readunsignedshort" class="tsd-kind-icon">read<wbr>Unsigned<wbr>Short</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#setarraybuffer" class="tsd-kind-icon">set<wbr>Array<wbr>Buffer</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#validate" class="tsd-kind-icon">validate</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-private">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#validatebuffer" class="tsd-kind-icon">validate<wbr>Buffer</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writeboolean" class="tsd-kind-icon">write<wbr>Boolean</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writebyte" class="tsd-kind-icon">write<wbr>Byte</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writebytes" class="tsd-kind-icon">write<wbr>Bytes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writedouble" class="tsd-kind-icon">write<wbr>Double</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writefloat" class="tsd-kind-icon">write<wbr>Float</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writeint" class="tsd-kind-icon">write<wbr>Int</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writeshort" class="tsd-kind-icon">write<wbr>Short</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writeutf" class="tsd-kind-icon">writeUTF</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writeutfbytes" class="tsd-kind-icon">writeUTFBytes</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writeunsignedint" class="tsd-kind-icon">write<wbr>Unsigned<wbr>Int</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_net_bytebuffer_.core.bytebuffer.html#writeunsignedshort" class="tsd-kind-icon">write<wbr>Unsigned<wbr>Short</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

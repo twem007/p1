@@ -1,0 +1,620 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>p1 wiki</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">p1 wiki</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> p1 wiki</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="-">框架说明</h1>
+				<p><a href="https://travis-ci.org/twem007/p1"><img src="https://travis-ci.org/twem007/p1.svg?branch=master" alt="Build Status"></a></p>
+				<p>交流QQ群：65384669</p>
+				<h2 id="-">目录</h2>
+				<ol>
+					<li><a href="#框架定位">框架定位</a></li>
+					<li><a href="#框架初始化流程">框架初始化流程</a></li>
+					<li><a href="#模块进入流程">模块进入流程</a></li>
+					<li><a href="#模块退出流程">模块退出流程</a></li>
+					<li><a href="#文件结构">文件结构</a></li>
+					<li><a href="#君子约定">君子约定</a></li>
+					<li><a href="#Egret相关">Egret相关</a></li>
+					<li><a href="#待办事宜">待办事宜</a></li>
+					<li><a href="#代码示例">代码示例</a></li>
+					<li><p><a href="#Lisence">Lisence</a></p>
+						<p><a href="./docs/Protobuf.md">protobuf使用教程</a></p>
+					</li>
+				</ol>
+				<h2 id="-">框架定位：</h2>
+				<blockquote>
+					<p>「让做游戏变简单！」</p>
+				</blockquote>
+				<p>本框架定位于简化游戏流程，提高团队开发效率，目前提供了管理模块间关系，处理底层事务，及松散的工具集合，使开发者专注于游戏本身的逻辑。</p>
+				<h2 id="-">框架初始化流程：</h2>
+				<p align="center">
+					<img src="./docs/imgs/frame.png">
+				</p>
+				<h2 id="-">模块进入流程：</h2>
+				<p align="center">
+					<img src="./docs/imgs/module_enter.png">
+				</p>
+				<h2 id="-">模块退出流程：</h2>
+				<p align="center">
+					<img src="./docs/imgs/module_exit.png">
+				</p>
+				<h2 id="-">文件结构：</h2>
+				<ul>
+					<li>src<ul>
+							<li>core                              框架源代码目录<ul>
+									<li>com<ul>
+											<li>Animation.ts                 动画类</li>
+											<li>Component.ts                显示对象基类</li>
+											<li>EUIComponent.ts            EUI显示对象基类</li>
+											<li>EUILayer.ts                EUI显示层基类</li>
+											<li>Layer.ts                    显示层基类</li>
+										</ul>
+									</li>
+									<li>data<ul>
+											<li>Callback.ts                回调函数对象</li>
+											<li>Dictionary.ts                字典对象</li>
+											<li>Node.ts                    链表节点对象</li>
+											<li>NodeList.ts                链表对象</li>
+										</ul>
+									</li>
+									<li>enum <ul>
+											<li>Keyboard.ts               键盘按键枚举</li>
+										</ul>
+									</li>
+									<li>event<ul>
+											<li>EventData.ts                事件数据基类</li>
+											<li>EventID.ts                事件ID类</li>
+											<li>KeyboardEventData.ts        键盘事件数据</li>
+											<li>ModuleEventData.ts        模块事件数据</li>
+										</ul>
+									</li>
+									<li>interface<ul>
+											<li>IComponent.ts        </li>
+											<li>IFactory.ts         </li>
+											<li>ILoadingUI.ts</li>
+											<li>IMessage.ts</li>
+										</ul>
+									</li>
+									<li>net<ul>
+											<li>ByteBuffer.ts                二进制处理类</li>
+											<li>HttpAPI.ts                HTTP协议接口类</li>
+											<li>MessageData.ts            消息体封装</li>
+											<li>ProtoFactory.ts           ProtoBuff的二次封装</li>
+											<li>SocketAPI.ts                Websocket协议接口类</li>
+											<li>SocketEventData.ts         Websocket事件数据</li>
+										</ul>
+									</li>
+									<li>utils<ul>
+											<li>Base64.ts                    Base64实现</li>
+											<li>CachePool.ts                对象池</li>
+											<li>DateUtils.ts                日期工具</li>
+											<li>DBFactory.ts                龙骨工具</li>
+											<li>DebugUtils.ts                调试工具</li>
+											<li>Long.ts                    Long结构实现</li>
+											<li>MathUtils.ts                数学计算</li>
+											<li>MCFactory.ts                egret.MovieClip工具</li>
+											<li>MD5.ts                    MD5实现</li>
+											<li>PlatUtils.ts                平台判断</li>
+											<li>ResUtils.ts                RES封装</li>
+											<li>SoundUtils.ts                egret.Sound封装</li>
+											<li>TextUtils.ts                文本处理工具</li>
+											<li>WebUtils.ts                web相关处理工具</li>
+											<li>XMLUtils.ts                XML相关处理</li>
+										</ul>
+									</li>
+									<li>Control.ts                    模块基类</li>
+									<li>Core.ts                        框架入口</li>
+									<li>EventCenter.ts                事件管理类</li>
+									<li>FrameEventCenter.ts            帧循环管理类</li>
+									<li>InputManager.ts                输入控制类</li>
+									<li>LayerCenter.ts                层管理类</li>
+									<li>LoadingManager.ts             Loading管理类</li>
+									<li>TimerManager.ts                Timer管理类</li>
+								</ul>
+							</li>
+							<li>unittest                          单元测试及使用示例目录<ul>
+									<li>UnitTest.ts                     单元测试入口</li>
+									<li>WSTest.ts                     Websocket和Protobuf测试及使用示例</li>
+								</ul>
+							</li>
+							<li>game                              游戏源代码目录</li>
+							<li>AssetAdapter.ts</li>
+							<li>ThemeAdapter.ts</li>
+							<li>Main.ts</li>
+						</ul>
+					</li>
+					<li>resource                              游戏资源目录<ul>
+							<li>assets</li>
+							<li>skins</li>
+						</ul>
+					</li>
+					<li>thirdparty                            第三方库目录<ul>
+							<li>jszip</li>
+							<li>protobuf</li>
+						</ul>
+					</li>
+				</ul>
+				<h2 id="-">君子约定：</h2>
+				<ol>
+					<li>类文件及类名统一首字母大写，文件名不宜过长，尽量在单个文件内写一个类，只有当前类引用的类和枚举可以写在同一文件内</li>
+					<li>资源文件统一小写</li>
+					<li>给接口名称加上大写字母I做为前缀，表示该类型为接口类型</li>
+					<li>成员变量以m_开头</li>
+					<li>私有静态变量以s_开头</li>
+					<li>临时变量以t_开头</li>
+					<li>常量及枚举项所有单词大写</li>
+				</ol>
+				<h2 id="egret-">Egret相关：</h2>
+				<ol>
+					<li>通过FrameEventCenter替代帧循环监听</li>
+					<li>通过TimerManager替代new Timer</li>
+					<li>尽量用序列帧代替透明度渐变及遮罩实现的动画</li>
+					<li>少用get、set语法糖，如需使用子类在调用父类的get、set需采用egret自身封装的方法</li>
+					<li>图片资源尽量合并为大图</li>
+					<li>文本文件采用zip压缩</li>
+					<li>常用UI面板关闭时尽量缓存</li>
+					<li>减少频繁的实例化，请使用对象池</li>
+					<li>在适当的时候销毁实例化对象及Resource加载的资源</li>
+					<li>根据变量的使用频率决定它是否为临时变量</li>
+					<li>注意UI与逻辑分离，逻辑与数据分离，</li>
+					<li>谨慎的选择需要使用的容器类型，显示类尽量从Component和EUIComponent继承</li>
+				</ol>
+				<h2 id="-">待办事宜：</h2>
+				<ul>
+					<li>[X] 为进行中</li>
+					<li>[ ] 为未开始</li>
+				</ul>
+				<hr>
+				<ul>
+					<li>[X] 修复框架中的BUG</li>
+					<li>[ ] 常用UI组件的开发</li>
+				</ul>
+				<h2 id="-">代码示例：</h2>
+				<h1 id="main-ts">Main.ts</h1>
+				<pre><code class="lang-javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">egret</span>.<span class="hljs-title">DisplayObjectContainer</span> </span>{
+
+
+
+    public <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-keyword">super</span>();
+        <span class="hljs-keyword">this</span>.addEventListener(egret.Event.ADDED_TO_STAGE, <span class="hljs-keyword">this</span>.onAddToStage, <span class="hljs-keyword">this</span>);
+    }
+
+    private onAddToStage(event: egret.Event) {
+
+        egret.lifecycle.addLifecycleListener(<span class="hljs-function">(<span class="hljs-params">context</span>) =&gt;</span> {
+            <span class="hljs-comment">// custom lifecycle plugin</span>
+
+            context.onUpdate = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+
+            }
+        })
+
+        egret.lifecycle.onPause = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+            egret.ticker.pause();
+        }
+
+        egret.lifecycle.onResume = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+            egret.ticker.resume();
+        }
+        <span class="hljs-comment">//inject the custom material parser</span>
+        <span class="hljs-comment">//注入自定义的素材解析器</span>
+        <span class="hljs-keyword">let</span> assetAdapter = <span class="hljs-keyword">new</span> AssetAdapter();
+        egret.registerImplementation(<span class="hljs-string">"eui.IAssetAdapter"</span>, assetAdapter);
+        egret.registerImplementation(<span class="hljs-string">"eui.IThemeAdapter"</span>, <span class="hljs-keyword">new</span> ThemeAdapter());
+        core.Core.run(<span class="hljs-keyword">this</span>.stage);
+        core.LayerCenter.getInstance().addLayer(LayerEnum.BG, <span class="hljs-keyword">new</span> core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.UI, <span class="hljs-keyword">new</span> core.EUILayer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.POPUP, <span class="hljs-keyword">new</span> core.Layer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.LOADING, <span class="hljs-keyword">new</span> core.EUILayer());
+        core.LayerCenter.getInstance().addLayer(LayerEnum.TOP, <span class="hljs-keyword">new</span> core.Layer());
+        <span class="hljs-keyword">this</span>.runGame().catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> {
+            <span class="hljs-built_in">console</span>.log(e);
+        });
+    }
+
+    private <span class="hljs-keyword">async</span> runGame() {
+        core.LoadingManager.setCurLoading(LoadingUI).show();
+        <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.loadResource()
+        <span class="hljs-keyword">await</span> platform.login();
+        <span class="hljs-keyword">const</span> userInfo = <span class="hljs-keyword">await</span> platform.getUserInfo();
+        <span class="hljs-built_in">console</span>.log(userInfo);
+        core.ResUtils.loadGroups([<span class="hljs-string">"preload"</span>], <span class="hljs-keyword">this</span>.onResourceProgress, <span class="hljs-keyword">this</span>.onResourceLoadError, <span class="hljs-keyword">this</span>.onResourceLoadComplete, <span class="hljs-keyword">this</span>);
+    }
+
+    private <span class="hljs-keyword">async</span> loadResource() {
+        <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">await</span> RES.loadConfig(<span class="hljs-string">"resource/default.res.json"</span>, <span class="hljs-string">"resource/"</span>);
+            <span class="hljs-keyword">await</span> <span class="hljs-keyword">this</span>.loadTheme();
+        }
+        <span class="hljs-keyword">catch</span> (e) {
+            <span class="hljs-built_in">console</span>.error(e);
+        }
+    }
+
+    private loadTheme() {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+            <span class="hljs-comment">// load skin theme configuration file, you can manually modify the file. And replace the default skin.</span>
+            <span class="hljs-comment">//加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。</span>
+            <span class="hljs-keyword">let</span> theme = <span class="hljs-keyword">new</span> eui.Theme(<span class="hljs-string">"resource/default.thm.json"</span>, <span class="hljs-keyword">this</span>.stage);
+            theme.addEventListener(eui.UIEvent.COMPLETE, () =&gt; {
+                resolve();
+            }, <span class="hljs-keyword">this</span>);
+
+        })
+    }
+
+
+    <span class="hljs-comment">/**
+     * 资源组加载进度
+     * @param  {core.GroupData} data
+     */</span>
+    private onResourceProgress(data: core.GroupData): <span class="hljs-keyword">void</span> {
+        egret.log(<span class="hljs-string">`当前加载进度:<span class="hljs-subst">${data.curGroup}</span> <span class="hljs-subst">${data.curGroupLoaded}</span>/<span class="hljs-subst">${data.curGroupTotal}</span>`</span>);
+        core.LoadingManager.getLoading(LoadingUI).setProgress(data);
+    }
+
+    <span class="hljs-comment">/**
+     * 资源组加载出错
+     * @param  {core.GroupData} data
+     */</span>
+    private onResourceLoadError(data: core.GroupData): <span class="hljs-keyword">void</span> {
+        <span class="hljs-comment">//TODO</span>
+        egret.log(<span class="hljs-string">"Group:"</span> + data.curGroup + <span class="hljs-string">" has failed to load"</span>);
+    }
+    <span class="hljs-comment">/**
+     * preload资源组加载完成
+     * @param  {core.GroupData} data
+     */</span>
+    private onResourceLoadComplete(data: core.GroupData): <span class="hljs-keyword">void</span> {
+        <span class="hljs-keyword">if</span> (data.curGroup == <span class="hljs-string">'preload'</span>) {
+            egret.log(<span class="hljs-string">"Group:"</span> + data.curGroup + <span class="hljs-string">" load complete"</span>);
+            core.LoadingManager.getLoading(LoadingUI).hide();
+            core.Config.init(RES.getRes(<span class="hljs-string">'config_zip'</span>));
+            <span class="hljs-keyword">this</span>.initModule();
+            UIManager.instance.openModule(ModuleEnum.LOGIN);
+        }
+    }
+
+    private initModule(): <span class="hljs-keyword">void</span> {
+        <span class="hljs-keyword">new</span> GameModule();
+        <span class="hljs-keyword">new</span> LoginModule();
+        <span class="hljs-keyword">new</span> MainModule();
+    }
+}
+</code></pre>
+				<h1 id="loginmodule-ts">LoginModule.ts</h1>
+				<pre><code class="lang-javascript"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LoginModule</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">core</span>.<span class="hljs-title">Module</span> </span>{
+    public <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-keyword">super</span>(ModuleEnum.LOGIN);
+    }
+    private m_pLoginUI: LoginUI;
+
+    <span class="hljs-comment">/**
+    * 获取loading
+    */</span>
+    protected getLoading(): core.ILoadingUI {
+        <span class="hljs-keyword">return</span> core.LoadingManager.getLoading(MainLoadingUI);
+    }
+    <span class="hljs-comment">/**
+     * 预加载资源组
+     */</span>
+    protected getLoadGroup(data?: core.ModuleEventData): string[] {
+        <span class="hljs-keyword">return</span> [<span class="hljs-string">'soundUI'</span>, <span class="hljs-string">'animUI'</span>];
+    }
+    <span class="hljs-comment">/**
+     * 显示
+     */</span>
+    protected show(data?: any): <span class="hljs-keyword">void</span> {
+        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>.m_pLoginUI) {
+            <span class="hljs-keyword">let</span> loginUI: LoginUI = <span class="hljs-keyword">new</span> LoginUI();
+            <span class="hljs-keyword">this</span>.m_pLoginUI = loginUI;
+        }
+        core.LayerCenter.getInstance().getLayer(LayerEnum.UI).addChild(<span class="hljs-keyword">this</span>.m_pLoginUI);
+    }
+    <span class="hljs-comment">/**
+     * 隐藏
+     */</span>
+    protected hide(): <span class="hljs-keyword">void</span> {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.m_pLoginUI &amp;&amp; <span class="hljs-keyword">this</span>.m_pLoginUI.parent) {
+            <span class="hljs-keyword">this</span>.m_pLoginUI.parent.removeChild(<span class="hljs-keyword">this</span>.m_pLoginUI);
+        }
+        <span class="hljs-keyword">this</span>.m_pLoginUI = <span class="hljs-literal">null</span>;
+    }
+
+    protected release(): <span class="hljs-keyword">void</span> {
+        <span class="hljs-keyword">super</span>.release();
+    }
+}
+</code></pre>
+				<h2 id="lisence">Lisence</h2>
+				<p><a href="http://opensource.org/licenses/mit-license.html">MIT</a></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_core_.html">"<wbr>Core"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_module_.html">"<wbr>Module"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_com_animation_.html">"com/<wbr>Animation"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_com_component_.html">"com/<wbr>Component"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_com_euicomponent_.html">"com/EUIComponent"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_com_euilayer_.html">"com/EUILayer"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_com_layer_.html">"com/<wbr>Layer"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_config_config_.html">"config/<wbr>Config"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_config_configdef_.html">"config/<wbr>Config<wbr>Def"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_callback_.html">"data/<wbr>Callback"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_dictionary_.html">"data/<wbr>Dictionary"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_localstoragedata_.html">"data/<wbr>Local<wbr>Storage<wbr>Data"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_node_.html">"data/<wbr>Node"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_data_nodelist_.html">"data/<wbr>Node<wbr>List"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_enum_keyboard_.html">"enum/<wbr>Keyboard"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_event_eventdata_.html">"event/<wbr>Event<wbr>Data"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_event_eventid_.html">"event/<wbr>EventID"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_event_keyboardeventdata_.html">"event/<wbr>Keyboard<wbr>Event<wbr>Data"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_event_moduleeventdata_.html">"event/<wbr>Module<wbr>Event<wbr>Data"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_interfaces_icomponent_.html">"interfaces/IComponent"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_interfaces_ifactory_.html">"interfaces/IFactory"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_interfaces_iloadingui_.html">"interfaces/ILoadingUI"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_interfaces_imessage_.html">"interfaces/IMessage"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_manager_eventmanager_.html">"manager/<wbr>Event<wbr>Manager"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_manager_frameeventcenter_.html">"manager/<wbr>Frame<wbr>Event<wbr>Center"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_manager_inputmanager_.html">"manager/<wbr>Input<wbr>Manager"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_manager_layermanager_.html">"manager/<wbr>Layer<wbr>Manager"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_manager_loadingmanager_.html">"manager/<wbr>Loading<wbr>Manager"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_manager_timermanager_.html">"manager/<wbr>Timer<wbr>Manager"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_net_bytebuffer_.html">"net/<wbr>Byte<wbr>Buffer"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_net_httpapi_.html">"net/<wbr>HttpAPI"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_net_socketapi_.html">"net/<wbr>SocketAPI"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_net_socketeventdata_.html">"net/<wbr>Socket<wbr>Event<wbr>Data"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_base64_.html">"utils/<wbr>Base64"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_cachepool_.html">"utils/<wbr>Cache<wbr>Pool"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_dbfactory_.html">"utils/DBFactory"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_dateutils_.html">"utils/<wbr>Date<wbr>Utils"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_debugutils_.html">"utils/<wbr>Debug<wbr>Utils"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_imagefactory_.html">"utils/<wbr>Image<wbr>Factory"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_mcfactory_.html">"utils/MCFactory"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_md5_.html">"utils/MD5"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_mathutils_.html">"utils/<wbr>Math<wbr>Utils"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_platutils_.html">"utils/<wbr>Plat<wbr>Utils"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_resutils_.html">"utils/<wbr>Res<wbr>Utils"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_soundutils_.html">"utils/<wbr>Sound<wbr>Utils"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_textutils_.html">"utils/<wbr>Text<wbr>Utils"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_webutils_.html">"utils/<wbr>Web<wbr>Utils"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_xmlutils_.html">"utils/XMLUtils"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>
