@@ -310,4 +310,4 @@ class LoginModule extends core.Module {
 
 [1]: http://opensource.org/licenses/mit-license.html
 [2]: ./docs/Protobuf.md
-[3]: http://htmlpreview.github.io/?https://github.com/twem007/p1/blob/master/docs/wiki/index.html
+[3]: http://htmlpreview.github.io/?https://github.com/twem007/p1/blob/master/docs/wiki/globals.html
