@@ -25,7 +25,7 @@ gulp.task('doc', ['compile'], function () {
       module: "commonjs",
       target: "ES5",
       tsconfig: "./code/client/tsconfig.json",
-      excludeExternals: true,
+      excludeExternals: false,
       excludePrivate: true,
       excludeProtected: false,
       includeDeclarations: false,
