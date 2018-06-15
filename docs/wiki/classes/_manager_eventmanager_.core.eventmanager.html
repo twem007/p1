@@ -38,8 +38,6 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 							<input type="checkbox" id="tsd-filter-only-exported" />
 							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
@@ -102,21 +100,12 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_manager_eventmanager_.core.eventmanager.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_manager_eventmanager_.core.eventmanager.html#m_callbackmaps" class="tsd-kind-icon">m_<wbr>callback<wbr>Maps</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_manager_eventmanager_.core.eventmanager.html#m_sendbuffer" class="tsd-kind-icon">m_<wbr>send<wbr>Buffer</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static"><a href="_manager_eventmanager_.core.eventmanager.html#s_instance" class="tsd-kind-icon">s_<wbr>instance</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_manager_eventmanager_.core.eventmanager.html#addeventlistener" class="tsd-kind-icon">add<wbr>Event<wbr>Listener</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_manager_eventmanager_.core.eventmanager.html#flush" class="tsd-kind-icon">flush</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_manager_eventmanager_.core.eventmanager.html#removeeventlistener" class="tsd-kind-icon">remove<wbr>Event<wbr>Listener</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="_manager_eventmanager_.core.eventmanager.html#sendall" class="tsd-kind-icon">send<wbr>All</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_manager_eventmanager_.core.eventmanager.html#sendevent" class="tsd-kind-icon">send<wbr>Event</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_manager_eventmanager_.core.eventmanager.html#getinstance" class="tsd-kind-icon">get<wbr>Instance</a></li>
 							</ul>
@@ -136,55 +125,12 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/manager/EventManager.ts#L20">manager/EventManager.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/a0ca757/code/client/src/core/manager/EventManager.ts#L20">manager/EventManager.ts:20</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="_manager_eventmanager_.core.eventmanager.html" class="tsd-signature-type">EventManager</a></h4>
 						</li>
 					</ul>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="m_callbackmaps" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> m_<wbr>callback<wbr>Maps</h3>
-					<div class="tsd-signature tsd-kind-icon">m_<wbr>callback<wbr>Maps<span class="tsd-signature-symbol">:</span> <a href="_data_dictionary_.dictionary.html" class="tsd-signature-type">Dictionary</a><span class="tsd-signature-symbol">&lt;</span><a href="_manager_eventmanager_.core.eventcallback.html" class="tsd-signature-type">EventCallBack</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/manager/EventManager.ts#L16">manager/EventManager.ts:16</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>事件回调字典</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="m_sendbuffer" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> m_<wbr>send<wbr>Buffer</h3>
-					<div class="tsd-signature tsd-kind-icon">m_<wbr>send<wbr>Buffer<span class="tsd-signature-symbol">:</span> <a href="_event_eventdata_.core.eventdata.html" class="tsd-signature-type">EventData</a><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/manager/EventManager.ts#L20">manager/EventManager.ts:20</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>发送缓存池</p>
-						</div>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
-					<a name="s_instance" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> <span class="tsd-flag ts-flagPrivate">Private</span> s_<wbr>instance</h3>
-					<div class="tsd-signature tsd-kind-icon">s_<wbr>instance<span class="tsd-signature-symbol">:</span> <a href="_manager_eventmanager_.core.eventmanager.html" class="tsd-signature-type">EventManager</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/manager/EventManager.ts#L12">manager/EventManager.ts:12</a></li>
-						</ul>
-					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -199,7 +145,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/manager/EventManager.ts#L41">manager/EventManager.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/a0ca757/code/client/src/core/manager/EventManager.ts#L41">manager/EventManager.ts:41</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -266,7 +212,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/manager/EventManager.ts#L91">manager/EventManager.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/a0ca757/code/client/src/core/manager/EventManager.ts#L91">manager/EventManager.ts:91</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -288,7 +234,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/manager/EventManager.ts#L66">manager/EventManager.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/a0ca757/code/client/src/core/manager/EventManager.ts#L66">manager/EventManager.ts:66</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -335,28 +281,6 @@
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
-					<a name="sendall" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> send<wbr>All</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
-						<li class="tsd-signature tsd-kind-icon">send<wbr>All<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/manager/EventManager.ts#L97">manager/EventManager.ts:97</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>发送缓存池中的消息</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
-						</li>
-					</ul>
-				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="sendevent" class="tsd-anchor"></a>
 					<h3>send<wbr>Event</h3>
@@ -367,7 +291,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/manager/EventManager.ts#L84">manager/EventManager.ts:84</a></li>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/a0ca757/code/client/src/core/manager/EventManager.ts#L84">manager/EventManager.ts:84</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -397,7 +321,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/twem007/p1/blob/3fe8a0e/code/client/src/core/manager/EventManager.ts#L27">manager/EventManager.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/twem007/p1/blob/a0ca757/code/client/src/core/manager/EventManager.ts#L27">manager/EventManager.ts:27</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="_manager_eventmanager_.core.eventmanager.html" class="tsd-signature-type">EventManager</a></h4>
@@ -435,15 +359,6 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="_manager_eventmanager_.core.eventmanager.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_manager_eventmanager_.core.eventmanager.html#m_callbackmaps" class="tsd-kind-icon">m_<wbr>callback<wbr>Maps</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_manager_eventmanager_.core.eventmanager.html#m_sendbuffer" class="tsd-kind-icon">m_<wbr>send<wbr>Buffer</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
-								<a href="_manager_eventmanager_.core.eventmanager.html#s_instance" class="tsd-kind-icon">s_<wbr>instance</a>
-							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_manager_eventmanager_.core.eventmanager.html#addeventlistener" class="tsd-kind-icon">add<wbr>Event<wbr>Listener</a>
 							</li>
@@ -452,9 +367,6 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_manager_eventmanager_.core.eventmanager.html#removeeventlistener" class="tsd-kind-icon">remove<wbr>Event<wbr>Listener</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
-								<a href="_manager_eventmanager_.core.eventmanager.html#sendall" class="tsd-kind-icon">send<wbr>All</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_manager_eventmanager_.core.eventmanager.html#sendevent" class="tsd-kind-icon">send<wbr>Event</a>

@@ -5,6 +5,9 @@
 
 交流QQ群：65384669
 
+ - [API文档][3]
+ - [protobuf使用教程][2]
+
 ## 目录
 
  1. [框架定位](#框架定位)
@@ -17,8 +20,6 @@
  8. [待办事宜](#待办事宜)
  9. [代码示例](#代码示例)
  10. [Lisence](#Lisence)
-
- [protobuf使用教程][2]
 
 ## 框架定位：
 > 「让做游戏变简单！」
@@ -309,3 +310,4 @@ class LoginModule extends core.Module {
 
 [1]: http://opensource.org/licenses/mit-license.html
 [2]: ./docs/Protobuf.md
+[3]: http://htmlpreview.github.io/?https://github.com/twem007/p1/blob/master/docs/wiki/index.html

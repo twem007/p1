@@ -25,6 +25,10 @@ gulp.task('doc', ['compile'], function () {
       module: "commonjs",
       target: "ES5",
       tsconfig: "./code/client/tsconfig.json",
+      excludeExternals: true,
+      excludePrivate: true,
+      excludeProtected: false,
+      includeDeclarations: false,
       out: "docs/wiki/",
       name: "p1 wiki"
     }));
