@@ -14,12 +14,11 @@
  2. [框架初始化流程](#框架初始化流程)
  3. [模块进入流程](#模块进入流程)
  4. [模块退出流程](#模块退出流程)
- 5. [文件结构](#文件结构)
- 6. [君子约定](#君子约定)
- 7. [Egret相关](#Egret相关)
- 8. [待办事宜](#待办事宜)
- 9. [代码示例](#代码示例)
- 10. [Lisence](#Lisence)
+ 5. [君子约定](#君子约定)
+ 6. [Egret相关](#Egret相关)
+ 7. [待办事宜](#待办事宜)
+ 8. [代码示例](#代码示例)
+ 9. [Lisence](#Lisence)
 
 ## 框架定位：
 > 「让做游戏变简单！」
@@ -41,77 +40,6 @@
 <p align="center">
     <img src="./docs/imgs/module_exit.png">
 </p>
-
-## 文件结构：
-+ src
-    + core                              框架源代码目录
-        + com
-            + Animation.ts 				动画类
-            + Component.ts				显示对象基类
-            + EUIComponent.ts			EUI显示对象基类
-            + EUILayer.ts				EUI显示层基类
-            + Layer.ts					显示层基类
-        + data
-            + Callback.ts				回调函数对象
-            + Dictionary.ts				字典对象
-            + Node.ts					链表节点对象
-            + NodeList.ts				链表对象
-        + enum 
-            + Keyboard.ts               键盘按键枚举
-        + event
-            + EventData.ts				事件数据基类
-            + EventID.ts				事件ID类
-            + KeyboardEventData.ts		键盘事件数据
-            + ModuleEventData.ts		模块事件数据
-        + interface
-            + IComponent.ts		
-            + IFactory.ts 		
-            + ILoadingUI.ts
-            + IMessage.ts
-        + net
-            + ByteBuffer.ts				二进制处理类
-            + HttpAPI.ts				HTTP协议接口类
-            + MessageData.ts			消息体封装
-            + ProtoFactory.ts           ProtoBuff的二次封装
-            + SocketAPI.ts				Websocket协议接口类
-			+ SocketEventData.ts 		Websocket事件数据
-        + utils
-            + Base64.ts					Base64实现
-            + CachePool.ts				对象池
-            + DateUtils.ts				日期工具
-            + DBFactory.ts				龙骨工具
-            + DebugUtils.ts				调试工具
-            + Long.ts					Long结构实现
-            + MathUtils.ts				数学计算
-            + MCFactory.ts				egret.MovieClip工具
-            + MD5.ts					MD5实现
-            + PlatUtils.ts				平台判断
-            + ResUtils.ts				RES封装
-            + SoundUtils.ts				egret.Sound封装
-            + TextUtils.ts				文本处理工具
-            + WebUtils.ts				web相关处理工具
-            + XMLUtils.ts				XML相关处理
-        + Control.ts					模块基类
-        + Core.ts						框架入口
-        + EventCenter.ts				事件管理类
-        + FrameEventCenter.ts			帧循环管理类
-        + InputManager.ts			    输入控制类
-        + LayerCenter.ts				层管理类
-        + LoadingManager.ts             Loading管理类
-        + TimerManager.ts				Timer管理类
-	+ unittest                          单元测试及使用示例目录
-		+ UnitTest.ts 					单元测试入口
-		+ WSTest.ts 					Websocket和Protobuf测试及使用示例
-    + game                              游戏源代码目录
-	+ AssetAdapter.ts
-	+ ThemeAdapter.ts
-	+ Main.ts
-+ resource                              游戏资源目录
-    + assets
-    + skins
-+ thirdparty                            第三方库目录
-    + jszip
-    + protobuf
 
 ## 君子约定：
 1.  类文件及类名统一首字母大写，文件名不宜过长，尽量在单个文件内写一个类，只有当前类引用的类和枚举可以写在同一文件内
