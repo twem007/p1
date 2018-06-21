@@ -5,7 +5,19 @@ module core {
 	export abstract class Component extends egret.DisplayObjectContainer implements IComponent {
 		public constructor() {
 			super();
+			this.touchEnabled = false;
+            this.touchChildren = false;
 		}
+		/**
+         * 过滤点击逻辑
+         */
+		public $hitTest(stageX: number, stageY: number): egret.DisplayObject {
+            if (!this.touchEnabled && !this.touchChildren) {
+                return null;
+            } else {
+                super.$hitTest(stageX, stageY);
+            }
+        }
 		/**
 		 * 从父容器移除
 		 */
