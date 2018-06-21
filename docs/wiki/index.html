@@ -77,7 +77,6 @@
 					<li><a href="#框架初始化流程">框架初始化流程</a></li>
 					<li><a href="#模块进入流程">模块进入流程</a></li>
 					<li><a href="#模块退出流程">模块退出流程</a></li>
-					<li><a href="#文件结构">文件结构</a></li>
 					<li><a href="#君子约定">君子约定</a></li>
 					<li><a href="#Egret相关">Egret相关</a></li>
 					<li><a href="#待办事宜">待办事宜</a></li>
@@ -101,102 +100,6 @@
 				<p align="center">
 					<img src="./docs/imgs/module_exit.png">
 				</p>
-				<h2 id="-">文件结构：</h2>
-				<ul>
-					<li>src<ul>
-							<li>core                              框架源代码目录<ul>
-									<li>com<ul>
-											<li>Animation.ts                 动画类</li>
-											<li>Component.ts                显示对象基类</li>
-											<li>EUIComponent.ts            EUI显示对象基类</li>
-											<li>EUILayer.ts                EUI显示层基类</li>
-											<li>Layer.ts                    显示层基类</li>
-										</ul>
-									</li>
-									<li>data<ul>
-											<li>Callback.ts                回调函数对象</li>
-											<li>Dictionary.ts                字典对象</li>
-											<li>Node.ts                    链表节点对象</li>
-											<li>NodeList.ts                链表对象</li>
-										</ul>
-									</li>
-									<li>enum <ul>
-											<li>Keyboard.ts               键盘按键枚举</li>
-										</ul>
-									</li>
-									<li>event<ul>
-											<li>EventData.ts                事件数据基类</li>
-											<li>EventID.ts                事件ID类</li>
-											<li>KeyboardEventData.ts        键盘事件数据</li>
-											<li>ModuleEventData.ts        模块事件数据</li>
-										</ul>
-									</li>
-									<li>interface<ul>
-											<li>IComponent.ts        </li>
-											<li>IFactory.ts         </li>
-											<li>ILoadingUI.ts</li>
-											<li>IMessage.ts</li>
-										</ul>
-									</li>
-									<li>net<ul>
-											<li>ByteBuffer.ts                二进制处理类</li>
-											<li>HttpAPI.ts                HTTP协议接口类</li>
-											<li>MessageData.ts            消息体封装</li>
-											<li>ProtoFactory.ts           ProtoBuff的二次封装</li>
-											<li>SocketAPI.ts                Websocket协议接口类</li>
-											<li>SocketEventData.ts         Websocket事件数据</li>
-										</ul>
-									</li>
-									<li>utils<ul>
-											<li>Base64.ts                    Base64实现</li>
-											<li>CachePool.ts                对象池</li>
-											<li>DateUtils.ts                日期工具</li>
-											<li>DBFactory.ts                龙骨工具</li>
-											<li>DebugUtils.ts                调试工具</li>
-											<li>Long.ts                    Long结构实现</li>
-											<li>MathUtils.ts                数学计算</li>
-											<li>MCFactory.ts                egret.MovieClip工具</li>
-											<li>MD5.ts                    MD5实现</li>
-											<li>PlatUtils.ts                平台判断</li>
-											<li>ResUtils.ts                RES封装</li>
-											<li>SoundUtils.ts                egret.Sound封装</li>
-											<li>TextUtils.ts                文本处理工具</li>
-											<li>WebUtils.ts                web相关处理工具</li>
-											<li>XMLUtils.ts                XML相关处理</li>
-										</ul>
-									</li>
-									<li>Control.ts                    模块基类</li>
-									<li>Core.ts                        框架入口</li>
-									<li>EventCenter.ts                事件管理类</li>
-									<li>FrameEventCenter.ts            帧循环管理类</li>
-									<li>InputManager.ts                输入控制类</li>
-									<li>LayerCenter.ts                层管理类</li>
-									<li>LoadingManager.ts             Loading管理类</li>
-									<li>TimerManager.ts                Timer管理类</li>
-								</ul>
-							</li>
-							<li>unittest                          单元测试及使用示例目录<ul>
-									<li>UnitTest.ts                     单元测试入口</li>
-									<li>WSTest.ts                     Websocket和Protobuf测试及使用示例</li>
-								</ul>
-							</li>
-							<li>game                              游戏源代码目录</li>
-							<li>AssetAdapter.ts</li>
-							<li>ThemeAdapter.ts</li>
-							<li>Main.ts</li>
-						</ul>
-					</li>
-					<li>resource                              游戏资源目录<ul>
-							<li>assets</li>
-							<li>skins</li>
-						</ul>
-					</li>
-					<li>thirdparty                            第三方库目录<ul>
-							<li>jszip</li>
-							<li>protobuf</li>
-						</ul>
-					</li>
-				</ul>
 				<h2 id="-">君子约定：</h2>
 				<ol>
 					<li>类文件及类名统一首字母大写，文件名不宜过长，尽量在单个文件内写一个类，只有当前类引用的类和枚举可以写在同一文件内</li>
@@ -498,6 +401,9 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_net_socketeventdata_.html">"net/<wbr>Socket<wbr>Event<wbr>Data"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_utils_arrayutils_.html">"utils/<wbr>Array<wbr>Utils"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_utils_base64_.html">"utils/<wbr>Base64"</a>
