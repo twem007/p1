@@ -18,6 +18,7 @@ class LoginUI extends core.EUIComponent {
 
 	public constructor() {
 		super();
+		this.touchChildren = true;
 		this.skinName = "resource/skins/login/LoginsSkin.exml";
 	}
 

@@ -15,7 +15,7 @@ module core {
             if (!this.touchEnabled && !this.touchChildren) {
                 return null;
             } else {
-                super.$hitTest(stageX, stageY);
+                return super.$hitTest(stageX, stageY);
             }
         }
 		/**
