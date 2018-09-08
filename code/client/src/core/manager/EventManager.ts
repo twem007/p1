@@ -103,7 +103,8 @@ module core {
 			const buffMax: number = 100;
 			if (buffLen > buffMax) {
 				sendBuff = this.m_sendBuffer.splice(0, buffMax);
-				egret.log(`分帧剩余未处理请求数：${this.m_sendBuffer.length}`)
+				egret.callLater(this.sendAll, this);
+				egret.log(`分帧剩余未处理请求数：${this.m_sendBuffer.length}`);
 			}
 			while (sendBuff.length > 0) {
 				let event: EventData = sendBuff.shift();

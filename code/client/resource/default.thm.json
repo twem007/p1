@@ -2,19 +2,19 @@
 	"skins": {},
 	"autoGenerateExmlsList": true,
 	"exmls": [
-		"resource/skins/LoadingSkin.exml",
+		"resource/skins/component/entranceBtn/BagBtnSkin.exml",
+		"resource/skins/component/entranceBtn/ChipBtnSkin.exml",
+		"resource/skins/component/entranceBtn/FriendBtnSkin.exml",
+		"resource/skins/component/entranceBtn/GameSetBtnSkin.exml",
+		"resource/skins/component/entranceBtn/GrowUpBtnSkin.exml",
+		"resource/skins/component/entranceBtn/HeroBtnSkin.exml",
+		"resource/skins/component/entranceBtn/MailBtnSkin.exml",
 		"resource/skins/loading/LoadingSkin.exml",
+		"resource/skins/LoadingSkin.exml",
 		"resource/skins/login/LoginsSkin.exml",
 		"resource/skins/main/MainPlayerFaceSkin.exml",
 		"resource/skins/main/MainRankFaceSkin.exml",
-		"resource/skins/component/entranceBtn/HeroBtnSkin.exml",
-		"resource/skins/component/entranceBtn/ChipBtnSkin.exml",
-		"resource/skins/component/entranceBtn/BagBtnSkin.exml",
-		"resource/skins/component/entranceBtn/FriendBtnSkin.exml",
-		"resource/skins/component/entranceBtn/GrowUpBtnSkin.exml",
-		"resource/skins/main/MainSkin.exml",
-		"resource/skins/component/entranceBtn/GameSetBtnSkin.exml",
-		"resource/skins/component/entranceBtn/MailBtnSkin.exml"
+		"resource/skins/main/MainSkin.exml"
 	],
 	"path": "resource/default.thm.json"
 }
