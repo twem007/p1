@@ -71,168 +71,25 @@
 - [X] 修复框架中的BUG
 - [ ] 常用UI组件的开发
 
-## 代码示例：
+## 功能列表：
+1. EXCEL配置表导出工具：自动将EXCEL导出为zip文件，并生成ts数据结构代码ConfigDef.ts，使用需手动将zip重命名为config.zip，放入resource/assets/config/目录下，ConfigDef.ts放入src/core/config/目录下
+2. Protobuf文件导出工具，并自动生成ts代码，自动导入到工程
+3. 模块管理流程
+4. 对象池
+5. 影片剪辑工厂
+6. 声音管理器，通过配置表实现声音的播放管理、覆盖关系
+7. 资源组加载器
+8. HTTP、websocket的易用性封装
+9. 事件管理器
+10. 帧循环管理器
+11. 输入管理器
+12. 层管理器
+13. Loading管理器
+14. timer管理器
+15. 字典类
+16. LocalStorage易用性封装
+...
 
-# Main.ts
-```javascript
-class Main extends egret.DisplayObjectContainer {
-
-
-
-    public constructor() {
-        super();
-        this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
-    }
-
-    private onAddToStage(event: egret.Event) {
-
-        egret.lifecycle.addLifecycleListener((context) => {
-            // custom lifecycle plugin
-
-            context.onUpdate = () => {
-
-            }
-        })
-
-        egret.lifecycle.onPause = () => {
-            egret.ticker.pause();
-        }
-
-        egret.lifecycle.onResume = () => {
-            egret.ticker.resume();
-        }
-        //inject the custom material parser
-        //注入自定义的素材解析器
-        let assetAdapter = new AssetAdapter();
-        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
-        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
-        core.Core.run(this.stage);
-        core.LayerCenter.getInstance().addLayer(LayerEnum.BG, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.UI, new core.EUILayer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.POPUP, new core.Layer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.LOADING, new core.EUILayer());
-        core.LayerCenter.getInstance().addLayer(LayerEnum.TOP, new core.Layer());
-        this.runGame().catch(e => {
-            console.log(e);
-        });
-    }
-
-    private async runGame() {
-        core.LoadingManager.setCurLoading(LoadingUI).show();
-        await this.loadResource()
-        await platform.login();
-        const userInfo = await platform.getUserInfo();
-        console.log(userInfo);
-        core.ResUtils.loadGroups(["preload"], this.onResourceProgress, this.onResourceLoadError, this.onResourceLoadComplete, this);
-    }
-
-    private async loadResource() {
-        try {
-            await RES.loadConfig("resource/default.res.json", "resource/");
-            await this.loadTheme();
-        }
-        catch (e) {
-            console.error(e);
-        }
-    }
-
-    private loadTheme() {
-        return new Promise((resolve, reject) => {
-            // load skin theme configuration file, you can manually modify the file. And replace the default skin.
-            //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
-            let theme = new eui.Theme("resource/default.thm.json", this.stage);
-            theme.addEventListener(eui.UIEvent.COMPLETE, () => {
-                resolve();
-            }, this);
-
-        })
-    }
-
-   
-    /**
-     * 资源组加载进度
-     * @param  {core.GroupData} data
-     */
-    private onResourceProgress(data: core.GroupData): void {
-        egret.log(`当前加载进度:${data.curGroup} ${data.curGroupLoaded}/${data.curGroupTotal}`);
-        core.LoadingManager.getLoading(LoadingUI).setProgress(data);
-    }
-    
-    /**
-     * 资源组加载出错
-     * @param  {core.GroupData} data
-     */
-    private onResourceLoadError(data: core.GroupData): void {
-        //TODO
-        egret.log("Group:" + data.curGroup + " has failed to load");
-    }
-    /**
-     * preload资源组加载完成
-     * @param  {core.GroupData} data
-     */
-    private onResourceLoadComplete(data: core.GroupData): void {
-        if (data.curGroup == 'preload') {
-            egret.log("Group:" + data.curGroup + " load complete");
-            core.LoadingManager.getLoading(LoadingUI).hide();
-            core.Config.init(RES.getRes('config_zip'));
-            this.initModule();
-            UIManager.instance.openModule(ModuleEnum.LOGIN);
-        }
-    }
-
-    private initModule(): void {
-        new GameModule();
-        new LoginModule();
-        new MainModule();
-    }
-}
-```
-
-# LoginModule.ts
-```javascript
-class LoginModule extends core.Module {
-	public constructor() {
-		super(ModuleEnum.LOGIN);
-	}
-	private m_pLoginUI: LoginUI;
-
-	/**
-	* 获取loading
-	*/
-	protected getLoading(): core.ILoadingUI {
-		return core.LoadingManager.getLoading(MainLoadingUI);
-	}
-	/**
-	 * 预加载资源组
-	 */
-	protected getLoadGroup(data?: core.ModuleEventData): string[] {
-		return ['soundUI', 'animUI'];
-	}
-	/**
-	 * 显示
-	 */
-	protected show(data?: any): void {
-		if (!this.m_pLoginUI) {
-			let loginUI: LoginUI = new LoginUI();
-			this.m_pLoginUI = loginUI;
-		}
-		core.LayerCenter.getInstance().getLayer(LayerEnum.UI).addChild(this.m_pLoginUI);
-	}
-	/**
-	 * 隐藏
-	 */
-	protected hide(): void {
-		if (this.m_pLoginUI && this.m_pLoginUI.parent) {
-			this.m_pLoginUI.parent.removeChild(this.m_pLoginUI);
-		}
-		this.m_pLoginUI = null;
-	}
-
-	protected release(): void {
-		super.release();
-	}
-}
-```
 ## Lisence
 [MIT][1]
 
