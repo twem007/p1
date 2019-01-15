@@ -47,7 +47,24 @@ var RES;
 })(RES || (RES = {}));
 var RES;
 (function (RES) {
+    /**
+     * @internal
+     */
     RES.resourceNameSelector = function (p) { return p; };
+    /**
+     * Get resource information through file path
+     * @param path file path
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
+     * 通过文件路径获取资源信息
+     * @param path 文件路径
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language zh_CN
+     */
     function getResourceInfo(path) {
         var result = RES.config.config.fileSystem.getFile(path);
         if (!result) {
@@ -58,6 +75,12 @@ var RES;
     }
     RES.getResourceInfo = getResourceInfo;
     var configItem;
+    /**
+     * 注册config的相关配置
+     * @internal
+     * @param url config的地址
+     * @param root 根路径
+     */
     function setConfigURL(url, root) {
         var type;
         if (url.indexOf(".json") >= 0) {
@@ -81,36 +104,52 @@ var RES;
             if (!this.config) {
                 this.config = {
                     alias: {}, groups: {}, resourceRoot: configItem.root,
-                    typeSelector: function () { return 'unknown'; }, mergeSelector: null,
+                    mergeSelector: null,
                     fileSystem: null,
                     loadGroup: []
                 };
             }
             return RES.queue.pushResItem(configItem).catch(function (e) {
-                if (!e.__resource_manager_error__) {
-                    console.error(e.stack);
-                    e = new RES.ResourceManagerError(1002);
+                if (!RES.isCompatible) {
+                    if (!e.__resource_manager_error__) {
+                        if (e.error) {
+                            console.error(e.error.stack);
+                        }
+                        else {
+                            console.error(e.stack);
+                        }
+                        e = new RES.ResourceManagerError(1002);
+                    }
                 }
                 RES.host.remove(configItem);
                 return Promise.reject(e);
             });
         };
         /**
-         * @internal
+         * 根据组名获取组加载项列表
+         * @method RES.ResourceConfig#getGroupByName
+         * @param name {string} 组名
+         * @returns {Array<egret.ResourceItem>}
          */
-        ResourceConfig.prototype.getGroupByName = function (name, shouldNotBeNull) {
+        ResourceConfig.prototype.getGroupByName = function (name) {
             var group = this.config.groups[name];
             var result = [];
             if (!group) {
-                if (shouldNotBeNull) {
-                    throw new RES.ResourceManagerError(2005, name);
-                }
-                return null;
+                return result;
             }
             for (var _i = 0, group_1 = group; _i < group_1.length; _i++) {
                 var paramKey = group_1[_i];
-                var _a = RES.config.getResourceWithSubkey(paramKey, true), key = _a.key, subkey = _a.subkey;
-                var r = RES.config.getResource(key, true);
+                var tempResult = void 0;
+                tempResult = RES.config.getResourceWithSubkey(paramKey);
+                if (tempResult == null) {
+                    continue;
+                }
+                var r = tempResult.r, key = tempResult.key;
+                if (r == null) {
+                    /** 加载组里面的资源，可能不存在 */
+                    throw new RES.ResourceManagerError(2005, key);
+                    continue;
+                }
                 if (result.indexOf(r) == -1) {
                     result.push(r);
                 }
@@ -122,8 +161,8 @@ var RES;
             if (!url) {
                 url = url_or_alias;
             }
-            if (RES.resourceTypeSelector) {
-                var type = RES.resourceTypeSelector(url);
+            if (RES.typeSelector) {
+                var type = RES.typeSelector(url);
                 if (!type) {
                     throw new RES.ResourceManagerError(2004, url);
                 }
@@ -134,7 +173,7 @@ var RES;
                 return "unknown";
             }
         };
-        ResourceConfig.prototype.getResourceWithSubkey = function (key, shouldNotBeNull) {
+        ResourceConfig.prototype.getResourceWithSubkey = function (key) {
             key = this.getKeyByAlias(key);
             var index = key.indexOf("#");
             var subkey = "";
@@ -144,13 +183,7 @@ var RES;
             }
             var r = this.getResource(key);
             if (!r) {
-                if (shouldNotBeNull) {
-                    var msg = subkey ? key + "#" + subkey : key;
-                    throw new RES.ResourceManagerError(2006, msg);
-                }
-                else {
-                    return null;
-                }
+                return null;
             }
             else {
                 return {
@@ -166,33 +199,19 @@ var RES;
                 return aliasName;
             }
         };
-        ResourceConfig.prototype.getResource = function (path_or_alias, shouldNotBeNull) {
+        ResourceConfig.prototype.getResource = function (path_or_alias) {
             var path = this.config.alias[path_or_alias];
             if (!path) {
                 path = path_or_alias;
             }
             var r = getResourceInfo(path);
             if (!r) {
-                if (shouldNotBeNull) {
-                    throw new RES.ResourceManagerError(2006, path_or_alias);
-                }
                 return null;
             }
-            return r;
+            else {
+                return r;
+            }
         };
-        /**
-         * 根据组名获取原始的组加载项列表
-         * @method RES.ResourceConfig#getRawGroupByName
-         * @param name {string} 组名
-         * @returns {Array<any>}
-         * @internal
-         */
-        ResourceConfig.prototype.getGroup = function (name) {
-            return this.getGroupByName(name);
-        };
-        // public getResourceInfos(folderName: string) {
-        //     this.config.resources[]
-        // }
         /**
          * 创建自定义的加载资源组,注意：此方法仅在资源配置文件加载完成后执行才有效。
          * 可以监听ResourceEvent.CONFIG_COMPLETE事件来确认配置加载完成。
@@ -265,15 +284,6 @@ var RES;
             }
             this.config.alias[alias] = key;
         };
-        /**
-         * 获取加载项类型。
-         * @method RES.ResourceConfig#getType
-         * @param key {string} 对应配置文件里的name属性或sbuKeys属性的一项。
-         * @returns {string}
-         */
-        ResourceConfig.prototype.getType = function (key) {
-            return this.getResource(key, true).type;
-        };
         ResourceConfig.prototype.addResourceData = function (data) {
             if (RES.hasRes(data.name)) {
                 return;
@@ -281,10 +291,7 @@ var RES;
             if (!data.type) {
                 data.type = this.__temp__get__type__via__url(data.url);
             }
-            RES.config.config.fileSystem.addFile(data.url, data.type, data.root, data.extra);
-            if (data.name) {
-                this.config.alias[data.name] = data.url;
-            }
+            RES.config.config.fileSystem.addFile(data);
         };
         ResourceConfig.prototype.removeResourceData = function (data) {
             if (!RES.hasRes(data.name)) {
@@ -376,14 +383,14 @@ var RES;
             this.thread = 4;
         }
         ResourceLoader.prototype.pushResItem = function (resInfo) {
-            if (this.promiseHash[resInfo.name]) {
-                return this.promiseHash[resInfo.name];
+            if (this.promiseHash[resInfo.root + resInfo.name]) {
+                return this.promiseHash[resInfo.root + resInfo.name];
             }
             this.lazyLoadList.push(resInfo);
             this.itemListPriorityDic[Number.NEGATIVE_INFINITY] = this.lazyLoadList;
             this.updatelistPriority(this.lazyLoadList, Number.NEGATIVE_INFINITY);
             var dispatcher = new egret.EventDispatcher();
-            this.dispatcherDic[resInfo.name] = dispatcher;
+            this.dispatcherDic[resInfo.root + resInfo.name] = dispatcher;
             var promise = new Promise(function (resolve, reject) {
                 dispatcher.addEventListener("complete", function (e) {
                     resolve(e.data);
@@ -392,7 +399,7 @@ var RES;
                     reject(e.data);
                 }, null);
             });
-            this.promiseHash[resInfo.name] = promise;
+            this.promiseHash[resInfo.root + resInfo.name] = promise;
             this.loadNextResource();
             return promise;
         };
@@ -438,7 +445,7 @@ var RES;
             }
             for (var _i = 0, list_1 = list; _i < list_1.length; _i++) {
                 var item = list_1[_i];
-                if (this.itemLoadDic[item.name] == 1) {
+                if (this.itemLoadDic[item.root + item.name] == 1) {
                     continue;
                 }
                 var oldPriority = this.findPriorityInDic(item);
@@ -484,15 +491,15 @@ var RES;
             var r = this.getOneResourceInfoInGroup();
             if (!r)
                 return false;
-            this.itemLoadDic[r.name] = 1;
+            this.itemLoadDic[r.root + r.name] = 1;
             this.loadingCount++;
             this.loadResource(r)
                 .then(function (response) {
                 _this.loadingCount--;
-                delete _this.itemLoadDic[r.name];
+                delete _this.itemLoadDic[r.root + r.name];
                 RES.host.save(r, response);
-                if (_this.promiseHash[r.name]) {
-                    var dispatcher = _this.deleteDispatcher(r.name);
+                if (_this.promiseHash[r.root + r.name]) {
+                    var dispatcher = _this.deleteDispatcher(r.root + r.name);
                     dispatcher.dispatchEventWith("complete", false, response);
                 }
                 var groupNames = r.groupNames;
@@ -513,14 +520,14 @@ var RES;
                 if (!error.__resource_manager_error__) {
                     throw error;
                 }
-                delete _this.itemLoadDic[r.name];
+                delete _this.itemLoadDic[r.root + r.name];
                 _this.loadingCount--;
                 delete RES.host.state[r.root + r.name];
                 var times = _this.retryTimesDic[r.name] || 1;
                 if (times > _this.maxRetryTimes) {
                     delete _this.retryTimesDic[r.name];
-                    if (_this.promiseHash[r.name]) {
-                        var dispatcher = _this.deleteDispatcher(r.name);
+                    if (_this.promiseHash[r.root + r.name]) {
+                        var dispatcher = _this.deleteDispatcher(r.root + r.name);
                         dispatcher.dispatchEventWith("error", false, { r: r, error: error });
                     }
                     var groupNames = r.groupNames;
@@ -621,8 +628,8 @@ var RES;
             }
         };
         /**
-         * 删除组的事件派发器，Promise的缓存，返回事件派发器
-         * @param groupName 组名
+         * 删除事件派发器，Promise的缓存，返回事件派发器
+         * @param groupName 组名或是root+name
          */
         ResourceLoader.prototype.deleteDispatcher = function (groupName) {
             delete this.promiseHash[groupName];
@@ -686,6 +693,20 @@ var RES;
 })(RES || (RES = {}));
 var RES;
 (function (RES) {
+    /**
+     * Decorator, determine if the parameter is null
+     * @internal
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
+     * 装饰器，判断参数是否为null
+     * @internal
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language zh_CN
+     */
     RES.checkNull = function (target, propertyKey, descriptor) {
         var method = descriptor.value;
         descriptor.value = function () {
@@ -704,11 +725,15 @@ var RES;
     };
     /**
      * 功能开关
-     *  LOADING_STATE：处理重复加载
+     * LOADING_STATE：处理重复加载
+     * @internal
      */
     RES.FEATURE_FLAG = {
         FIX_DUPLICATE_LOAD: 1
     };
+    /**
+     * @internal
+     */
     var upgrade;
     (function (upgrade) {
         var _level = "warning";
@@ -748,25 +773,103 @@ var RES;
 //////////////////////////////////////////////////////////////////////////////////////
 var RES;
 (function (RES) {
-    RES.nameSelector = function (url) {
-        return RES.path.basename(url).split(".").join("_");
-    };
     /**
-     * Conduct mapping injection with class definition as the value.
-     * @param type Injection type.
-     * @param analyzerClass Injection type classes need to be resolved.
-     * @version Egret 2.4
+    * Convert the file name of the resource to the Key value used in the project.
+    * @param url Resource Name.
+    * @returns The key value used in the project
+    * @version Egret 5.2
+    * @platform Web,Native
+    * @language en_US
+    */
+    /**
+     * 将资源的文件名称转换为项目中所使用的Key值。
+     * 在加载合并图集的时候使用，例如图集加载A_json，需要加载对应A_png，这里就是转换的机制
+     * 一般项目中无需更改，只有没有使用默认的key和文件对应的需要修改
+     * @param url 资源名称。
+     * @returns 项目中所用的key值
+     * @version Egret 5.2
      * @platform Web,Native
-     * @includeExample extension/resource/Resource.ts
+     * @language zh_CN
+     */
+    function nameSelector(url) {
+        return RES.path.basename(url).split(".").join("_");
+    }
+    RES.nameSelector = nameSelector;
+    /**
+    * Get the read type of the file.
+    * When using getResByUrl does not specify the type of the read file, it will find the corresponding type according to this method.
+    * File types not found are loaded by default in binary format
+    * @param path file path.
+    * @returns Processor type used to read the file
+    * @version Egret 5.2
+    * @platform Web,Native
+    * @language en_US
+    */
+    /**
+     * 获取文件的读取类型
+     * 在使用getResByUrl没有指定读取文件的类型，会根据这个方法寻找对应的类型
+     * 没有查找到的文件类型以二进制格式默认加载
+     * @param path 文件路径
+     * @returns 读取文件所用的Processor类型
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language zh_CN
+     */
+    function typeSelector(path) {
+        var ext = path.substr(path.lastIndexOf(".") + 1);
+        var type;
+        switch (ext) {
+            case RES.ResourceItem.TYPE_XML:
+            case RES.ResourceItem.TYPE_JSON:
+            case RES.ResourceItem.TYPE_SHEET:
+                type = ext;
+                break;
+            case "png":
+            case "jpg":
+            case "gif":
+            case "jpeg":
+            case "bmp":
+                type = RES.ResourceItem.TYPE_IMAGE;
+                break;
+            case "fnt":
+                type = RES.ResourceItem.TYPE_FONT;
+                break;
+            case "txt":
+                type = RES.ResourceItem.TYPE_TEXT;
+                break;
+            case "mp3":
+            case "ogg":
+            case "mpeg":
+            case "wav":
+            case "m4a":
+            case "mp4":
+            case "aiff":
+            case "wma":
+            case "mid":
+                type = RES.ResourceItem.TYPE_SOUND;
+                break;
+            case "mergeJson":
+            case "zip":
+            case "pvr":
+                type = ext;
+                break;
+            default:
+                type = RES.ResourceItem.TYPE_BIN;
+                break;
+        }
+        return type;
+    }
+    RES.typeSelector = typeSelector;
+    /**
+     * Conduct mapping injection with class definition as the value, Deprecated.
+     * @deprecated
+     * @see RES.processor.map
      * @language en_US
      */
     /**
-     * 以类定义为值进行映射注入。
-     * @param type 注入的类型。
-     * @param analyzerClass 注入类型需要解析的类。
-     * @version Egret 2.4
-     * @platform Web,Native
-     * @includeExample extension/resource/Resource.ts
+     * 以类定义为值进行映射注入，已废弃。
+     * @deprecated
+     * @see RES.processor.map
      * @language zh_CN
      */
     function registerAnalyzer(type, analyzerClass) {
@@ -774,16 +877,46 @@ var RES;
     }
     RES.registerAnalyzer = registerAnalyzer;
     /**
+    * Set whether it is compatible mode
+    * When the value is true, the assetsManager will output the design of Res. When it is false, all the loaded resources will be returned as promises.
+    * The default is false, run in strict assetsManager mode
+    * @version Egret 5.2.9
+    * @platform Web,Native
+    * @language en_US
+    */
+    /**
+     * 设置是否为兼容模式
+     * 当值为true时，assetsManager会以Res的设计输出，当为false时候，所有的加载资源都会以promise的方式返回
+     * 默认是false，以严格assetsManager方式运行
+     * @version Egret 5.2.9
+     * @platform Web,Native
+     * @language zh_CN
+     */
+    function setIsCompatible(value) {
+        RES.isCompatible = value;
+    }
+    RES.setIsCompatible = setIsCompatible;
+    /**
+     * @internal
+     */
+    RES.isCompatible = false;
+    /**
      * Load configuration file and parse.
+     * @param url The url address of the resource config
+     * @param resourceRoot The root address of the resource config
+     * @returns Promise
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
     /**
      * 加载配置文件并解析。
+     * @param url 资源配置的url地址
+     * @param resourceRoot 资源配置的根地址
+     * @returns Promise
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -800,16 +933,26 @@ var RES;
         RES.setConfigURL(url, resourceRoot);
         if (!instance)
             instance = new Resource();
-        return instance.loadConfig();
+        return compatiblePromise(instance.loadConfig());
     }
     RES.loadConfig = loadConfig;
+    function compatiblePromise(promise) {
+        if (RES.isCompatible) {
+            promise.catch(function (e) { }).then();
+            return undefined;
+        }
+        else {
+            return promise;
+        }
+    }
     /**
      * Load a set of resources according to the group name.
      * @param name Group name to load the resource group.
      * @param priority Load priority can be negative, the default value is 0.
      * <br>A low priority group must wait for the high priority group to complete the end of the load to start, and the same priority group will be loaded at the same time.
+     * @param reporter Resource group loading progress prompt
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
@@ -818,14 +961,15 @@ var RES;
      * @param name 要加载资源组的组名。
      * @param priority 加载优先级,可以为负数,默认值为 0。
      * <br>低优先级的组必须等待高优先级组完全加载结束才能开始，同一优先级的组会同时加载。
+     * @param reporter 资源组的加载进度提示
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
     function loadGroup(name, priority, reporter) {
         if (priority === void 0) { priority = 0; }
-        return instance.loadGroup(name, priority, reporter);
+        return compatiblePromise(instance.loadGroup(name, priority, reporter));
     }
     RES.loadGroup = loadGroup;
     /**
@@ -833,7 +977,7 @@ var RES;
      * @param name Group name。
      * @returns Is loading or not.
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
@@ -842,7 +986,7 @@ var RES;
      * @param name 组名。
      * @returns 是否正在加载。
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -856,7 +1000,7 @@ var RES;
      * @returns The resource item array of group.
      * @see RES.ResourceItem
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
@@ -866,7 +1010,7 @@ var RES;
      * @returns 加载项列表。
      * @see RES.ResourceItem
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -882,7 +1026,7 @@ var RES;
      * @param override Is the default false for the same name resource group already exists.
      * @returns Create success or fail.
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
@@ -894,7 +1038,7 @@ var RES;
      * @param override 是否覆盖已经存在的同名资源组,默认 false。
      * @returns 是否创建成功。
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -906,16 +1050,18 @@ var RES;
     /**
      * Check whether the configuration file contains the specified resources.
      * @param key A sbuKeys attribute or name property in a configuration file.
+     * @returns Whether you have the specified resource
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
     /**
      * 检查配置文件里是否含有指定的资源。
      * @param key 对应配置文件里的 name 属性或 sbuKeys 属性的一项。
+     * @returns 是否拥有指定资源
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -939,7 +1085,7 @@ var RES;
      * @param key A subKeys attribute or name property in a configuration file.
      * @see RES.ResourceItem
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
@@ -958,7 +1104,7 @@ var RES;
      * @param key 对应配置文件里的 name 属性或 subKeys 属性的一项。
      * @see RES.ResourceItem
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -966,8 +1112,44 @@ var RES;
         return instance.getRes(key);
     }
     RES.getRes = getRes;
+    /**
+     * Asynchronous mode to get the resources in the configuration. As long as the resources exist in the configuration file, you can get it in an asynchronous way.
+     * @param key A sbuKeys attribute or name property in a configuration file.
+     * @param compFunc Call back function. Example：compFunc(data,key):void.
+     * @param thisObject This pointer of call back function.
+     * @see #setMaxRetryTimes
+     * @example The following code demonstrates how to load a resource via getResAsync
+     * <pre>
+     *       RES.getResAsync("resource/example.json");//Only pass the key value to get the resource
+     *
+     *       RES.getResAsync("resource/example.json", (data) => {
+     *          console.log(data)
+     *       }, this) //Pass in the key value, compFunc and thisObject get the resource, the latter two must appear at the same time
+     * </pre>
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
+     * 异步方式获取配置里的资源。只要是配置文件里存在的资源，都可以通过异步方式获取。
+     * @param key 对应配置文件里的 name 属性或 sbuKeys 属性的一项。
+     * @param compFunc 回调函数。示例：compFunc(data,key):void。
+     * @param thisObject 回调函数的 this 引用。
+     * @see #setMaxRetryTimes
+     * @example 以下代码演示了如何通过getResAsync加载资源
+     * <pre>
+     *       RES.getResAsync("resource/example.json");//只传入key值获取资源
+     *
+     *       RES.getResAsync("resource/example.json", (data) => {
+     *          console.log(data)
+     *       }, this) //传入key值，compFunc和thisObject获取资源，后两个必须同时出现
+     * </pre>
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language zh_CN
+     */
     function getResAsync(key, compFunc, thisObject) {
-        return instance.getResAsync.apply(instance, arguments);
+        return compatiblePromise(instance.getResAsync.apply(instance, arguments));
     }
     RES.getResAsync = getResAsync;
     /**
@@ -976,9 +1158,8 @@ var RES;
      * @param compFunc Call back function. Example：compFunc(data,url):void。
      * @param thisObject This pointer of call back function.
      * @param type File type (optional). Use the static constants defined in the ResourceItem class. If you do not set the file name extension.
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
-     * @includeExample extension/resource/GetResByUrl.ts
      * @language en_US
      */
     /**
@@ -987,14 +1168,13 @@ var RES;
      * @param compFunc 回调函数。示例：compFunc(data,url):void。
      * @param thisObject 回调函数的 this 引用。
      * @param type 文件类型(可选)。请使用 ResourceItem 类中定义的静态常量。若不设置将根据文件扩展名生成。
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
-     * @includeExample extension/resource/GetResByUrl.ts
      * @language zh_CN
      */
     function getResByUrl(url, compFunc, thisObject, type) {
         if (type === void 0) { type = ""; }
-        instance.getResByUrl(url, compFunc, thisObject, type);
+        return compatiblePromise(instance.getResByUrl(url, compFunc, thisObject, type));
     }
     RES.getResByUrl = getResByUrl;
     /**
@@ -1003,7 +1183,7 @@ var RES;
      * @param force Destruction of a resource group when the other resources groups have the same resource situation whether the resources will be deleted, the default value true.
      * @returns Are successful destruction.
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
@@ -1013,7 +1193,7 @@ var RES;
      * @param force 销毁一个资源组时其他资源组有同样资源情况资源是否会被删除，默认值 true。
      * @see #setMaxRetryTimes
      * @returns 是否销毁成功。
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -1022,18 +1202,18 @@ var RES;
     }
     RES.destroyRes = destroyRes;
     /**
-     * Sets the maximum number of concurrent load threads, the default value is 2.
+     * Sets the maximum number of concurrent load threads, the default value is 4.
      * @param thread The number of concurrent loads to be set.
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
     /**
-     * 设置最大并发加载线程数量，默认值是 2。
+     * 设置最大并发加载线程数量，默认值是 4。
      * @param thread 要设置的并发加载数。
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -1047,7 +1227,7 @@ var RES;
      * Sets the number of retry times when the resource failed to load, and the default value is 3.
      * @param retry To set the retry count.
      * @includeExample extension/resource/Resource.ts
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
@@ -1055,7 +1235,7 @@ var RES;
      * 设置资源加载失败时的重试次数，默认值是 3。
      * @param retry 要设置的重试次数。
      * @includeExample extension/resource/Resource.ts
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -1077,7 +1257,7 @@ var RES;
      * All listeners with a priority for n will be processed before the -1 n listener.
      * If two or more listeners share the same priority, they are processed in accordance with the order of their added. The default priority is 0.
      * @see RES.ResourceEvent
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
@@ -1094,7 +1274,7 @@ var RES;
      * 优先级为 n -1 的侦听器之前得到处理。如果两个或更多个侦听器共享相同的优先级，则按照它们的添加顺序进行处理。默认优先级为 0。
      * @see RES.ResourceEvent
      * @see #setMaxRetryTimes
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -1112,7 +1292,7 @@ var RES;
      * @param listener Listening function。
      * @param thisObject The this object that is bound to a function.
      * @param useCapture Is used to capture, and this property is only valid in the display list.
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
@@ -1122,7 +1302,7 @@ var RES;
      * @param listener 侦听函数。
      * @param thisObject 侦听函数绑定的this对象。
      * @param useCapture 是否使用捕获，这个属性只在显示列表中生效。
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -1134,14 +1314,14 @@ var RES;
     /**
      * Adding a custom resource configuration.
      * @param data To add configuration.
-     * @version Egret 3.1.6
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
     /**
      * 自定义添加一项资源配置。
      * @param data 要添加的配置。
-     * @version Egret 3.1.6
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -1151,14 +1331,14 @@ var RES;
     }
     RES.$addResourceData = $addResourceData;
     /**
-        * Returns the VersionController
-        * @version Egret 2.5
-        * @platform Web,Native
-        * @language en_US
-        */
+    * Returns the VersionController
+    * @version Egret 5.2
+    * @platform Web,Native
+    * @language en_US
+    */
     /**
      * 获得版本控制器.
-     * @version Egret 2.5
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -1169,16 +1349,16 @@ var RES;
     }
     RES.getVersionController = getVersionController;
     /**
-         * Register the VersionController
-         * @param vcs The VersionController to register.
-         * @version Egret 2.5
-         * @platform Web,Native
-         * @language en_US
-         */
+     * Register the VersionController
+     * @param vcs The VersionController to register.
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language en_US
+     */
     /**
      * 注册版本控制器,通过RES模块加载资源时会从版本控制器获取真实url
      * @param vcs 注入的版本控制器。
-     * @version Egret 2.5
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -1188,6 +1368,22 @@ var RES;
         instance.registerVersionController(vcs);
     }
     RES.registerVersionController = registerVersionController;
+    /**
+     * Convert the address of the loaded resource (via version controller conversion)
+     * @param url path to the original resource
+     * @returns converted address
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
+     * 转换加载资源的地址（经过版本控制器的转换）
+     * @param url 原始资源的路径
+     * @returns 转换后的地址
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language zh_CN
+     */
     function getVirtualUrl(url) {
         if (instance.vcs) {
             return instance.vcs.getVirtualUrl(url);
@@ -1205,6 +1401,18 @@ var RES;
         function Resource() {
             var _this = _super.call(this) || this;
             _this.isVcsInit = false;
+            /**
+             * @private
+             * 版本控制器加载后的加载配置
+             */
+            _this.normalLoadConfig = function () {
+                return RES.config.init().then(function (data) {
+                    RES.ResourceEvent.dispatchResourceEvent(_this, RES.ResourceEvent.CONFIG_COMPLETE);
+                }, function (error) {
+                    RES.ResourceEvent.dispatchResourceEvent(_this, RES.ResourceEvent.CONFIG_LOAD_ERROR);
+                    return Promise.reject(error);
+                });
+            };
             if (RES.VersionController) {
                 _this.vcs = new RES.VersionController();
             }
@@ -1220,22 +1428,14 @@ var RES;
          */
         Resource.prototype.loadConfig = function () {
             var _this = this;
-            var normalCall = function () {
-                return RES.config.init().then(function (data) {
-                    RES.ResourceEvent.dispatchResourceEvent(_this, RES.ResourceEvent.CONFIG_COMPLETE);
-                }, function (error) {
-                    RES.ResourceEvent.dispatchResourceEvent(_this, RES.ResourceEvent.CONFIG_LOAD_ERROR);
-                    return Promise.reject(error);
-                });
-            };
             if (!this.isVcsInit && this.vcs) {
                 this.isVcsInit = true;
                 return this.vcs.init().then(function () {
-                    return normalCall();
+                    return _this.normalLoadConfig();
                 });
             }
             else {
-                return normalCall();
+                return this.normalLoadConfig();
             }
         };
         /**
@@ -1244,7 +1444,7 @@ var RES;
          * @param name {string}
          */
         Resource.prototype.isGroupLoaded = function (name) {
-            var resources = RES.config.getGroupByName(name, true);
+            var resources = RES.config.getGroupByName(name);
             return resources.every(function (r) { return RES.host.get(r) != null; });
         };
         /**
@@ -1253,7 +1453,7 @@ var RES;
          * @param name {string}
          */
         Resource.prototype.getGroupByName = function (name) {
-            return RES.config.getGroupByName(name, true); //这里不应该传入 true，但是为了老版本的 TypeScriptCompiler 兼容性，暂时这样做
+            return RES.config.getGroupByName(name);
         };
         /**
          * 根据组名加载一组资源
@@ -1290,16 +1490,19 @@ var RES;
                         RES.ResourceEvent.dispatchResourceEvent(_this, RES.ResourceEvent.ITEM_LOAD_ERROR, name, item);
                     }
                 }
+                if (RES.isCompatible) {
+                    console.warn(error.error.message);
+                }
                 RES.ResourceEvent.dispatchResourceEvent(_this, RES.ResourceEvent.GROUP_LOAD_ERROR, name);
                 return Promise.reject(error.error);
             });
         };
         Resource.prototype._loadGroup = function (name, priority, reporter) {
             if (priority === void 0) { priority = 0; }
-            var resources = RES.config.getGroupByName(name, true);
+            var resources = RES.config.getGroupByName(name);
             if (resources.length == 0) {
                 return new Promise(function (resolve, reject) {
-                    reject({ error: new RES.ResourceManagerError(2006, name) });
+                    reject({ error: new RES.ResourceManagerError(2005, name) });
                 });
             }
             return RES.queue.pushResGroup(resources, name, priority, reporter);
@@ -1353,7 +1556,14 @@ var RES;
         Resource.prototype.getResAsync = function (key, compFunc, thisObject) {
             var _this = this;
             var paramKey = key;
-            var _a = RES.config.getResourceWithSubkey(key, true), r = _a.r, subkey = _a.subkey;
+            var tempResult = RES.config.getResourceWithSubkey(key);
+            if (tempResult == null) {
+                if (compFunc) {
+                    compFunc.call(thisObject, null, paramKey);
+                }
+                return Promise.reject(new RES.ResourceManagerError(2006, key));
+            }
+            var r = tempResult.r, subkey = tempResult.subkey;
             return RES.queue.pushResItem(r).then(function (value) {
                 RES.host.save(r, value);
                 var p = RES.processor.isSupport(r);
@@ -1367,6 +1577,10 @@ var RES;
             }, function (error) {
                 RES.host.remove(r);
                 RES.ResourceEvent.dispatchResourceEvent(_this, RES.ResourceEvent.ITEM_LOAD_ERROR, "", r);
+                if (compFunc) {
+                    compFunc.call(thisObject, null, paramKey);
+                    return Promise.reject(null);
+                }
                 return Promise.reject(error);
             });
         };
@@ -1403,6 +1617,10 @@ var RES;
             }, function (error) {
                 RES.host.remove(r);
                 RES.ResourceEvent.dispatchResourceEvent(_this, RES.ResourceEvent.ITEM_LOAD_ERROR, "", r);
+                if (compFunc) {
+                    compFunc.call(thisObject, null, url);
+                    return Promise.reject(null);
+                }
                 return Promise.reject(error);
             });
         };
@@ -1415,14 +1633,17 @@ var RES;
          */
         Resource.prototype.destroyRes = function (name, force) {
             if (force === void 0) { force = true; }
-            var group = RES.config.getGroup(name);
+            var group = RES.config.getGroupByName(name);
             if (group && group.length > 0) {
+                var index = RES.config.config.loadGroup.indexOf(name);
+                if (index == -1) {
+                    return false;
+                }
                 if (force || (RES.config.config.loadGroup.length == 1 && RES.config.config.loadGroup[0] == name)) {
                     for (var _i = 0, group_2 = group; _i < group_2.length; _i++) {
                         var item = group_2[_i];
                         RES.queue.unloadResource(item);
                     }
-                    var index = RES.config.config.loadGroup.indexOf(name);
                     RES.config.config.loadGroup.splice(index, 1);
                 }
                 else {
@@ -1439,15 +1660,12 @@ var RES;
                             }
                         }
                     }
-                    for (var tmpname in removeItemHash) {
-                        if (removeItemHash[tmpname] && removeItemHash[tmpname] == 1) {
-                            var item = RES.config.getResource(tmpname);
-                            if (item) {
-                                RES.queue.unloadResource(item);
-                            }
+                    for (var _c = 0, group_3 = group; _c < group_3.length; _c++) {
+                        var item = group_3[_c];
+                        if (removeItemHash[item.name] && removeItemHash[item.name] == 1) {
+                            RES.queue.unloadResource(item);
                         }
                     }
-                    var index = RES.config.config.loadGroup.indexOf(name);
                     RES.config.config.loadGroup.splice(index, 1);
                 }
                 return true;
@@ -1458,7 +1676,7 @@ var RES;
                     return RES.queue.unloadResource(item);
                 }
                 else {
-                    console.warn("\u65E0\u6CD5\u5220\u9664\u6307\u5B9A\u7EC4:" + name);
+                    console.warn("\u5728\u5185\u5B58" + name + "\u8D44\u6E90\u4E0D\u5B58\u5728");
                     return false;
                 }
             }
@@ -1483,6 +1701,7 @@ var RES;
             RES.queue.maxRetryTimes = retry;
         };
         Resource.prototype.addResourceData = function (data) {
+            data["root"] = '';
             RES.config.addResourceData(data);
         };
         __decorate([
@@ -1508,18 +1727,79 @@ var RES;
 })(RES || (RES = {}));
 var RES;
 (function (RES) {
+    /**
+     * Print the memory occupied by the picture.
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
+     * 对文件路径的一些操作，针对的是 C:/A/B/C/D/example.ts这种格式
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language zh_CN
+     */
     var path;
     (function (path_1) {
-        path_1.normalize = function (filename) {
+        /**
+         * Format the file path,"C:/A/B//C//D//example.ts"=>"C:/A/B/C/D/example.ts"
+         * @param filename Incoming file path
+         * @version Egret 5.2
+         * @platform Web,Native
+         * @language en_US
+         */
+        /**
+         * 格式化文件路径，"C:/A/B//C//D//example.ts"=>"C:/A/B/C/D/example.ts"
+         * @param filename 传入的文件路径
+         * @version Egret 5.2
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        function normalize(filename) {
             var arr = filename.split("/");
             return arr.filter(function (value, index) { return !!value || index == arr.length - 1; }).join("/");
-        };
-        path_1.basename = function (filename) {
+        }
+        path_1.normalize = normalize;
+        /**
+         * Get the file name according to the file path, "C:/A/B/example.ts"=>"example.ts"
+         * @param filename Incoming file path
+         * @return File name
+         * @version Egret 5.2
+         * @platform Web,Native
+         * @language en_US
+         */
+        /**
+         * 根据文件路径得到文件名字，"C:/A/B/example.ts"=>"example.ts"
+         * @param filename 传入的文件路径
+         * @return 文件的名字
+         * @version Egret 5.2
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        function basename(filename) {
             return filename.substr(filename.lastIndexOf("/") + 1);
-        };
-        path_1.dirname = function (path) {
+        }
+        path_1.basename = basename;
+        /**
+         * The path to the folder where the file is located,"C:/A/B/example.ts"=>"C:/A/B"
+         * @param filename Incoming file path
+         * @return The address of the folder where the file is located
+         * @version Egret 5.2
+         * @platform Web,Native
+         * @language en_US
+         */
+        /**
+         * 文件所在文件夹路径，"C:/A/B/example.ts"=>"C:/A/B"
+         * @param filename 传入的文件路径
+         * @return 文件所在文件夹的地址
+         * @version Egret 5.2
+         * @platform Web,Native
+         * @language zh_CN
+         */
+        function dirname(path) {
             return path.substr(0, path.lastIndexOf("/"));
-        };
+        }
+        path_1.dirname = dirname;
     })(path = RES.path || (RES.path = {}));
 })(RES || (RES = {}));
 //////////////////////////////////////////////////////////////////////////////////////
@@ -1592,14 +1872,37 @@ var RES;
 (function (RES) {
     var processor;
     (function (processor_1) {
+        /**
+         * @internal
+         * @param resource 对应的资源接口，需要type属性
+         */
         function isSupport(resource) {
             return processor_1._map[resource.type];
         }
         processor_1.isSupport = isSupport;
+        /**
+         * Register the processor that loads the resource
+         * @param type Load resource type
+         * @param processor Loaded processor, an instance that implements the Processor interface
+         * @version Egret 5.2
+         * @platform Web,Native
+         * @language en_US
+         */
+        /**
+         * 注册加载资源的处理器
+         * @param type 加载资源类型
+         * @param processor 加载的处理器，一个实现Processor接口的实例
+         * @version Egret 5.2
+         * @platform Web,Native
+         * @language zh_CN
+         */
         function map(type, processor) {
             processor_1._map[type] = processor;
         }
         processor_1.map = map;
+        /**
+        * @internal
+        */
         function promisify(loader, resource) {
             var _this = this;
             return new Promise(function (resolve, reject) {
@@ -1615,6 +1918,11 @@ var RES;
                 loader.addEventListener(egret.IOErrorEvent.IO_ERROR, onError, _this);
             });
         }
+        /**
+         * @private
+         * @param url
+         * @param file
+         */
         function getRelativePath(url, file) {
             if (file.indexOf("://") != -1) {
                 return file;
@@ -1635,7 +1943,6 @@ var RES;
             return url + paramUrl;
         }
         processor_1.getRelativePath = getRelativePath;
-        // var cache: {[index:string]:egret.Texture} = {};
         processor_1.ImageProcessor = {
             onLoadStart: function (host, resource) {
                 var loader = new egret.ImageLoader();
@@ -1664,8 +1971,6 @@ var RES;
                 request.open(RES.getVirtualUrl(resource.root + resource.url), "get");
                 request.send();
                 return promisify(request, resource);
-                // let arraybuffer = await promisify(request, resource);
-                // return arraybuffer;
             },
             onRemoveStart: function (host, resource) {
             }
@@ -1677,8 +1982,6 @@ var RES;
                 request.open(RES.getVirtualUrl(resource.root + resource.url), "get");
                 request.send();
                 return promisify(request, resource);
-                // let text = await promisify(request, resource);
-                // return text;
             },
             onRemoveStart: function (host, resource) {
                 return true;
@@ -1686,7 +1989,6 @@ var RES;
         };
         processor_1.JsonProcessor = {
             onLoadStart: function (host, resource) {
-                // let text = await host.load(resource, 'text');
                 return host.load(resource, 'text').then(function (text) {
                     var data = JSON.parse(text);
                     return data;
@@ -1695,6 +1997,9 @@ var RES;
             onRemoveStart: function (host, request) {
             }
         };
+        /**
+        * @internal
+        */
         processor_1.XMLProcessor = {
             onLoadStart: function (host, resource) {
                 return host.load(resource, 'text').then(function (text) {
@@ -1706,6 +2011,9 @@ var RES;
                 return true;
             }
         };
+        /**
+        * @internal
+        */
         processor_1.CommonJSProcessor = {
             onLoadStart: function (host, resource) {
                 // let text = await host.load(resource, 'text');
@@ -1725,9 +2033,11 @@ var RES;
             onRemoveStart: function (host, resource) {
             }
         };
+        /**
+        * @internal
+        */
         processor_1.SheetProcessor = {
             onLoadStart: function (host, resource) {
-                // let data = await host.load(resource, "json");
                 return host.load(resource, "json").then(function (data) {
                     var r = host.resourceConfig.getResource(RES.nameSelector(data.file));
                     if (!r) {
@@ -1750,6 +2060,9 @@ var RES;
                         }
                         host.save(r, bitmapData);
                         return spriteSheet;
+                    }, function (e) {
+                        host.remove(r);
+                        throw e;
                     });
                 });
             },
@@ -1789,6 +2102,9 @@ var RES;
             }
             return url;
         };
+        /**
+        * @internal
+        */
         processor_1.FontProcessor = {
             onLoadStart: function (host, resource) {
                 // let data: string = await host.load(resource, 'text');
@@ -1818,6 +2134,9 @@ var RES;
                         // todo refactor
                         host.save(r, texture);
                         return font;
+                    }, function (e) {
+                        host.remove(r);
+                        throw e;
                     });
                 });
             },
@@ -1834,11 +2153,13 @@ var RES;
                 return promisify(sound, resource).then(function () {
                     return sound;
                 });
-                // return sound;
             },
             onRemoveStart: function (host, resource) {
             }
         };
+        /**
+        * @internal
+        */
         processor_1.MovieClipProcessor = {
             onLoadStart: function (host, resource) {
                 var mcData;
@@ -1848,7 +2169,7 @@ var RES;
                     mcData = value;
                     var jsonPath = resource.name;
                     var imagePath = jsonPath.substring(0, jsonPath.lastIndexOf(".")) + ".png";
-                    imageResource = host.resourceConfig.getResource(imagePath, true);
+                    imageResource = host.resourceConfig.getResource(imagePath);
                     if (!imageResource) {
                         throw new RES.ResourceManagerError(1001, imagePath);
                     }
@@ -1867,10 +2188,15 @@ var RES;
                 // refactor
                 var jsonPath = resource.name;
                 var imagePath = jsonPath.substring(0, jsonPath.lastIndexOf(".")) + ".png";
-                var imageResource = host.resourceConfig.getResource(imagePath, true);
-                host.unload(imageResource);
+                var imageResource = host.resourceConfig.getResource(imagePath);
+                if (imageResource) {
+                    host.unload(imageResource);
+                }
             }
         };
+        /**
+        * @internal
+        */
         processor_1.MergeJSONProcessor = {
             onLoadStart: function (host, resource) {
                 // let data = await host.load(resource, 'json');
@@ -1894,6 +2220,9 @@ var RES;
             onRemoveStart: function (host, resource) {
             }
         };
+        /**
+        * @internal
+        */
         processor_1.LegacyResourceConfigProcessor = {
             onLoadStart: function (host, resource) {
                 return host.load(resource, 'json').then(function (data) {
@@ -1906,13 +2235,13 @@ var RES;
                             getFile: function (filename) {
                                 return fsData[filename];
                             },
-                            addFile: function (filename, type, root, extra) {
-                                if (!type)
-                                    type = "";
+                            addFile: function (data) {
+                                if (!data.type)
+                                    data.type = "";
                                 if (root == undefined) {
-                                    root = "";
+                                    data.root = "";
                                 }
-                                fsData[filename] = { name: filename, type: type, url: filename, root: root, extra: extra };
+                                fsData[data.name] = data;
                             },
                             profile: function () {
                                 console.log(fsData);
@@ -1950,13 +2279,16 @@ var RES;
                         var resource_1 = _c[_b];
                         _loop_1(resource_1);
                     }
-                    host.save(resource, resConfigData);
-                    return resConfigData;
+                    host.save(resource, data);
+                    return data;
                 });
             },
             onRemoveStart: function () {
             }
         };
+        /**
+        * @internal
+        */
         processor_1._map = {
             "image": processor_1.ImageProcessor,
             "json": processor_1.JsonProcessor,
@@ -2005,13 +2337,13 @@ var RES;
 (function (RES) {
     /**
      * The events of resource loading.
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
     /**
      * 资源加载事件。
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -2022,7 +2354,7 @@ var RES;
          * @param type  The type of the event, accessible as Event.type.
          * @param bubbles  Determines whether the Event object participates in the bubbling stage of the event flow. The default value is false.
          * @param cancelable Determines whether the Event object can be canceled. The default values is false.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @private
          * @language en_US
@@ -2032,7 +2364,7 @@ var RES;
          * @param type  事件的类型，可以作为 Event.type 访问。
          * @param bubbles  确定 Event 对象是否参与事件流的冒泡阶段。默认值为 false。
          * @param cancelable 确定是否可以取消 Event 对象。默认值为 false。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @private
          * @language zh_CN
@@ -2043,39 +2375,39 @@ var RES;
             var _this = _super.call(this, type, bubbles, cancelable) || this;
             /**
              * File number that has been loaded.
-             * @version Egret 2.4
+             * @version Egret 5.2
              * @platform Web,Native
              * @language en_US
              */
             /**
              * 已经加载的文件数。
-             * @version Egret 2.4
+             * @version Egret 5.2
              * @platform Web,Native
              * @language zh_CN
              */
             _this.itemsLoaded = 0;
             /**
              * Total file number to load.
-             * @version Egret 2.4
+             * @version Egret 5.2
              * @platform Web,Native
              * @language en_US
              */
             /**
              * 要加载的总文件数。
-             * @version Egret 2.4
+             * @version Egret 5.2
              * @platform Web,Native
              * @language zh_CN
              */
             _this.itemsTotal = 0;
             /**
              * Resource group name.
-             * @version Egret 2.4
+             * @version Egret 5.2
              * @platform Web,Native
              * @language en_US
              */
             /**
              * 资源组名。
-             * @version Egret 2.4
+             * @version Egret 5.2
              * @platform Web,Native
              * @language zh_CN
              */
@@ -2092,7 +2424,9 @@ var RES;
          * @param itemsLoaded {number}
          * @param itemsTotal {number}
          * @internal
-         * @private
+         * @version Egret 5.2
+         * @platform Web,Native
+         * @language en_CN
          */
         ResourceEvent.dispatchResourceEvent = function (target, type, groupName, resItem, itemsLoaded, itemsTotal) {
             if (groupName === void 0) { groupName = ""; }
@@ -2112,78 +2446,78 @@ var RES;
         };
         /**
          * Failure event for a load item.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 一个加载项加载失败事件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceEvent.ITEM_LOAD_ERROR = "itemLoadError";
         /**
          * Configure file to load and parse the completion event. Note: if a configuration file is loaded, it will not be thrown out, and if you want to handle the configuration loading failure, monitor the CONFIG_LOAD_ERROR event.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 配置文件加载并解析完成事件。注意：若有配置文件加载失败，将不会抛出此事件，若要处理配置加载失败，请同时监听 CONFIG_LOAD_ERROR 事件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceEvent.CONFIG_COMPLETE = "configComplete";
         /**
          * Configuration file failed to load.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 配置文件加载失败事件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceEvent.CONFIG_LOAD_ERROR = "configLoadError";
         /**
          * Delay load group resource loading progress event.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 延迟加载组资源加载进度事件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceEvent.GROUP_PROGRESS = "groupProgress";
         /**
          * Delay load group resource to complete event. Note: if you have a resource item loading failure, the event will not be thrown, if you want to handle the group load failure, please listen to the GROUP_LOAD_ERROR event.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 延迟加载组资源加载完成事件。注意：若组内有资源项加载失败，将不会抛出此事件，若要处理组加载失败，请同时监听 GROUP_LOAD_ERROR 事件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceEvent.GROUP_COMPLETE = "groupComplete";
         /**
          * Delayed load group resource failed event.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 延迟加载组资源加载失败事件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
@@ -2225,13 +2559,13 @@ var RES;
 (function (RES) {
     /**
      * Resource term. One of the resources arrays in resource.json.
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language en_US
      */
     /**
      * 资源项。对应 resource.json 中 resources 数组中的一项。
-     * @version Egret 2.4
+     * @version Egret 5.2
      * @platform Web,Native
      * @language zh_CN
      */
@@ -2239,104 +2573,104 @@ var RES;
     (function (ResourceItem) {
         /**
          * XML file.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * XML 文件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceItem.TYPE_XML = "xml";
         /**
          * Picture file.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 图片文件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceItem.TYPE_IMAGE = "image";
         /**
          * Binary file.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web
          * @language en_US
          */
         /**
          * 二进制文件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web
          * @language zh_CN
          */
         ResourceItem.TYPE_BIN = "bin";
         /**
          * Text file.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 文本文件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceItem.TYPE_TEXT = "text";
         /**
          * JSON file.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * JSON 文件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceItem.TYPE_JSON = "json";
         /**
          * SpriteSheet file.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * SpriteSheet 文件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceItem.TYPE_SHEET = "sheet";
         /**
          * BitmapTextSpriteSheet file.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * BitmapTextSpriteSheet 文件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
         ResourceItem.TYPE_FONT = "font";
         /**
          * Sound file.
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language en_US
          */
         /**
          * 声音文件。
-         * @version Egret 2.4
+         * @version Egret 5.2
          * @platform Web,Native
          * @language zh_CN
          */
@@ -2367,6 +2701,9 @@ var RES;
 })(RES || (RES = {}));
 var RES;
 (function (RES) {
+    /**
+    * @internal
+    */
     var NewFileSystem = (function () {
         function NewFileSystem(data) {
             this.data = data;
@@ -2446,6 +2783,18 @@ var RES;
 var RES;
 (function (RES) {
     var __tempCache = {};
+    /**
+     * Print the memory occupied by the picture.
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language en_US
+     */
+    /**
+     * 打印图片所占内存
+     * @version Egret 5.2
+     * @platform Web,Native
+     * @language zh_CN
+     */
     function profile() {
         RES.config.config.fileSystem.profile();
         console.log(__tempCache);
@@ -2460,6 +2809,9 @@ var RES;
         console.log("gpu size : " + (totalImageSize / 1024).toFixed(3) + "kb");
     }
     RES.profile = profile;
+    /**
+    * @internal
+    */
     RES.host = {
         state: {},
         get resourceConfig() {
@@ -2472,19 +2824,28 @@ var RES;
         unload: function (r) { return RES.queue.unloadResource(r); },
         save: function (resource, data) {
             RES.host.state[resource.root + resource.name] = 2;
-            resource.promise = undefined;
-            __tempCache[resource.url] = data;
+            delete resource.promise;
+            __tempCache[resource.root + resource.name] = data;
         },
         get: function (resource) {
-            return __tempCache[resource.url];
+            return __tempCache[resource.root + resource.name];
         },
         remove: function (resource) {
             delete RES.host.state[resource.root + resource.name];
-            delete __tempCache[resource.url];
+            delete __tempCache[resource.root + resource.name];
         }
     };
+    /**
+     * @internal
+     */
     RES.config = new RES.ResourceConfig();
+    /**
+     * @internal
+     */
     RES.queue = new RES.ResourceLoader();
+    /**
+    * @private
+    */
     var ResourceManagerError = (function (_super) {
         __extends(ResourceManagerError, _super);
         function ResourceManagerError(code, replacer, replacer2) {
@@ -2505,7 +2866,7 @@ var RES;
             2002: "Analyzer 相关API 在 ResourceManager 中不再支持，请编写自定义 Processor ，更多内容请参见 https://github.com/egret-labs/resourcemanager/blob/master/docs/README.md#processor",
             2003: "{0}解析失败,错误原因:{1}",
             2004: "无法找到文件类型:{0}",
-            2005: "资源配置文件中无法找到特定的资源组:{0}",
+            2005: "RES加载了不存在或空的资源组:\"{0}\"",
             2006: "资源配置文件中无法找到特定的资源:{0}"
         };
         return ResourceManagerError;
