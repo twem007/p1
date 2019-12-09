@@ -138,6 +138,8 @@ function formatKeyType(type) {
             return "string";
         case "boolean":
             return "boolean";
+        default:
+            throw new TypeError(type + "\u7C7B\u578B\u672A\u5B9A\u4E49");
     }
 }
 function formatValueType(type, value) {
@@ -149,6 +151,8 @@ function formatValueType(type, value) {
             return value + "";
         case "boolean":
             return Boolean(value);
+        default:
+            throw new Error(type + "\u7C7B\u578B\u672A\u5B9A\u4E49");
     }
 }
 //# sourceMappingURL=main.js.map

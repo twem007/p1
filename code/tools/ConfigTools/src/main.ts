@@ -141,6 +141,8 @@ function formatKeyType(type: string): string {
             return "string";
         case "boolean":
             return "boolean";
+        default:
+            throw new TypeError(`${type}类型未定义`);
     }
 }
 
@@ -153,5 +155,7 @@ function formatValueType(type: string, value: any): any {
             return value + "";
         case "boolean":
             return Boolean(value);
+        default:
+            throw new Error(`${type}类型未定义`);
     }
 }
