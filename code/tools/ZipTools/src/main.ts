@@ -8,9 +8,9 @@ const imgRegExp: RegExp = /.+\.(jpg|bmp|gif|png)$/i;
 const txtRegExp: RegExp = /.+\.(txt)$/i;
 const jsRegExp: RegExp = /.+\.(js)$/i;
 
-readRegExpFiles(txtRegExp.source);
+readRegExpFiles(txtRegExp.source, 'config.bin');
 
-function readRegExpFiles(regExp: string): void {
+function readRegExpFiles(regExp: string, output:string): void {
     let files = readFiles(filePath);
     //读取文件
     if (files) {
@@ -24,7 +24,7 @@ function readRegExpFiles(regExp: string): void {
         zip.generateAsync({ type: "nodebuffer" })
             .then(function (content) {
                 // see FileSaver.js
-                writeFile(`${filePath}\\output.zip`, content);
+                writeFile(`${filePath}\\${output}`, content);
             });
     }
 }

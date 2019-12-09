@@ -22,8 +22,8 @@ fs.readdir(xlsxPath, function (err, files) {
         fs.mkdirSync(serverDir);
     }
     //创建客户端代码结构
-    var defFileStr = "\/**\n * 该文件为工具自动生成，请勿自行修改。\n **\/\n";
-    var templete = "class {0} {\n{1}}\n";
+    var defFileStr = "/**\n * \u8BE5\u6587\u4EF6\u4E3A\u5DE5\u5177\u81EA\u52A8\u751F\u6210\uFF0C\u8BF7\u52FF\u81EA\u884C\u4FEE\u6539\u3002\n *\n */\n";
+    var templete = "export class {0} {\n{1}}\n";
     //读取文件
     if (files) {
         for (var i = 0, iLen = files.length; i < iLen; i++) {
@@ -47,12 +47,15 @@ fs.readdir(xlsxPath, function (err, files) {
                 var keyTemplate = "";
                 for (var i_1 = 0, iLen_1 = keys.length; i_1 < iLen_1; i_1++) {
                     var channel = channels[i_1];
-                    if ((channel & 1) == 1) {
-                        var remark = remarks[i_1] || "";
-                        remark = remark.replace(/\n/g, '\n\t * ');
-                        var remarkStr = "\t/**\n\t * " + remark + "\n\t **/";
-                        var variableStr = "public " + keys[i_1] + ":" + formatKeyType(types[i_1]) + ";\n";
-                        keyTemplate += remarkStr + "\n\t" + variableStr;
+                    switch (channel & 1) {
+                        case 1:
+                        case 3:
+                            var remark = remarks[i_1] || "";
+                            remark = remark.replace(/\n/g, '\n   * ');
+                            var remarkStr = "  /**\n   * " + remark + "\n   */";
+                            var variableStr = "public " + keys[i_1] + ": " + formatKeyType(types[i_1]) + ";\n";
+                            keyTemplate += remarkStr + "\n  " + variableStr;
+                            break;
                     }
                 }
                 defFileStr += formatString(templete, [fileName, keyTemplate]);
@@ -61,15 +64,13 @@ fs.readdir(xlsxPath, function (err, files) {
                 var serverData = {};
                 clientData.name = fileName;
                 serverData.name = fileName;
-                var size = sheetData.length - 6;
-                clientData.dataSize = size;
-                serverData.dataSize = size;
+                var startIndex = 8;
                 clientData.key = keys[0];
                 serverData.key = keys[0];
                 clientData.data = [];
                 serverData.data = [];
                 //解析表数据
-                for (var i_2 = 6, iLen_2 = sheetData.length; i_2 < iLen_2; i_2++) {
+                for (var i_2 = startIndex, iLen_2 = sheetData.length; i_2 < iLen_2; i_2++) {
                     var rowData = sheetData[i_2];
                     if (rowData && rowData.length > 0) {
                         var data_client = {};

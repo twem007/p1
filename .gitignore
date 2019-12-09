@@ -1,5 +1,7 @@
 code/client/.wing/*
 code/client/bin-debug/*
 code/client/bin-release/*
+code/tools/ConfigTools/node_modules/*
+code/tools/ZipTools/node_modules/*
 node_modules/
 .wing/

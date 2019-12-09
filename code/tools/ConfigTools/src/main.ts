@@ -21,8 +21,8 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
         fs.mkdirSync(serverDir);
     }
     //创建客户端代码结构
-    let defFileStr: string = "\/**\n * 该文件为工具自动生成，请勿自行修改。\n **\/\n";
-    let templete: string = `class {0} {\n{1}}\n`
+    let defFileStr: string = `/**\n * 该文件为工具自动生成，请勿自行修改。\n *\n */\n`;
+    let templete: string = `export class {0} {\n{1}}\n`
     //读取文件
     if (files) {
         for (let i: number = 0, iLen: number = files.length; i < iLen; i++) {
@@ -46,12 +46,15 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                 let keyTemplate: string = "";
                 for (let i: number = 0, iLen: number = keys.length; i < iLen; i++) {
                     let channel: number = channels[i];
-                    if ((channel & 1) == 1) {
-                        let remark: string = remarks[i] || "";
-                        remark = remark.replace(/\n/g, '\n\t * ');
-                        let remarkStr = `\t\/**\n\t * ${remark}\n\t **\/`;
-                        let variableStr = `public ${keys[i]}:${formatKeyType(types[i])};\n`
-                        keyTemplate += `${remarkStr}\n\t${variableStr}`;
+                    switch (channel & 1) {
+                        case 1:
+                        case 3:
+                            let remark: string = remarks[i] || "";
+                            remark = remark.replace(/\n/g, '\n   * ');
+                            let remarkStr = `  \/**\n   * ${remark}\n   *\/`;
+                            let variableStr = `public ${keys[i]}: ${formatKeyType(types[i])};\n`
+                            keyTemplate += `${remarkStr}\n  ${variableStr}`;
+                            break;
                     }
                 }
                 defFileStr += formatString(templete, [fileName, keyTemplate]);
@@ -60,15 +63,13 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                 let serverData: any = {};
                 clientData.name = fileName;
                 serverData.name = fileName;
-                let size: number = sheetData.length - 6;
-                clientData.dataSize = size;
-                serverData.dataSize = size;
+                let startIndex: number = 8;
                 clientData.key = keys[0];
                 serverData.key = keys[0];
                 clientData.data = [];
                 serverData.data = [];
                 //解析表数据
-                for (let i: number = 6, iLen: number = sheetData.length; i < iLen; i++) {
+                for (let i: number = startIndex, iLen: number = sheetData.length; i < iLen; i++) {
                     let rowData: any[] = sheetData[i];
                     if (rowData && rowData.length > 0) {
                         let data_client: any = {};
@@ -88,6 +89,7 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                                     break;
                             }
                         }
+
                         clientData.data.push(data_client);
                         serverData.data.push(data_server);
                     }

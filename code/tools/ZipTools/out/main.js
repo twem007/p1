@@ -8,8 +8,8 @@ console.log("\u8BFB\u53D6\u76EE\u5F55\uFF1A" + filePath);
 var imgRegExp = /.+\.(jpg|bmp|gif|png)$/i;
 var txtRegExp = /.+\.(txt)$/i;
 var jsRegExp = /.+\.(js)$/i;
-readRegExpFiles(txtRegExp.source);
-function readRegExpFiles(regExp) {
+readRegExpFiles(txtRegExp.source, 'config.bin');
+function readRegExpFiles(regExp, output) {
     var files = readFiles(filePath);
     //读取文件
     if (files) {
@@ -23,7 +23,7 @@ function readRegExpFiles(regExp) {
         zip.generateAsync({ type: "nodebuffer" })
             .then(function (content) {
             // see FileSaver.js
-            writeFile(filePath + "\\output.zip", content);
+            writeFile(filePath + "\\" + output, content);
         });
     }
 }
