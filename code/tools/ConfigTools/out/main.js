@@ -64,7 +64,7 @@ fs.readdir(xlsxPath, function (err, files) {
                 var serverData = {};
                 clientData.name = fileName;
                 serverData.name = fileName;
-                var startIndex = 8;
+                var startIndex = 6;
                 clientData.key = keys[0];
                 serverData.key = keys[0];
                 clientData.data = [];

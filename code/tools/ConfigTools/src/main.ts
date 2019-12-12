@@ -63,7 +63,7 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                 let serverData: any = {};
                 clientData.name = fileName;
                 serverData.name = fileName;
-                let startIndex: number = 8;
+                let startIndex: number = 6;
                 clientData.key = keys[0];
                 serverData.key = keys[0];
                 clientData.data = [];
