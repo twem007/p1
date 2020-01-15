@@ -2,9 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
 var xlsx = require("node-xlsx");
-var xlsxPath = process.argv.splice(2, 1)[0] || process.cwd();
-var outPath = xlsxPath + "\\outFile";
-console.log("\u8BFB\u53D6\u76EE\u5F55\uFF1A" + xlsxPath);
+var argv = require('yargs').argv;
+var xlsxPath = argv.xlsxPath || process.cwd();
+var os = argv.os || 'windows';
+var outPath = null;
+if (os == 'mac') {
+    outPath = xlsxPath + "/outFile";
+}
+else {
+    outPath = xlsxPath + "\\outFile";
+}
+console.log("\u8BFB\u53D6\u76EE\u5F55\uFF1A" + xlsxPath + "  \u8BFB\u53D6\u7CFB\u7EDF\uFF1A" + os);
 fs.readdir(xlsxPath, function (err, files) {
     if (err) {
         console.log("\u8BFB\u53D6\u76EE\u5F55\u5931\u8D25:" + err.message);
@@ -14,10 +22,15 @@ fs.readdir(xlsxPath, function (err, files) {
         fs.mkdirSync(outPath);
     }
     var clientDir = outPath + "\\client";
+    var serverDir = outPath + "\\server";
+    // 如果是mac的话，切换路径方式
+    if (os == 'mac') {
+        clientDir = outPath + "/client";
+        serverDir = outPath + "/server";
+    }
     if (!fs.existsSync(clientDir)) {
         fs.mkdirSync(clientDir);
     }
-    var serverDir = outPath + "\\server";
     if (!fs.existsSync(serverDir)) {
         fs.mkdirSync(serverDir);
     }
@@ -28,9 +41,13 @@ fs.readdir(xlsxPath, function (err, files) {
     if (files) {
         for (var i = 0, iLen = files.length; i < iLen; i++) {
             var file = files[i];
-            if (file.indexOf('.xlsx') >= 0) {
+            if (file.indexOf('.xlsx') >= 0 && file.indexOf('~$') == -1) {
                 console.log("\u8BFB\u53D6\u6587\u4EF6\uFF1A" + file);
-                var buffer = fs.readFileSync(xlsxPath + "\\" + file);
+                var fileDir = xlsxPath + "\\" + file;
+                if (os == 'mac') {
+                    fileDir = xlsxPath + "/" + file;
+                }
+                var buffer = fs.readFileSync(fileDir);
                 var sheets = xlsx.parse(buffer);
                 if (sheets.length == 0) {
                     return;
@@ -96,14 +113,21 @@ fs.readdir(xlsxPath, function (err, files) {
                 }
                 //创建配置文件
                 var clientFilePath = outPath + "\\client\\" + fileName + ".txt";
-                writeFile(clientFilePath, JSON.stringify(clientData));
                 var serverFilePath = outPath + "\\server\\" + fileName + ".txt";
+                if (os == 'mac') {
+                    clientFilePath = outPath + "/client/" + fileName + ".txt";
+                    serverFilePath = outPath + "/server/" + fileName + ".txt";
+                }
+                writeFile(clientFilePath, JSON.stringify(clientData));
                 writeFile(serverFilePath, JSON.stringify(serverData));
             }
         }
     }
     var defFileName = 'ConfigDef';
     var defFilePath = outPath + "\\client\\" + defFileName + ".ts";
+    if (os == 'mac') {
+        defFilePath = outPath + "/client/" + defFileName + ".ts";
+    }
     writeFile(defFilePath, defFileStr);
 });
 function writeFile(path, data) {
@@ -146,8 +170,16 @@ function formatValueType(type, value) {
     switch (type) {
         case "int32":
         case "float":
-            return Number(value);
+            if (isNaN(value)) {
+                return null;
+            }
+            else {
+                return Number(value);
+            }
         case "string":
+            if (value === null || value === undefined) {
+                return null;
+            }
             return value + "";
         case "boolean":
             return Boolean(value);

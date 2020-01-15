@@ -1,9 +1,19 @@
 import fs = require('fs');
 import xlsx = require('node-xlsx');
+const argv = require('yargs').argv;
 
-let xlsxPath: string = process.argv.splice(2, 1)[0] || process.cwd();
-let outPath: string = `${xlsxPath}\\outFile`
-console.log(`读取目录：${xlsxPath}`);
+let xlsxPath: string = argv.xlsxPath || process.cwd();
+let os: string = argv.os || 'windows';
+
+let outPath: string = null;
+if (os == 'mac') {
+    outPath = `${xlsxPath}/outFile`;
+} else {
+    outPath = `${xlsxPath}\\outFile`;
+}
+
+console.log(`读取目录：${xlsxPath}  读取系统：${os}`);
+
 fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): void {
     if (err) {
         console.log(`读取目录失败:${err.message}`);
@@ -12,11 +22,19 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
     if (!fs.existsSync(outPath)) {
         fs.mkdirSync(outPath);
     }
+
     let clientDir: string = `${outPath}\\client`;
+    let serverDir: string = `${outPath}\\server`;
+
+    // 如果是mac的话，切换路径方式
+    if (os == 'mac') {
+        clientDir = `${outPath}/client`;
+        serverDir = `${outPath}/server`;
+    }
+
     if (!fs.existsSync(clientDir)) {
         fs.mkdirSync(clientDir);
     }
-    let serverDir: string = `${outPath}\\server`;
     if (!fs.existsSync(serverDir)) {
         fs.mkdirSync(serverDir);
     }
@@ -27,9 +45,13 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
     if (files) {
         for (let i: number = 0, iLen: number = files.length; i < iLen; i++) {
             let file: string = files[i];
-            if (file.indexOf('.xlsx') >= 0) {
+            if (file.indexOf('.xlsx') >= 0 && file.indexOf('~$') == -1) {
                 console.log(`读取文件：${file}`);
-                let buffer: Buffer = fs.readFileSync(`${xlsxPath}\\${file}`);
+                let fileDir = `${xlsxPath}\\${file}`;
+                if (os == 'mac') {
+                    fileDir = `${xlsxPath}/${file}`;
+                }
+                let buffer: Buffer = fs.readFileSync(fileDir);
                 const sheets: any[] = xlsx.parse(buffer);
                 if (sheets.length == 0) {
                     return;
@@ -96,14 +118,22 @@ fs.readdir(xlsxPath, function (err: NodeJS.ErrnoException, files: string[]): voi
                 }
                 //创建配置文件
                 let clientFilePath: string = `${outPath}\\client\\${fileName}.txt`;
-                writeFile(clientFilePath, JSON.stringify(clientData));
                 let serverFilePath: string = `${outPath}\\server\\${fileName}.txt`;
+
+                if (os == 'mac') {
+                    clientFilePath = `${outPath}/client/${fileName}.txt`;
+                    serverFilePath = `${outPath}/server/${fileName}.txt`;
+                }
+                writeFile(clientFilePath, JSON.stringify(clientData));
                 writeFile(serverFilePath, JSON.stringify(serverData));
             }
         }
     }
     let defFileName: string = 'ConfigDef';
     let defFilePath: string = `${outPath}\\client\\${defFileName}.ts`;
+    if (os == 'mac') {
+        defFilePath = `${outPath}/client/${defFileName}.ts`;
+    }
     writeFile(defFilePath, defFileStr);
 })
 
@@ -150,8 +180,15 @@ function formatValueType(type: string, value: any): any {
     switch (type) {
         case "int32":
         case "float":
-            return Number(value);
+            if (isNaN(value)) {
+                return null;
+            } else {
+                return Number(value);
+            }
         case "string":
+            if (value === null || value === undefined) {
+                return null;
+            }
             return value + "";
         case "boolean":
             return Boolean(value);

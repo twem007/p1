@@ -1,5 +1,9 @@
 {
   "name": "nodejs-console",
   "version": "0.0.0",
-  "main": "./out/main.js"
+  "main": "./out/main.js",
+  "devDependencies": {
+    "node-xlsx": "^0.15.0",
+    "yargs": "^15.1.0"
+  }
 }
