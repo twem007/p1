@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
+var argv = require('yargs').argv;
 var JSZip = require('jszip');
 var zip = new JSZip();
-var filePath = process.argv.splice(2, 1)[0] || process.cwd();
-console.log("\u8BFB\u53D6\u76EE\u5F55\uFF1A" + filePath);
+var filePath = argv.filePath || process.cwd();
+var os = argv.os || 'windows';
+console.log("\u8BFB\u53D6\u76EE\u5F55\uFF1A" + filePath + " \u8BFB\u53D6\u7CFB\u7EDF\uFF1A" + os);
 var imgRegExp = /.+\.(jpg|bmp|gif|png)$/i;
 var txtRegExp = /.+\.(txt)$/i;
 var jsRegExp = /.+\.(js)$/i;
@@ -17,13 +19,30 @@ function readRegExpFiles(regExp, output) {
             var file = files[i];
             if (file.match(regExp)) {
                 console.log("\u8BFB\u53D6\u6587\u4EF6\uFF1A" + file);
-                zip.file(file.substring(file.lastIndexOf('\\') + 1), fs.readFileSync(file));
+                var index = null;
+                if (os == 'mac') {
+                    index = file.lastIndexOf('/') + 1;
+                }
+                else {
+                    index = file.lastIndexOf('\\') + 1;
+                }
+                zip.file(file.substring(index), fs.readFileSync(file));
             }
         }
-        zip.generateAsync({ type: "nodebuffer" })
-            .then(function (content) {
+        zip.generateAsync({
+            type: "nodebuffer",
+            compression: 'DEFLATE',
+            compressionOptions: {
+                level: 6,
+            },
+        }).then(function (content) {
             // see FileSaver.js
-            writeFile(filePath + "\\" + output, content);
+            if (os == 'mac') {
+                writeFile(filePath + "/" + output, content);
+            }
+            else {
+                writeFile(filePath + "\\" + output, content);
+            }
         });
     }
 }
@@ -37,7 +56,12 @@ function readFiles(path) {
     var results = [];
     var list = fs.readdirSync(path);
     list.forEach(function (file, index, list) {
-        file = path + '\\' + file;
+        if (os == 'mac') {
+            file = path + '/' + file;
+        }
+        else {
+            file = path + '\\' + file;
+        }
         var stat = fs.statSync(file);
         if (stat && stat.isDirectory()) {
             results = results.concat(readFiles(file));
