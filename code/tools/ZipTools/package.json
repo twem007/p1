@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "main": "./out/main.js",
   "devDependencies": {
-    "jszip": "^3.2.2",
+    "jszip": "^3.7.0",
     "yargs": "^15.1.0"
   }
 }
