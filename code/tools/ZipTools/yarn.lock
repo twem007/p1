@@ -94,10 +94,10 @@ isarray@~1.0.0:
   resolved "https://registry.npm.taobao.org/isarray/download/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
   integrity sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=
 
-jszip@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.npm.taobao.org/jszip/download/jszip-3.2.2.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fjszip%2Fdownload%2Fjszip-3.2.2.tgz#b143816df7e106a9597a94c77493385adca5bd1d"
-  integrity sha1-sUOBbffhBqlZepTHdJM4WtylvR0=
+jszip@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.8.0.tgz#a2ac3c33fe96a76489765168213655850254d51b"
+  integrity sha512-cnpQrXvFSLdsR9KR5/x7zdf6c3m8IhZfZzSblFEHSqBaVwD2nvJ4CuCKLyvKvwBgZm08CgfSoiTBQLm5WW9hGw==
   dependencies:
     lie "~3.3.0"
     pako "~1.0.2"
